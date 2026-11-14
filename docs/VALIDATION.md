@@ -39,12 +39,8 @@ Every check the team has run, in one place. Numbers are copied from the report f
 *Wording decided by Dongju Kim (team lead) on 2026-11-14 15:35 KST: "key numbers" instead of "every number", add the KDSA-only coverage figure, add the pending KDSA permission to the limits.*
 
 **Validation.** We checked the key numbers in the app against independent sources. Sun and Earth
-directions agree with NASA JPL Horizons to within 0.0005° in more than 37,000 comparisons from 2020
-to 2038. Terrain horizons were re-derived by brute force from NASA LOLA elevation models and agree
-to about 0.02°. Against NASA's 18.6-year south-polar illumination maps (PGDA), our sunlight fractions
-at 240 random points differ by 1.7 percentage points on average (r = 0.985) and Earth visibility by
-1.2 points (r = 0.990); the largest errors are on steep crater walls, where PGDA itself changes
-strongly within 60 m. The app's metrics are identical in JavaScript and in a separate Python
-implementation. Moon visibility from Yeoju KDSA and NASA's three DSN complexes matches Horizons to
+directions agree with NASA JPL Horizons to within 0.0005° in over 37,000 comparisons (2020–2038). Brute-force recomputation of the terrain horizons from NASA LOLA elevation models agrees
+to about 0.02°. Against NASA's 18.6-year south-polar illumination maps (PGDA), sunlight fractions at 240 random points differ by 1.7 percentage points on average (r = 0.985) and Earth visibility by
+1.2 points (r = 0.990); the largest errors lie on steep crater walls, where PGDA itself varies strongly. App metrics are identical in JavaScript and an independent Python port. Moon visibility from Yeoju KDSA and NASA's three DSN complexes matches Horizons to
 0.0012°; Yeoju adds direct-link hours that no DSN complex covers (0.3–0.4 % of Earth-visible time). Limits: geometry only (no link budget), coarser terrain away from the poles, and permission to use the KDSA
 coordinates is still pending.
