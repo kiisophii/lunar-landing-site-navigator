@@ -46,8 +46,10 @@ Since 2026-11-14 11:50 KST the 16 named sites in `validation.json` use card 8's 
 
 | Named sites (n = 16) | Sun MAE | Sun bias | Earth (any part) MAE | Earth bias |
 |---|---|---|---|---|
-| pole-centred 60/240 m windows | 5.59 pp | +4.27 pp | 4.53 pp | +4.50 pp |
-| card 8 per-site horizons | 3.63 pp | +1.76 pp | 3.57 pp | +3.26 pp |
+| pole-centred 60/240 m windows | 5.56 pp | +4.31 pp | 4.52 pp | +4.51 pp |
+| card 8 per-site horizons | 3.67 pp | +1.72 pp | 3.56 pp | +3.29 pp |
+
+*Updated 2026-11-14 15:20 KST:* SHACKLETON_RIM moved to the Gläser et al. (2017) rim point S (−89.6866, −162.81, card 15). Its horizon is card 13's recomputation (PR #14). New point: ours Sun 0.845 vs PGDA 0.871 (±300 m range 0.000–0.871), Earth 0.538 vs 0.537. The earlier table (5.59 / 3.63 / 4.53 / 3.57 pp) used the old R04 point.
 
 Named sites sit on peaks and rims where PGDA's own value varies strongly within ±300 m, so these
 errors are larger than for the random points; the finer card 8 near-field terrain clearly helps

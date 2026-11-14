@@ -1,5 +1,5 @@
 {
- "generated_utc": "2026-11-14T04:03:56.465812+00:00",
+ "generated_utc": "2026-11-14T06:13:13.453104+00:00",
  "window": "2026-01-01T00Z..2030-12-31T23Z",
  "hours": 43824,
  "definition": "(same as the app, web/js/diff_data.js siteStationLink):\n  link hour at site S and station G  =  Earth CENTRE above S's terrain horizon mask (topocentric, 2 m observer)\n                                        AND apparent Moon centre >= 10 deg above G's ellipsoidal horizon.\nDirect link only: no relay, no link budget, no antenna schedule/availability.",
@@ -357,16 +357,16 @@
   },
   {
    "id": "SHACKLETON_RIM",
-   "name": "Shackleton Rim (R04)",
-   "lat": -89.7668,
-   "lon": -171.87,
-   "earth_h": 2163,
-   "kdsa_h": 911,
-   "dsn_h": 2143,
-   "kdsa_only_h": 16,
-   "kdsa_share": 0.4212,
-   "dsn_share": 0.9908,
-   "kdsa_only_share": 0.0074
+   "name": "Shackleton Rim (S)",
+   "lat": -89.6866,
+   "lon": -162.81,
+   "earth_h": 21887,
+   "kdsa_h": 9986,
+   "dsn_h": 21723,
+   "kdsa_only_h": 84,
+   "kdsa_share": 0.4563,
+   "dsn_share": 0.9925,
+   "kdsa_only_share": 0.00384
   },
   {
    "id": "CONNECTING_RIDGE",
@@ -567,10 +567,10 @@
   },
   {
    "id": "SHACKLETON_RIM",
-   "earth_h": 2163,
-   "kdsa_h": 911,
-   "dsn_h": 2143,
-   "kdsa_only_h": 16,
+   "earth_h": 21887,
+   "kdsa_h": 9986,
+   "dsn_h": 21723,
+   "kdsa_only_h": 84,
    "diff_vs_table_h": {
     "earth_h": 0,
     "kdsa_h": 0,

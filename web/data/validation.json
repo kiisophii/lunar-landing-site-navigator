@@ -3021,14 +3021,14 @@
   },
   {
    "id": "SHACKLETON_RIM",
-   "ours_sun": 0.09034,
-   "pgda_sun": 0.10964,
-   "pgda_sun_min300": 0.04916,
-   "pgda_sun_max300": 0.16668,
-   "ours_earth": 0.10725,
-   "pgda_earth": 0.11072,
+   "ours_sun": 0.84488,
+   "pgda_sun": 0.8706,
+   "pgda_sun_min300": 0.0,
+   "pgda_sun_max300": 0.8706,
+   "ours_earth": 0.53847,
+   "pgda_earth": 0.53748,
    "pgda_earth_min300": 0.0,
-   "pgda_earth_max300": 0.19896
+   "pgda_earth_max300": 0.53748
   },
   {
    "id": "CONNECTING_RIDGE",
@@ -3247,14 +3247,14 @@
   },
   {
    "id": "SHACKLETON_RIM",
-   "pgda_sun": 0.10964,
-   "pole_sun": 0.09124729286908245,
-   "card8_sun": 0.09033568122557839,
-   "pgda_earth": 0.11072,
-   "pole_earth": 0.10960905652964,
-   "card8_earth": 0.10725160846716762,
-   "card8_earth_ctr": 0.055621040223957564,
-   "card8_sources": "PGDA_LOLA_5M<=3km+PGDA_LOLA_10M<=25km+PGDA_LOLA_60M<=59.94km+PGDA_LOLA_240M<=192.93km"
+   "pgda_sun": 0.8706,
+   "pole_sun": 0.8578272451761272,
+   "card8_sun": 0.8448782867124922,
+   "pgda_earth": 0.53748,
+   "pole_earth": 0.5383576445164776,
+   "card8_earth": 0.538468149894406,
+   "card8_earth_ctr": 0.4928908206866067,
+   "card8_sources": "PGDA_LOLA_5M<=3km+PGDA_LOLA_10M<=25km+PGDA_LOLA_60M<=59.94km+PGDA_LOLA_240M<=199.95km+LDEM_64<=300km"
   },
   {
    "id": "CONNECTING_RIDGE",
