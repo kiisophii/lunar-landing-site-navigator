@@ -7,7 +7,7 @@
 import * as core from './core.js';
 import { t } from './i18n.js';
 import { addStrings, whenReady, translate, siteName, getFocus, fmtHours, cssVar, LLSN } from './ui_shared.js';
-import { relayIndex, relayFor, segmentHours, longestNone } from './diff_data.js';
+import { relayIndex, relayFor, segmentHours, longestNone, relayMissingKind } from './diff_data.js';
 
 addStrings({
   rlTitle: 'Relay tower — restore the Earth link', rlAria: 'Relay tower analysis for the focused site',
@@ -137,8 +137,7 @@ function render() {
   sec.querySelector('.rl-site').textContent = `${t('rlFor')}: ${siteName(site)}`;
   const body = sec.querySelector('.rl-body');
   if (!rel) {
-    const why = idx.pending_terrain?.[site.id];
-    body.innerHTML = `<p class="note">${why && why !== 'not computed yet' ? t('rlPending') : (idx.ids.length ? t('rlPending') : t('rlNotYet'))}</p>`;
+    body.innerHTML = `<p class="note">${relayMissingKind(site, idx) === 'pending' ? t('rlPending') : t('rlNotAvail')}</p>`;
     return;
   }
   const j = rel.params.heights_m.findIndex(h => Number(h) === height);

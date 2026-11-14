@@ -77,6 +77,7 @@ function wheelHint() {
 // ------------------------------------------------------------ mirrored time strip under the globe
 function wireTimeStrip() {
   const sl = $('#gl-slider'), lab = $('#gl-time'), play = $('#gl-play'), mainPlay = $('#play'), mainSl = $('#slider');
+  if (!sl || !lab || !play) return;            // 3-column layout: the time controls live in the right panel only
   const syncRange = () => { sl.min = mainSl.min; sl.max = mainSl.max; sl.step = mainSl.step; sl.value = mainSl.value; };
   const syncPlay = () => { play.textContent = mainPlay.textContent; play.setAttribute('aria-pressed', mainPlay.getAttribute('aria-pressed') || 'false'); };
   syncRange(); syncPlay();

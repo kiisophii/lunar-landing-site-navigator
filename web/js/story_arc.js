@@ -5,7 +5,7 @@
 import * as core from './core.js';
 import { t } from './i18n.js';
 import { addStrings, whenReady, translate, siteName, getFocus, fmtHours, LLSN } from './ui_shared.js';
-import { relayFor, segmentHours, siteStationLink } from './diff_data.js';
+import { relayIndex, relayMissingKind, relayFor, segmentHours, siteStationLink } from './diff_data.js';
 
 addStrings({
   saTitle: 'The communication story for this site', saAria: 'Communication story: direct link, tower, Korea',
@@ -65,7 +65,7 @@ async function render() {
   const h = LLSN().relayHeight || 15;
   sec.querySelector('.sa-site').textContent = siteName(site);
   sec.querySelector('.sa-period').textContent = `${isoDay(w.i0)} → ${isoDay(w.i1)} · ${t('saChange')}`;
-  const [rel, ln] = await Promise.all([relayFor(site.id).catch(() => null), siteStationLink(site, w.i0, w.i1)]);
+  const [rel, ln, idx] = await Promise.all([relayFor(site.id).catch(() => null), siteStationLink(site, w.i0, w.i1), relayIndex()]);
   if (my !== seq) return;
   const put = (cls, big, txt) => { const li = sec.querySelector('.' + cls); li.querySelector('.big').innerHTML = big; li.querySelector('.txt').innerHTML = txt; };
   // 1 + 3 from the relay timeline (real terrain only)
@@ -78,6 +78,11 @@ async function render() {
     put('s3', net.towers.length ? pct(a) : '—', net.towers.length
       ? fill(t('sa3txt'), { n: net.towers.length, h, a: pct(d), b: pct(a) })
       : (rel.lander.earth_frac >= 0.9999 ? t('sa3ok') : fill(t('sa3none'), { h })));
+  } else if (relayMissingKind(site, idx) === 'na' && !core.terrainPending(site) && !core.horizonMock(site)) {
+    // no relay run for this site: step 1 comes straight from the period metrics (Earth centre above the terrain horizon)
+    const m = w.metrics.get(site.id), d = m ? m.earth_frac : 0;
+    put('s1', pct(d), d >= 0.999 ? t('sa1ok') : fill(t('sa1fail'), { x: pct(1 - d) }));
+    put('s3', `<span class="tag" title="${t('saNotAvailTip')}">${t('saNotAvail')}</span>`, t('rlNotAvail'));
   } else {
     put('s1', pend(), t('saPendingTip')); put('s3', pend(), t('saPendingTip'));
   }

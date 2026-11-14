@@ -6,19 +6,56 @@
 <title>Lunar Landing Site Navigator</title>
 <link rel="icon" href="data:,">
 <link rel="stylesheet" href="css/base.css">
+<!-- layout.css (integrator): 3-column viewer, tabs, About page. Layout only; colours/fonts come from the variables. -->
+<link rel="stylesheet" href="css/layout.css">
 <!-- card 12 (design) owns theme.css: it only overrides the variables defined at the top of base.css -->
 <link rel="stylesheet" href="css/theme.css">
 </head>
 <body>
 <header class="top">
-  <h1 data-i18n="title">Lunar Landing Site Navigator</h1>
-  <button id="lang" type="button" data-i18n="lang">한국어</button>
+  <a class="brand" href="#about" data-i18n-title="aboutLinkTitle"><h1 data-i18n="title">Lunar Landing Site Navigator</h1></a>
   <p class="tagline" data-i18n="tagline"></p>
+  <nav class="top-nav" aria-label="Main">
+    <a class="nav-link" id="nav-viewer" href="#" data-i18n="navViewer">Viewer</a>
+    <a class="nav-link" id="nav-about" href="#about" data-i18n="navAbout">About</a>
+    <label class="lang"><span class="sr" data-i18n="langLabel">Language</span>
+      <select id="lang">
+        <option value="en" lang="en" title="English" aria-label="English">EN</option>
+        <option value="ko" lang="ko" title="한국어 (Korean)" aria-label="한국어 (Korean)">KR</option>
+      </select></label>
+  </nav>
 </header>
 <div class="mock-banner" role="status" data-i18n="mock"></div>
-<main>
-  <!-- 0. whole-Moon 3D globe (globe3d.js via globe_app.js): selected time = real Sun light; site clicks <-> picker/cards -->
-  <section id="llsn-globe" class="panel globe-panel" data-i18n-aria="glTitle">
+
+<div id="viewer">
+<main class="viewer">
+  <!-- LEFT: site picker (search, group, pinned + ranked list), filters, custom point -->
+  <aside class="col col-left">
+    <section id="picker" class="pane" aria-labelledby="pk-title">
+      <h2 id="pk-title" data-i18n="pkTitle"></h2>
+      <label class="pk-search"><span class="sr" data-i18n="pkSearch"></span>
+        <input id="pk-q" type="search" autocomplete="off" data-i18n-ph="pkSearchPh"></label>
+      <label class="pk-grp"><span data-i18n="pkGroup"></span> <select id="pk-group"></select></label>
+      <div class="pk-sort">
+        <span data-i18n="rkLabel"></span>
+        <button type="button" class="info-btn" id="rk-btn" aria-expanded="false" aria-controls="rk-info" data-i18n-aria="rkInfoBtn">ⓘ</button>
+        <span id="pk-count" class="muted" aria-live="polite"></span>
+      </div>
+      <p id="rk-info" class="info-pop" hidden data-i18n="rkInfo"></p>
+      <ul id="pk-list" class="pk-list" aria-labelledby="pk-title"></ul>
+    </section>
+    <details class="pane fold" id="fl-fold">
+      <summary data-i18n="flFold"></summary>
+      <section id="llsn-filters"></section>
+    </details>
+    <details class="pane fold" id="cu-fold">
+      <summary data-i18n="cuFold"></summary>
+      <section id="llsn-custom"></section>
+    </details>
+  </aside>
+
+  <!-- CENTER: whole-Moon 3D globe (globe3d.js via globe_app.js): selected time = real Sun light -->
+  <section id="llsn-globe" class="col col-center globe-panel" data-i18n-aria="glTitle">
     <div class="panel-head">
       <h2 data-i18n="glTitle">3D Moon</h2>
       <div class="gl-views seg" role="group" data-i18n-aria="glViews">
@@ -30,54 +67,65 @@
       <div class="gl-zoom"><button type="button" data-zoom="in" data-i18n-aria="glZoomIn">+</button><button type="button" data-zoom="out" data-i18n-aria="glZoomOut">−</button></div>
       <p class="gl-hint" role="status" hidden></p>
     </div>
-    <div class="gl-time">
-      <button id="gl-play" type="button" aria-pressed="false">Play</button>
-      <input id="gl-slider" type="range" min="0" max="0" value="0" step="0.25" data-i18n-aria="time">
-      <strong id="gl-time" class="num"></strong>
-      <a class="now-link" href="#llsn-window" data-i18n="glToAnalysis">Analysis window ↓</a>
-    </div>
-    <p class="hint" data-i18n="glHint"></p>
   </section>
 
-  <!-- 1. site picker + 3-card comparison -->
-  <section id="picker" class="panel" data-i18n-aria="pkTitle">
-    <div class="panel-head">
-      <h2 data-i18n="pkTitle"></h2>
-      <a class="now-link" href="#llsn-window"><span data-i18n="selTime"></span> <span id="now-short" class="num"></span></a>
-    </div>
-    <div class="ctl">
-      <label class="grow"><span class="sr" data-i18n="pkSearch"></span>
-        <input id="pk-q" type="search" autocomplete="off" data-i18n-ph="pkSearchPh"></label>
-      <label><span data-i18n="pkGroup"></span> <select id="pk-group"></select></label>
-      <span id="pk-count" class="muted" aria-live="polite"></span>
-    </div>
-    <ul id="pk-list" class="pk-list"></ul>
-    <p class="hint" data-i18n="pkHint"></p>
-  </section>
-  <!-- 1b. user-defined point (custom_site.js mounts here) -->
-  <section id="llsn-custom" class="panel"></section>
-  <section id="cards" aria-label="Site comparison"><p class="muted" data-i18n="loading">Loading data…</p></section>
+  <!-- RIGHT: analysis of the focused site + time controls -->
+  <aside class="col col-right">
+    <section id="analysis" class="pane" aria-labelledby="an-name">
+      <div class="an-head">
+        <div class="an-title">
+          <p class="an-kicker muted" data-i18n="anFocus"></p>
+          <h2 id="an-name" class="an-name"></h2>
+          <p id="an-meta" class="an-meta"></p>
+          <p id="an-tags" class="an-tags"></p>
+        </div>
+        <button type="button" id="an-pin" class="pin-btn" aria-pressed="false"></button>
+      </div>
+      <div class="val-wrap">
+        <button type="button" id="val-badge" class="val-badge" aria-expanded="false" aria-controls="val-pop" hidden></button>
+        <div id="val-pop" class="val-pop" role="dialog" aria-labelledby="val-pop-h" hidden></div>
+      </div>
+      <div class="blk instant">
+        <h3><span data-i18n="instTitle"></span> <span id="an-time" class="num"></span></h3>
+        <div class="big sun"><span class="label" data-i18n="sunEl"></span><span class="value" id="an-sunel"></span><span class="sub" id="an-sunaz"></span></div>
+        <div class="chips"><span class="chip" id="an-sunchip"></span><span class="chip" id="an-earthchip"></span></div>
+        <div class="an-until">
+          <div class="big sun"><span class="label" id="an-sunlbl"></span><span class="value" id="an-sunt"></span></div>
+          <div class="big earth"><span class="label" id="an-earthlbl"></span><span class="value" id="an-eartht"></span></div>
+        </div>
+        <p class="small" id="an-earthel"></p>
+      </div>
+      <div class="blk period">
+        <h3><span data-i18n="perTitle"></span> <span id="an-range" class="num"></span></h3>
+        <div class="pgrid">
+          <div class="pm sun"><span class="label" data-i18n="perSun"></span><span class="value" id="an-psun"></span><span class="sub" id="an-psund"></span></div>
+          <div class="pm earth"><span class="label" data-i18n="perEarth"></span><span class="value" id="an-pearth"></span><span class="sub" id="an-pearthd"></span></div>
+          <div class="pm both"><span class="label" data-i18n="perBoth"></span><span class="value" id="an-pboth"></span><span class="sub" id="an-pbothd"></span></div>
+          <div class="pm dark"><span class="label" data-i18n="perDark"></span><span class="value" id="an-pdark"></span><span class="sub" id="an-pdarkd"></span></div>
+        </div>
+      </div>
+    </section>
 
-  <!-- 2. 360° horizon panorama of the focused site (horizon_chart.js mounts here) -->
-  <section id="llsn-horizon" class="panel"></section>
-
-  <!-- 2b. communication story for the focused site (story_arc.js): direct → orbiter → tower → Korea -->
-  <section id="llsn-story" class="panel"></section>
-
-  <!-- 3. analysis window: time controls + period results (window_metrics.js renders #wm-body) -->
-  <section id="llsn-window" class="panel" data-i18n-aria="awTitle">
-    <h2 data-i18n="awTitle"></h2>
-    <div class="timebar" role="group" data-i18n-aria="tbAria">
-      <label><span data-i18n="tbStart"></span> <input id="t-date" type="date" required></label>
-      <label><span data-i18n="tbTod"></span> <input id="t-tod" type="time" step="60" required></label>
-      <span class="ctl-item"><span data-i18n="tbPeriod"></span>
-        <span class="seg" id="t-period" role="group">
+    <!-- time controls: the selected time (instant values) and the analysis period (period values) -->
+    <section id="llsn-window" class="pane timectl" data-i18n-aria="awTitle">
+      <h2 class="sr" data-i18n="awTitle"></h2>
+      <div class="tc-row tc-first">
+        <label><span data-i18n="tbDate"></span><input id="t-date" type="date" required></label>
+        <label><span data-i18n="tbTime"></span><input id="t-tod" type="time" step="60" required></label>
+      </div>
+      <div class="tc-row">
+        <span class="tc-lbl" data-i18n="tbPeriod"></span>
+        <span class="seg" id="t-period" role="group" data-i18n-aria="tbPeriod">
           <button type="button" data-days="7" data-i18n="wm7"></button><button type="button" data-days="30" data-i18n="wm30"></button><button type="button" data-days="90" data-i18n="wm90"></button>
         </span>
-        <input id="t-days" type="number" min="1" max="1826" step="1" data-i18n-aria="tbDays"> <span data-i18n="wmDays"></span>
-      </span>
-      <span class="ctl-item">
-        <button id="play" type="button" data-i18n="play">Play</button>
+        <label class="tc-days"><span class="sr" data-i18n="tbDays"></span><input id="t-days" type="number" min="1" max="1826" step="1" data-i18n-aria="tbDays"> <span data-i18n="wmDays"></span></label>
+      </div>
+      <div class="scrub">
+        <output id="scrub-tip" class="scrub-tip num" hidden></output>
+        <input id="slider" type="range" min="0" max="0" value="0" step="0.25" data-i18n-aria="scrubAria" aria-describedby="scrub-keys">
+        <div class="scrub-ends num"><span id="scrub-start"></span><span id="scrub-end"></span></div>
+      </div>
+      <div class="tc-row tc-play">
         <label><span data-i18n="speed">Speed</span>
           <select id="speed">
             <option value="1" data-i18n="sp1"></option>
@@ -86,28 +134,42 @@
             <option value="24" data-i18n="sp24"></option>
           </select>
         </label>
-      </span>
-      <input id="slider" class="span" type="range" min="0" max="0" value="0" step="0.25" data-i18n-aria="time">
-      <p class="span tb-read"><span class="muted" data-i18n="selTime"></span> <strong id="time-label" class="num" aria-live="polite"></strong>
-        <span id="period-label" class="muted num"></span></p>
-    </div>
-    <p class="hint" data-i18n="tbHint"></p>
+        <span class="tc-now num"><strong id="time-label" aria-live="off"></strong></span>
+        <button id="play" type="button" aria-pressed="false" data-i18n-title="playFrom">▶</button>
+      </div>
+      <p id="scrub-keys" class="sr" data-i18n="scrubKeys"></p>
+      <p id="period-label" class="muted num tc-period"></p>
+    </section>
+  </aside>
+</main>
+
+<!-- BELOW: detail tabs for the focused site -->
+<section class="deep" data-i18n-aria="tabsAria">
+  <div class="tabs" role="tablist" id="tabs" data-i18n-aria="tabsAria">
+    <button type="button" role="tab" id="tab-horizon" aria-controls="llsn-horizon" data-i18n="tabHorizon"></button>
+    <button type="button" role="tab" id="tab-dates" aria-controls="llsn-dates" data-i18n="tabDates"></button>
+    <button type="button" role="tab" id="tab-relay" aria-controls="llsn-relay" data-i18n="tabRelay"></button>
+    <button type="button" role="tab" id="tab-korea" aria-controls="llsn-korea" data-i18n="tabKorea"></button>
+    <button type="button" role="tab" id="tab-story" aria-controls="llsn-story" data-i18n="tabStory"></button>
+    <button type="button" role="tab" id="tab-compare" aria-controls="llsn-compare" data-i18n="tabCompare"></button>
+  </div>
+  <section id="llsn-horizon" class="panel tabpanel" role="tabpanel" aria-labelledby="tab-horizon"></section>
+  <section id="llsn-dates" class="panel tabpanel" role="tabpanel" aria-labelledby="tab-dates" hidden></section>
+  <section id="llsn-relay" class="panel tabpanel" role="tabpanel" aria-labelledby="tab-relay" hidden></section>
+  <section id="llsn-korea" class="panel tabpanel" role="tabpanel" aria-labelledby="tab-korea" hidden></section>
+  <section id="llsn-story" class="panel tabpanel" role="tabpanel" aria-labelledby="tab-story" hidden></section>
+  <section id="llsn-compare" class="panel tabpanel" role="tabpanel" aria-labelledby="tab-compare" hidden>
+    <div id="cards" aria-label="Site comparison"><p class="muted" data-i18n="loading">Loading data…</p></div>
     <div id="wm-body"></div>
   </section>
+</section>
+</div>
 
-  <!-- 3b. differentiators for the focused site: relay tower (relay_panel.js), Korea links (korea_panel.js) -->
-  <section id="llsn-relay" class="panel"></section>
-  <section id="llsn-korea" class="panel"></section>
-  <!-- 3b. landing-date scan for the focused site (landing_scan.js mounts here) -->
-  <section id="llsn-dates" class="panel"></section>
+<!-- About page (#about hash route; about.js fills it) -->
+<main id="about" class="about" hidden></main>
 
-  <!-- 4. filters (filters.js mounts here) -->
-  <section id="llsn-filters" class="panel"></section>
-</main>
 <footer>
-  <p data-i18n="assumptions"></p>
-  <p data-i18n="terrainNote"></p>
-  <p>Team Ginkgo Orbit · NASA Space Apps Challenge 2026 · <a href="https://github.com/kiisophii/lunar-landing-site-navigator">source (Apache-2.0)</a></p>
+  <p>Team Ginkgo Orbit · NASA Space Apps Challenge 2026 · <a href="https://github.com/kiisophii/lunar-landing-site-navigator">source (Apache-2.0)</a> · <a href="#about" data-i18n="navAbout">About</a></p>
 </footer>
 <script type="module" src="js/app.js"></script>
 <script>let v=null;setInterval(async()=>{try{const r=await fetch('version.json',{cache:'no-store'});const j=await r.json();if(v&&j.v!==v)location.reload();v=j.v}catch(e){}},30000);</script>

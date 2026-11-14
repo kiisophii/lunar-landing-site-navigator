@@ -20,6 +20,17 @@ export async function relayIndex() {
   catch (e) { return { ids: [], pending_terrain: {}, run_params: null, missing: true }; }
 }
 
+/**
+ * Why a site has no relay result: 'pending' = a south-polar catalogue site whose real terrain is still being prepared;
+ * 'na' = relay analysis not available for this site (so far run_relay.py covers only the south-polar sites, so
+ * non-polar catalogue sites — listed in index.pending_terrain because their SLDEM cache is missing — and custom points
+ * get this). Never called "terrain pending" for non-polar sites: their horizon IS computed, only the relay run is missing.
+ */
+export function relayMissingKind(site, idx) {
+  const polar = site.lat <= -80 && !site.user && site.group !== 'custom';
+  return polar && idx && idx.pending_terrain && idx.pending_terrain[site.id] ? 'pending' : 'na';
+}
+
 /** Relay result for one site, or null when it is pending terrain / not computed. */
 export async function relayFor(id) {
   const idx = await relayIndex();
