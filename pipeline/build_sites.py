@@ -17,6 +17,8 @@ APOLLO = "https://nssdc.gsfc.nasa.gov/planetary/lunar/lunar_sites.html"
 LUNA = "https://nssdc.gsfc.nasa.gov/planetary/lunar/lunar_artifact_impacts.html"
 REGIONS = "https://www.nasa.gov/news-release/nasa-provides-update-on-artemis-iii-moon-landing-regions/"
 WUELLER = "https://agupubs.onlinelibrary.wiley.com/doi/full/10.1029/2025JE009434"
+WUELLER_ETH = "https://www.research-collection.ethz.ch/server/api/core/bitstreams/fdbbd74d-ec07-4adc-9869-51a416cce9f1/content"
+WUELLER_ETH_RECORD = "https://www.research-collection.ethz.ch/items/828482bf-3641-40d8-a6b3-86378841d4e2"
 DATA_BOOK = "https://ntrs.nasa.gov/api/citations/20230007818/downloads/ACD-50044%20Lunar%20Surface%20Data%20Book%20Rev%20A.pdf"
 VERTEX = "https://www.frontiersin.org/journals/astronomy-and-space-sciences/articles/10.3389/fspas.2022.926018/full"
 KASI = "https://pda.kasi.re.kr/lusem.php?lang=en"
@@ -35,6 +37,14 @@ def record(id, name, name_ko, short, group, lat, source_lon_east,
                 "review_method": "Primary source opened; numeric pair manually transcribed",
                 "longitude_conversion": "(east_lon + 180) modulo 360 - 180",
                 "catalogue_lon": lon, "representation": "point"}
+    evidence["datum_status"] = ("source_de421_confirmed" if group in ("apollo", "luna")
+                                else "exact_moon_me_de421_unverified")
+    evidence["datum_basis"] = ("User-reported independent review confirmed DE421 in the cited original source"
+                               if group in ("apollo", "luna") else
+                               "Numeric source match does not establish the exact MOON_ME_DE421 datum; no transformation applied")
+    if group == "artemis3_region":
+        evidence["alternate_full_text_url"] = WUELLER_ETH
+        evidence["alternate_repository_record_url"] = WUELLER_ETH_RECORD
     return site, evidence
 
 
@@ -145,14 +155,23 @@ def main():
     audit = {"reviewed_date": REVIEWED, "n_sites": len(sites), "n_region_representatives": 9,
              "counts_by_group": dict(Counter(s["group"] for s in sites)),
              "scope": "Manual primary-source transcription and numeric convention checks, not an independent source re-extraction or human sign-off",
+             "datum_counts": {"source_de421_confirmed": 9, "exact_moon_me_de421_unverified": 24},
+             "datum_scope": "Application target frame is MOON_ME_DE421; source numeric agreement alone does not confirm that datum. Status for nine Apollo/Luna entries is based on user-reported independent review, not a new author datum audit.",
              "rows": [evidence for _, evidence in rows]}
     (ROOT / "docs/sites_source_audit.json").write_text(json.dumps(audit, indent=2) + "\n", encoding="utf-8")
     lines = ["# Landing sites and region representatives", "",
              f"Card 4 catalogue: {len(sites)} entries. Source review date: {REVIEWED}.", "",
              "## Coordinate policy", "",
-             "Latitude is north-positive and longitude is east-positive in [-180, 180). The application uses the contract's MOON_ME / DE421 convention. Apollo coordinates explicitly state DE421 ME/PA; LROC-derived lander locations and LOLA-based polar study points are used for terrain consistency. No unverified transformation of a different mission's control network has been applied.", "",
-             "`coord_quality=primary` means the numbers are published by the official archive, measurement team or original paper. It is not an accuracy class and does not mean a point is NASA-approved. LROC's own image measurements are primary values under the contract; `secondary` would describe a location we derived from imagery ourselves. Coordinate precision is preserved; IM-1 remains a coarse two-decimal location.", "",
+             "Latitude is north-positive and longitude is east-positive in [-180, 180). MOON_ME_DE421 is the application's required target frame, not a verified datum claim for every catalogue entry. Numerical agreement with a source and confirmation of its exact coordinate datum are separate checks. The user-reported independent review confirmed DE421 in the original sources for all six Apollo and three Luna entries. The remaining 24 entries have exact MOON_ME_DE421 datum UNVERIFIED; an LROC or LOLA association alone does not prove the exact datum. No datum transformation has been applied, and no coordinate was changed in this documentation follow-up.", "",
+             "`coord_quality=primary` means the numbers are published by the official archive, measurement team or original paper. It is not an accuracy class, does not certify the exact MOON_ME_DE421 datum and does not mean a point is NASA-approved. LROC's own image measurements are primary values under the contract; `secondary` would describe a location we derived from imagery ourselves. Coordinate precision is preserved; IM-1 remains a coarse two-decimal location.", "",
              "All `elev_m` values are null. Heights must be sampled from the team's DEM pipeline above R=1737.4 km; null is unknown, not a measured zero. We deliberately do not mix article elevations with potentially different vertical control. The observer's +2 m belongs in the geometry, not in the stored terrain elevation.", "",
+             "## Datum confirmation status", "",
+             "| Entries | Count | Exact source datum status |",
+             "|---|---:|---|",
+             "| Apollo 11, 12, 14, 15, 16, 17 | 6 | Source DE421 confirmed in user-reported independent review |",
+             "| Luna 16, 20, 24 | 3 | Source DE421 confirmed in user-reported independent review |",
+             "| Change, Chandrayaan, SLIM, CLPS, Artemis representatives, polar study points and future target | 24 | Exact MOON_ME_DE421 datum unverified |", "",
+             "Per-entry status and its evidence basis are recorded in docs/sites_source_audit.json. These documentation-only fields do not extend the sites.json contract.", "",
              "## Point meanings", "",
              "Apollo entries identify lunar modules, not ALSEP stations or retroreflectors. Robotic entries use post-landing positions. The Chang'e-4 point follows the refined 2020 LROC solution (-45.4562, 177.5885), rather than the different Chang'e-2-map solution used for the card 1 geometry test; those test coordinates were not a catalogue decision.", "",
              "The nine Artemis entries reproduce the membership of NASA's 2024-10-28 candidate-region list. Each is represented by one explicitly identified research CLS in Wueller et al. (2026), Appendix Table A1; it is not a region centroid, boundary or selected NASA touchdown point. Choosing the first listed CLS is a reproducible display choice, not a ranking or recommendation. No mission schedule is inferred from the historical Artemis III label. Slater Plain uses SP01, whose longitude is explicitly 124.5210 E; it is not the centre of Slater crater.", "",
@@ -167,6 +186,13 @@ def main():
     lines += ["", "## Source corrections and limitations", "",
               "The task card's NTRS 20250007692 resolves to 'LEMS-A3 Lunar Environment Monitoring Station Thermal Control Subsystem', not a coordinate catalogue: https://ntrs.nasa.gov/citations/20250007692 . It is not used for coordinates. The cited Goossens et al. (2025) full coordinate table was not verified and is not presented as evidence. The exact, accessible representative coordinates instead come from Wueller et al. (2026), DOI 10.1029/2025JE009434. NASA supplies region membership; the original paper supplies each numerical pair.", "",
               "This is a curated comparison catalogue, not an exhaustive or live registry of every lunar mission. Provider schedules and final future touchdown positions can change. Individual source uncertainties are retained when reported; no uniform metre-level accuracy is asserted. Reopening a source and checking its row is still required for independent review.", "",
+              "## Independent review supplied by user (2026-11-14)", "",
+              "The user reported that independent re-extraction of all 33 coordinate pairs matched the original sources exactly: maximum latitude difference 0 degrees and maximum wrapped-longitude difference 0 degrees. The contract checker, regeneration in a separate copy, and actual-browser display of 33 cards with a mock banner passed. These are user-supplied results for implementation commit a09b0dbfba0a5b075404ecafe57dbb24f4306b59, not new independent tests performed during this documentation update and not human sign-off. Exact datum confirmation has the separate 9 confirmed / 24 unverified scope above. Human review remains TO CHECK.", "",
+              "## Artemis original full text", "",
+              f"Publisher: {WUELLER} ; accessible ETH copy of the same published article (DOI 10.1029/2025JE009434), Appendix Table A1: {WUELLER_ETH} ; ETH repository record: {WUELLER_ETH_RECORD} . The ETH PDF was opened for this documentation update and its DOI and Table A1 were checked. This confirms document identity and access, not the exact datum of the Artemis coordinates.", "",
+              "## Terrain handoff and mock fallbacks", "",
+              "All 33 elev_m=null values mean unconfirmed terrain heights, not elevations of zero. In the current core.js, missing real horizon files cause flatHorizon(site) to substitute h0_m = site.elev_m ?? 0 and a zero-degree horizon mask, marked mock=true and flat=true; the 2 m observer offset is then added separately. The resulting zero terrain height and flat horizon are MOCK fallbacks for app operation, not measured terrain or validated visibility. A real ephemeris or a source-matched coordinate does not make these terrain assumptions real. Keep the app mock indication until real terrain inputs replace the fallbacks.", "",
+              "Terrain owners must obtain heights above R=1737.4 km and real curvature-aware horizon masks at the catalogue coordinates, with datum provenance, before treating derived visibility as terrain-based results. Do not replace null by zero in sites.json or infer terrain heights from this fallback. No heights, coordinates, core.js, horizon files or app UI were changed by this follow-up.", "",
               "## Reproduce and verify", "", "```sh", "python pipeline/build_sites.py", "python pipeline/check_contract.py", "```", "",
               "`docs/sites_source_audit.json` retains the original east-longitude value and exact row/figure locator for each record, including 0..360-to-signed conversions. It documents this author's source review, not an independent PASS. A separate reviewer should open every source and compare latitude and wrapped longitude within 0.01 degrees, paying attention to regional representatives and source precision.", "",
               "The three old card-6 mock horizon files for APOLLO17, CHANGE4 and SHACKLETON_RIM were tied to obsolete placeholder coordinates. They are removed, not moved to the new sites or replaced with invented terrain. core.js already supplies an explicitly mock flat fallback until the terrain owners generate real horizons. This catalogue does not provide terrain-visibility results.", "",

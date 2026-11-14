@@ -14,6 +14,11 @@
     "future": 1
   },
   "scope": "Manual primary-source transcription and numeric convention checks, not an independent source re-extraction or human sign-off",
+  "datum_counts": {
+    "source_de421_confirmed": 9,
+    "exact_moon_me_de421_unverified": 24
+  },
+  "datum_scope": "Application target frame is MOON_ME_DE421; source numeric agreement alone does not confirm that datum. Status for nine Apollo/Luna entries is based on user-reported independent review, not a new author datum audit.",
   "rows": [
     {
       "id": "APOLLO11",
@@ -25,7 +30,9 @@
       "review_method": "Primary source opened; numeric pair manually transcribed",
       "longitude_conversion": "(east_lon + 180) modulo 360 - 180",
       "catalogue_lon": 23.47314,
-      "representation": "point"
+      "representation": "point",
+      "datum_status": "source_de421_confirmed",
+      "datum_basis": "User-reported independent review confirmed DE421 in the cited original source"
     },
     {
       "id": "APOLLO12",
@@ -37,7 +44,9 @@
       "review_method": "Primary source opened; numeric pair manually transcribed",
       "longitude_conversion": "(east_lon + 180) modulo 360 - 180",
       "catalogue_lon": -23.4219,
-      "representation": "point"
+      "representation": "point",
+      "datum_status": "source_de421_confirmed",
+      "datum_basis": "User-reported independent review confirmed DE421 in the cited original source"
     },
     {
       "id": "APOLLO14",
@@ -49,7 +58,9 @@
       "review_method": "Primary source opened; numeric pair manually transcribed",
       "longitude_conversion": "(east_lon + 180) modulo 360 - 180",
       "catalogue_lon": -17.47194,
-      "representation": "point"
+      "representation": "point",
+      "datum_status": "source_de421_confirmed",
+      "datum_basis": "User-reported independent review confirmed DE421 in the cited original source"
     },
     {
       "id": "APOLLO15",
@@ -61,7 +72,9 @@
       "review_method": "Primary source opened; numeric pair manually transcribed",
       "longitude_conversion": "(east_lon + 180) modulo 360 - 180",
       "catalogue_lon": 3.6333,
-      "representation": "point"
+      "representation": "point",
+      "datum_status": "source_de421_confirmed",
+      "datum_basis": "User-reported independent review confirmed DE421 in the cited original source"
     },
     {
       "id": "APOLLO16",
@@ -73,7 +86,9 @@
       "review_method": "Primary source opened; numeric pair manually transcribed",
       "longitude_conversion": "(east_lon + 180) modulo 360 - 180",
       "catalogue_lon": 15.5011,
-      "representation": "point"
+      "representation": "point",
+      "datum_status": "source_de421_confirmed",
+      "datum_basis": "User-reported independent review confirmed DE421 in the cited original source"
     },
     {
       "id": "APOLLO17",
@@ -85,7 +100,9 @@
       "review_method": "Primary source opened; numeric pair manually transcribed",
       "longitude_conversion": "(east_lon + 180) modulo 360 - 180",
       "catalogue_lon": 30.7723,
-      "representation": "point"
+      "representation": "point",
+      "datum_status": "source_de421_confirmed",
+      "datum_basis": "User-reported independent review confirmed DE421 in the cited original source"
     },
     {
       "id": "LUNA16",
@@ -97,7 +114,9 @@
       "review_method": "Primary source opened; numeric pair manually transcribed",
       "longitude_conversion": "(east_lon + 180) modulo 360 - 180",
       "catalogue_lon": 56.3638,
-      "representation": "point"
+      "representation": "point",
+      "datum_status": "source_de421_confirmed",
+      "datum_basis": "User-reported independent review confirmed DE421 in the cited original source"
     },
     {
       "id": "LUNA20",
@@ -109,7 +128,9 @@
       "review_method": "Primary source opened; numeric pair manually transcribed",
       "longitude_conversion": "(east_lon + 180) modulo 360 - 180",
       "catalogue_lon": 56.6242,
-      "representation": "point"
+      "representation": "point",
+      "datum_status": "source_de421_confirmed",
+      "datum_basis": "User-reported independent review confirmed DE421 in the cited original source"
     },
     {
       "id": "LUNA24",
@@ -121,7 +142,9 @@
       "review_method": "Primary source opened; numeric pair manually transcribed",
       "longitude_conversion": "(east_lon + 180) modulo 360 - 180",
       "catalogue_lon": 62.2129,
-      "representation": "point"
+      "representation": "point",
+      "datum_status": "source_de421_confirmed",
+      "datum_basis": "User-reported independent review confirmed DE421 in the cited original source"
     },
     {
       "id": "CHANGE3",
@@ -133,7 +156,9 @@
       "review_method": "Primary source opened; numeric pair manually transcribed",
       "longitude_conversion": "(east_lon + 180) modulo 360 - 180",
       "catalogue_lon": -19.5116,
-      "representation": "point"
+      "representation": "point",
+      "datum_status": "exact_moon_me_de421_unverified",
+      "datum_basis": "Numeric source match does not establish the exact MOON_ME_DE421 datum; no transformation applied"
     },
     {
       "id": "CHANGE4",
@@ -145,7 +170,9 @@
       "review_method": "Primary source opened; numeric pair manually transcribed",
       "longitude_conversion": "(east_lon + 180) modulo 360 - 180",
       "catalogue_lon": 177.5885,
-      "representation": "point"
+      "representation": "point",
+      "datum_status": "exact_moon_me_de421_unverified",
+      "datum_basis": "Numeric source match does not establish the exact MOON_ME_DE421 datum; no transformation applied"
     },
     {
       "id": "CHANGE5",
@@ -157,7 +184,9 @@
       "review_method": "Primary source opened; numeric pair manually transcribed",
       "longitude_conversion": "(east_lon + 180) modulo 360 - 180",
       "catalogue_lon": -51.9161,
-      "representation": "point"
+      "representation": "point",
+      "datum_status": "exact_moon_me_de421_unverified",
+      "datum_basis": "Numeric source match does not establish the exact MOON_ME_DE421 datum; no transformation applied"
     },
     {
       "id": "CHANGE6",
@@ -169,7 +198,9 @@
       "review_method": "Primary source opened; numeric pair manually transcribed",
       "longitude_conversion": "(east_lon + 180) modulo 360 - 180",
       "catalogue_lon": -153.9852,
-      "representation": "point"
+      "representation": "point",
+      "datum_status": "exact_moon_me_de421_unverified",
+      "datum_basis": "Numeric source match does not establish the exact MOON_ME_DE421 datum; no transformation applied"
     },
     {
       "id": "CHANDRAYAAN3",
@@ -181,7 +212,9 @@
       "review_method": "Primary source opened; numeric pair manually transcribed",
       "longitude_conversion": "(east_lon + 180) modulo 360 - 180",
       "catalogue_lon": 32.32,
-      "representation": "point"
+      "representation": "point",
+      "datum_status": "exact_moon_me_de421_unverified",
+      "datum_basis": "Numeric source match does not establish the exact MOON_ME_DE421 datum; no transformation applied"
     },
     {
       "id": "SLIM",
@@ -193,7 +226,9 @@
       "review_method": "Primary source opened; numeric pair manually transcribed",
       "longitude_conversion": "(east_lon + 180) modulo 360 - 180",
       "catalogue_lon": 25.251,
-      "representation": "point"
+      "representation": "point",
+      "datum_status": "exact_moon_me_de421_unverified",
+      "datum_basis": "Numeric source match does not establish the exact MOON_ME_DE421 datum; no transformation applied"
     },
     {
       "id": "IM1",
@@ -205,7 +240,9 @@
       "review_method": "Primary source opened; numeric pair manually transcribed",
       "longitude_conversion": "(east_lon + 180) modulo 360 - 180",
       "catalogue_lon": 1.44,
-      "representation": "point"
+      "representation": "point",
+      "datum_status": "exact_moon_me_de421_unverified",
+      "datum_basis": "Numeric source match does not establish the exact MOON_ME_DE421 datum; no transformation applied"
     },
     {
       "id": "IM2",
@@ -217,7 +254,9 @@
       "review_method": "Primary source opened; numeric pair manually transcribed",
       "longitude_conversion": "(east_lon + 180) modulo 360 - 180",
       "catalogue_lon": 29.1957,
-      "representation": "point"
+      "representation": "point",
+      "datum_status": "exact_moon_me_de421_unverified",
+      "datum_basis": "Numeric source match does not establish the exact MOON_ME_DE421 datum; no transformation applied"
     },
     {
       "id": "BLUE_GHOST1",
@@ -229,7 +268,9 @@
       "review_method": "Primary source opened; numeric pair manually transcribed",
       "longitude_conversion": "(east_lon + 180) modulo 360 - 180",
       "catalogue_lon": 61.81,
-      "representation": "point"
+      "representation": "point",
+      "datum_status": "exact_moon_me_de421_unverified",
+      "datum_basis": "Numeric source match does not establish the exact MOON_ME_DE421 datum; no transformation applied"
     },
     {
       "id": "ARTEMIS_CABEUS_B",
@@ -242,6 +283,10 @@
       "longitude_conversion": "(east_lon + 180) modulo 360 - 180",
       "catalogue_lon": -69.983,
       "representation": "Research CLS chosen to represent the NASA 2024 region",
+      "datum_status": "exact_moon_me_de421_unverified",
+      "datum_basis": "Numeric source match does not establish the exact MOON_ME_DE421 datum; no transformation applied",
+      "alternate_full_text_url": "https://www.research-collection.ethz.ch/server/api/core/bitstreams/fdbbd74d-ec07-4adc-9869-51a416cce9f1/content",
+      "alternate_repository_record_url": "https://www.research-collection.ethz.ch/items/828482bf-3641-40d8-a6b3-86378841d4e2",
       "region_membership_source": "https://www.nasa.gov/news-release/nasa-provides-update-on-artemis-iii-moon-landing-regions/"
     },
     {
@@ -255,6 +300,10 @@
       "longitude_conversion": "(east_lon + 180) modulo 360 - 180",
       "catalogue_lon": -20.514,
       "representation": "Research CLS chosen to represent the NASA 2024 region",
+      "datum_status": "exact_moon_me_de421_unverified",
+      "datum_basis": "Numeric source match does not establish the exact MOON_ME_DE421 datum; no transformation applied",
+      "alternate_full_text_url": "https://www.research-collection.ethz.ch/server/api/core/bitstreams/fdbbd74d-ec07-4adc-9869-51a416cce9f1/content",
+      "alternate_repository_record_url": "https://www.research-collection.ethz.ch/items/828482bf-3641-40d8-a6b3-86378841d4e2",
       "region_membership_source": "https://www.nasa.gov/news-release/nasa-provides-update-on-artemis-iii-moon-landing-regions/"
     },
     {
@@ -268,6 +317,10 @@
       "longitude_conversion": "(east_lon + 180) modulo 360 - 180",
       "catalogue_lon": -0.944,
       "representation": "Research CLS chosen to represent the NASA 2024 region",
+      "datum_status": "exact_moon_me_de421_unverified",
+      "datum_basis": "Numeric source match does not establish the exact MOON_ME_DE421 datum; no transformation applied",
+      "alternate_full_text_url": "https://www.research-collection.ethz.ch/server/api/core/bitstreams/fdbbd74d-ec07-4adc-9869-51a416cce9f1/content",
+      "alternate_repository_record_url": "https://www.research-collection.ethz.ch/items/828482bf-3641-40d8-a6b3-86378841d4e2",
       "region_membership_source": "https://www.nasa.gov/news-release/nasa-provides-update-on-artemis-iii-moon-landing-regions/",
       "name_note": "Paper discussion identifies Mons Malapert as formerly Malapert Massif"
     },
@@ -282,6 +335,10 @@
       "longitude_conversion": "(east_lon + 180) modulo 360 - 180",
       "catalogue_lon": 26.71,
       "representation": "Research CLS chosen to represent the NASA 2024 region",
+      "datum_status": "exact_moon_me_de421_unverified",
+      "datum_basis": "Numeric source match does not establish the exact MOON_ME_DE421 datum; no transformation applied",
+      "alternate_full_text_url": "https://www.research-collection.ethz.ch/server/api/core/bitstreams/fdbbd74d-ec07-4adc-9869-51a416cce9f1/content",
+      "alternate_repository_record_url": "https://www.research-collection.ethz.ch/items/828482bf-3641-40d8-a6b3-86378841d4e2",
       "region_membership_source": "https://www.nasa.gov/news-release/nasa-provides-update-on-artemis-iii-moon-landing-regions/"
     },
     {
@@ -295,6 +352,10 @@
       "longitude_conversion": "(east_lon + 180) modulo 360 - 180",
       "catalogue_lon": 31.851,
       "representation": "Research CLS chosen to represent the NASA 2024 region",
+      "datum_status": "exact_moon_me_de421_unverified",
+      "datum_basis": "Numeric source match does not establish the exact MOON_ME_DE421 datum; no transformation applied",
+      "alternate_full_text_url": "https://www.research-collection.ethz.ch/server/api/core/bitstreams/fdbbd74d-ec07-4adc-9869-51a416cce9f1/content",
+      "alternate_repository_record_url": "https://www.research-collection.ethz.ch/items/828482bf-3641-40d8-a6b3-86378841d4e2",
       "region_membership_source": "https://www.nasa.gov/news-release/nasa-provides-update-on-artemis-iii-moon-landing-regions/"
     },
     {
@@ -308,6 +369,10 @@
       "longitude_conversion": "(east_lon + 180) modulo 360 - 180",
       "catalogue_lon": 36.917,
       "representation": "Research CLS chosen to represent the NASA 2024 region",
+      "datum_status": "exact_moon_me_de421_unverified",
+      "datum_basis": "Numeric source match does not establish the exact MOON_ME_DE421 datum; no transformation applied",
+      "alternate_full_text_url": "https://www.research-collection.ethz.ch/server/api/core/bitstreams/fdbbd74d-ec07-4adc-9869-51a416cce9f1/content",
+      "alternate_repository_record_url": "https://www.research-collection.ethz.ch/items/828482bf-3641-40d8-a6b3-86378841d4e2",
       "region_membership_source": "https://www.nasa.gov/news-release/nasa-provides-update-on-artemis-iii-moon-landing-regions/"
     },
     {
@@ -321,6 +386,10 @@
       "longitude_conversion": "(east_lon + 180) modulo 360 - 180",
       "catalogue_lon": 56.481,
       "representation": "Research CLS chosen to represent the NASA 2024 region",
+      "datum_status": "exact_moon_me_de421_unverified",
+      "datum_basis": "Numeric source match does not establish the exact MOON_ME_DE421 datum; no transformation applied",
+      "alternate_full_text_url": "https://www.research-collection.ethz.ch/server/api/core/bitstreams/fdbbd74d-ec07-4adc-9869-51a416cce9f1/content",
+      "alternate_repository_record_url": "https://www.research-collection.ethz.ch/items/828482bf-3641-40d8-a6b3-86378841d4e2",
       "region_membership_source": "https://www.nasa.gov/news-release/nasa-provides-update-on-artemis-iii-moon-landing-regions/"
     },
     {
@@ -334,6 +403,10 @@
       "longitude_conversion": "(east_lon + 180) modulo 360 - 180",
       "catalogue_lon": -68.865,
       "representation": "Research CLS chosen to represent the NASA 2024 region",
+      "datum_status": "exact_moon_me_de421_unverified",
+      "datum_basis": "Numeric source match does not establish the exact MOON_ME_DE421 datum; no transformation applied",
+      "alternate_full_text_url": "https://www.research-collection.ethz.ch/server/api/core/bitstreams/fdbbd74d-ec07-4adc-9869-51a416cce9f1/content",
+      "alternate_repository_record_url": "https://www.research-collection.ethz.ch/items/828482bf-3641-40d8-a6b3-86378841d4e2",
       "region_membership_source": "https://www.nasa.gov/news-release/nasa-provides-update-on-artemis-iii-moon-landing-regions/"
     },
     {
@@ -347,6 +420,10 @@
       "longitude_conversion": "(east_lon + 180) modulo 360 - 180",
       "catalogue_lon": 124.521,
       "representation": "Research CLS chosen to represent the NASA 2024 region",
+      "datum_status": "exact_moon_me_de421_unverified",
+      "datum_basis": "Numeric source match does not establish the exact MOON_ME_DE421 datum; no transformation applied",
+      "alternate_full_text_url": "https://www.research-collection.ethz.ch/server/api/core/bitstreams/fdbbd74d-ec07-4adc-9869-51a416cce9f1/content",
+      "alternate_repository_record_url": "https://www.research-collection.ethz.ch/items/828482bf-3641-40d8-a6b3-86378841d4e2",
       "region_membership_source": "https://www.nasa.gov/news-release/nasa-provides-update-on-artemis-iii-moon-landing-regions/"
     },
     {
@@ -359,7 +436,9 @@
       "review_method": "Primary source opened; numeric pair manually transcribed",
       "longitude_conversion": "(east_lon + 180) modulo 360 - 180",
       "catalogue_lon": -171.87,
-      "representation": "Published terrain-study polygon centre"
+      "representation": "Published terrain-study polygon centre",
+      "datum_status": "exact_moon_me_de421_unverified",
+      "datum_basis": "Numeric source match does not establish the exact MOON_ME_DE421 datum; no transformation applied"
     },
     {
       "id": "CONNECTING_RIDGE",
@@ -371,7 +450,9 @@
       "review_method": "Primary source opened; numeric pair manually transcribed",
       "longitude_conversion": "(east_lon + 180) modulo 360 - 180",
       "catalogue_lon": -137.49,
-      "representation": "Published terrain-study polygon centre"
+      "representation": "Published terrain-study polygon centre",
+      "datum_status": "exact_moon_me_de421_unverified",
+      "datum_basis": "Numeric source match does not establish the exact MOON_ME_DE421 datum; no transformation applied"
     },
     {
       "id": "PEAK_NEAR_SHACKLETON",
@@ -383,7 +464,9 @@
       "review_method": "Primary source opened; numeric pair manually transcribed",
       "longitude_conversion": "(east_lon + 180) modulo 360 - 180",
       "catalogue_lon": 123.6901,
-      "representation": "Published terrain-study polygon centre"
+      "representation": "Published terrain-study polygon centre",
+      "datum_status": "exact_moon_me_de421_unverified",
+      "datum_basis": "Numeric source match does not establish the exact MOON_ME_DE421 datum; no transformation applied"
     },
     {
       "id": "DE_GERLACHE_RIM1",
@@ -395,7 +478,9 @@
       "review_method": "Primary source opened; numeric pair manually transcribed",
       "longitude_conversion": "(east_lon + 180) modulo 360 - 180",
       "catalogue_lon": -67.9321,
-      "representation": "Published terrain-study polygon centre"
+      "representation": "Published terrain-study polygon centre",
+      "datum_status": "exact_moon_me_de421_unverified",
+      "datum_basis": "Numeric source match does not establish the exact MOON_ME_DE421 datum; no transformation applied"
     },
     {
       "id": "SHOEMAKER_RIM_A",
@@ -407,7 +492,9 @@
       "review_method": "Primary source opened; numeric pair manually transcribed",
       "longitude_conversion": "(east_lon + 180) modulo 360 - 180",
       "catalogue_lon": 11.88866,
-      "representation": "Published terrain-study polygon centre"
+      "representation": "Published terrain-study polygon centre",
+      "datum_status": "exact_moon_me_de421_unverified",
+      "datum_basis": "Numeric source match does not establish the exact MOON_ME_DE421 datum; no transformation applied"
     },
     {
       "id": "IM3_REINER_GAMMA",
@@ -420,6 +507,8 @@
       "longitude_conversion": "(east_lon + 180) modulo 360 - 180",
       "catalogue_lon": -58.725,
       "representation": "Published Lunar Vertex science target for the IM-3 region",
+      "datum_status": "exact_moon_me_de421_unverified",
+      "datum_basis": "Numeric source match does not establish the exact MOON_ME_DE421 datum; no transformation applied",
       "mission_association_source": "https://pda.kasi.re.kr/lusem.php?lang=en"
     }
   ]
