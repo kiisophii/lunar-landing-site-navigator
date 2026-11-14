@@ -67,15 +67,21 @@ $nCores = [Environment]::ProcessorCount
 $t = if ($AllCores) { $nCores } else { [math]::Min($Threads, $nCores) }
 if ($AllCores -and $busy.Count -and -not $Force) { $fail += 'other python jobs are running - use -Threads N, or -Force once they are finished' }
 Log "threads: $t of $nCores logical CPUs"
+# From here on only native python calls (checked via $LASTEXITCODE). In Windows PowerShell 5.1,
+# 'Stop' turns every stderr line of a native command under 2>&1 (numba warnings, etc.) into a
+# terminating error, which killed the first run attempt; so use 'Continue'.
+$ErrorActionPreference = 'Continue'
 & $Py pipeline\global_maps.py status --ppd 32 2>&1 | ForEach-Object { Log "status: $_" }
 if ($fail.Count) { $fail | ForEach-Object { Log "PRE-FLIGHT FAIL: $_" }; exit 2 }
 if ($CheckOnly) { Log 'pre-flight OK (check only, nothing computed)'; exit 0 }
 
 # ---------------------------------------------------------------- keep awake while running
 Add-Type -Namespace Win -Name Power -MemberDefinition '[DllImport("kernel32.dll")] public static extern uint SetThreadExecutionState(uint f);'
-[void][Win.Power]::SetThreadExecutionState(0x80000001)   # ES_CONTINUOUS | ES_SYSTEM_REQUIRED
+[void][Win.Power]::SetThreadExecutionState([Convert]::ToUInt32('80000001', 16))   # ES_CONTINUOUS | ES_SYSTEM_REQUIRED; PS 5.1 parses 0x80000001 as a negative int32
 try {
-    $tArg = if ($AllCores) { @('--all-cores') } else { @('--threads', "$t") }
+    # [string[]]: an 'if' expression unrolls a 1-element array to a plain string, and splatting
+    # a string passes it character by character ("- - a l l - c o r e s").
+    [string[]]$tArg = if ($AllCores) { @('--all-cores') } else { @('--threads', "$t") }
     $ok = $false
     for ($i = 1; $i -le $Retries -and -not $ok; $i++) {
         Log "run attempt $i/$Retries"
@@ -95,5 +101,5 @@ try {
     }
     Log 'DONE'
 } finally {
-    [void][Win.Power]::SetThreadExecutionState(0x80000000)   # back to normal sleep rules
+    [void][Win.Power]::SetThreadExecutionState([Convert]::ToUInt32('80000000', 16))   # ES_CONTINUOUS only: back to normal sleep rules
 }
