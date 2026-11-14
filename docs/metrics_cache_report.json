@@ -1,5 +1,5 @@
 {
-  "generated_utc": "2026-11-14T03:20:09.407Z",
+  "generated_utc": "2026-11-14T05:40:15.430Z",
   "complete": true,
   "definition": "Actual web/js/core.js metrics(site, 0, 43823); inclusive hourly sample counts",
   "window": "2026-01-01..2030-12-31",
@@ -7,7 +7,7 @@
   "ephem_sha256": "c0a226391f7a47c22c71d8b187cc98fb80101631bee37bd13b32a6870f965da3",
   "metadata_sha256": "c6294c416a16bcc34d08752b8f0541d803e2e5784af09ce291b0a211269f52b8",
   "n": 43824,
-  "sites_sha256": "a3f0bde4f7020742798317cd6b7f40fffa43c2f4928623d8be704245aeb7bcc2",
+  "sites_sha256": "fabf63bcfe2d33d556bb1e0c1f8934254600233fd65f0ecc7bb7d974d1ed7af0",
   "computed": [
     {
       "id": "APOLLO11",
@@ -199,7 +199,7 @@
         "horizon_sha256": "a38e0bd619d235f929532c9d0f8a5370b4cb9052d3a90017ce1b4274f634f06b"
       },
       "output_sha256": "7c9ab36f23902c4fa5dc9339bd678783b86dac14d0fb98dd86e3543925f413b1",
-      "resumed": true
+      "resumed": false
     },
     {
       "id": "IM2",
@@ -211,7 +211,7 @@
         "horizon_sha256": "9e341663e268fa31f0d35427e42c5f7606abb47a743f8dd1402fde527e68e281"
       },
       "output_sha256": "104c86f2e756ff88de940cf35945dbbb52ed68cb5c01e23d9f9fa4fc652e90f3",
-      "resumed": true
+      "resumed": false
     },
     {
       "id": "BLUE_GHOST1",
@@ -235,7 +235,7 @@
         "horizon_sha256": "145a651dc9df04ff9c942b854095d74b69f7f33408f89be0e29d956e3ad882e6"
       },
       "output_sha256": "95e777ca34fd7080890126d59ce348d3b7f2f1fe588d1271c3fdd69977dafaf5",
-      "resumed": true
+      "resumed": false
     },
     {
       "id": "ARTEMIS_HAWORTH",
@@ -247,7 +247,7 @@
         "horizon_sha256": "75051bf47e1625e387fba2267d75e776d3f0ede3ee64f44b655b2bb6ac8733f3"
       },
       "output_sha256": "83d99a0d38637f39006068ef1e458771bcc056211d4afb27d9a4aeb8ed2c8f90",
-      "resumed": true
+      "resumed": false
     },
     {
       "id": "ARTEMIS_MALAPERT",
@@ -259,7 +259,7 @@
         "horizon_sha256": "a274da886f22c9ac622d1819bfe6444f0647e94dd781d797fa5914e0aafc0ac1"
       },
       "output_sha256": "e3e06836d23544579dd38a8d9494d968c441637caada64db30b6bdf80b959133",
-      "resumed": true
+      "resumed": false
     },
     {
       "id": "ARTEMIS_MOUTON_PLATEAU",
@@ -271,7 +271,7 @@
         "horizon_sha256": "9ee206cb92270145a529a4da19840486b31ea733001c1afb0898ab30f893d762"
       },
       "output_sha256": "44bd97b23510ffbeef59c8698007373f920a1d0868398487958b5ab2df0ff99a",
-      "resumed": true
+      "resumed": false
     },
     {
       "id": "ARTEMIS_MOUTON",
@@ -283,7 +283,7 @@
         "horizon_sha256": "42455df7850f8ccbf5d2615b060f921475ce7228b9f8c325caec5eeb4ec0bf71"
       },
       "output_sha256": "fa3fb8d1a8afaf701fb096a4ef7d18b99900ea0ead67bad48989f6271d23dc13",
-      "resumed": true
+      "resumed": false
     },
     {
       "id": "ARTEMIS_NOBILE_RIM1",
@@ -295,7 +295,7 @@
         "horizon_sha256": "5f64896417bb8bc27d41fd0b14c53dd87da816e97de68898ddf1e3956bdcbcd8"
       },
       "output_sha256": "5cc277a2f501adf4e88d4d19cbc2901f47c754e9d0b1a09bec6f33603c7d3ca2",
-      "resumed": true
+      "resumed": false
     },
     {
       "id": "ARTEMIS_NOBILE_RIM2",
@@ -307,7 +307,7 @@
         "horizon_sha256": "db3570a8e042fe44c939401f9dc1d9afdb09d2fa6809da22e032e8ea1438e216"
       },
       "output_sha256": "28380c5c04d331e92aa45789bb1acc4c6987fdb768c8c88b5b75553bf2a917f9",
-      "resumed": true
+      "resumed": false
     },
     {
       "id": "ARTEMIS_DE_GERLACHE_RIM2",
@@ -319,7 +319,7 @@
         "horizon_sha256": "c430f489e3dd711fcd52dbd67cdfd314291b8094db63cd5414de87da56fd8549"
       },
       "output_sha256": "a9de15b8ed50fa86b91570ae5c0fff21c89f411ededafd18e528f03a27554a4d",
-      "resumed": true
+      "resumed": false
     },
     {
       "id": "ARTEMIS_SLATER_PLAIN",
@@ -331,7 +331,7 @@
         "horizon_sha256": "e890b5e6f08e5c81e431b9607c6e68674318aad59eca02aa0e1ce2f81e490796"
       },
       "output_sha256": "ba2bfbe3ac3abec50d03d1934e88a6adf912d1ed67153b633512afae17e16193",
-      "resumed": true
+      "resumed": false
     },
     {
       "id": "SHACKLETON_RIM",
@@ -339,11 +339,11 @@
         "core_sha256": "50a431098cf74afac8fd0dd6e390e33ff4a53885f931b906ac49245080a5c394",
         "ephem_sha256": "c0a226391f7a47c22c71d8b187cc98fb80101631bee37bd13b32a6870f965da3",
         "metadata_sha256": "c6294c416a16bcc34d08752b8f0541d803e2e5784af09ce291b0a211269f52b8",
-        "site_sha256": "2281d2a2a953eebc3d4a70a082cd8fa159323835f2af928ec452f0dc80841769",
-        "horizon_sha256": "0e7ccaf7d9d6690411261ede4de87b99860a230e2648fea40073f8b32149542d"
+        "site_sha256": "4ba1309d32c2d100955d2078338c7a68da70b9fe1d0aa779775df51731e87eba",
+        "horizon_sha256": "e58f5e53704a552774d49447ae575bf098031f3ea45f7f6763146ae27bc729b9"
       },
-      "output_sha256": "173bf3d95c9089cdbe8009e84cab801661d09e3dc5e165044053d2578d602ada",
-      "resumed": true
+      "output_sha256": "5ad89bb8bdb5936037ede71a7f70ef6c52df82b9dc34160721e5ac4b1913cb0d",
+      "resumed": false
     },
     {
       "id": "CONNECTING_RIDGE",
@@ -355,7 +355,7 @@
         "horizon_sha256": "4a4f5be40df01e4410362fae8cdeebfc2d9f6a9b752968ace9edc5f1b488f3d7"
       },
       "output_sha256": "a1998a14c442b6c375a0b2db9813b2532d13854b08fde32190d81366534e4c4b",
-      "resumed": true
+      "resumed": false
     },
     {
       "id": "PEAK_NEAR_SHACKLETON",
@@ -367,7 +367,7 @@
         "horizon_sha256": "f96807381ecb0308de3160cd6a56ec6d664f4fa9fcb97c5dbf192571be58dbac"
       },
       "output_sha256": "6272b0466e877e4be4d5f3a26696cf13de14eeb02ac8ac73dccd5d3adaf84259",
-      "resumed": true
+      "resumed": false
     },
     {
       "id": "DE_GERLACHE_RIM1",
@@ -379,7 +379,7 @@
         "horizon_sha256": "7ccaf2875df71c0a312130f66fde9c65fb246471c288dd35195aa375bf41e470"
       },
       "output_sha256": "5e24eb5962eacdb0a7f5a1f9c69224339efe8a6d78ff65d648a9f87d2040fe43",
-      "resumed": true
+      "resumed": false
     },
     {
       "id": "SHOEMAKER_RIM_A",
@@ -391,7 +391,7 @@
         "horizon_sha256": "8730711877cb9ed376dd13166fc2eb7cdddddbbd0e700513ffc82d69985ce6f5"
       },
       "output_sha256": "c47df8fa6790153ded61be862ad472ecb27d023c3c6e410121f6062b92ecde3e",
-      "resumed": true
+      "resumed": false
     },
     {
       "id": "IM3_REINER_GAMMA",

@@ -1,0 +1,150 @@
+{
+  "cpu": "AMD Ryzen 5 5600X",
+  "max_active_site_jobs": 4,
+  "priority": "BelowNormal",
+  "threads_per_job": 1,
+  "download_start_utc": "2026-11-14T04:07:03Z",
+  "download_end_utc": "2026-11-14T04:28:27.364806+00:00",
+  "download_wall_s": 1284.364806,
+  "compute_start_utc": "2026-11-14T04:18:02+00:00",
+  "compute_end_utc": "2026-11-14T06:03:23.3382546+00:00",
+  "compute_wall_s": 6321.338254,
+  "finalization_s": 219.7494466,
+  "finalization": {
+    "start_utc": "2026-11-14T05:59:43.5888080+00:00",
+    "end_utc": "2026-11-14T06:03:23.3382546+00:00",
+    "elapsed_s": 219.7494466,
+    "exit_code": 0
+  },
+  "new_shackleton": {
+    "start_utc": "2026-11-14T05:48:22.4071043+00:00",
+    "end_utc": "2026-11-14T05:57:40.4603266+00:00",
+    "elapsed_s": 558.0532223,
+    "exit_code": 0
+  },
+  "initial_dispatch_site_timings": [
+    {
+      "id": "APOLLO12",
+      "seconds": 994
+    },
+    {
+      "id": "APOLLO14",
+      "seconds": 1222
+    },
+    {
+      "id": "APOLLO15",
+      "seconds": 810
+    },
+    {
+      "id": "APOLLO16",
+      "seconds": 1159
+    },
+    {
+      "id": "ARTEMIS_CABEUS_B",
+      "seconds": 621
+    },
+    {
+      "id": "ARTEMIS_HAWORTH",
+      "seconds": 612
+    },
+    {
+      "id": "ARTEMIS_MALAPERT",
+      "seconds": 578
+    },
+    {
+      "id": "ARTEMIS_MOUTON",
+      "seconds": 584
+    },
+    {
+      "id": "ARTEMIS_MOUTON_PLATEAU",
+      "seconds": 598
+    },
+    {
+      "id": "ARTEMIS_NOBILE_RIM1",
+      "seconds": 544
+    },
+    {
+      "id": "ARTEMIS_NOBILE_RIM2",
+      "seconds": 586
+    },
+    {
+      "id": "ARTEMIS_SLATER_PLAIN",
+      "seconds": 609
+    },
+    {
+      "id": "BLUE_GHOST1",
+      "seconds": 591
+    },
+    {
+      "id": "CHANDRAYAAN3",
+      "seconds": 617
+    },
+    {
+      "id": "CHANGE3",
+      "seconds": 671
+    },
+    {
+      "id": "CHANGE4",
+      "seconds": 652
+    },
+    {
+      "id": "CHANGE5",
+      "seconds": 641
+    },
+    {
+      "id": "CHANGE6",
+      "seconds": 714
+    },
+    {
+      "id": "CONNECTING_RIDGE",
+      "seconds": 639
+    },
+    {
+      "id": "DE_GERLACHE_RIM1",
+      "seconds": 602
+    },
+    {
+      "id": "IM1",
+      "seconds": 576
+    },
+    {
+      "id": "IM3_REINER_GAMMA",
+      "seconds": 596
+    },
+    {
+      "id": "LUNA16",
+      "seconds": 580
+    },
+    {
+      "id": "LUNA20",
+      "seconds": 550
+    },
+    {
+      "id": "LUNA24",
+      "seconds": 591
+    },
+    {
+      "id": "PEAK_NEAR_SHACKLETON",
+      "seconds": 615
+    },
+    {
+      "id": "SHACKLETON_RIM",
+      "seconds": 617
+    },
+    {
+      "id": "SHOEMAKER_RIM_A",
+      "seconds": 569
+    },
+    {
+      "id": "SLIM",
+      "seconds": 724
+    }
+  ],
+  "code_commit": "1694ea9efac272f72cab3e7a47b437700c115b77",
+  "notes": [
+    "Observed wall time includes overlapping download, checkpoint recovery, validation and coordination; not a clean isolated benchmark.",
+    "New Shackleton coordinate computation occupied a freed slot; four simultaneous site jobs maximum.",
+    "The obsolete coordinate was computed before Card 15 arrived, and its cost is included.",
+    "Finalization reused saved candidate Earth visibility and recomputed paths, networks and coverage."
+  ]
+}

@@ -32,30 +32,34 @@ RUN_PARAMS = {"radius_km": 10.0, "spacing_m": 250.0, "heights_m": [5.0, 15.0, 30
               "link_rule": "los", "n_towers": 3}
 
 
-def same_run(path, site, params):
+def same_run(path, site, params, identity):
     try:
         o = json.loads(path.read_text(encoding="utf-8"))
     except Exception:  # noqa: BLE001
         return False
     p = o.get("params", {})
+    effective = dict(rt.DEFAULTS, **params)
     return (not o.get("mock") and o.get("lat") == site["lat"] and o.get("lon") == site["lon"]
-            and all(p.get(k) == v for k, v in params.items() if k != "heights_m")
-            and [float(h) for h in p.get("heights_m", [])] == params["heights_m"])
+            and p.get("engine_version") == rt.ENGINE_VERSION and o.get("input_identity") == identity
+            and all(p.get(k) == v for k, v in effective.items() if k not in ("bands", "sun_shortlist"))
+            and p.get("bands_ghz") == {b: f/1e9 for b, f in effective["bands"].items()})
 
 
 def run_one(site, raw, web_data, work, params, force):
     t0 = time.time()
+    params = dict(params, coverage_side_km=15. if site["id"].startswith("ARTEMIS_") else 0.)
     try:
         chain = rh.build_chain(site, raw, rt.DEFAULTS["max_km"])
     except rh.MissingDEM as e:
         return site["id"], "PENDING", f"missing DEM: {e}"
     out = web_data / "relay" / f"{site['id']}.json"
-    if not force and same_run(out, site, params):
-        return site["id"], "OK", "up to date (resume)"
     eph = rt.Ephem.load(web_data)
     if eph.mock:
         return site["id"], "PENDING", "ephemeris is mock"
-    obj = rt.compute_relay(site, chain, eph, params, work_dir=work / site["id"], log=lambda *a: None)
+    if not force and same_run(out, site, params, rt.input_identity(chain, eph)):
+        return site["id"], "OK", "up to date (resume)"
+    obj = rt.compute_relay(site, chain, eph, params, work_dir=work / site["id"],
+                           log=lambda msg: print(f"[{site['id']}] {msg}", flush=True))
     rt.validate_relay(obj)
     hz.write_json_atomic(out, obj)
     return site["id"], "OK", f"computed in {time.time() - t0:.0f} s"
@@ -64,7 +68,7 @@ def run_one(site, raw, web_data, work, params, force):
 def write_index(web_data, sites, pending):
     d = web_data / "relay"
     d.mkdir(parents=True, exist_ok=True)
-    ids = [s["id"] for s in sites if (d / f"{s['id']}.json").exists()]
+    ids = [s["id"] for s in sites if s["id"] not in pending and (d / f"{s['id']}.json").exists()]
     pend = {sid: why for sid, why in pending.items() if sid not in ids}
     for s in sites:
         if s["id"] not in ids and s["id"] not in pend:

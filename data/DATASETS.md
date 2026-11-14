@@ -1,5 +1,13 @@
 # Data sources
 
+Card 13 (Jiyong, 2026-11-14) reuses the cited PGDA product 90 polar rasters,
+SLDEM2015 512 ppd site windows, LOLA LDEM_64/16 and MOON_ME ephemeris below for
+all 33 relay analyses. Downloads use the unchanged `pipeline/fetch_global.py`.
+The 250 m candidate/coverage grids are analysis sampling grids, not new DEM resolutions.
+The 5/15/30/50 m antennas, S=2.2 GHz, Ka=26 GHz, 10 km search/service radius and
+15 km coverage square are modelling choices; only the cited BEACON concept motivates
+the 15 m / approximately 10 km case. RF budgets remain labelled estimates.
+
 Add each dataset the moment you use it: name, URL, resolution, size, license, citation, where it is used.
 
 | Dataset | URL | Resolution / size | License | Citation | Used for |

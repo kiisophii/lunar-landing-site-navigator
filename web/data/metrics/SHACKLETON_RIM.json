@@ -1,0 +1,9 @@
+{
+  "id": "SHACKLETON_RIM",
+  "window": "2026-01-01..2030-12-31",
+  "sun_frac": 0.8482566630156991,
+  "earth_frac": 0.49942953632712667,
+  "both_frac": 0.4436153705732019,
+  "longest_dark_h": 75,
+  "slope_deg": null
+}

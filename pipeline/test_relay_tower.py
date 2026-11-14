@@ -183,3 +183,122 @@ def test_candidate_grid():
     assert np.all(np.hypot(e, n) <= 20000.0 + 1e-6)
     assert ((e == 0) & (n == 0)).sum() == 1
     assert abs(e.size - math.pi * 80 ** 2) / e.size < 0.01     # ~20,100 candidates
+
+
+def test_missing_profile_terrain_is_not_clear():
+    chain = [(hz.FunctionSampler(lambda a, b: np.full(a.shape, np.nan)), 400)]
+    la, lo = rt.local_offsets_to_latlon(0, 0, np.array([1000.]), np.array([0.]))
+    with pytest.raises(ValueError, match="missing terrain"):
+        rt.link_profiles(chain, 0, 0, 2, la, lo, [[15]], bands={"S": 2.2e9})
+
+
+def test_shifted_tower_samples_fine_terrain_towards_lander():
+    fine = hz.FunctionSampler(lambda a, b: np.full(a.shape, 200.), "FINE")
+    far = hz.FunctionSampler(lambda a, b: np.zeros(a.shape), "FAR")
+    anchored = rt.anchored_chain([(fine, 3), (far, 300)], 0, 0)
+    # A ray starting 10 km east and returning to 1 km east must use the fine DEM.
+    la, lo = rt.local_offsets_to_latlon(0, 0, np.array([1000., 4000.]), np.array([0., 0.]))
+    values = hz.sample_chain(anchored, la, lo, np.array([19., 16.]))
+    assert values.tolist() == [200., 0.]
+
+
+def test_high_earth_is_not_assumed_visible_above_near_cliff():
+    chain = [(hz.FunctionSampler(lambda a, b: np.where(np.radians(a)*R > 10, 300., 0.)), 400)]
+    earth = np.array([[384400.*np.sin(np.radians(60)), 0, 384400.*np.cos(np.radians(60))]])
+    p = dict(rt.DEFAULTS, min_km=.005, n_steps=300)
+    assert not rt.earth_visibility(0, 0, chain, 0, [2], earth, p)[0, 0]
+
+
+def test_resume_rejects_changed_ephemeris(tmp_path):
+    site = {"id": "CACHE", "lat": 0., "lon": 0.}
+    chain = [(hz.FunctionSampler(lambda a, b: np.zeros(a.shape)), 400)]
+    p = dict(radius_km=0., spacing_m=250., n_steps=100)
+    e = synthetic_ephem(4)
+    first = rt.compute_relay(site, chain, e, p, work_dir=tmp_path, log=lambda *a: None)
+    e.earth[:] = -rt.unit(0, 0)*384400.
+    second = rt.compute_relay(site, chain, e, p, work_dir=tmp_path, log=lambda *a: None)
+    assert first["best"][0]["tower_earth_frac"] > 0
+    assert second["best"][0]["tower_earth_frac"] == 0
+
+
+def test_input_identity_detects_same_size_dem_replacement(tmp_path):
+    path = tmp_path / "terrain.npz"
+    path.write_bytes(b"abcd")
+    sampler = hz.FunctionSampler(lambda a, b: np.zeros(a.shape))
+    sampler.path = path
+    e = synthetic_ephem(2)
+    before = rt.input_identity([(sampler, 300)], e)
+    import os
+    old = path.stat().st_mtime_ns
+    path.write_bytes(b"efgh")
+    os.utime(path, ns=(old+1000, old+1000))
+    assert rt.input_identity([(sampler, 300)], e) != before
+
+
+def test_coverage_square_area_and_shadow():
+    # A tall east-west wall separates the tower at the origin from the northern half.
+    chain = [(hz.FunctionSampler(lambda a, b: np.where(
+        np.abs(np.radians(a)*R-1000) < 100, 1000., 0.)), 400)]
+    p = dict(rt.DEFAULTS, coverage_side_km=15., coverage_spacing_m=250.)
+    tower = dict(idx=0, lat=0., lon=0., ground_m=0., height_m=15.)
+    m = rt.coverage_map({"lat": 0., "lon": 0.}, chain, [tower], p)
+    assert (m["rows"], m["cols"]) == (60, 60)
+    assert m["area_km2"] == 225.
+    layer = m["per_height"]["15"]
+    los = np.array(layer["los"]).reshape(60, 60)
+    assert los[30, 30] == 1 and los[45, 30] == 0
+    assert layer["los_area_km2"] == pytest.approx(los.sum()*.0625)
+    for band in ("S", "Ka"):
+        f = np.array(layer[f"fresnel60_{band}"])
+        assert np.all(f <= los.ravel())
+
+
+def test_height_curve_matches_selected_solution(ridge_result):
+    curve = ridge_result["height_curve"]
+    assert [r["height_m"] for r in curve] == [5., 15., 30., 50.]
+    for row, best, net in zip(curve, ridge_result["best"], ridge_result["networks"]):
+        assert row["single_link_frac"] == best["link_frac"]
+        assert row["network_link_frac"] == net["link_frac_by_n"][-1]
+
+
+def test_contract_rejects_wrong_coverage_dimensions(ridge_result):
+    import copy
+    obj = copy.deepcopy(ridge_result)
+    obj["coverage"] = dict(rows=60, cols=60, valid_terrain=[1], per_height={})
+    with pytest.raises(AssertionError):
+        rt.validate_relay(obj)
+
+
+def test_network_records_clearance_to_actual_parent():
+    # First antenna sits on the ridge, second behind it: only the hop via the first can reach it.
+    chain = [(hz.FunctionSampler(ridge), 400.)]
+    e, n = np.array([0., 0.]), np.array([2000., 3000.])
+    la, lo = rt.local_offsets_to_latlon(0, 0, e, n)
+    ground = ridge(la, lo)
+    p = dict(rt.DEFAULTS, n_towers=2, los_step_m=2.)
+    prof = rt.link_profiles(chain, 0, 0, 2, la, lo, (ground+15)[:, None], bands=p["bands"], step_m=2.)
+    linked = rt.link_ok(prof, "los")
+    assert linked[:, 0].tolist() == [True, False]
+    vis = rt.pack(np.array([[[1, 1, 0, 0]], [[0, 0, 1, 1]]], bool))
+    direct = np.zeros(4, bool)
+    net = rt._greedy_network(0, 15, p, chain, 0, 0, 0, e, n, la, lo, ground,
+        np.ones(2, bool), linked, vis, rt.pack(direct), direct, 4, p["bands"], "los", prof,
+        np.full((2, 1), .5), np.array([[.5], [0.]]), np.zeros(2))
+    assert net["link_frac_by_n"] == [0., .5, 1.]
+    second = net["towers"][1]
+    assert second["parent"] == 0 and second["min_clear_m"] < 0
+    assert second["parent_link"]["min_clear_m"] > 0
+    assert second["parent_link"]["fresnel"]["S"] > 0
+
+
+@pytest.mark.parametrize("lat", [0., 20., -89.])
+def test_colocated_antenna_remains_linked_in_mixed_distance_batch(lat):
+    chain = [(hz.FunctionSampler(lambda a, b: np.zeros(a.shape)), 400.)]
+    la, lo = rt.local_offsets_to_latlon(lat, 30., np.array([0., 250.]), np.array([0., 0.]))
+    pr = rt.link_profiles(chain, lat, 30., 2., la, lo, [[15.], [15.]],
+                           bands={"S": 2.2e9, "Ka": 26e9}, step_m=5.)
+    assert rt.link_ok(pr, "los").all()
+    assert np.isposinf(pr["min_clear_m"][0, 0])
+    assert np.isfinite(pr["min_clear_m"][1, 0])
+    for band in ("S", "Ka"):
+        assert np.isposinf(pr["fresnel"][band][0, 0])

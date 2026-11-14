@@ -1,0 +1,1474 @@
+{
+  "method": "Independent PROJ geodesics + ECEF rays; no production code imports; no early stop",
+  "criterion": "<=1 percentage point full-window fractions and <=1% mismatched sampled states; LOS and Fresnel60 classification agreement",
+  "limitation": "Verification against the same DEMs, not physical ground truth; 30 epochs cannot establish a statistical 1% error bound.",
+  "sites": [
+    {
+      "id": "APOLLO11",
+      "passed": true,
+      "height_m": 15.0,
+      "best_idx": 2512,
+      "tower_lat": 0.67416,
+      "tower_lon": 23.47314,
+      "terrain": [
+        {
+          "kind": "sldem",
+          "path": "C:\\Users\\jy02s\\Documents\\lunar-card8-jiyong\\data\\raw\\sldem\\APOLLO11.npz",
+          "max_km": 150.0
+        },
+        {
+          "kind": "global",
+          "path": "C:\\Users\\jy02s\\Documents\\lunar-card8-jiyong\\data\\raw\\global\\ldem_64_float.img",
+          "max_km": null
+        },
+        {
+          "kind": "global",
+          "path": "C:\\Users\\jy02s\\Documents\\lunar-card8-jiyong\\data\\raw\\global\\ldem_16_float.img",
+          "max_km": null
+        }
+      ],
+      "params": {
+        "radius_km": 10.0,
+        "spacing_m": 250.0,
+        "heights_m": [
+          5.0,
+          15.0,
+          30.0,
+          50.0
+        ],
+        "link_rule": "los",
+        "los_step_m": 5.0,
+        "min_km": 0.005,
+        "max_km": 300.0,
+        "n_steps": 8000,
+        "earth_el_cap_deg": 90.0,
+        "slope_box_m": 250.0,
+        "max_slope_deg": 15.0,
+        "n_towers": 3,
+        "coverage_side_km": 0.0,
+        "coverage_spacing_m": 250.0,
+        "bands_ghz": {
+          "S": 2.2,
+          "Ka": 26.0
+        },
+        "engine_version": 2
+      },
+      "relay_sha256": "550569fca50e9dfec1a6c9a0be65daa9a7a825f2080f0336b5a84c79eac33849",
+      "ephem_sha256": "c0a226391f7a47c22c71d8b187cc98fb80101631bee37bd13b32a6870f965da3",
+      "path": {
+        "status": "co-located; no horizontal interior",
+        "distance_m": 0.0,
+        "min_clear_m": null,
+        "fresnel": {
+          "S": null,
+          "Ka": null
+        },
+        "los": true,
+        "reported_min_clear_m": 1000000.0,
+        "reported_fresnel": {
+          "S": 999.0,
+          "Ka": 999.0
+        },
+        "clearance_difference_m": null,
+        "fresnel_difference": {
+          "S": null,
+          "Ka": null
+        },
+        "link_rule_agrees": true,
+        "fresnel60_agrees": {
+          "S": true,
+          "Ka": true
+        }
+      },
+      "auxiliary_path": {
+        "min_clear_m": 2.0463150702761093,
+        "fresnel": {
+          "S": 1.639898900079553,
+          "Ka": 5.637575980723021
+        },
+        "status": "sampled",
+        "distance_m": 250.0000000000016,
+        "samples": 250,
+        "step_m": 0.9960159362549864,
+        "los": true,
+        "idx": 2432,
+        "reported_fresnel_pc": {
+          "S": 164,
+          "Ka": 564
+        },
+        "fresnel60_agrees": {
+          "S": true,
+          "Ka": true
+        },
+        "link_rule_agrees": true,
+        "note": "Nearest non-colocated linked candidate (or nearest candidate if none linked); Fresnel fields quantized/clipped to percent."
+      },
+      "full_window": {
+        "direct": {
+          "independent": 1.0,
+          "reported": 1.0,
+          "difference_pp": 0.0
+        },
+        "tower_earth": {
+          "independent": 1.0,
+          "reported": 1.0,
+          "difference_pp": 0.0
+        },
+        "single_tower_link": {
+          "independent": 1.0,
+          "reported": 1.0,
+          "difference_pp": 0.0
+        }
+      },
+      "sample_mismatches": {
+        "direct": 0,
+        "tower": 0,
+        "link": 0
+      },
+      "epochs": [
+        {
+          "hour": 0,
+          "utc": "2026-01-01T00:00:00+00:00",
+          "direct": true,
+          "tower": true,
+          "link": true,
+          "reference_direct": true,
+          "reference_tower": true,
+          "reference_link": true,
+          "direct_margin_deg": 61.96742543497683,
+          "tower_margin_deg": 63.32632496698463
+        },
+        {
+          "hour": 1511,
+          "utc": "2026-03-04T23:00:00+00:00",
+          "direct": true,
+          "tower": true,
+          "link": true,
+          "reference_direct": true,
+          "reference_tower": true,
+          "reference_link": true,
+          "direct_margin_deg": 68.5975168545865,
+          "tower_margin_deg": 69.89435368994307
+        },
+        {
+          "hour": 3022,
+          "utc": "2026-05-06T22:00:00+00:00",
+          "direct": true,
+          "tower": true,
+          "link": true,
+          "reference_direct": true,
+          "reference_tower": true,
+          "reference_link": true,
+          "direct_margin_deg": 60.02279145736187,
+          "tower_margin_deg": 61.39632386873203
+        },
+        {
+          "hour": 4533,
+          "utc": "2026-07-08T21:00:00+00:00",
+          "direct": true,
+          "tower": true,
+          "link": true,
+          "reference_direct": true,
+          "reference_tower": true,
+          "reference_link": true,
+          "direct_margin_deg": 57.064227228651674,
+          "tower_margin_deg": 58.4218257186213
+        },
+        {
+          "hour": 6044,
+          "utc": "2026-09-09T20:00:00+00:00",
+          "direct": true,
+          "tower": true,
+          "link": true,
+          "reference_direct": true,
+          "reference_tower": true,
+          "reference_link": true,
+          "direct_margin_deg": 68.15051897039491,
+          "tower_margin_deg": 69.37823625170664
+        },
+        {
+          "hour": 7555,
+          "utc": "2026-11-11T19:00:00+00:00",
+          "direct": true,
+          "tower": true,
+          "link": true,
+          "reference_direct": true,
+          "reference_tower": true,
+          "reference_link": true,
+          "direct_margin_deg": 65.1638032838794,
+          "tower_margin_deg": 66.49993096153636
+        },
+        {
+          "hour": 9066,
+          "utc": "2027-01-13T18:00:00+00:00",
+          "direct": true,
+          "tower": true,
+          "link": true,
+          "reference_direct": true,
+          "reference_tower": true,
+          "reference_link": true,
+          "direct_margin_deg": 56.642121649419,
+          "tower_margin_deg": 58.14227643416934
+        },
+        {
+          "hour": 10577,
+          "utc": "2027-03-17T17:00:00+00:00",
+          "direct": true,
+          "tower": true,
+          "link": true,
+          "reference_direct": true,
+          "reference_tower": true,
+          "reference_link": true,
+          "direct_margin_deg": 62.60452994286937,
+          "tower_margin_deg": 64.10154434413742
+        },
+        {
+          "hour": 12089,
+          "utc": "2027-05-19T17:00:00+00:00",
+          "direct": true,
+          "tower": true,
+          "link": true,
+          "reference_direct": true,
+          "reference_tower": true,
+          "reference_link": true,
+          "direct_margin_deg": 67.99443710679853,
+          "tower_margin_deg": 69.40260807791911
+        },
+        {
+          "hour": 13600,
+          "utc": "2027-07-21T16:00:00+00:00",
+          "direct": true,
+          "tower": true,
+          "link": true,
+          "reference_direct": true,
+          "reference_tower": true,
+          "reference_link": true,
+          "direct_margin_deg": 60.684641800431805,
+          "tower_margin_deg": 62.170145996301066
+        },
+        {
+          "hour": 15111,
+          "utc": "2027-09-22T15:00:00+00:00",
+          "direct": true,
+          "tower": true,
+          "link": true,
+          "reference_direct": true,
+          "reference_tower": true,
+          "reference_link": true,
+          "direct_margin_deg": 58.606877157101984,
+          "tower_margin_deg": 59.956181892168665
+        },
+        {
+          "hour": 16622,
+          "utc": "2027-11-24T14:00:00+00:00",
+          "direct": true,
+          "tower": true,
+          "link": true,
+          "reference_direct": true,
+          "reference_tower": true,
+          "reference_link": true,
+          "direct_margin_deg": 67.59684286996892,
+          "tower_margin_deg": 68.9929169567245
+        },
+        {
+          "hour": 18133,
+          "utc": "2028-01-26T13:00:00+00:00",
+          "direct": true,
+          "tower": true,
+          "link": true,
+          "reference_direct": true,
+          "reference_tower": true,
+          "reference_link": true,
+          "direct_margin_deg": 65.89144705852614,
+          "tower_margin_deg": 67.29054986861252
+        },
+        {
+          "hour": 19644,
+          "utc": "2028-03-29T12:00:00+00:00",
+          "direct": true,
+          "tower": true,
+          "link": true,
+          "reference_direct": true,
+          "reference_tower": true,
+          "reference_link": true,
+          "direct_margin_deg": 57.61200694039737,
+          "tower_margin_deg": 58.982602577337964
+        },
+        {
+          "hour": 21155,
+          "utc": "2028-05-31T11:00:00+00:00",
+          "direct": true,
+          "tower": true,
+          "link": true,
+          "reference_direct": true,
+          "reference_tower": true,
+          "reference_link": true,
+          "direct_margin_deg": 63.641039946409634,
+          "tower_margin_deg": 64.98116786246732
+        },
+        {
+          "hour": 22667,
+          "utc": "2028-08-02T11:00:00+00:00",
+          "direct": true,
+          "tower": true,
+          "link": true,
+          "reference_direct": true,
+          "reference_tower": true,
+          "reference_link": true,
+          "direct_margin_deg": 69.73243497921203,
+          "tower_margin_deg": 70.88169852661893
+        },
+        {
+          "hour": 24178,
+          "utc": "2028-10-04T10:00:00+00:00",
+          "direct": true,
+          "tower": true,
+          "link": true,
+          "reference_direct": true,
+          "reference_tower": true,
+          "reference_link": true,
+          "direct_margin_deg": 60.97621540461554,
+          "tower_margin_deg": 62.34391343286522
+        },
+        {
+          "hour": 25689,
+          "utc": "2028-12-06T09:00:00+00:00",
+          "direct": true,
+          "tower": true,
+          "link": true,
+          "reference_direct": true,
+          "reference_tower": true,
+          "reference_link": true,
+          "direct_margin_deg": 60.10919281154198,
+          "tower_margin_deg": 61.34653873086815
+        },
+        {
+          "hour": 27200,
+          "utc": "2029-02-07T08:00:00+00:00",
+          "direct": true,
+          "tower": true,
+          "link": true,
+          "reference_direct": true,
+          "reference_tower": true,
+          "reference_link": true,
+          "direct_margin_deg": 69.56959694044095,
+          "tower_margin_deg": 70.90668424308747
+        },
+        {
+          "hour": 28711,
+          "utc": "2029-04-11T07:00:00+00:00",
+          "direct": true,
+          "tower": true,
+          "link": true,
+          "reference_direct": true,
+          "reference_tower": true,
+          "reference_link": true,
+          "direct_margin_deg": 65.57993577021654,
+          "tower_margin_deg": 66.91844168242034
+        },
+        {
+          "hour": 30222,
+          "utc": "2029-06-13T06:00:00+00:00",
+          "direct": true,
+          "tower": true,
+          "link": true,
+          "reference_direct": true,
+          "reference_tower": true,
+          "reference_link": true,
+          "direct_margin_deg": 59.016351437106636,
+          "tower_margin_deg": 60.183285901335495
+        },
+        {
+          "hour": 31733,
+          "utc": "2029-08-15T05:00:00+00:00",
+          "direct": true,
+          "tower": true,
+          "link": true,
+          "reference_direct": true,
+          "reference_tower": true,
+          "reference_link": true,
+          "direct_margin_deg": 65.46435904400202,
+          "tower_margin_deg": 66.7906860081424
+        },
+        {
+          "hour": 33245,
+          "utc": "2029-10-17T05:00:00+00:00",
+          "direct": true,
+          "tower": true,
+          "link": true,
+          "reference_direct": true,
+          "reference_tower": true,
+          "reference_link": true,
+          "direct_margin_deg": 69.70055236358387,
+          "tower_margin_deg": 71.00155191696065
+        },
+        {
+          "hour": 34756,
+          "utc": "2029-12-19T04:00:00+00:00",
+          "direct": true,
+          "tower": true,
+          "link": true,
+          "reference_direct": true,
+          "reference_tower": true,
+          "reference_link": true,
+          "direct_margin_deg": 62.14526242676989,
+          "tower_margin_deg": 63.62926781750653
+        },
+        {
+          "hour": 36267,
+          "utc": "2030-02-20T03:00:00+00:00",
+          "direct": true,
+          "tower": true,
+          "link": true,
+          "reference_direct": true,
+          "reference_tower": true,
+          "reference_link": true,
+          "direct_margin_deg": 60.171620964928614,
+          "tower_margin_deg": 61.499206178152306
+        },
+        {
+          "hour": 37778,
+          "utc": "2030-04-24T02:00:00+00:00",
+          "direct": true,
+          "tower": true,
+          "link": true,
+          "reference_direct": true,
+          "reference_tower": true,
+          "reference_link": true,
+          "direct_margin_deg": 69.99703661121745,
+          "tower_margin_deg": 71.36220673046236
+        },
+        {
+          "hour": 39289,
+          "utc": "2030-06-26T01:00:00+00:00",
+          "direct": true,
+          "tower": true,
+          "link": true,
+          "reference_direct": true,
+          "reference_tower": true,
+          "reference_link": true,
+          "direct_margin_deg": 67.05199541076615,
+          "tower_margin_deg": 68.41381003544593
+        },
+        {
+          "hour": 40800,
+          "utc": "2030-08-28T00:00:00+00:00",
+          "direct": true,
+          "tower": true,
+          "link": true,
+          "reference_direct": true,
+          "reference_tower": true,
+          "reference_link": true,
+          "direct_margin_deg": 58.70535642462485,
+          "tower_margin_deg": 60.04691624984384
+        },
+        {
+          "hour": 42311,
+          "utc": "2030-10-29T23:00:00+00:00",
+          "direct": true,
+          "tower": true,
+          "link": true,
+          "reference_direct": true,
+          "reference_tower": true,
+          "reference_link": true,
+          "direct_margin_deg": 66.2594207593705,
+          "tower_margin_deg": 67.73860088477561
+        },
+        {
+          "hour": 43823,
+          "utc": "2030-12-31T23:00:00+00:00",
+          "direct": true,
+          "tower": true,
+          "link": true,
+          "reference_direct": true,
+          "reference_tower": true,
+          "reference_link": true,
+          "direct_margin_deg": 70.70637515066991,
+          "tower_margin_deg": 72.00803518443622
+        }
+      ],
+      "cache_fraction_consistent": true,
+      "dense_horizon_step_m": 2.5,
+      "dense_horizon_samples_per_ray": 127998,
+      "elapsed_s": 9.94
+    },
+    {
+      "id": "APOLLO17",
+      "passed": true,
+      "height_m": 15.0,
+      "best_idx": 2512,
+      "tower_lat": 20.1911,
+      "tower_lon": 30.7723,
+      "terrain": [
+        {
+          "kind": "sldem",
+          "path": "C:\\Users\\jy02s\\Documents\\lunar-card8-jiyong\\data\\raw\\sldem\\APOLLO17.npz",
+          "max_km": 150.0
+        },
+        {
+          "kind": "global",
+          "path": "C:\\Users\\jy02s\\Documents\\lunar-card8-jiyong\\data\\raw\\global\\ldem_64_float.img",
+          "max_km": null
+        },
+        {
+          "kind": "global",
+          "path": "C:\\Users\\jy02s\\Documents\\lunar-card8-jiyong\\data\\raw\\global\\ldem_16_float.img",
+          "max_km": null
+        }
+      ],
+      "params": {
+        "radius_km": 10.0,
+        "spacing_m": 250.0,
+        "heights_m": [
+          5.0,
+          15.0,
+          30.0,
+          50.0
+        ],
+        "link_rule": "los",
+        "los_step_m": 5.0,
+        "min_km": 0.005,
+        "max_km": 300.0,
+        "n_steps": 8000,
+        "earth_el_cap_deg": 90.0,
+        "slope_box_m": 250.0,
+        "max_slope_deg": 15.0,
+        "n_towers": 3,
+        "coverage_side_km": 0.0,
+        "coverage_spacing_m": 250.0,
+        "bands_ghz": {
+          "S": 2.2,
+          "Ka": 26.0
+        },
+        "engine_version": 2
+      },
+      "relay_sha256": "1930edce8c1af443c3c2082371b110fd0a24e50645010c69bf7211390e355bf4",
+      "ephem_sha256": "c0a226391f7a47c22c71d8b187cc98fb80101631bee37bd13b32a6870f965da3",
+      "path": {
+        "status": "co-located; no horizontal interior",
+        "distance_m": 0.0,
+        "min_clear_m": null,
+        "fresnel": {
+          "S": null,
+          "Ka": null
+        },
+        "los": true,
+        "reported_min_clear_m": 1000000.0,
+        "reported_fresnel": {
+          "S": 999.0,
+          "Ka": 999.0
+        },
+        "clearance_difference_m": null,
+        "fresnel_difference": {
+          "S": null,
+          "Ka": null
+        },
+        "link_rule_agrees": true,
+        "fresnel60_agrees": {
+          "S": true,
+          "Ka": true
+        }
+      },
+      "auxiliary_path": {
+        "min_clear_m": 2.0624142876995704,
+        "fresnel": {
+          "S": 1.7034532206375455,
+          "Ka": 5.856060370847028
+        },
+        "status": "sampled",
+        "distance_m": 249.99999999990814,
+        "samples": 249,
+        "step_m": 0.9999999999996325,
+        "los": true,
+        "idx": 2432,
+        "reported_fresnel_pc": {
+          "S": 170,
+          "Ka": 585
+        },
+        "fresnel60_agrees": {
+          "S": true,
+          "Ka": true
+        },
+        "link_rule_agrees": true,
+        "note": "Nearest non-colocated linked candidate (or nearest candidate if none linked); Fresnel fields quantized/clipped to percent."
+      },
+      "full_window": {
+        "direct": {
+          "independent": 1.0,
+          "reported": 1.0,
+          "difference_pp": 0.0
+        },
+        "tower_earth": {
+          "independent": 1.0,
+          "reported": 1.0,
+          "difference_pp": 0.0
+        },
+        "single_tower_link": {
+          "independent": 1.0,
+          "reported": 1.0,
+          "difference_pp": 0.0
+        }
+      },
+      "sample_mismatches": {
+        "direct": 0,
+        "tower": 0,
+        "link": 0
+      },
+      "epochs": [
+        {
+          "hour": 0,
+          "utc": "2026-01-01T00:00:00+00:00",
+          "direct": true,
+          "tower": true,
+          "link": true,
+          "reference_direct": true,
+          "reference_tower": true,
+          "reference_link": true,
+          "direct_margin_deg": 36.98555790758297,
+          "tower_margin_deg": 37.04796535701777
+        },
+        {
+          "hour": 1511,
+          "utc": "2026-03-04T23:00:00+00:00",
+          "direct": true,
+          "tower": true,
+          "link": true,
+          "reference_direct": true,
+          "reference_tower": true,
+          "reference_link": true,
+          "direct_margin_deg": 47.580196484531484,
+          "tower_margin_deg": 47.64110897389393
+        },
+        {
+          "hour": 3022,
+          "utc": "2026-05-06T22:00:00+00:00",
+          "direct": true,
+          "tower": true,
+          "link": true,
+          "reference_direct": true,
+          "reference_tower": true,
+          "reference_link": true,
+          "direct_margin_deg": 43.63809761115731,
+          "tower_margin_deg": 43.69725744285598
+        },
+        {
+          "hour": 4533,
+          "utc": "2026-07-08T21:00:00+00:00",
+          "direct": true,
+          "tower": true,
+          "link": true,
+          "reference_direct": true,
+          "reference_tower": true,
+          "reference_link": true,
+          "direct_margin_deg": 33.62733504225797,
+          "tower_margin_deg": 33.688076103841155
+        },
+        {
+          "hour": 6044,
+          "utc": "2026-09-09T20:00:00+00:00",
+          "direct": true,
+          "tower": true,
+          "link": true,
+          "reference_direct": true,
+          "reference_tower": true,
+          "reference_link": true,
+          "direct_margin_deg": 45.412773039122555,
+          "tower_margin_deg": 45.474944789108996
+        },
+        {
+          "hour": 7555,
+          "utc": "2026-11-11T19:00:00+00:00",
+          "direct": true,
+          "tower": true,
+          "link": true,
+          "reference_direct": true,
+          "reference_tower": true,
+          "reference_link": true,
+          "direct_margin_deg": 47.5551813002792,
+          "tower_margin_deg": 47.61408170595175
+        },
+        {
+          "hour": 9066,
+          "utc": "2027-01-13T18:00:00+00:00",
+          "direct": true,
+          "tower": true,
+          "link": true,
+          "reference_direct": true,
+          "reference_tower": true,
+          "reference_link": true,
+          "direct_margin_deg": 34.09103996904535,
+          "tower_margin_deg": 34.15202475131431
+        },
+        {
+          "hour": 10577,
+          "utc": "2027-03-17T17:00:00+00:00",
+          "direct": true,
+          "tower": true,
+          "link": true,
+          "reference_direct": true,
+          "reference_tower": true,
+          "reference_link": true,
+          "direct_margin_deg": 39.39462439864739,
+          "tower_margin_deg": 39.45554616907003
+        },
+        {
+          "hour": 12089,
+          "utc": "2027-05-19T17:00:00+00:00",
+          "direct": true,
+          "tower": true,
+          "link": true,
+          "reference_direct": true,
+          "reference_tower": true,
+          "reference_link": true,
+          "direct_margin_deg": 50.058074724674626,
+          "tower_margin_deg": 50.11829902595932
+        },
+        {
+          "hour": 13600,
+          "utc": "2027-07-21T16:00:00+00:00",
+          "direct": true,
+          "tower": true,
+          "link": true,
+          "reference_direct": true,
+          "reference_tower": true,
+          "reference_link": true,
+          "direct_margin_deg": 38.3021399083593,
+          "tower_margin_deg": 38.36343112915985
+        },
+        {
+          "hour": 15111,
+          "utc": "2027-09-22T15:00:00+00:00",
+          "direct": true,
+          "tower": true,
+          "link": true,
+          "reference_direct": true,
+          "reference_tower": true,
+          "reference_link": true,
+          "direct_margin_deg": 35.1305223380563,
+          "tower_margin_deg": 35.19138549842556
+        },
+        {
+          "hour": 16622,
+          "utc": "2027-11-24T14:00:00+00:00",
+          "direct": true,
+          "tower": true,
+          "link": true,
+          "reference_direct": true,
+          "reference_tower": true,
+          "reference_link": true,
+          "direct_margin_deg": 49.54332087390572,
+          "tower_margin_deg": 49.60351347231698
+        },
+        {
+          "hour": 18133,
+          "utc": "2028-01-26T13:00:00+00:00",
+          "direct": true,
+          "tower": true,
+          "link": true,
+          "reference_direct": true,
+          "reference_tower": true,
+          "reference_link": true,
+          "direct_margin_deg": 43.48297996804722,
+          "tower_margin_deg": 43.54398938570063
+        },
+        {
+          "hour": 19644,
+          "utc": "2028-03-29T12:00:00+00:00",
+          "direct": true,
+          "tower": true,
+          "link": true,
+          "reference_direct": true,
+          "reference_tower": true,
+          "reference_link": true,
+          "direct_margin_deg": 33.798797727314295,
+          "tower_margin_deg": 33.85976026075147
+        },
+        {
+          "hour": 21155,
+          "utc": "2028-05-31T11:00:00+00:00",
+          "direct": true,
+          "tower": true,
+          "link": true,
+          "reference_direct": true,
+          "reference_tower": true,
+          "reference_link": true,
+          "direct_margin_deg": 45.384490805387045,
+          "tower_margin_deg": 45.44367974653873
+        },
+        {
+          "hour": 22667,
+          "utc": "2028-08-02T11:00:00+00:00",
+          "direct": true,
+          "tower": true,
+          "link": true,
+          "reference_direct": true,
+          "reference_tower": true,
+          "reference_link": true,
+          "direct_margin_deg": 47.700267374257265,
+          "tower_margin_deg": 47.76125811122514
+        },
+        {
+          "hour": 24178,
+          "utc": "2028-10-04T10:00:00+00:00",
+          "direct": true,
+          "tower": true,
+          "link": true,
+          "reference_direct": true,
+          "reference_tower": true,
+          "reference_link": true,
+          "direct_margin_deg": 36.187952484569394,
+          "tower_margin_deg": 36.250199683178565
+        },
+        {
+          "hour": 25689,
+          "utc": "2028-12-06T09:00:00+00:00",
+          "direct": true,
+          "tower": true,
+          "link": true,
+          "reference_direct": true,
+          "reference_tower": true,
+          "reference_link": true,
+          "direct_margin_deg": 40.902851625467896,
+          "tower_margin_deg": 40.961508031180855
+        },
+        {
+          "hour": 27200,
+          "utc": "2029-02-07T08:00:00+00:00",
+          "direct": true,
+          "tower": true,
+          "link": true,
+          "reference_direct": true,
+          "reference_tower": true,
+          "reference_link": true,
+          "direct_margin_deg": 49.28433139741293,
+          "tower_margin_deg": 49.34544755075639
+        },
+        {
+          "hour": 28711,
+          "utc": "2029-04-11T07:00:00+00:00",
+          "direct": true,
+          "tower": true,
+          "link": true,
+          "reference_direct": true,
+          "reference_tower": true,
+          "reference_link": true,
+          "direct_margin_deg": 39.72974204404324,
+          "tower_margin_deg": 39.79280529820431
+        },
+        {
+          "hour": 30222,
+          "utc": "2029-06-13T06:00:00+00:00",
+          "direct": true,
+          "tower": true,
+          "link": true,
+          "reference_direct": true,
+          "reference_tower": true,
+          "reference_link": true,
+          "direct_margin_deg": 38.294366423360415,
+          "tower_margin_deg": 38.35469182913125
+        },
+        {
+          "hour": 31733,
+          "utc": "2029-08-15T05:00:00+00:00",
+          "direct": true,
+          "tower": true,
+          "link": true,
+          "reference_direct": true,
+          "reference_tower": true,
+          "reference_link": true,
+          "direct_margin_deg": 47.49428857365007,
+          "tower_margin_deg": 47.55282765227025
+        },
+        {
+          "hour": 33245,
+          "utc": "2029-10-17T05:00:00+00:00",
+          "direct": true,
+          "tower": true,
+          "link": true,
+          "reference_direct": true,
+          "reference_tower": true,
+          "reference_link": true,
+          "direct_margin_deg": 43.4010571948708,
+          "tower_margin_deg": 43.46572881683913
+        },
+        {
+          "hour": 34756,
+          "utc": "2029-12-19T04:00:00+00:00",
+          "direct": true,
+          "tower": true,
+          "link": true,
+          "reference_direct": true,
+          "reference_tower": true,
+          "reference_link": true,
+          "direct_margin_deg": 39.51367099733651,
+          "tower_margin_deg": 39.57456072094269
+        },
+        {
+          "hour": 36267,
+          "utc": "2030-02-20T03:00:00+00:00",
+          "direct": true,
+          "tower": true,
+          "link": true,
+          "reference_direct": true,
+          "reference_tower": true,
+          "reference_link": true,
+          "direct_margin_deg": 45.306251888787614,
+          "tower_margin_deg": 45.36626279121573
+        },
+        {
+          "hour": 37778,
+          "utc": "2030-04-24T02:00:00+00:00",
+          "direct": true,
+          "tower": true,
+          "link": true,
+          "reference_direct": true,
+          "reference_tower": true,
+          "reference_link": true,
+          "direct_margin_deg": 44.16277187989336,
+          "tower_margin_deg": 44.2265276804603
+        },
+        {
+          "hour": 39289,
+          "utc": "2030-06-26T01:00:00+00:00",
+          "direct": true,
+          "tower": true,
+          "link": true,
+          "reference_direct": true,
+          "reference_tower": true,
+          "reference_link": true,
+          "direct_margin_deg": 42.11958917388577,
+          "tower_margin_deg": 42.18261050180885
+        },
+        {
+          "hour": 40800,
+          "utc": "2030-08-28T00:00:00+00:00",
+          "direct": true,
+          "tower": true,
+          "link": true,
+          "reference_direct": true,
+          "reference_tower": true,
+          "reference_link": true,
+          "direct_margin_deg": 44.023314634883484,
+          "tower_margin_deg": 44.08245222416031
+        },
+        {
+          "hour": 42311,
+          "utc": "2030-10-29T23:00:00+00:00",
+          "direct": true,
+          "tower": true,
+          "link": true,
+          "reference_direct": true,
+          "reference_tower": true,
+          "reference_link": true,
+          "direct_margin_deg": 43.06125707902352,
+          "tower_margin_deg": 43.123428433841525
+        },
+        {
+          "hour": 43823,
+          "utc": "2030-12-31T23:00:00+00:00",
+          "direct": true,
+          "tower": true,
+          "link": true,
+          "reference_direct": true,
+          "reference_tower": true,
+          "reference_link": true,
+          "direct_margin_deg": 44.467356793807845,
+          "tower_margin_deg": 44.53200519571789
+        }
+      ],
+      "cache_fraction_consistent": true,
+      "dense_horizon_step_m": 2.5,
+      "dense_horizon_samples_per_ray": 127998,
+      "elapsed_s": 9.92
+    },
+    {
+      "id": "IM2",
+      "passed": true,
+      "height_m": 15.0,
+      "best_idx": 3726,
+      "tower_lat": -84.65371609472464,
+      "tower_lon": 26.717389324747238,
+      "terrain": [
+        {
+          "kind": "polar",
+          "path": "C:\\Users\\jy02s\\Documents\\lunar-card8-jiyong\\data\\raw\\polar\\10\\IM2.npz",
+          "max_km": 25.0
+        },
+        {
+          "kind": "polar",
+          "path": "C:\\Users\\jy02s\\Documents\\lunar-card8-jiyong\\data\\raw\\polar\\20\\IM2.npz",
+          "max_km": 25.0
+        },
+        {
+          "kind": "polar",
+          "path": "C:\\Users\\jy02s\\Documents\\lunar-card8-jiyong\\data\\raw\\polar\\60\\IM2.npz",
+          "max_km": 60.0
+        },
+        {
+          "kind": "polar",
+          "path": "C:\\Users\\jy02s\\Documents\\lunar-card8-jiyong\\data\\raw\\polar\\80\\IM2.npz",
+          "max_km": 60.0
+        },
+        {
+          "kind": "polar",
+          "path": "C:\\Users\\jy02s\\Documents\\lunar-card8-jiyong\\data\\raw\\polar\\240\\IM2.npz",
+          "max_km": 200.0
+        },
+        {
+          "kind": "global",
+          "path": "C:\\Users\\jy02s\\Documents\\lunar-card8-jiyong\\data\\raw\\global\\ldem_64_float.img",
+          "max_km": null
+        },
+        {
+          "kind": "global",
+          "path": "C:\\Users\\jy02s\\Documents\\lunar-card8-jiyong\\data\\raw\\global\\ldem_16_float.img",
+          "max_km": null
+        }
+      ],
+      "params": {
+        "radius_km": 10.0,
+        "spacing_m": 250.0,
+        "heights_m": [
+          5.0,
+          15.0,
+          30.0,
+          50.0
+        ],
+        "link_rule": "los",
+        "los_step_m": 5.0,
+        "min_km": 0.005,
+        "max_km": 300.0,
+        "n_steps": 8000,
+        "earth_el_cap_deg": 90.0,
+        "slope_box_m": 250.0,
+        "max_slope_deg": 15.0,
+        "n_towers": 3,
+        "coverage_side_km": 0.0,
+        "coverage_spacing_m": 250.0,
+        "bands_ghz": {
+          "S": 2.2,
+          "Ka": 26.0
+        },
+        "engine_version": 2
+      },
+      "relay_sha256": "3922cada45782cba2e32663e0289b5bba1754c012531868fae025725c1282b74",
+      "ephem_sha256": "c0a226391f7a47c22c71d8b187cc98fb80101631bee37bd13b32a6870f965da3",
+      "path": {
+        "min_clear_m": 2.0468079647508914,
+        "fresnel": {
+          "S": 1.6174190108904358,
+          "Ka": 5.560295556097008
+        },
+        "status": "sampled",
+        "distance_m": 8062.257748298606,
+        "samples": 8062,
+        "step_m": 0.9999079434824019,
+        "los": true,
+        "reported_min_clear_m": 2.2,
+        "reported_fresnel": {
+          "S": 1.62,
+          "Ka": 5.58
+        },
+        "clearance_difference_m": -0.15319203524910874,
+        "fresnel_difference": {
+          "S": -0.00258098910956428,
+          "Ka": -0.019704443902991642
+        },
+        "link_rule_agrees": true,
+        "fresnel60_agrees": {
+          "S": true,
+          "Ka": true
+        }
+      },
+      "auxiliary_path": null,
+      "full_window": {
+        "direct": {
+          "independent": 0.81421139101862,
+          "reported": 0.8142,
+          "difference_pp": 0.0011391018619910653
+        },
+        "tower_earth": {
+          "independent": 1.0,
+          "reported": 1.0,
+          "difference_pp": 0.0
+        },
+        "single_tower_link": {
+          "independent": 1.0,
+          "reported": 1.0,
+          "difference_pp": 0.0
+        }
+      },
+      "sample_mismatches": {
+        "direct": 0,
+        "tower": 0,
+        "link": 0
+      },
+      "epochs": [
+        {
+          "hour": 0,
+          "utc": "2026-01-01T00:00:00+00:00",
+          "direct": true,
+          "tower": true,
+          "link": true,
+          "reference_direct": true,
+          "reference_tower": true,
+          "reference_link": true,
+          "direct_margin_deg": 12.206579573163316,
+          "tower_margin_deg": 13.949454283567778
+        },
+        {
+          "hour": 1511,
+          "utc": "2026-03-04T23:00:00+00:00",
+          "direct": true,
+          "tower": true,
+          "link": true,
+          "reference_direct": true,
+          "reference_tower": true,
+          "reference_link": true,
+          "direct_margin_deg": 2.8921844413603686,
+          "tower_margin_deg": 4.573949093369336
+        },
+        {
+          "hour": 3022,
+          "utc": "2026-05-06T22:00:00+00:00",
+          "direct": true,
+          "tower": true,
+          "link": true,
+          "reference_direct": true,
+          "reference_tower": true,
+          "reference_link": true,
+          "direct_margin_deg": 0.30114807326693427,
+          "tower_margin_deg": 1.943840607334884
+        },
+        {
+          "hour": 4533,
+          "utc": "2026-07-08T21:00:00+00:00",
+          "direct": true,
+          "tower": true,
+          "link": true,
+          "reference_direct": true,
+          "reference_tower": true,
+          "reference_link": true,
+          "direct_margin_deg": 10.84580798411822,
+          "tower_margin_deg": 13.04061409969932
+        },
+        {
+          "hour": 6044,
+          "utc": "2026-09-09T20:00:00+00:00",
+          "direct": true,
+          "tower": true,
+          "link": true,
+          "reference_direct": true,
+          "reference_tower": true,
+          "reference_link": true,
+          "direct_margin_deg": 5.535213296199766,
+          "tower_margin_deg": 7.179535824331811
+        },
+        {
+          "hour": 7555,
+          "utc": "2026-11-11T19:00:00+00:00",
+          "direct": false,
+          "tower": true,
+          "link": true,
+          "reference_direct": false,
+          "reference_tower": true,
+          "reference_link": true,
+          "direct_margin_deg": -0.4053662167347225,
+          "tower_margin_deg": 1.217343998256865
+        },
+        {
+          "hour": 9066,
+          "utc": "2027-01-13T18:00:00+00:00",
+          "direct": true,
+          "tower": true,
+          "link": true,
+          "reference_direct": true,
+          "reference_tower": true,
+          "reference_link": true,
+          "direct_margin_deg": 9.158802856706453,
+          "tower_margin_deg": 11.425815714650929
+        },
+        {
+          "hour": 10577,
+          "utc": "2027-03-17T17:00:00+00:00",
+          "direct": true,
+          "tower": true,
+          "link": true,
+          "reference_direct": true,
+          "reference_tower": true,
+          "reference_link": true,
+          "direct_margin_deg": 8.613816504335773,
+          "tower_margin_deg": 10.364736110968932
+        },
+        {
+          "hour": 12089,
+          "utc": "2027-05-19T17:00:00+00:00",
+          "direct": false,
+          "tower": true,
+          "link": true,
+          "reference_direct": false,
+          "reference_tower": true,
+          "reference_link": true,
+          "direct_margin_deg": -0.9399759943972079,
+          "tower_margin_deg": 0.7543923173966895
+        },
+        {
+          "hour": 13600,
+          "utc": "2027-07-21T16:00:00+00:00",
+          "direct": true,
+          "tower": true,
+          "link": true,
+          "reference_direct": true,
+          "reference_tower": true,
+          "reference_link": true,
+          "direct_margin_deg": 7.891764457215803,
+          "tower_margin_deg": 9.541693299200109
+        },
+        {
+          "hour": 15111,
+          "utc": "2027-09-22T15:00:00+00:00",
+          "direct": true,
+          "tower": true,
+          "link": true,
+          "reference_direct": true,
+          "reference_tower": true,
+          "reference_link": true,
+          "direct_margin_deg": 10.50184900294419,
+          "tower_margin_deg": 12.422473272629759
+        },
+        {
+          "hour": 16622,
+          "utc": "2027-11-24T14:00:00+00:00",
+          "direct": false,
+          "tower": true,
+          "link": true,
+          "reference_direct": false,
+          "reference_tower": true,
+          "reference_link": true,
+          "direct_margin_deg": -0.6951164337642981,
+          "tower_margin_deg": 0.9705038136601654
+        },
+        {
+          "hour": 18133,
+          "utc": "2028-01-26T13:00:00+00:00",
+          "direct": true,
+          "tower": true,
+          "link": true,
+          "reference_direct": true,
+          "reference_tower": true,
+          "reference_link": true,
+          "direct_margin_deg": 6.056108494869097,
+          "tower_margin_deg": 7.6733536915828395
+        },
+        {
+          "hour": 19644,
+          "utc": "2028-03-29T12:00:00+00:00",
+          "direct": true,
+          "tower": true,
+          "link": true,
+          "reference_direct": true,
+          "reference_tower": true,
+          "reference_link": true,
+          "direct_margin_deg": 11.48787022642254,
+          "tower_margin_deg": 13.583968232150415
+        },
+        {
+          "hour": 21155,
+          "utc": "2028-05-31T11:00:00+00:00",
+          "direct": true,
+          "tower": true,
+          "link": true,
+          "reference_direct": true,
+          "reference_tower": true,
+          "reference_link": true,
+          "direct_margin_deg": 0.7087645304007304,
+          "tower_margin_deg": 2.4453699736841976
+        },
+        {
+          "hour": 22667,
+          "utc": "2028-08-02T11:00:00+00:00",
+          "direct": true,
+          "tower": true,
+          "link": true,
+          "reference_direct": true,
+          "reference_tower": true,
+          "reference_link": true,
+          "direct_margin_deg": 3.8454958318265975,
+          "tower_margin_deg": 5.5837596474606315
+        },
+        {
+          "hour": 24178,
+          "utc": "2028-10-04T10:00:00+00:00",
+          "direct": true,
+          "tower": true,
+          "link": true,
+          "reference_direct": true,
+          "reference_tower": true,
+          "reference_link": true,
+          "direct_margin_deg": 12.22611608502274,
+          "tower_margin_deg": 13.924446647530491
+        },
+        {
+          "hour": 25689,
+          "utc": "2028-12-06T09:00:00+00:00",
+          "direct": true,
+          "tower": true,
+          "link": true,
+          "reference_direct": true,
+          "reference_tower": true,
+          "reference_link": true,
+          "direct_margin_deg": 2.892965265071993,
+          "tower_margin_deg": 4.520486708190171
+        },
+        {
+          "hour": 27200,
+          "utc": "2029-02-07T08:00:00+00:00",
+          "direct": true,
+          "tower": true,
+          "link": true,
+          "reference_direct": true,
+          "reference_tower": true,
+          "reference_link": true,
+          "direct_margin_deg": 1.5614109441860595,
+          "tower_margin_deg": 3.3380602802511543
+        },
+        {
+          "hour": 28711,
+          "utc": "2029-04-11T07:00:00+00:00",
+          "direct": true,
+          "tower": true,
+          "link": true,
+          "reference_direct": true,
+          "reference_tower": true,
+          "reference_link": true,
+          "direct_margin_deg": 12.076171904757675,
+          "tower_margin_deg": 13.70307753148997
+        },
+        {
+          "hour": 30222,
+          "utc": "2029-06-13T06:00:00+00:00",
+          "direct": true,
+          "tower": true,
+          "link": true,
+          "reference_direct": true,
+          "reference_tower": true,
+          "reference_link": true,
+          "direct_margin_deg": 5.327392932493302,
+          "tower_margin_deg": 7.195587656419353
+        },
+        {
+          "hour": 31733,
+          "utc": "2029-08-15T05:00:00+00:00",
+          "direct": false,
+          "tower": true,
+          "link": true,
+          "reference_direct": false,
+          "reference_tower": true,
+          "reference_link": true,
+          "direct_margin_deg": -0.15897201702478347,
+          "tower_margin_deg": 1.4702124549433078
+        },
+        {
+          "hour": 33245,
+          "utc": "2029-10-17T05:00:00+00:00",
+          "direct": true,
+          "tower": true,
+          "link": true,
+          "reference_direct": true,
+          "reference_tower": true,
+          "reference_link": true,
+          "direct_margin_deg": 11.152750291174911,
+          "tower_margin_deg": 13.010067819063668
+        },
+        {
+          "hour": 34756,
+          "utc": "2029-12-19T04:00:00+00:00",
+          "direct": true,
+          "tower": true,
+          "link": true,
+          "reference_direct": true,
+          "reference_tower": true,
+          "reference_link": true,
+          "direct_margin_deg": 7.789299876297239,
+          "tower_margin_deg": 9.525783191032886
+        },
+        {
+          "hour": 36267,
+          "utc": "2030-02-20T03:00:00+00:00",
+          "direct": false,
+          "tower": true,
+          "link": true,
+          "reference_direct": false,
+          "reference_tower": true,
+          "reference_link": true,
+          "direct_margin_deg": -0.9684995043359934,
+          "tower_margin_deg": 0.6982205898352185
+        },
+        {
+          "hour": 37778,
+          "utc": "2030-04-24T02:00:00+00:00",
+          "direct": true,
+          "tower": true,
+          "link": true,
+          "reference_direct": true,
+          "reference_tower": true,
+          "reference_link": true,
+          "direct_margin_deg": 9.601491541166414,
+          "tower_margin_deg": 11.45013297697607
+        },
+        {
+          "hour": 39289,
+          "utc": "2030-06-26T01:00:00+00:00",
+          "direct": true,
+          "tower": true,
+          "link": true,
+          "reference_direct": true,
+          "reference_tower": true,
+          "reference_link": true,
+          "direct_margin_deg": 9.563680333259448,
+          "tower_margin_deg": 11.213850146893837
+        },
+        {
+          "hour": 40800,
+          "utc": "2030-08-28T00:00:00+00:00",
+          "direct": false,
+          "tower": true,
+          "link": true,
+          "reference_direct": false,
+          "reference_tower": true,
+          "reference_link": true,
+          "direct_margin_deg": -0.7501503660868534,
+          "tower_margin_deg": 0.9896485411947931
+        },
+        {
+          "hour": 42311,
+          "utc": "2030-10-29T23:00:00+00:00",
+          "direct": true,
+          "tower": true,
+          "link": true,
+          "reference_direct": true,
+          "reference_tower": true,
+          "reference_link": true,
+          "direct_margin_deg": 7.054882630389036,
+          "tower_margin_deg": 8.683578092024678
+        },
+        {
+          "hour": 43823,
+          "utc": "2030-12-31T23:00:00+00:00",
+          "direct": true,
+          "tower": true,
+          "link": true,
+          "reference_direct": true,
+          "reference_tower": true,
+          "reference_link": true,
+          "direct_margin_deg": 10.761277489282591,
+          "tower_margin_deg": 12.800645388035116
+        }
+      ],
+      "cache_fraction_consistent": true,
+      "dense_horizon_step_m": 2.5,
+      "dense_horizon_samples_per_ray": 127998,
+      "elapsed_s": 10.41
+    }
+  ]
+}

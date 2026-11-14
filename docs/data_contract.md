@@ -174,6 +174,39 @@ every other site uses a flat 0° mask labelled **"Terrain pending"** (not counte
 - `networks[j]`: greedy 1…`n_towers` towers at that height; `parent` = what the tower hangs on (`"LANDER"` or the index of an earlier tower in `towers`). `link_frac_by_n[0]` = direct only. Timeline segments cover the whole window in order; when direct works the code is 1 even if a tower also works.
 - `link_budget` is a rough estimate with explicit assumptions (not a specification); the UI must label it "estimate".
 
+### 12.1 Optional card-13 additions (2026-11-14, Jiyong)
+Existing fields remain compatible. Engine v2 samples local links at at most 5 m intervals,
+and horizons from 5 m to 300 km at 8,001 logarithmic distances. All Earth elevations are checked
+against terrain (`earth_el_cap_deg` is retained as metadata, 90). DEM gates are measured from
+the original lander even for a shifted tower; global rasters cover the entire tower ray.
+Missing profile/horizon terrain aborts output instead of assuming clear sky.
+
+- `input_identity`: DEM source names, radius gates, file byte sizes and nanosecond modification
+  times, global label hashes, plus a SHA-256 of the actual Sun/Earth arrays and epoch. Used for
+  resume invalidation. DEM file identity is **not** a cryptographic hash of the raster content.
+- `height_curve`: four rows `{height_m, single_link_frac, network_link_frac, single_gain_pp}`;
+  single is the selected `best` tower, network is the final greedy network, gain is percentage
+  points over the direct fraction. Each height may choose a different location.
+- `networks[].towers[].parent_link`: `{min_clear_m, fresnel:{S,Ka}}` for the actual parent hop.
+  Existing `min_clear_m`/`fresnel` remain the path to the lander. Same-position paths have no
+  interior samples: clearance `1000000` and Fresnel `999` are sentinels, not measured margins.
+- `coverage` (Artemis III sites): a 15 x 15 km square centred on the lander. `rows=cols=60`,
+  `spacing_m=250`, `origin_e_m=origin_n_m=-7500`; row-major, rows south to north, columns west
+  to east. Cell centres are origin + (index + 0.5) x spacing. `valid_terrain` has 3,600 binary
+  entries; `area_km2=225`, `valid_area_km2` counts available cell centres.
+  `per_height["5"|"15"|"30"|"50"]` identifies the selected single tower and contains binary
+  `los`, `fresnel60_S`, `fresnel60_Ka` arrays of length 3,600, plus corresponding `*_area_km2`.
+  The receiver antenna is 2 m above its local terrain; range is capped at `max_link_range_km`
+  (10 km in the batch run). Each represented cell contributes 0.0625 km²; areas are grid estimates,
+  not precise terrain surface areas. Fresnel masks require both positive LOS and clearance ≥0.6 F1.
+  Coverage means **local geometric antenna reach** only. It is not Earth-link availability,
+  receiver sunlight, guaranteed throughput, or ground-station coverage. Tower Earth availability
+  and sunlight remain in `best`. `params.coverage_side_km=0` disables the optional map.
+
+The network is a greedy marginal-coverage heuristic, not a global optimum. A bridge that adds
+zero immediate Earth-visible hours is not selected. Slopes are 250 m plane fits, not a survey
+for construction. Frequencies and link-budget assumptions remain the existing configurable estimates.
+
 ## 13. `web/data/korea/*.json` — Korea links (differentiator B) — **v1.2 proposal** (2026-11-14, Sua; new section only, renumbered from 9 at merge; sections 0–12 unchanged)
 Written by `python pipeline/korea_links.py`; tests `python -m pytest pipeline/test_korea_links.py -q`.
 
