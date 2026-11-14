@@ -61,12 +61,23 @@ function siteTags(s, withFilter = true) {
   return out.join('');
 }
 
-// ------------------------------------------------------------ ranking (team decision: Sua may change this ONE function)
-/** Sort key of a site's period metrics (higher = listed first among unpinned sites).
- *  Default: both_frac = share of hours in the analysis period with the Sun up (sunlit) AND the Earth visible. */
-export function rankKey(m) {
-  return m ? m.both_frac : -Infinity;
+// ------------------------------------------------------------ sorting (team decision 11/14: the user chooses the sort)
+/** Sort options for the unpinned sites. Each sorts by ONE metric of the current analysis period; no weighted formula.
+ *  key(m) -> number, dir -1 = descending, +1 = ascending; 'name' sorts alphabetically. */
+export const SORTS = {
+  both:  { key: m => m.both_frac,      dir: -1, frac: true },   // default: Sun up AND Earth visible
+  sun:   { key: m => m.sun_frac,       dir: -1, frac: true },
+  earth: { key: m => m.earth_frac,     dir: -1, frac: true },
+  dark:  { key: m => m.longest_dark_h, dir: +1, frac: false },  // shortest longest-darkness first
+  name:  { key: m => m.both_frac,      dir: 0,  frac: true },   // alphabetical; the bar still shows Sun + Earth
+};
+let sortMode = 'both';
+/** Value of the selected sort metric for a site's period metrics (null when not computed). */
+export function rankKey(m, mode = sortMode) {
+  const v = m ? SORTS[mode].key(m) : null;
+  return Number.isFinite(v) ? v : null;
 }
+function saveSort() { try { localStorage.setItem('llsn.sort', sortMode); } catch (e) { /* ignore */ } }
 
 // ------------------------------------------------------------ picker
 function fillGroups() {
@@ -84,15 +95,17 @@ function matches(s) {
 }
 
 function itemHTML(s, pinned) {
-  const m = window.LLSN.window?.metrics.get(s.id);
-  const k = rankKey(m), pct = isFinite(k) ? Math.round(k * 100) : null;
+  const w = window.LLSN.window, m = w?.metrics.get(s.id), so = SORTS[sortMode];
+  const k = rankKey(m);
+  const bar = k === null ? 0 : so.frac ? k * 100 : Math.min(100, 100 * k / Math.max(1, w.hours));
+  const val = k === null ? '—' : so.frac ? Math.round(k * 100) + '%' : fmtHours(k);
   const focus = s.id === window.LLSN.focus;
   return `<li class="pk-row${pinned ? ' pinned' : ''}${focus ? ' focus' : ''}">
     <button type="button" class="pk-item" data-id="${s.id}"${focus ? ' aria-current="true"' : ''}>
       <span class="pk-name">${esc(nameOf(s))}</span>
       <span class="pk-meta">${t('g_' + s.group)} · ${coordText(s)}</span>
       <span class="pk-tags">${siteTags(s)}</span>
-      <span class="pk-rank" title="${esc(t('rkVal'))}"><span class="pk-bar"><i style="width:${pct ?? 0}%"></i></span><span class="num">${pct === null ? '—' : pct + '%'}</span></span>
+      <span class="pk-rank pk-rank-${sortMode}" title="${esc(t('rkVal_' + sortMode))}"><span class="pk-bar"><i style="width:${bar.toFixed(1)}%"></i></span><span class="num">${val}</span></span>
     </button>
     <button type="button" class="pk-pin" data-id="${s.id}" aria-pressed="${pinned}" aria-label="${esc(t(pinned ? 'unpin' : 'pin'))}: ${esc(nameOf(s))}"
       title="${esc(t(pinned ? 'unpin' : 'pinHint'))}">${pinned ? '★' : '☆'}</button></li>`;
@@ -102,8 +115,14 @@ function renderPicker() {
   const pass = window.LLSN.filterPass, w = window.LLSN.window;
   const pinned = pins.map(byId).filter(s => s && matches(s));
   const rest = core.state.sites.filter(s => !pins.includes(s.id) && matches(s) && (!pass || pass.has(s.id)));
+  const dir = SORTS[sortMode].dir, byName = (a, b) => nameOf(a).localeCompare(nameOf(b));
   const key = s => rankKey(w?.metrics.get(s.id));
-  rest.sort((a, b) => (key(b) - key(a)) || nameOf(a).localeCompare(nameOf(b)));
+  rest.sort((a, b) => {
+    if (!dir) return byName(a, b);
+    const ka = key(a), kb = key(b);
+    if (ka === null || kb === null) return (ka === null) - (kb === null) || byName(a, b);   // not computed -> last
+    return dir * (ka - kb) || byName(a, b);
+  });
   let html = '';
   if (pinned.length) html += `<li class="pk-sec" role="presentation">${t('pinned')} · ${pinned.length}</li>` + pinned.map(s => itemHTML(s, true)).join('');
   if (rest.length) html += `<li class="pk-sec" role="presentation">${t('allSites')}</li>` + rest.map(s => itemHTML(s, false)).join('');
@@ -490,6 +509,8 @@ async function main() {
   window.LLSN.pins = () => pins.slice();
   window.LLSN.compare = () => pins.slice();                // old name kept for modules
   window.LLSN.rankKey = rankKey;
+  window.LLSN.sortMode = () => sortMode;
+  try { const sv = localStorage.getItem('llsn.sort'); if (sv && SORTS[sv]) sortMode = sv; } catch (e) { /* ignore */ }
   window.LLSN.initialParams = new URLSearchParams(params);       // URL at page load (before saveURL rewrites it)
   /** Start the analysis period on day `startHour` (hour index), keeping the time of day; `days` = period length. */
   window.LLSN.setPeriod = (startHour, days = periodDays) => { now = dayStart(startHour) + (now - dayStart(now)); setPeriod(startHour, days); };
@@ -523,6 +544,8 @@ async function main() {
   // picker: item = select (focus); star = pin/unpin
   $('#pk-q').addEventListener('input', e => { query = e.target.value.trim(); renderPicker(); });
   $('#pk-group').addEventListener('change', e => { group = e.target.value; renderPicker(); });
+  $('#pk-sort').value = sortMode;
+  $('#pk-sort').addEventListener('change', e => { if (SORTS[e.target.value]) { sortMode = e.target.value; saveSort(); renderPicker(); } });
   $('#pk-list').addEventListener('click', e => {
     const p = e.target.closest('.pk-pin'); if (p) { togglePin(p.dataset.id); return; }
     const b2 = e.target.closest('.pk-item'); if (b2) pick(b2.dataset.id);

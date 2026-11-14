@@ -37,7 +37,14 @@
         <input id="pk-q" type="search" autocomplete="off" data-i18n-ph="pkSearchPh"></label>
       <label class="pk-grp"><span data-i18n="pkGroup"></span> <select id="pk-group"></select></label>
       <div class="pk-sort">
-        <span data-i18n="rkLabel"></span>
+        <label class="pk-sortby"><span data-i18n="rkLabel"></span>
+          <select id="pk-sort">
+            <option value="both" data-i18n="rk_both"></option>
+            <option value="sun" data-i18n="rk_sun"></option>
+            <option value="earth" data-i18n="rk_earth"></option>
+            <option value="dark" data-i18n="rk_dark"></option>
+            <option value="name" data-i18n="rk_name"></option>
+          </select></label>
         <button type="button" class="info-btn" id="rk-btn" aria-expanded="false" aria-controls="rk-info" data-i18n-aria="rkInfoBtn">ⓘ</button>
         <span id="pk-count" class="muted" aria-live="polite"></span>
       </div>

@@ -48,6 +48,9 @@ footer { max-width: none; padding-top: var(--gap); }
 .pk-grp select { flex: 1 1 auto; min-width: 0; color: var(--text); }
 .pk-sort { display: flex; flex-wrap: wrap; align-items: center; gap: .3em .5em; margin-top: .6em; font-size: .85rem; color: var(--muted); }
 .pk-sort #pk-count { margin-left: auto; }
+.pk-sortby { display: flex; align-items: center; gap: .4em; flex: 1 1 100%; min-width: 0; }
+.pk-sortby > span { white-space: nowrap; }
+.pk-sortby select { flex: 1 1 auto; min-width: 0; color: var(--text); }
 .info-btn { padding: 0; width: 1.6em; height: 1.6em; line-height: 1; border-radius: 50%; font-size: .95rem; }
 .info-btn[aria-expanded="true"] { background: var(--text); color: var(--bg); }
 .info-pop { margin: .5em 0 0; padding: .6em .8em; background: var(--surface-2); border-radius: 8px; font-size: .85rem; color: var(--text); }
