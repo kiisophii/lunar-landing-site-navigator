@@ -136,3 +136,14 @@ html[lang="ko"] .detail-table.cmp-tbl .nm, html[lang="ko"] .detail-actions butto
   .ls-globe .gl-progress .bar { display: none; }
   .ls-globe .gl-progress .txt { left: 12px; right: auto; top: 8px; max-width: calc(100vw - 24px); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 }
+/* phones (#120, moved to the current table): 96 px label column + two equal candidate columns */
+@media (max-width: 760px) {
+  .detail-table.cmp-tbl { width: 100%; max-width: 100%; }
+  .detail-table .measure-col, .detail-table.cmp-tbl th.lbl { width: 96px; }
+  .detail-table .site-col { width: auto; }
+  .detail-table.cmp-tbl th, .detail-table.cmp-tbl td { padding-left: 6px; padding-right: 6px; }
+  .detail-table th.lbl .lb { font-size: 11.5px; gap: 4px; line-height: 1.3; }
+  .detail-table.cmp-tbl .nm { font-size: 14px; padding-right: 22px; }
+  .detail-table .r-relay .sub, .detail-table .sub { font-size: 13px; }
+  .detail-actions button { padding: 0 8px; font-size: 11.5px; }
+}

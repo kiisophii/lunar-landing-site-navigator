@@ -62,11 +62,14 @@
     </section>
 
     <!-- L. left panel -->
+    <button type="button" class="pn-edge l" id="pn-edge-l" data-side="l" hidden></button>
+    <button type="button" class="pn-edge r" id="pn-edge-r" data-side="r" hidden></button>
     <aside class="ls-left" id="ls-left">
       <section class="ls-card ls-cond" id="ls-cond" aria-labelledby="c1-h">
         <div class="ls-card-head">
           <h2 id="c1-h"><span class="circ" aria-hidden="true">1</span><span data-i18n="c1">Mission conditions</span></h2>
           <button type="button" class="ls-icon ls-fold c1-tog" data-fold="ls-cond" aria-expanded="true" data-i18n-aria="collapse"></button>
+          <button type="button" class="pn-fold" id="pn-fold-l" data-side="l" aria-expanded="true">«</button>
         </div>
         <!-- folded summary (the copy): date · period, active conditions as chips, Expand -->
         <div class="c1-sum" id="c1-sum" hidden><b class="num" id="c1-sum-1"></b><span class="c1-chips" id="c1-sum-2"></span></div>
@@ -124,6 +127,7 @@
       <div class="ls-card-head">
         <h2 id="tray-h"><span class="circ" aria-hidden="true">3</span><span data-i18n="tray">Comparison</span></h2>
         <span id="ls-valbadge" class="val-badge-slot"></span>
+        <button type="button" class="pn-fold" id="pn-fold-r" data-side="r" aria-expanded="true">»</button>
       </div>
       <!-- empty state: title + one line only -->
       <p class="tray-empty" data-i18n="trayEmpty">Pin sites in Candidates to compare them here</p>
@@ -194,7 +198,6 @@
     <div class="ls-pickbar" id="ls-pickbar" hidden><span data-i18n="pickOn"></span> <button type="button" class="ls-link" id="pick-cancel" data-i18n="cancel"></button></div>
     <div class="ls-hud"><p id="hud-1" data-i18n="hudLine1"></p><span class="hud-t"><p id="hud-2" class="num"></p><button type="button" class="hud-i" id="hud-i"><svg class="ic" data-icon="info"></svg></button></span></div>
     <!-- South Pole shortcut at the map's top-left (the copy); same action as the toolbar's south-pole view -->
-    <button type="button" class="sp-btn" id="sp-btn"><svg class="ic" data-icon="chevron-down"></svg> <span data-i18n="spBtn">South Pole</span></button>
 
     <!-- 3.10 add-site drawer (shell.js); custom_site.js mounts its calculator into #llsn-custom -->
     <div class="ls-drawer" id="ls-add" role="dialog" aria-labelledby="add-h" hidden></div>

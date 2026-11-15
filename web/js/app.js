@@ -43,7 +43,7 @@ addStrings({
   periodIs: 'Period', days: 'days', pinnedFull: '', scrollHint: 'Compare in detail', pagesAria: 'Screens', pgMap: 'Map', pgCmp: 'Detailed comparison', pgBrief: 'Site checks', expH: 'Export this analysis', expLead: 'Save the current conditions, candidates, and comparison as a file.', expPdf: 'PDF report', expPdfSub: 'For print and sharing',
   hudLine1: 'Earth-set edge (Earth-visibility limit) · LROC color · LOLA terrain',
   exportPdf: 'Export PDF', exportPdfTip: 'Print or save this comparison as a PDF (browser print dialog)', hudLine2: '{t}', hudSrc: 'Sun and Earth positions: JPL DE440s ephemeris (selected time, UTC)', pickOn: 'Click the Moon to place a point · Esc to cancel', cancel: 'Cancel',
-  spBtn: 'South Pole', tb_relief: 'Terrain relief (LOLA)', tbt_relief: 'LOLA terrain shading with a fixed light from the north-west. No data values and no time dependence.', lgRelief: 'Terrain relief, LOLA', lgReliefNote: 'shading only, fixed light from the north-west; no values', tb_elev: 'Elevation (LOLA)', tbt_elev: 'LOLA terrain height in colour, over the same fixed-light terrain shading. No time dependence.', lgElev: 'Elevation, LOLA', lgElevNote: 'true height above 1737.4 km (3D shape ×{x} for display only) · colours clamp at the ends · data range {a} … {b} km · fixed light from the north-west', tb_light: 'Sunlight now', tb_mean: 'Mean sunlight 2026–2030', tb_earthmap: 'Mean Earth visibility 2026–2030', tb_focus: 'Zoom to the focused site',
+  spBtn: 'South Pole', tb_relief: 'Terrain relief (LOLA)', tbt_relief: 'LOLA terrain shading with a fixed light from the north-west. No data values and no time dependence.', lgRelief: 'Terrain relief, LOLA', lgReliefNote: 'shading only, fixed light from the north-west; no values', tb_elev: 'Elevation (LOLA)', tbt_elev: 'LOLA terrain height in colour, over the same fixed-light terrain shading. No time dependence.', lgElev: 'Elevation (LOLA)', lgElevNote: 'true height above 1737.4 km (3D shape ×{x} for display only) · colours clamp at the ends · data range {a} … {b} km · fixed light from the north-west', tb_light: 'Sunlight now', tb_mean: 'Mean sunlight 2026–2030', tb_earthmap: 'Mean Earth visibility 2026–2030', tb_focus: 'Zoom to the focused site',
   tb_whole: 'Whole Moon', tb_south: 'South pole', tb_pick: 'Place a point on the Moon',
   tbt_light: 'Shadows for the Sun direction at the selected time (not necessarily the real current time).',
   tbt_mean: 'Mean visible fraction of the solar disc over 2026–2030 on a 948 m whole-Moon grid (data/gmaps_ppd32). Long-term average, not this period.',
@@ -76,7 +76,7 @@ addStrings({
   periodIs: '기간', days: '일', scrollHint: '상세 비교 보기', pagesAria: '화면', pgMap: '지도', pgCmp: '상세 비교', pgBrief: '착륙지 검증', expH: '이 분석 내보내기', expLead: '지금 조건, 후보, 비교를 파일로 저장합니다.', expPdf: 'PDF 보고서', expPdfSub: '인쇄·공유용',
   hudLine1: '지구가 지는 경계 · LROC 컬러 · LOLA 지형',
   exportPdf: 'PDF로 내보내기', exportPdfTip: '이 비교를 인쇄하거나 PDF로 저장합니다 (브라우저 인쇄 창)', hudLine2: '{t}', hudSrc: '태양·지구 위치: JPL DE440s 천체력 (선택 시각, UTC)', pickOn: '달을 눌러 지점을 고르세요 · Esc 취소', cancel: '취소',
-  spBtn: '남극', tb_relief: '지형 음영 (LOLA)', tbt_relief: 'LOLA 지형 음영, 북서쪽 고정 조명. 값이 없고 시간에 따라 바뀌지 않습니다.', lgRelief: '지형 음영, LOLA', lgReliefNote: '음영만 표시, 북서쪽 고정 조명; 값 없음', tb_elev: '고도 (LOLA)', tbt_elev: 'LOLA 지형 높이를 색으로, 같은 고정 조명 지형 음영 위에 표시. 시간에 따라 바뀌지 않습니다.', lgElev: '고도, LOLA', lgElevNote: '기준 반지름 1737.4 km 대비 실제 높이 (3D 모양만 ×{x} 과장) · 양 끝 밖은 끝 색 · 자료 범위 {a} … {b} km · 북서쪽 고정 조명', tb_light: '선택 시각의 햇빛', tb_mean: '평균 일조 2026–2030', tb_earthmap: '평균 지구 가시 2026–2030', tb_focus: '보고 있는 착륙지로 확대',
+  spBtn: '남극', tb_relief: '지형 음영 (LOLA)', tbt_relief: 'LOLA 지형 음영, 북서쪽 고정 조명. 값이 없고 시간에 따라 바뀌지 않습니다.', lgRelief: '지형 음영, LOLA', lgReliefNote: '음영만 표시, 북서쪽 고정 조명; 값 없음', tb_elev: '고도 (LOLA)', tbt_elev: 'LOLA 지형 높이를 색으로, 같은 고정 조명 지형 음영 위에 표시. 시간에 따라 바뀌지 않습니다.', lgElev: '고도 (LOLA)', lgElevNote: '기준 반지름 1737.4 km 대비 실제 높이 (3D 모양만 ×{x} 과장) · 양 끝 밖은 끝 색 · 자료 범위 {a} … {b} km · 북서쪽 고정 조명', tb_light: '선택 시각의 햇빛', tb_mean: '평균 일조 2026–2030', tb_earthmap: '평균 지구 가시 2026–2030', tb_focus: '보고 있는 착륙지로 확대',
   tb_whole: '달 전체', tb_south: '남극', tb_pick: '달에서 지점 찍기',
   tbt_light: '선택 시각의 태양 방향으로 그림자. 실제 현재 시각이 아닐 수 있음.',
   tbt_mean: '태양 원반이 보이는 시간 비율, 달 전체 2026–2030 평균, 948 m 격자(data/gmaps_ppd32). 이 기간 값이 아닌 장기 평균.',
@@ -91,7 +91,7 @@ if (params.get('tv') === '1') document.documentElement.classList.add('tv');
 
 const DEFAULT_PINS = ['SHACKLETON_RIM', 'ARTEMIS_HAWORTH', 'APOLLO17'];   // first visit only (team choice 11/14); a comparison, not a recommendation
 const PERIODS = [['7', 'p7'], ['29.5', 'p295'], ['90', 'p90'], ['365', 'p365']];
-const SORTS = ['both', 'sun', 'earth', 'dark', 'name'];
+const SORTS = ['both', 'sun', 'earth', 'dark'];   // 17-3: 'Name' removed (the copy's list)
 const LIST_FIRST = 12;
 const store = {
   get(k, d) { try { const v = localStorage.getItem('ls.' + k); return v == null ? d : JSON.parse(v); } catch (e) { return d; } },

@@ -1,0 +1,79 @@
+[
+  {
+    "range": 6000,
+    "clusters": [
+      {
+        "text": "+14",
+        "members": "ARTEMIS_DE_GERLACHE_RIM2|ARTEMIS_HAWORTH|ARTEMIS_MALAPERT|ARTEMIS_MOUTON|ARTEMIS_MOUTON_PLATEAU|ARTEMIS_NOBILE_RIM1|ARTEMIS_NOBILE_RIM2|ARTEMIS_SLATER_PLAIN|CONNECTING_RIDGE|DE_GERLACHE_RIM1|IM2|PEAK_NEAR_SHACKLETON|SHACKLETON_RIM|SHOEMAKER_RIM_A"
+      }
+    ],
+    "visible": [
+      {
+        "id": "CHANGE4",
+        "dot": false
+      },
+      {
+        "id": "CHANGE6",
+        "dot": false
+      },
+      {
+        "id": "CHANDRAYAAN3",
+        "dot": false
+      },
+      {
+        "id": "SLIM",
+        "dot": true
+      },
+      {
+        "id": "IM1",
+        "dot": false
+      },
+      {
+        "id": "ARTEMIS_CABEUS_B",
+        "dot": true
+      }
+    ]
+  },
+  {
+    "range": 300,
+    "clusters": [],
+    "visible": [
+      {
+        "id": "ARTEMIS_HAWORTH",
+        "dot": false
+      },
+      {
+        "id": "ARTEMIS_MALAPERT",
+        "dot": false
+      },
+      {
+        "id": "ARTEMIS_DE_GERLACHE_RIM2",
+        "dot": false
+      },
+      {
+        "id": "ARTEMIS_SLATER_PLAIN",
+        "dot": false
+      },
+      {
+        "id": "SHACKLETON_RIM",
+        "dot": false
+      },
+      {
+        "id": "CONNECTING_RIDGE",
+        "dot": true
+      },
+      {
+        "id": "PEAK_NEAR_SHACKLETON",
+        "dot": false
+      },
+      {
+        "id": "DE_GERLACHE_RIM1",
+        "dot": true
+      },
+      {
+        "id": "SHOEMAKER_RIM_A",
+        "dot": false
+      }
+    ]
+  }
+]

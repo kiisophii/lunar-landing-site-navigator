@@ -936,7 +936,9 @@ function wire() {
   ['llsn:focus', 'llsn:window', 'llsn:pins', 'llsn:lang', 'llsn:sites'].forEach(ev => window.addEventListener(ev, later));
   let tt = 0;
   window.addEventListener('llsn:time', () => { clearTimeout(tt); tt = setTimeout(renderShareURL, 120); });
-  render().then(() => { if (q?.has('sites') && q.has('focus') && q.has('t')) setTimeout(() => LLSN().goTo?.('#ls-brief'), 600); });
+  // a shared link (sites + focus + t) opens at the site check; a reload does not jump there (the app writes the same parameters into its own address)
+  const isReload = performance.getEntriesByType?.('navigation')?.[0]?.type === 'reload';
+  render().then(() => { if (!isReload && q?.has('sites') && q.has('focus') && q.has('t')) setTimeout(() => LLSN().goTo?.('#ls-brief'), 600); });
 }
 function renderShareURL() { const i = document.querySelector('#ls-brief .share-row input'); if (i) i.value = LLSN().shareURL?.() || location.href; }
 

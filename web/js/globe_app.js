@@ -195,10 +195,9 @@ whenReady(start);
 
 // compared sites: the 3D label reads '#n name' in the site colour (the copy's selected label); others keep the dot
 function markPinnedLabels() {
-  const L = window.LLSN || {}, sites = L.state?.sites || [];
-  const byTitle = new Map(sites.map(s => [`${s.name} (${s.lat.toFixed(3)}, ${s.lon.toFixed(3)})`, s.id]));
+  const L = window.LLSN || {};
   document.querySelectorAll('#globe-stage .g3-site').forEach(b => {
-    const id = byTitle.get(b.title), n = id ? L.pinNo?.(id) : null;
+    const id = b.dataset.siteId, n = id ? L.pinNo?.(id) : null;
     if (n) { b.dataset.n = n; b.style.setProperty('--sc', `var(--c${n})`); } else { delete b.dataset.n; b.style.removeProperty('--sc'); }
   });
 }

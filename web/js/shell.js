@@ -235,6 +235,7 @@ async function setLayer(k) {
   layerNoted = false; const ln = document.getElementById('ls-layernote'); if (ln && k === 'light') ln.hidden = true;
   tb.classList.toggle('time-off', k !== 'light' && k !== 'sun');   // open for Sunlight and Average sunlight (the copy); folds for the others
   LL().globe?.setElevation?.(null);
+  { const el = document.getElementById('elev-legend'); if (el) el.hidden = true; }
   { const h1 = document.getElementById('hud-1'); if (h1) h1.style.display = k === 'light' ? '' : 'none'; }   // one legend at a time: the LROC/Earth-set line belongs to the Sunlight view
   if (k === 'elev') {                                              // elevation: LOLA height colour over the same fixed-light hillshade (relief merged in)
     layer = k; tb.querySelectorAll('button[data-layer]').forEach(b => b.setAttribute('aria-pressed', String(b.dataset.layer === k)));
@@ -243,11 +244,13 @@ async function setLayer(k) {
     g0.setElevation({ min: ELEV_MIN, max: ELEV_MAX, stops: ELEV_RAMP });
     const r = await elevRange();
     if (layer !== 'elev') return;
-    const leg = $('#map-legend'); leg.hidden = false;
+    $('#map-legend').hidden = true;
     const km = x => `${x > 0 ? '+' : x < 0 ? '−' : ''}${Math.abs(x).toFixed(1)}`;
-    leg.innerHTML = `<div>${esc(t('lgElev'))}</div>
-      <div class="bar" style="background:linear-gradient(90deg, ${ELEV_RAMP.join(', ')})"></div><div class="ends"><span>≤ ${km(ELEV_MIN)} km</span><span>${km((ELEV_MIN + ELEV_MAX) / 2)}</span><span>≥ ${km(ELEV_MAX)} km</span></div>
-      <div class="muted" style="margin-top:3px">${esc(fill(t('lgElevNote'), { x: 3, a: r ? km(r[0]) : '—', b: r ? km(r[1]) : '—' }))}</div>`;
+    let el = document.getElementById('elev-legend');
+    if (!el) { el = document.createElement('div'); el.id = 'elev-legend'; el.className = 'elev-legend'; tb.appendChild(el); }
+    const note = fill(t('lgElevNote'), { x: 3, a: r ? km(r[0]) : '—', b: r ? km(r[1]) : '—' });
+    el.title = note; el.hidden = false;
+    el.innerHTML = `<b>${esc(t('lgElev'))}</b><span class="el-row"><span class="el-ends num"><span>≥ ${km(ELEV_MAX)} km</span><span>≤ ${km(ELEV_MIN)} km</span></span><i class="el-bar" style="background:linear-gradient(0deg, ${ELEV_RAMP.join(', ')})"></i></span><span class="sr">${esc(note)}</span>`;
     return;
   }
   if (k === 'relief') {                                            // terrain shading only: neutral grey over the LOLA hillshade
@@ -573,3 +576,28 @@ document.getElementById('c1-sum')?.addEventListener('pointerdown', () => { const
 // last input was the keyboard? (used to hide the focus ring on headings that receive script focus after a mouse click)
 (() => { const h = document.documentElement; window.addEventListener('keydown', e => { if (e.key === 'Tab' || e.key === 'Enter' || e.key === ' ' || e.key.startsWith('Arrow')) h.dataset.kbd = '1'; }, true);
   for (const ev of ['pointerdown', 'mousedown', 'touchstart']) window.addEventListener(ev, () => { delete h.dataset.kbd; }, { capture: true, passive: true }); })();
+
+// ------------------------------------------------------------ 17-1: fold either side panel; a vertical tab stays on the screen edge
+(() => { const root = document.documentElement, KEY = 'ls.panelsOff';
+  const btn = { l: document.getElementById('pn-fold-l'), r: document.getElementById('pn-fold-r') }, edge = { l: document.getElementById('pn-edge-l'), r: document.getElementById('pn-edge-r') };
+  if (!btn.l || !btn.r || !edge.l || !edge.r) return;
+  const ko = () => getLang() === 'ko';
+  const pins = () => document.querySelectorAll('#pk-pinned .pk-row').length;
+  const label = () => {
+    btn.l.title = ko() ? '조건 패널 접기' : 'Hide the conditions panel'; btn.r.title = ko() ? '비교 패널 접기' : 'Hide the comparison panel';
+    btn.l.setAttribute('aria-label', btn.l.title); btn.r.setAttribute('aria-label', btn.r.title);
+    edge.l.textContent = (ko() ? '조건' : 'Conditions') + ' ›'; edge.r.textContent = '‹ ' + (ko() ? '비교' : 'Compare') + ' · ' + pins();
+    edge.l.setAttribute('aria-label', ko() ? '조건 패널 펼치기' : 'Show the conditions panel'); edge.r.setAttribute('aria-label', ko() ? '비교 패널 펼치기' : 'Show the comparison panel');
+  };
+  const set = (side, off, user) => {
+    root.classList.toggle(side === 'l' ? 'lp-off' : 'rp-off', off); edge[side].hidden = !off; btn[side].setAttribute('aria-expanded', String(!off));
+    try { localStorage.setItem(KEY, (root.classList.contains('lp-off') ? 'l' : '') + (root.classList.contains('rp-off') ? 'r' : '')); } catch (e) { /* storage blocked */ }
+    // the map area changed: minimap, dock, legend, chips and the globe centre follow the new edges
+    for (const ms of [0, 120, 260]) setTimeout(() => window.dispatchEvent(new Event('resize')), ms);
+    if (user) (off ? edge[side] : btn[side]).focus({ preventScroll: true });
+  };
+  for (const side of ['l', 'r']) { btn[side].addEventListener('click', () => set(side, true, true)); edge[side].addEventListener('click', () => set(side, false, true)); }
+  let saved = ''; try { saved = localStorage.getItem(KEY) || ''; } catch (e) { /* ignore */ }
+  if (window.matchMedia('(min-width: 1100px)').matches) { if (saved.includes('l')) set('l', true); if (saved.includes('r')) set('r', true); }
+  ['llsn:lang', 'llsn:pins', 'llsn:ready', 'llsn:sites', 'llsn:filter'].forEach(ev => window.addEventListener(ev, () => setTimeout(label, 60))); label();
+})();

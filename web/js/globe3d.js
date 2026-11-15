@@ -143,15 +143,15 @@ export async function createGlobe(container, opts = {}) {
   const scene = new THREE.Scene();
   scene.background = new THREE.Color(0x000000);
   const camera = new THREE.PerspectiveCamera(45, 1, 0.0005, 1e8);
-  // Moon look matched to the designer's copy (Chaei, 18:41): warm sunlight 0xfff4e2 at 2.5 and a faint blue earthshine,
+  // Moon look matched to the designer's copy (Chaei, 18:41): warm sunlight 0xfff4e2 and a faint blue earthshine,
   // applied to the colour map in display (sRGB) space like her three.js r128 page; see the moon shader below.
-  const sun = new THREE.DirectionalLight(new THREE.Color().setRGB(1, 0xf4 / 255, 0xe2 / 255, THREE.LinearSRGBColorSpace), 2.5 * Math.PI);
+  const sun = new THREE.DirectionalLight(new THREE.Color().setRGB(1, 0xf4 / 255, 0xe2 / 255, THREE.LinearSRGBColorSpace), 3.2 * Math.PI);   // 3.2: day side measured ~25 % darker than the copy at 2.5
   sun.castShadow = true;
   sun.shadow.mapSize.set(4096, 4096);
   scene.add(sun, sun.target);
-  // night side: ambient ~0.25 of the colour map (copy dark-side median ~44/255) + earthshine from the Earth for crater relief
-  const ambient = new THREE.AmbientLight(0xffffff, 0.25 * Math.PI);
-  const earthshine = new THREE.DirectionalLight(0xffffff, 0.12 * Math.PI);
+  // night side: nearly black like the copy (its ambient 0.012 + earthshine 0.07 from the Earth, which keeps a hint of crater relief)
+  const ambient = new THREE.AmbientLight(0xffffff, 0.012 * Math.PI);
+  const earthshine = new THREE.DirectionalLight(new THREE.Color().setRGB(0x9f / 255, 0xb8 / 255, 1, THREE.LinearSRGBColorSpace), 0.07 * Math.PI);
   scene.add(ambient, earthshine, earthshine.target);
 
   // colour map: 2k first (0.4 MB), the 8k (6.6 MB) only once the camera comes closer than HIRES_RANGE km (lazy)
@@ -253,7 +253,9 @@ if (uLayerA > 0.0 || uElev > 0.5) {
   vec3 L = normalize(up * 0.70711 + (no - ea) * 0.5);
   float relief = clamp(1.0 + 1.6 * (dot(nW, L) / 0.70711 - 1.0), 0.08, 1.8);   // 1 on level ground, steeper contrast on slopes
   vec3 ground = vec3(clamp(0.05 + 1.6 * gLum, 0.04, 0.5)) * relief;
-  gl_FragColor.rgb = mix(ground, gLayer * LAYER_DIM * mix(1.0, relief, 0.75), uElev > 0.5 ? ${LAYER_OPACITY.toFixed(2)} : uLayerA);   // LAYER_DIM: team asked for a darker mean map (11/14)
+  gl_FragColor.rgb = uElev > 0.5
+    ? gLayer * mix(1.0, relief, 0.35)                                            // elevation: full colour, light relief (as vivid as the copy)
+    : mix(ground, gLayer * LAYER_DIM * mix(1.0, relief, 0.75), uLayerA);   // LAYER_DIM: team asked for a darker mean map (11/14)
 }`);
     };
     m.customProgramCacheKey = () => 'moon-' + (kind === 'band' ? 'b' : 'c');
@@ -548,6 +550,12 @@ if (uLayerA > 0.0 || uElev > 0.5) {
   .g3-site::before{content:'';display:inline-block;width:9px;height:9px;border-radius:50%;background:#ff5a5a;border:2px solid #fff;margin-right:4px;vertical-align:-2px;box-shadow:0 0 3px #000}
   .g3-site.g3-polar_peak::before,.g3-site.g3-artemis3_region::before{background:#2ee59d}
   .g3-site.g3-flip{display:inline-flex;flex-direction:row-reverse;align-items:center}.g3-site.g3-flip::before{margin:0 0 0 4px}
+  .g3-site.g3-dotonly{width:14px!important;height:14px;font-size:0!important;overflow:hidden;padding:0!important}
+  .g3-site.g3-dotonly::before{content:''!important;width:6px!important;height:6px!important;margin:0!important;background:#fff;border:1px solid #111}
+  .g3-cluster{position:absolute;pointer-events:auto;z-index:4;min-width:32px;min-height:26px;padding:3px 7px;border:1px solid #aaa;border-radius:14px;background:#16191eee;color:#fff;font:600 12px sans-serif;cursor:pointer}
+  .g3-cluster-panel{position:absolute;pointer-events:auto;z-index:8;width:240px;max-width:calc(100% - 24px);max-height:240px;overflow:auto;padding:8px;border:1px solid #666;border-radius:8px;background:#101318f5;color:white}
+  .g3-cluster-panel[hidden]{display:none}.g3-cluster-panel button{display:block;width:100%;padding:8px;text-align:left;border:0;background:transparent;color:#fff;cursor:pointer}.g3-cluster-panel button:hover{background:#ffffff20}
+  .g3-cluster:focus-visible,.g3-cluster-panel button:focus-visible{outline:2px solid #ffd23f}
   .g3-site:focus-visible{outline:2px solid #ffd23f}
   .g3-site.g3-dotonly{color:transparent!important;text-shadow:none!important}.g3-site.g3-dotonly:hover,.g3-site.g3-dotonly:focus-visible{color:inherit!important;z-index:2}
   .g3-chip{position:absolute;left:0;top:0;padding:3px 8px;border-radius:12px;font-weight:600;white-space:nowrap;box-shadow:0 1px 4px #0008}
@@ -560,10 +568,15 @@ if (uLayerA > 0.0 || uElev > 0.5) {
   .g3-chip .g3-arr{display:inline-block;margin-right:4px}
   .g3-hud b.sun{color:#ffd23f}.g3-hud b.earth{color:#7fb6ff}`;
   overlay.appendChild(css);
+  const siteName = s => lang === 'ko' && s.name_ko ? s.name_ko : s.name;
+  function updateSiteLabel(s, el) {
+    el.textContent = lang === 'ko' ? siteName(s) : (s.short || s.name);
+    el.title = `${siteName(s)} (${s.lat.toFixed(3)}, ${s.lon.toFixed(3)})`;
+  }
   const siteEls = sites.map(s => {
     const b = document.createElement('button');
-    b.className = 'g3-site g3-' + s.group; b.type = 'button';
-    b.textContent = s.short || s.name; b.title = `${s.name} (${s.lat.toFixed(3)}, ${s.lon.toFixed(3)})`;
+    b.className = 'g3-site g3-' + s.group; b.type = 'button'; b.dataset.siteId = s.id;
+    updateSiteLabel(s, b);
     b.addEventListener('click', ev => { ev.stopPropagation(); focusSite(s.id); emit('siteclick', s); });
     overlay.appendChild(b);
     return { s, el: b, dir: dirFromLatLon(s.lat, s.lon), h: null };
@@ -594,25 +607,93 @@ if (uLayerA > 0.0 || uElev > 0.5) {
   // direction of the body, then slid along that border until they overlap no obstacle: opts.avoid
   // (elements or CSS selectors: header, side panels, buttons, minimap ...), our own note/HUD and the other chip.
   const avoidList = () => {
-    const out = [dock];
+    const out = [dock, ...clusterButtons.values(), clusterPanel];
     for (const a of opts.avoid || []) {
       if (typeof a === 'string') document.querySelectorAll(a).forEach(e => out.push(e)); else if (a) out.push(a);
     }
     return out;
   };
   const hit = (a, b) => a.x < b.x + b.w && b.x < a.x + a.w && a.y < b.y + b.h && b.y < a.y + a.h;
+  const clusterButtons = new Map();
+  const clusterPanel=document.createElement('div');clusterPanel.className='g3-cluster-panel';clusterPanel.hidden=true;clusterPanel.setAttribute('role','dialog');overlay.append(clusterPanel);
+  let activeCluster=null;
+  function closeCluster(restore=false){clusterPanel.hidden=true;if(restore)activeCluster?.focus();activeCluster=null;}
+  overlay.addEventListener('pointerdown',e=>{if(!e.target.closest('.g3-cluster,.g3-cluster-panel'))closeCluster();});
+  clusterPanel.addEventListener('keydown',e=>{if(e.key==='Escape'){e.preventDefault();closeCluster(true);}});
+  function openCluster(button, members){
+    activeCluster=button;clusterPanel.replaceChildren();clusterPanel.hidden=false;
+    clusterPanel.setAttribute('aria-label',lang==='ko'?'가까운 착륙지 선택':'Choose a nearby landing site');
+    const close=document.createElement('button');close.textContent=lang==='ko'?'닫기 ×':'Close ×';close.onclick=()=>closeCluster(true);clusterPanel.append(close);
+    for(const m of members){const row=document.createElement('button');row.textContent=lang==='ko'?(m.s.name_ko||m.s.name):m.s.name;row.dataset.siteId=m.s.id;
+      row.onclick=e=>{e.stopPropagation();closeCluster();focusSite(m.s.id);emit('siteclick',m.s);};clusterPanel.append(row);}
+    const x=parseFloat(button.style.left),y=parseFloat(button.style.top);
+    clusterPanel.style.left=`${Math.max(8,Math.min(x,overlay.clientWidth-clusterPanel.offsetWidth-8))}px`;
+    clusterPanel.style.top=`${Math.max(8,Math.min(y+30,overlay.clientHeight-clusterPanel.offsetHeight-8))}px`;
+    clusterPanel.querySelector('button[data-site-id]')?.focus();
+  }
   function declutter() {
-      // page boxes floating over the stage (legend, captions, minimap ...) count as already placed (opts.labelBlockers)
-    const kept = (typeof opts.labelBlockers === 'function' ? opts.labelBlockers() : []).map(q => ({ x0: q.left, y0: q.top, w: q.width, h: q.height }));
-    const order = siteEls.filter(m => m.box).sort((a, b) => (b.el.dataset.n ? 1 : 0) - (a.el.dataset.n ? 1 : 0));
-    for (const m of order) {
-      const q = m.el.getBoundingClientRect();                     // real box incl. the '#n' prefix (fonts / language change the width)
-      const r = { x0: q.left, y0: q.top, w: q.width, h: q.height }, hit = kept.some(k => r.x0 < k.x0 + k.w + 4 && k.x0 < r.x0 + r.w + 4 && r.y0 < k.y0 + k.h + 3 && k.y0 < r.y0 + r.h + 3);
-      m.el.classList.toggle('g3-dotonly', hit);
-      if (!hit) kept.push(r);
+    const origin=overlay.getBoundingClientRect();
+    const blockers=(typeof opts.labelBlockers==='function'?opts.labelBlockers():[]).map(q=>({x0:q.left,y0:q.top,w:q.width,h:q.height}));
+    const overlaps=(a,b,pad=3)=>a.x0<b.x0+b.w+pad&&b.x0<a.x0+a.w+pad&&a.y0<b.y0+b.h+pad&&b.y0<a.y0+a.h+pad;
+    const kept=[...blockers], candidates=[], blocked=new Map();   // blocker index -> sites whose dot sits under that box
+    for(const m of siteEls){m.el.style.visibility='';m.el.classList.remove('g3-dotonly');if(!m.box||!m.point)continue;
+      m.lw=m.el.offsetWidth||m.lw||80;
+      m.el.style.transform=`translate(${m.flip?m.point.x-m.lw+7:m.point.x-7}px,${m.point.y-7}px)`;
+      const edge=m.point.x<(labelIns?.left||0)+7?'left':m.point.x>overlay.clientWidth-(labelIns?.right||0)-7?'right':m.point.y<(labelIns?.top||0)+7?'top':null;
+      if(edge){m.el.style.visibility='hidden';if(m.point.x>=0&&m.point.x<=overlay.clientWidth&&m.point.y>=0&&m.point.y<=overlay.clientHeight){if(!blocked.has(edge))blocked.set(edge,[]);blocked.get(edge).push(m);}continue;}
+      const dot={x0:origin.left+m.point.x-7,y0:origin.top+m.point.y-7,w:14,h:14};
+      // a dot under a page box (legend, notes, minimap) is not dropped: it joins a +N button placed beside that box
+      const bi=blockers.findIndex(k=>overlaps(dot,k,0));
+      if(bi>=0){m.el.style.visibility='hidden';if(!blocked.has(bi))blocked.set(bi,[]);blocked.get(bi).push(m);continue;}candidates.push(m);
+    }
+    // Connected components in screen pixels split naturally as the camera zooms in.
+    const groups=[];const unseen=new Set(candidates);
+    while(unseen.size){const first=unseen.values().next().value,group=[first];unseen.delete(first);
+      for(let i=0;i<group.length;i++)for(const other of [...unseen])if(Math.hypot(group[i].point.x-other.point.x,group[i].point.y-other.point.y)<24){group.push(other);unseen.delete(other);}
+      groups.push(group);
+    }
+    const used=new Set(), clustered=new Set();
+    for(const members of groups.filter(g=>g.length>1)){
+      const key=members.map(m=>m.s.id).sort().join('|');used.add(key);
+      let button=clusterButtons.get(key);if(!button){button=document.createElement('button');button.type='button';button.className='g3-cluster';overlay.append(button);clusterButtons.set(key,button);}
+      button.textContent=`+${members.length}`;button.dataset.members=key;button.setAttribute('aria-label',lang==='ko'?`가까운 착륙지 ${members.length}곳 선택`:`Choose among ${members.length} nearby landing sites`);
+      button.onclick=e=>{e.stopPropagation();openCluster(button,members);};
+      const x=members.reduce((n,m)=>n+m.point.x,0)/members.length,y=members.reduce((n,m)=>n+m.point.y,0)/members.length;
+      const bw=button.offsetWidth,bh=button.offsetHeight;
+      let px=Math.max(8,Math.min(x,overlay.clientWidth-bw-8)),py=Math.max(8,Math.min(y,overlay.clientHeight-bh-8));
+      for(const [dx,dy]of [[0,0],[-bw-8,0],[0,-bh-8],[0,bh+8],[-bw-8,-bh-8]]){const a={x0:origin.left+px+dx,y0:origin.top+py+dy,w:bw,h:bh};if(!kept.some(k=>overlaps(a,k))&&px+dx>=0&&py+dy>=0){px+=dx;py+=dy;break;}}
+      button.style.left=`${px}px`;button.style.top=`${py}px`;kept.push({x0:origin.left+px,y0:origin.top+py,w:bw,h:bh});
+      for(const m of members){clustered.add(m);m.el.style.visibility='hidden';}
+    }
+    for(const [bi,members]of blocked){
+      const key='under:'+bi+':'+members.map(m=>m.s.id).sort().join('|');used.add(key);
+      let button=clusterButtons.get(key);if(!button){button=document.createElement('button');button.type='button';button.className='g3-cluster g3-under';overlay.append(button);clusterButtons.set(key,button);}
+      button.textContent=`+${members.length}`;button.dataset.members=members.map(m=>m.s.id).join('|');
+      button.setAttribute('aria-label',lang==='ko'?`패널·상자에 가려진 착륙지 ${members.length}곳 선택`:`Choose among ${members.length} landing sites hidden under a panel`);
+      button.onclick=e=>{e.stopPropagation();openCluster(button,members);};
+      const bw=button.offsetWidth||34,bh=button.offsetHeight||26;
+      const mx=members.reduce((n,m)=>n+m.point.x,0)/members.length+origin.left, my=members.reduce((n,m)=>n+m.point.y,0)/members.length+origin.top;   // keep the button near the hidden dots
+      const L=labelIns?.left||0,R=labelIns?.right||0,T=labelIns?.top||0,W=overlay.clientWidth,Hh=overlay.clientHeight;
+      const k=typeof bi==='number'?blockers[bi]:bi==='left'?{x0:origin.left,y0:origin.top,w:L,h:Hh}:bi==='right'?{x0:origin.left+W-R,y0:origin.top,w:R,h:Hh}:{x0:origin.left,y0:origin.top,w:W,h:T};
+      const spots=bi==='left'?[[k.x0+k.w+6,my-bh/2]]:bi==='right'?[[k.x0-bw-6,my-bh/2],[k.x0-bw-6,my+bh+4],[k.x0-bw-6,my-2*bh-4]]:bi==='top'?[[mx-bw/2,k.y0+k.h+6],[mx-bw*1.5-6,k.y0+k.h+6]]
+        :[[mx-bw/2,k.y0+k.h+6],[k.x0-bw-6,k.y0+k.h/2-bh/2],[mx-bw/2,k.y0-bh-6],[k.x0+k.w+6,k.y0+k.h/2-bh/2]];
+      let pick=null;
+      for(const [ax,ay]of spots){const px=Math.max(origin.left+8,Math.min(ax,origin.left+overlay.clientWidth-bw-8)),py=Math.max(origin.top+(labelIns?.top||0)+4,Math.min(ay,origin.top+overlay.clientHeight-bh-8));
+        const a={x0:px,y0:py,w:bw,h:bh};if(!kept.some(q=>overlaps(a,q))){pick=[px,py];break;}}
+      if(!pick){const ax=Math.max(origin.left+8,Math.min(spots[0][0],origin.left+overlay.clientWidth-bw-8)),ay=spots[0][1];   // walk up and down the same column to the nearest free spot
+        for(let i=1;i<40&&!pick;i++)for(const sg of [1,-1]){const py=ay+sg*i*(bh/2+2);if(py<origin.top+(labelIns?.top||0)+4||py>origin.top+overlay.clientHeight-bh-8)continue;
+          if(!kept.some(q=>overlaps({x0:ax,y0:py,w:bw,h:bh},q))){pick=[ax,py];break;}}
+        if(!pick)pick=[ax,Math.min(ay,origin.top+overlay.clientHeight-bh-8)];}
+      button.style.left=`${pick[0]-origin.left}px`;button.style.top=`${pick[1]-origin.top}px`;kept.push({x0:pick[0],y0:pick[1],w:bw,h:bh});
+    }
+    for(const [key,button]of clusterButtons)if(!used.has(key)){if(activeCluster===button)closeCluster();button.remove();clusterButtons.delete(key);}
+    const order=candidates.filter(m=>!clustered.has(m)).sort((a,b)=>(b.el.dataset.n?1:0)-(a.el.dataset.n?1:0));
+    for(const m of order){const q=m.el.getBoundingClientRect(),r={x0:q.left,y0:q.top,w:q.width,h:q.height};const collision=kept.some(k=>overlaps(r,k));
+      m.el.classList.toggle('g3-dotonly',collision);
+      if(collision)m.el.style.transform=`translate(${m.point.x-7}px,${m.point.y-7}px)`;else kept.push(r);
     }
   }
-  setInterval(() => { if (!stopped) declutter(); }, 400);   // also when the camera is still (legend / caption boxes come and go)
+  const declutterTimer=setInterval(()=>{if(!stopped)declutter();},400);
   function edgeChip(el, worldP, labelEl, placed) {
     const pr = project(worldP);
     if (pr.on) { el.style.display = 'none'; labelEl.style.display = ''; labelEl.style.transform = `translate(${pr.x + 14}px,${pr.y - 8}px)`; return null; }
@@ -865,13 +946,14 @@ if (uLayerA > 0.0 || uElev > 0.5) {
       const facing = m.dir.dot(camPos.clone().sub(p)) > 0;
       const pr = project(p);
       const show = facing && pr.on && view.range < 9000;
+      m.point = show ? {x:pr.x,y:pr.y} : null;
       m.el.style.display = show ? '' : 'none';
       if (show) {
         // keep the name inside the view: flip it to the left of the dot near the right edge, fade it near top/bottom
         const lw = (frameNo % 60 === 0 || !m.lw) ? (m.lw = m.el.offsetWidth || 80) : m.lw;
         const flip = pr.x + lw > R0 - 6 && pr.x - lw > L0;
         if (flip !== !!m.flip) { m.flip = flip; m.el.classList.toggle('g3-flip', flip); }
-        m.el.style.transform = flip ? `translate(${pr.x - lw + 7}px,${pr.y - 7}px)` : `translate(${pr.x - 7}px,${pr.y - 7}px)`;
+        m.el.style.transform = flip && !m.el.classList.contains('g3-dotonly') ? `translate(${pr.x - lw + 7}px,${pr.y - 7}px)` : `translate(${pr.x - 7}px,${pr.y - 7}px)`;
         const edge = Math.min(pr.y - 4 - T0, h - pr.y - 4, flip ? pr.x - lw - L0 : R0 - pr.x - lw, pr.x - L0, R0 - pr.x);
         m.el.style.opacity = edge < 18 ? String(Math.max(0.25, edge / 18)) : '';
         m.box = { x0: flip ? pr.x - lw + 7 : pr.x - 7, y0: pr.y - 7, w: lw, h: 14 };
@@ -914,7 +996,19 @@ if (uLayerA > 0.0 || uElev > 0.5) {
     updateBodies(); dirty = true; emit('time', hour);
   }
   function setExaggeration(x) { exag = x; elevExag.value = x; for (const s of siteEls) s.h = null; updateNote(); dirty = true; }
-  function setLang(l) { lang = l === 'ko' ? 'ko' : 'en'; updateNote(); chipSun.lastChild.textContent = lang === 'ko' ? ' 태양' : ' Sun'; chipEarth.lastChild.textContent = lang === 'ko' ? ' 지구' : ' Earth'; }
+  function setLang(l) {
+    closeCluster();
+    lang = l === 'ko' ? 'ko' : 'en';
+    for (const m of siteEls) {
+      updateSiteLabel(m.s, m.el);
+      m.lw = 0;
+    }
+    updateNote();
+    chipSun.lastChild.textContent = lang === 'ko' ? ' 태양' : ' Sun';
+    chipEarth.lastChild.textContent = lang === 'ko' ? ' 지구' : ' Earth';
+    dirty = true;
+    declutter();
+  }
 
   setTime(opts.hour ?? 0);
   if (opts.view) setView(opts.view);
@@ -988,7 +1082,7 @@ if (uLayerA > 0.0 || uElev > 0.5) {
     sunDirection: () => sunDir.clone(), earthPosition: () => earthPos.clone(),
     waitIdle: async (timeout = 30000) => { const t0 = performance.now(); let calm = 0; while (performance.now() - t0 < timeout) { await new Promise(r => setTimeout(r, 100)); calm = stats.pending === 0 && !fly ? calm + 1 : 0; if (calm >= 5) return true; } return false; },
     on(ev, fn) { (listeners[ev] ||= []).push(fn); return () => { listeners[ev] = listeners[ev].filter(f => f !== fn); }; },
-    dispose() { stopped = true; colorWorker?.terminate(); colorWorker = null; cancelAnimationFrame(raf); ro.disconnect(); io.disconnect(); for (const t of tiles.values()) disposeTile(t); colorTex.value?.dispose(); renderer.dispose(); overlay.remove(); el.remove(); },
+    dispose() { stopped = true; clearInterval(declutterTimer); colorWorker?.terminate(); colorWorker = null; cancelAnimationFrame(raf); ro.disconnect(); io.disconnect(); for (const t of tiles.values()) disposeTile(t); colorTex.value?.dispose(); renderer.dispose(); overlay.remove(); el.remove(); },
     _internal: { scene, camera, renderer, tiles },
   };
   return api;
