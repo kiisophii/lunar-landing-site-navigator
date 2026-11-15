@@ -659,6 +659,18 @@ if (uLayerA > 0.0 || uElev > 0.5) {
     clusterPanel.style.maxHeight=`${Math.floor(ph)}px`;clusterPanel.style.left=`${left}px`;
     clusterPanel.style.top=`${Math.round(down?bBot+4:bTop-4-ph)}px`;
   }
+  // declutter() runs every few frames and every 400 ms: rewriting the +N text each time replaced the text node under a
+  // pressed mouse, and the browser then fired no click (first click on +16 sometimes did nothing). Write only on change.
+  function setClusterButton(button,text,members,label){
+    if(button.textContent!==text)button.textContent=text;
+    if(button.dataset.members!==members)button.dataset.members=members;
+    if(button.getAttribute('aria-label')!==label)button.setAttribute('aria-label',label);
+  }
+  function placeClusterButton(button,x,y){   // sub-pixel jitter is ignored so a pressed button does not creep away
+    const ox=parseFloat(button.style.left),oy=parseFloat(button.style.top);
+    if(!(Math.abs(ox-x)<0.5))button.style.left=`${x}px`;
+    if(!(Math.abs(oy-y)<0.5))button.style.top=`${y}px`;
+  }
   function declutter() {
     const origin=overlay.getBoundingClientRect();
     const blockers=(typeof opts.labelBlockers==='function'?opts.labelBlockers():[]).map(q=>({x0:q.left,y0:q.top,w:q.width,h:q.height}));
@@ -684,20 +696,19 @@ if (uLayerA > 0.0 || uElev > 0.5) {
     for(const members of groups.filter(g=>g.length>1)){
       const key=members.map(m=>m.s.id).sort().join('|');used.add(key);
       let button=clusterButtons.get(key);if(!button){button=document.createElement('button');button.type='button';button.className='g3-cluster';overlay.append(button);clusterButtons.set(key,button);}
-      button.textContent=`+${members.length}`;button.dataset.members=key;button.setAttribute('aria-label',lang==='ko'?`가까운 착륙지 ${members.length}곳 선택`:`Choose among ${members.length} nearby landing sites`);
+      setClusterButton(button,`+${members.length}`,key,lang==='ko'?`가까운 착륙지 ${members.length}곳 선택`:`Choose among ${members.length} nearby landing sites`);
       button.onclick=e=>{e.stopPropagation();openCluster(button,members);};
       const x=members.reduce((n,m)=>n+m.point.x,0)/members.length,y=members.reduce((n,m)=>n+m.point.y,0)/members.length;
       const bw=button.offsetWidth,bh=button.offsetHeight;
       let px=Math.max(8,Math.min(x,overlay.clientWidth-bw-8)),py=Math.max(8,Math.min(y,overlay.clientHeight-bh-8));
       for(const [dx,dy]of [[0,0],[-bw-8,0],[0,-bh-8],[0,bh+8],[-bw-8,-bh-8]]){const a={x0:origin.left+px+dx,y0:origin.top+py+dy,w:bw,h:bh};if(!kept.some(k=>overlaps(a,k))&&px+dx>=0&&py+dy>=0){px+=dx;py+=dy;break;}}
-      button.style.left=`${px}px`;button.style.top=`${py}px`;kept.push({x0:origin.left+px,y0:origin.top+py,w:bw,h:bh});
+      placeClusterButton(button,px,py);kept.push({x0:origin.left+px,y0:origin.top+py,w:bw,h:bh});
       for(const m of members){clustered.add(m);m.el.style.visibility='hidden';}
     }
     for(const [bi,members]of blocked){
       const key='under:'+bi+':'+members.map(m=>m.s.id).sort().join('|');used.add(key);
       let button=clusterButtons.get(key);if(!button){button=document.createElement('button');button.type='button';button.className='g3-cluster g3-under';overlay.append(button);clusterButtons.set(key,button);}
-      button.textContent=`+${members.length}`;button.dataset.members=members.map(m=>m.s.id).join('|');
-      button.setAttribute('aria-label',lang==='ko'?`패널·상자에 가려진 착륙지 ${members.length}곳 선택`:`Choose among ${members.length} landing sites hidden under a panel`);
+      setClusterButton(button,`+${members.length}`,members.map(m=>m.s.id).join('|'),lang==='ko'?`패널·상자에 가려진 착륙지 ${members.length}곳 선택`:`Choose among ${members.length} landing sites hidden under a panel`);
       button.onclick=e=>{e.stopPropagation();openCluster(button,members);};
       const bw=button.offsetWidth||34,bh=button.offsetHeight||26;
       const mx=members.reduce((n,m)=>n+m.point.x,0)/members.length+origin.left, my=members.reduce((n,m)=>n+m.point.y,0)/members.length+origin.top;   // keep the button near the hidden dots
@@ -712,7 +723,7 @@ if (uLayerA > 0.0 || uElev > 0.5) {
         for(let i=1;i<40&&!pick;i++)for(const sg of [1,-1]){const py=ay+sg*i*(bh/2+2);if(py<origin.top+(labelIns?.top||0)+4||py>origin.top+overlay.clientHeight-bh-8)continue;
           if(!kept.some(q=>overlaps({x0:ax,y0:py,w:bw,h:bh},q))){pick=[ax,py];break;}}
         if(!pick)pick=[ax,Math.min(ay,origin.top+overlay.clientHeight-bh-8)];}
-      button.style.left=`${pick[0]-origin.left}px`;button.style.top=`${pick[1]-origin.top}px`;kept.push({x0:pick[0],y0:pick[1],w:bw,h:bh});
+      placeClusterButton(button,pick[0]-origin.left,pick[1]-origin.top);kept.push({x0:pick[0],y0:pick[1],w:bw,h:bh});
     }
     for(const [key,button]of clusterButtons)if(!used.has(key)){if(activeCluster===button)closeCluster();button.remove();clusterButtons.delete(key);}
     const order=candidates.filter(m=>!clustered.has(m)).sort((a,b)=>(b.el.dataset.n?1:0)-(a.el.dataset.n?1:0));
