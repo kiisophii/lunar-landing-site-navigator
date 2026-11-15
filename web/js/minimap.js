@@ -3,7 +3,7 @@
 // labels = pinned sites. The expand button opens coordinates and catalogue destinations.
 // Drag the ball to rotate it; click to fly the 3D view. Box movement/resize lives in minimap_drag.js.
 import { t, getLang } from './i18n.js';
-import { addStrings, whenReady, setFocus, LLSN } from './ui_shared.js';
+import { addStrings, whenReady, setFocus, LLSN, mapSiteColors } from './ui_shared.js';
 
 addStrings({
   mmAria: 'Mini map: where the 3D view is looking. Open for coordinate search.', mmSearch: 'Coordinates', mmPh: 'e.g. −89.45, −136.2 or 89.45S 136.2W',
@@ -15,7 +15,7 @@ addStrings({
   mmOpen: '미니맵 크게 보기', mmClose: '미니맵 작게', mmPinned: '고정한 후보', mmTop: '대표 후보 (지금 정렬 상위 5)', mmRecent: '최근 방문', mmHere: '{c}(으)로 이동했습니다. "이 지점 분석"을 누르면 지형 지평선을 계산합니다.',
 });
 
-addStrings({mmLat:'Lat',mmLon:'Lon',mmGoto:'Go to',mmSouth:'South Pole',mmNorth:'North Pole',mmPole:'Pole',mmTerrain:'Terrain',mmPast:'Past landing',mmLatitude:'Latitude',mmLongitude:'Longitude'}, {mmLat:'위도',mmLon:'경도',mmGoto:'이동 목록',mmSouth:'남극',mmNorth:'북극',mmPole:'극',mmTerrain:'지형',mmPast:'지난 착륙지',mmLatitude:'위도',mmLongitude:'경도'});
+addStrings({mmLat:'Lat',mmLon:'Lon',mmGoto:'Go to',mmSouth:'South Pole',mmNorth:'North Pole',mmPole:'Pole',mmTerrain:'Terrain',mmPast:'Past landing',mmLatitude:'Latitude',mmLongitude:'Longitude'}, {mmLat:'위도',mmLon:'경도',mmGoto:'바로 가기',mmSouth:'남극점',mmNorth:'북극점',mmPole:'극지',mmTerrain:'지형',mmPast:'역대 착륙지',mmLatitude:'위도',mmLongitude:'경도'});
 
 const D2R = Math.PI / 180, R2D = 180 / Math.PI;
 const esc = x => String(x).replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
@@ -86,9 +86,9 @@ function build() {
     else { const s = LLSN().state.sites.find(s => s.id === b.dataset.site); if(s) { setFocus(s.id); own = {lat:s.lat,lon:s.lon}; fly(s.lat,s.lon); } }
     draw();
   });
-  window.addEventListener('llsn:lang', () => { relabel(); lists(); });
+  window.addEventListener('llsn:lang', () => { relabel(); lists(); draw(); });
   window.addEventListener('llsn:pins', () => { draw(); lists(); });
-  window.addEventListener('llsn:sort', lists);
+  for (const event of ['llsn:sort', 'llsn:window', 'llsn:sites', 'llsn:relay']) window.addEventListener(event, () => { lists(); draw(); });
   window.addEventListener('llsn:focus', () => { lists(); draw(); });
   let resizeTimer = 0;
   new ResizeObserver(() => { clearTimeout(resizeTimer); resizeTimer = setTimeout(sizeBall, 60); }).observe(box);
@@ -163,23 +163,34 @@ function draw() {
   const curve = points => { g.beginPath(); let pen=false; for(const [lat,lon] of points) { const q=project(lat,lon); if(!q.front){pen=false;continue;} const x=R+q.x*R,y=R-q.y*R; if(pen)g.lineTo(x,y);else g.moveTo(x,y);pen=true; } g.stroke(); };
   for(let lat=-60;lat<=60;lat+=30)curve(Array.from({length:181},(_,i)=>[lat,i*2-180]));
   for(let lon=-180;lon<180;lon+=30)curve(Array.from({length:91},(_,i)=>[i*2-90,lon]));
+  // All candidates share their 3D colours; draw numbered comparison pins last.
+  const colors = mapSiteColors(), pins = LLSN().pins?.() || [];
+  const pinnedIds = new Set(pins.map(p => p.id));
+  for (const s of LLSN().state.sites) {
+    if (pinnedIds.has(s.id)) continue;
+    const q = project(s.lat, s.lon); if (!q.front) continue;
+    g.fillStyle = colors.get(s.id) || '#EDEDED'; g.strokeStyle = '#0a0a0b'; g.lineWidth = dpr;
+    g.beginPath(); g.arc(R + q.x * R, R - q.y * R, 2 * dpr, 0, 7); g.fill(); g.stroke();
+  }
   // Pinned labels use separate pills, including nearby polar candidates.
   const pills=[];
-  g.font = `${10 * dpr}px Oxanium, monospace`; g.textBaseline = 'middle';
-  for (const pn of LLSN().pins?.() || []) {
+  // pin numbers in the screen's number font (Geist Mono in English, Oxanium in Korean)
+  g.font = `${10 * dpr}px ${getComputedStyle(document.documentElement).getPropertyValue('--font-num').trim() || 'Oxanium, monospace'}`; g.textBaseline = 'middle';
+  for (const pn of pins) {
     const s = LLSN().state.sites.find(x => x.id === pn.id); if (!s) continue;
     const q = project(s.lat, s.lon); if (!q.front) continue;
     const x = R + q.x * R, y = R - q.y * R;
-    g.fillStyle = '#fff'; g.beginPath(); g.arc(x, y, 2.4 * dpr, 0, 7); g.fill();
+    const pc = getComputedStyle(document.documentElement).getPropertyValue('--c' + pn.n).trim() || '#ededed';   // 18-2: the candidate's own colour
+    g.fillStyle = pc; g.beginPath(); g.arc(x, y, 2.4 * dpr, 0, 7); g.fill();
     const label=`#${pn.n}`, tw=g.measureText(label).width, tx=Math.min(W-tw-8*dpr,Math.max(4*dpr,x+4*dpr));
     let ty=Math.max(8*dpr,Math.min(H-8*dpr,y));
     while(pills.some(p=>Math.abs(p.y-ty)<16*dpr&&tx<p.x+p.w&&tx+tw+6*dpr>p.x)&&ty>24*dpr)ty-=16*dpr;
     pills.push({x:tx,y:ty,w:tw+6*dpr});
-    g.fillStyle='#ededed'; g.beginPath(); g.roundRect(tx-3*dpr,ty-7*dpr,tw+6*dpr,14*dpr,7*dpr); g.fill();g.fillStyle='#0a0a0b';g.fillText(label,tx,ty);
+    g.fillStyle=pc; g.beginPath(); g.roundRect(tx-3*dpr,ty-7*dpr,tw+6*dpr,14*dpr,7*dpr); g.fill();g.fillStyle='#0a0a0b';g.fillText(label,tx,ty);
   }
   if(lastPick){const q=project(lastPick.lat,lastPick.lon);if(q.front){g.fillStyle='#fff';g.font=`${16*dpr}px sans-serif`;g.fillText('★',R+q.x*R-7*dpr,R-q.y*R);}}
   const f = LLSN().state.sites.find(x => x.id === LLSN().focus);
-  if (f) { const q = project(f.lat, f.lon); if (q.front) { g.strokeStyle = '#ff9b55'; g.lineWidth = 1.5 * dpr; g.beginPath(); g.arc(R + q.x * R, R - q.y * R, 4 * dpr, 0, 7); g.stroke(); } }
+  if (f) { const q = project(f.lat, f.lon); if (q.front) { g.strokeStyle = colors.get(f.id) || '#EDEDED'; g.lineWidth = 1.5 * dpr; g.beginPath(); g.arc(R + q.x * R, R - q.y * R, 4 * dpr, 0, 7); g.stroke(); } }
 }
 function fly(lat, lon) {
   const g = LLSN().globe; if (!g) return;

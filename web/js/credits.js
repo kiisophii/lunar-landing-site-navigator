@@ -43,7 +43,8 @@ export const CREDITS = [
     ["C28", "JetBrains Mono — Copyright 2020 The JetBrains Mono Project Authors, SIL Open Font License 1.1. Served by Google Fonts (intro and About band)."],
   ]],
   ["Design", [
-    ["C29", "Visual design, icon set, favicon, intro animation and About band graphic: Chaei Oh (Team Ginkgo Orbit), made during the contest and drawn in code. They contain no AI-generated images and no third-party images. The Luna Sight logo is a text wordmark, not an image."],
+    ["C29", "Visual design, icon set, favicon, intro animation and About band graphic: Chaei Oh (Team Ginkgo Orbit), made during the contest and drawn in code. They contain no AI-generated images and no third-party images."],
+    ["C30", "Luna Sight logo: vector trace by team designer Oh Chaei of the team's brand logo; the brand image was made with AI assistance (see SI disclosure)."],
   ]],
   ["New detail-analysis sources (15 November 2026)", [
     ["C22", "Local terrain descriptors: NASA LRO LOLA / NASA GSFC PGDA, native 5 m mosaic (product 81 (https://pgda.gsfc.nasa.gov/products/81)) and adjusted 10/20 m DEMs (product 90 (https://pgda.gsfc.nasa.gov/products/90)). Barker et al. (2021), doi:10.1016/j.pss.2020.105119; Barker et al. (2023), doi:10.3847/PSJ/acf3e1; data doi:10.60903/gsfcpgda-lola-spole. Slopes, flat-area reference fractions and DEM plane-residual roughness are team-derived, not certified landing-safety values."],

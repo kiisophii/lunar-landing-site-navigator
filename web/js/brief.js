@@ -81,7 +81,7 @@ addStrings({
   sFirst: '{l} {v} — {n}곳 중 1위', sLast: '{l} {v} — {n}곳 중 꼴찌', sHigh: '지구 직접 교신 {v} — {hi} % 이상', sDarkRule: '최장 그늘 {v} — {dark}시간 초과', sLow: '지구 직접 교신 {v} — {lo} % 미만',
   bNow: '선택 시각의 상태', nSun: '햇빛 있음', nDark: '그늘', nEarth: '지구 보임', nNoEarth: '지구 안 보임',
   nNext: '다음 변화까지 {x}', nNone: '기간 안에 변화 없음', sunEl: '태양 고도', earthEl: '지구 고도',
-  kSun: '일조율', kEarth: '직접 교신율', kBoth: '해·지구 동시', kDark: '최장 그늘',
+  kSun: '일조율', kEarth: '지구 가시', kBoth: '해·지구 함께 보임', kDark: '최장 그늘',
   kSunSub: '햇빛 있는 시간 {h}시간 · 끊김 {g}번', kEarthSub: '끊김 {g}번 · 최장 {x}', kBothSub: '해와 지구가 함께 보이는 시간 {h}시간', kDarkSub: '{dark}시간 기준 초과 (주의 규칙)', kDarkOk: '{dark}시간 이내',
   kUnc: '300 m 안: {a}–{b} (p10–p90, 2026–2030)', daily: '일별',
   tipSun: '기간 중 태양 원반의 50 % 이상이 지형 지평선 위에 있는 시간 비율(관측 높이 2 m).',
@@ -96,11 +96,11 @@ addStrings({
   close: '닫기', legSun: '일조율 (%)', legRange: '이 격자: {a} – {b} (모든 착륙지 같은 0–100 % 색 범위)', shadowPatch: '대부분 그늘 (일조 5 % 미만)',
   d_time: '햇빛과 교신, 시간에 따라', d_timeD: '끊김은 분석 기간 안에서 셈. 기간 시작·끝에 걸친 끊김은 잘린 길이로 셈.',
   d_near: '주변 위치를 조금 옮기면', d_nearD: '착륙지 주변 값. ②③④는 장기 평균(2026–2030 / 18.6년)이라 이 기간 값과 직접 비교하지 마세요.',
-  d_date: '날짜가 밀리면?', d_dateD: '2026–2030 전체 착륙일 표(data/detail/dates), 착륙일 훑기(천체력과 지형 지평선으로 브라우저에서 계산), 2026–2027 날짜 밀림 파일.',
+  d_date: '착륙 날짜·일정 지연', d_dateD: '2026–2030 전체 착륙일 표(data/detail/dates), 착륙일 훑기(천체력과 지형 지평선으로 브라우저에서 계산), 2026–2027 날짜 밀림 파일.',
   d_seasons: '계절 2026–2030', d_seasonsD: '60개월의 월별 값. 달을 누르면 분석 기간이 그 달에서 시작합니다.',
   d_relay: '중계탑을 세우면', d_relayD: '기하학적 가시성만 계산(착륙선↔탑 시선, 탑에서 지구가 지평선 위). 전파 세기·장비 성능은 추정. 개념: NASA Glenn BEACON (NTRS 20240014584).',
   d_gs: '지상국이 보이는 시간 (기하만)', d_gsD: '착륙지에서 지구가 지평선 위이고 지상국에서 달이 10° 이상일 때. 기하만 — 수신 성능은 계산하지 않음. 합계는 합집합. 좌표: KDSA = KARI kdsa01.tf (NAIF), DSN = NASA 810-005.',
-  d_hz: '지평선과 가림 원인', d_hzD: '여유각 = 천체 고도 − 그 방향 지형 높이. 양수면 보임(태양은 원반 중심 기준).',
+  d_hz: '지평선·차폐 원인', d_hzD: '여유각 = 천체 고도 − 그 방향 지형 높이. 양수면 보임(태양은 원반 중심 기준).',
   d_more: '추가 분석과 준비 상태', d_moreD: '이 도구가 아직 분석하지 않은 것을 솔직하게 적습니다 — 숫자를 지어내지 않습니다.',
   d_trust: '이 숫자 믿어도 되나', d_trustD: 'NASA PGDA 지도 비교, 실제 임무 되짚기, 이 착륙지에 쓴 파일.',
   demBtn: '지형 자료 보기', demH: '지형 자료', aboutX: '설명 보기: {x}',
@@ -161,18 +161,18 @@ addStrings({
   src_trust: 'NASA PGDA AVGVISIB maps (Mazarico et al. 2011) · ALSJ and mission reports · data/validation.json, data/hindcast.json',
   src_more: 'This tool’s own data inventory',
 }, {
-  scKick: '착륙지 검증', scLatLon: '위도/경도', scPeriod: '분석 기간', scChange: '착륙지 바꾸기', scCompare: '다른 착륙지와 비교',
-  sumSun: '일조', sumEarth: '지구 보임', sumBoth: '해+지구', sumDark: '최장 어둠',
-  pickH: '분석 고르기', pickSub: '여러 개 고를 수 있어요 · {n}/{m}', soon: '준비 중',
-  c_time: '햇빛·지구 보임 시간', c_near: '주변 위치 민감도', c_date: '착륙일과 지연', c_relay: '중계탑 효과',
-  c_gs: '지상국 가시 시간', c_hz: '지평선·가림', c_terrain: '경사·거칠기·평탄 면적', c_history: '가까운 과거 임무',
-  c_seasons: '계절 2026–2030', c_access: '과학 목표 접근', c_routes: '이동 경로·장애물',
-  kSun: '일조율', kSunT: '총 일조', kEarth: '지구 보임', kEarthT: '총 지구 보임', kEgap: '최장 지구 끊김', kEgapM: '평균 지구 끊김',
-  kEgapN: '지구 끊김 횟수', kDark: '최장 어둠', kDarkN: '어둠 횟수', kSunRun: '최장 연속 일조', kBoth: '해+지구',
-  limH: '가정과 한계', limBase: '관측 높이 2 m · 1시간 간격 · 지형 {dem}.', srcH: '출처', mv: '방법과 검증',
+  scKick: '착륙지 검증', scLatLon: '위도/경도', scPeriod: '분석 기간', scChange: '후보지 변경', scCompare: '다른 착륙지와 비교',
+  sumSun: '일조율', sumEarth: '지구 가시', sumBoth: '해·지구 함께 보임', sumDark: '최장 어둠',
+  pickH: '분석 항목 선택', pickSub: '여러 개를 고를 수 있습니다 · {n}/{m}', soon: '준비 중',
+  c_time: '햇빛·지구 보임 시간', c_near: '주변 위치 민감도', c_date: '착륙 날짜·일정 지연', c_relay: '중계탑 효과',
+  c_gs: '지상국 가시 시간', c_hz: '지평선·차폐 원인', c_terrain: '경사·거칠기·평탄 영역', c_history: '주변 착륙 이력',
+  c_seasons: '계절 2026–2030', c_access: '과학 목표 접근성', c_routes: '경로·장애물 분석',
+  kSun: '일조율', kSunT: '일조 총시간', kEarth: '지구 가시', kEarthT: '지구 가시 총시간', kEgap: '최장 지구 안 보임', kEgapM: '평균 지구 안 보임',
+  kEgapN: '지구 안 보임 횟수', kDark: '최장 어둠', kDarkN: '어둠 횟수', kSunRun: '최장 연속 일조', kBoth: '해·지구 함께 보임',
+  limH: '가정과 한계', limBase: '관측 높이 2 m · 1시간 간격 · 지형 {dem}.', srcH: '출처', mv: '계산 방법·검증 보기',
   mvAll: '검증 자세히', mvNot: '아직 하지 않은 분석',
-  legSunUp: '햇빛', legEarthIn: '지구 보임', legBothIn: '해+지구', legNone: '안 보임', rSun: '해', rEarth: '지구', rBoth: '둘 다',
-  d_history: '가까운 과거 임무', d_historyD: '2026-11-15까지 실제 착륙한 18개 착륙선 중 가장 가까운 3곳. 기준 구면 위 대원 거리이며 이동 경로·접근성·기반 시설을 뜻하지 않음.',
+  legSunUp: '해 보임', legEarthIn: '지구 보임', legBothIn: '해·지구 함께', legNone: '안 보임', rSun: '해', rEarth: '지구', rBoth: '함께',
+  d_history: '주변 착륙 이력', d_historyD: '2026-11-15까지 실제 착륙한 18개 착륙선 중 가장 가까운 3곳. 기준 구면 위 대원 거리이며 이동 경로·접근성·기반 시설을 뜻하지 않음.',
   src_time: 'NASA LOLA 지형 지평선 · NAIF DE440s / DE421 천체력 · data/windows, data/detail/time_stats',
   src_near: 'NASA LOLA 지형 · data/local250, data/local, data/uncertainty · NASA PGDA ±300 m 범위',
   src_date: 'NAIF 천체력 + 지형 지평선 · data/detail/dates, data/date_slip',
@@ -343,18 +343,38 @@ function renderSum(s) {
   $('#ls-brief .sc-sum').innerHTML = cell('sumSun', pc(m?.sun_frac), 'var(--sun)') + cell('sumEarth', pc(m?.earth_frac), 'var(--earth)')
     + cell('sumBoth', pc(m?.both_frac)) + cell('sumDark', ok ? dh(m.longest_dark_h) : '—');
 }
+addStrings({hiddenAnalyses:'{n} items not needed for this candidate are hidden',noAnalysisData:'No data for this candidate; this does not mean the analysis is unnecessary.'},{hiddenAnalyses:'이 후보에는 필요 없는 항목 {n}개를 숨겼어요',noAnalysisData:'이 후보의 자료가 없는 항목입니다. 분석이 필요 없다는 뜻은 아닙니다.'});
+let available = new Set(PICKABLE), showUnavailable = false;
+async function updateAvailability(s) {
+  const valid=!core.terrainPending(s)&&!core.horizonMock(s);
+  const [terrain,relay,dates,history,local,monthly,psr,terrainData]=await Promise.all([
+    idxIds('terrain'),idxIds('relay'),idxIds('detail/dates'),historyFile(),
+    s.user?null:localGrid(s.id),s.user?null:siteFile('monthly',s.id),idxIds('detail/psr'),s.user?null:detailFile('terrain',s.id)]);
+  const next=new Set(['gs']);
+  if(valid)for(const k of ['time','hz'])next.add(k);
+  if(local?.data?.points?.length || (valid && LLSN().state.sites.some(o=>o.id!==s.id&&distKm(s,o)<=20&&!core.terrainPending(o))))next.add('near');
+  if(terrain.has(s.id))next.add('terrain');
+  if(relay.has(s.id)&&valid)next.add('relay');
+  if(dates.has(s.id))next.add('date');
+  if(history?.sites?.some(x=>x.id===s.id))next.add('history');
+  if(monthly)next.add('seasons');
+  if(!s.user&&s.lat<=-80&&psr.has(s.id))next.add('access');
+  if(terrainData?.kind==='polar_detailed'&&terrainData.slope_by_radius_m)next.add('routes');
+  return next;
+}
 /** 7-5: analysis chips; on = card shown below. */
 function renderPick() {
-  const n = PICKABLE.filter(k => open.has(k)).length;
-  $('#ls-brief .sc-pick').innerHTML = `<p class="sc-pick-h"><b>${esc(t('pickH'))}</b> <span>${esc(fill(t('pickSub'), { n, m: PICKABLE.length }))}</span></p>
-    <div class="sc-chips" role="group" aria-label="${esc(t('pickH'))}">${PICK.map(([k, soon]) => (soon
-      ? `<span class="sc-chip soon" aria-disabled="true"><i class="box"></i>${esc(t('c_' + k))}<em>${esc(t('soon'))}</em></span>`
-      : `<button type="button" class="sc-chip" data-chip="${k}" aria-pressed="${open.has(k)}" aria-controls="blk-${k}"><i class="box">${IC.check}</i>${esc(t('c_' + k))}</button>`)).join('')}</div>`;
+  const visible=PICK.filter(([k])=>available.has(k)), missing=PICK.filter(([k])=>!available.has(k));
+  const n=visible.filter(([k])=>open.has(k)).length;
+  $('#ls-brief .sc-pick').innerHTML = `<p class="sc-pick-h"><b>${esc(t('pickH'))}</b> <span>${esc(fill(t('pickSub'), { n, m:visible.length }))}</span></p>
+    <div class="sc-chips" role="group" aria-label="${esc(t('pickH'))}">${visible.map(([k])=>`<button type="button" class="sc-chip" data-chip="${k}" aria-pressed="${open.has(k)}" aria-controls="blk-${k}"><i class="box">${IC.check}</i>${esc(t('c_'+k))}</button>`).join('')}</div>
+    ${missing.length?`<button type="button" class="sc-hidden-toggle" aria-expanded="${showUnavailable}" aria-controls="sc-unavailable">${esc(fill(t('hiddenAnalyses'),{n:missing.length}))}</button><div id="sc-unavailable" class="sc-unavailable"${showUnavailable?'':' hidden'}><p>${esc(t('noAnalysisData'))}</p><div class="sc-chips">${missing.map(([k])=>`<span class="sc-chip soon" aria-disabled="true">${esc(t('c_'+k))}</span>`).join('')}</div></div>`:''}`;
+  PICK.forEach(([k])=>document.getElementById(`blk-${k}`)?.classList.toggle('data-unavailable',!available.has(k)));
 }
 /** Card numbers 01, 02 … follow the order of the open cards. */
 function renumber() {
   let i = 0;
-  CARD_ORDER.forEach(k => { const el = document.getElementById(`blk-${k}`); const no = el?.querySelector('.sc-no'); if (no) no.textContent = el.classList.contains('is-closed') ? '' : String(++i).padStart(2, '0'); });
+  CARD_ORDER.forEach(k => { const el = document.getElementById(`blk-${k}`); const no = el?.querySelector('.sc-no'); if (no) no.textContent = (el.classList.contains('is-closed') || el.classList.contains('data-unavailable')) ? '' : String(++i).padStart(2, '0'); });
 }
 function renderShare() {
   const url = LLSN().shareURL?.() || location.href;
@@ -491,7 +511,7 @@ async function timeBlock(s) {
     const T0 = Date.parse(win.start_utc), T1 = Date.parse(win.end_utc), W = 1000, X = ms => ((ms - T0) / (T1 - T0)) * W;
     const strip = (arr, col, y) => arr.map(v => `<rect x="${X(Date.parse(v.start_utc)).toFixed(1)}" y="${y}" width="${Math.max(0.5, X(Date.parse(v.end_utc)) - X(Date.parse(v.start_utc))).toFixed(1)}" height="12" fill="${col}"/>`).join('');
     const p0 = X(core.hourToDate(w.i0).getTime()), p1 = X(core.hourToDate(w.i1 + 1).getTime());
-    const years = [2027, 2028, 2029, 2030].map(y => { const x = X(Date.UTC(y, 0, 1)); return `<line x1="${x}" x2="${x}" y1="0" y2="40" stroke="var(--border)"/><text x="${x + 3}" y="48" font-size="10" fill="var(--muted)" font-family="Oxanium,monospace">${y}</text>`; }).join('');
+    const years = [2027, 2028, 2029, 2030].map(y => { const x = X(Date.UTC(y, 0, 1)); return `<line x1="${x}" x2="${x}" y1="0" y2="40" stroke="var(--border)"/><text x="${x + 3}" y="48" font-size="10" fill="var(--muted)" style="font-family:var(--font-num)">${y}</text>`; }).join('');
     const gapRows = (arr) => arr.map(g => `<tr><td class="num">${g.start_utc.slice(0, 16).replace('T', ' ')}</td><td>${g.end_utc.slice(0, 16).replace('T', ' ')}</td><td>${fmtHours(g.duration_h)}${g.clipped_start || g.clipped_end ? ' *' : ''}</td></tr>`).join('');
     five = `<h4 style="margin:16px 0 6px;font-size:13px">${esc(t('tFiveStrip'))} ${chip('chipLong', 'long')}</h4>
       <svg class="five-strip" viewBox="0 0 ${W} 52" style="width:100%;cursor:pointer" role="img" aria-label="${esc(t('tFiveStrip'))}" data-t0="${T0}" data-t1="${T1}">
@@ -790,7 +810,8 @@ function drawZ3(body, s, D) {
 // ------------------------------------------------------------ render all
 async function render() {
   const s = target(); if (!s || !LLSN().window) return;
-  const my = ++seq; current = s.id;
+  const my = ++seq; if(current!==s.id)showUnavailable=false; current = s.id;
+  const next=await updateAvailability(s);if(my!==seq)return;available=next;
   renderHead(s); renderSum(s); renderPick(); renderShare();
   mvHTML = await trustCard(s, true);
   if (my !== seq) return;
@@ -801,7 +822,7 @@ async function render() {
   simpleBlock('hz', chip('chipPeriod', 'period'));
 }
 function setOpen(k, on, scroll = true) {
-  const el = document.getElementById(`blk-${k}`); if (!el) return;
+  const el = document.getElementById(`blk-${k}`); if (!el || (on && PICKABLE.includes(k) && !available.has(k))) return;
   if (on) open.add(k); else open.delete(k);
   el.classList.toggle('is-closed', !on); el.setAttribute('aria-hidden', String(!on));
   document.querySelectorAll(`#ls-brief [data-open="${k}"]`).forEach(b => b.setAttribute('aria-expanded', String(on)));
@@ -914,6 +935,7 @@ function wire() {
     #ls-brief .z3-ctl .pill[aria-pressed="true"] { background: var(--text); color: var(--bg); }`;
   document.head.appendChild(st);
   root.addEventListener('click', e => {
+    if(e.target.closest('.sc-hidden-toggle')){showUnavailable=!showUnavailable;renderPick();root.querySelector('.sc-hidden-toggle')?.focus();return;}
     const ch = e.target.closest('[data-chip]'); if (ch) { const k = ch.dataset.chip; setOpen(k, !open.has(k), false); return; }
     const mv = e.target.closest('.sc-mv'); if (mv) { const on = mv.getAttribute('aria-expanded') !== 'true'; mv.setAttribute('aria-expanded', String(on)); document.getElementById(mv.getAttribute('aria-controls'))?.toggleAttribute('hidden', !on); return; }
     const o = e.target.closest('[data-open]'); if (o) { const k = o.dataset.open; setOpen(k, o.closest('.bento') ? !open.has(k) : true); return; }

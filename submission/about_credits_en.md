@@ -69,7 +69,8 @@
 
 **Design**
 
-- C29. Visual design, icon set, favicon, intro animation and About band graphic: Chaei Oh (Team Ginkgo Orbit), made during the contest and drawn in code. They contain no AI-generated images and no third-party images. The Luna Sight logo is a text wordmark, not an image.
+- C29. Visual design, icon set, favicon, intro animation and About band graphic: Chaei Oh (Team Ginkgo Orbit), made during the contest and drawn in code. They contain no AI-generated images and no third-party images.
+- C30. Luna Sight logo: vector trace by team designer Oh Chaei of the team's brand logo; the brand image was made with AI assistance (see SI disclosure).
 
 **New detail-analysis sources — 15 November 2026**
 
@@ -113,6 +114,7 @@ Opened on 14 November 2026 (KST) unless the source column says "resources_en.md"
 | C27 | **Confirmed 2026-11-15.** Same holder as Geist; SIL OFL 1.1. English-screen numbers, dates and site names | https://github.com/google/fonts/blob/main/ofl/geistmono/OFL.txt |
 | C28 | **Confirmed 2026-11-15.** OFL.txt first line "Copyright 2020 The JetBrains Mono Project Authors (https://github.com/JetBrains/JetBrainsMono)"; SIL OFL 1.1. Loaded by the intro (luna-intro.js:91, PR #113). PR #113 numbers this font "C22" in credits.js; that number is already used by the terrain line, so keep one entry (suggest C28) when merging | https://github.com/google/fonts/blob/main/ofl/jetbrainsmono/OFL.txt |
 | C29 | **Team statement (Sua Kim, 2026-11-15), checked in code.** Chaei Oh designed the icon set, favicon, intro and About band during the contest. Checked: no raster image data in web/index.html, web/js or web/css; luna-intro.js and about-journey.js (PR #113) draw on canvas/SVG and fetch no images; the favicon is an inline SVG drawn in code; the wordmark is text (index.html:32). PR #113 removed the AI-traced logo vector from the designer's original intro | ../web/index.html ; PR #113 |
+| C30 | **Team decision (Sua Kim, 2026-11-15).** web/assets/luna-sight-logo.svg (from D:\kakao\luna-sight-logo.svg; viewBox 0 0 1811 159, 9 letter paths) in the top bar, and the same traced paths restored in web/js/luna-intro.js (LOGO). The brand image it traces was made with AI assistance; the vector trace is by Oh Chaei. Supersedes the C29 note that the logo is a text wordmark | team statement |
 
 ## Differences from the current About source table (`s5-design-impl-sua`, `web/js/about.js`)
 

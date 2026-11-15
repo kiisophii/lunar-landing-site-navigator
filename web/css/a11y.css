@@ -1,0 +1,27 @@
+/* Keyboard and contrast fixes from Soyun Jung's accessibility check (2026-11-15). Shapes, sizes and numbers unchanged.
+   Loaded last from index.html; colours use !important because design_lower.css, site_check.css and about_layout.css
+   are added later by script. Small grey text #6E6E74 (3.4-4.1:1 on the panels) -> #8B8B91 (>= 4.9:1 on #1B1B1D). */
+
+/* 1. 3D Moon canvas: visible focus ring for Tab (globe3d.js sets outline:none inline) */
+#globe-stage canvas:focus-visible { outline: 2px solid #EDEDED !important; outline-offset: -2px; }
+
+/* 4. focus rings drawn inside the box so scrolling / rounded parents do not clip them */
+.ls .c1-add:focus-visible, .ls-left .pk-list :focus-visible, .ls .ls-add:focus-visible,
+.ls-tray :focus-visible, .ls .tray-more:focus-visible { outline: 2px solid #EDEDED; outline-offset: -2px; }
+
+/* 5. skip link: dark site background, white text (was sky blue on white, 1.91:1) */
+.ls .ls-skip, .ls .ls-skip:visited { background: #0A0A0B !important; color: #EDEDED !important; border: 1px solid #EDEDED; }
+
+/* 3. keyboard tooltip for the tray and map info buttons (shell.js) */
+.kbd-tip { position: fixed; z-index: 200; max-width: 280px; padding: 6px 9px; border-radius: 6px; background: #0A0A0B; color: #EDEDED;
+  border: 1px solid rgba(237, 237, 237, .18); font: 12px/1.4 var(--font, system-ui, sans-serif); pointer-events: none; }
+.kbd-tip[hidden] { display: none; }
+
+/* 6. small grey text: 4.5:1 or more */
+:root { --n-dim: #8B8B91; }
+#ls-brief { --sc-dim: #8B8B91 !important; }
+.ls .pk-grp, .ls .pk-vals small, .ls .pk-chip:not(.on), .ls .c2-dot, .ls .ls-tabs-top a b, .ls .fc-val.unset, .ls .val-pop .vp-cap,
+.ls .detail-table .pin-no, .ls .detail-table .sub, .ls .detail-table.cmp-tbl .val small, .ls .detail-table.cmp-tbl thead th.lbl,
+.ls .detail-icon, .ls .detail-info, #ls-compare .detail-table tr.r-relay .val small, .ls .detail-tooltip.tl-tip .tt-n,
+.ls .ls-minimap .mm-coord label, .ls .ls-minimap .mm-coord > span, .ls .ls-minimap .mm-dest-copy small, .ls .ls-minimap .mm-tag,
+.ls-about .ab-no, .ls-about .ab-measures thead th, .ls-about #about-start .ab-by, body > .sc-pop .v i { color: #8B8B91 !important; }

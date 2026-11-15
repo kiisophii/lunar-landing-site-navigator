@@ -6,6 +6,10 @@ Prepared 2026-11-14. Source: [latest-main snapshot 64e3bee3bfcaa224843212cdd2321
 
 The solution ideas and design decisions came from our six team members. We used Claude Code and OpenAI Codex to assist with code, data processing, documentation and cross-checking. Team members directed the work and reviewed the reported findings. Numerical checks used independent references and implementations, including NASA JPL Horizons, PGDA products, brute-force terrain calculations and a separate Python implementation of the JavaScript metrics. These checks have documented sample sizes, tolerances and limitations. Independent AI sessions also reviewed selected deliverables. AI-run verification is distinguished from a human rerun; unresolved human-review entries remain listed below. The team retains responsibility for the submitted work.
 
+## Logo
+
+Luna Sight logo: vector trace by team designer Oh Chaei of the team's brand logo; the brand image was made with AI assistance (see SI disclosure). Used in the top bar and the intro (team decision, 2026-11-15); the favicon, icons and other graphics remain hand-drawn in code (About, C29–C30).
+
 ## Claim boundary before submission
 
 **Supported statement (verification ledger, updated 2026-11-15 after PRs #57–#59):** All 18 published data products were re-checked by someone other than their author, who recomputed a sample with separate code (site coordinates: re-read from the sources); on identical inputs, differences were at most 0.15 percentage points, 0.004° or 0.37 m (tiles, within encoding steps); known gaps are listed in docs/verification_ledger.md.

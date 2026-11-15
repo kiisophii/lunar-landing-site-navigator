@@ -9,6 +9,36 @@ import { STR, t } from './i18n.js';
 
 export const LLSN = () => window.LLSN || {};
 
+/** Evenly space candidate hues through the available arcs. Reserve yellow (Sun),
+ * green/teal (relay) and light blue (Earth); comparison colours remain the list's tokens. */
+export function candidateMapColors(ordered, pins, comparisonColors) {
+  const pinned = new Map(pins.map(p => [p.id, p.n]));
+  const rest = ordered.filter(s => !pinned.has(s.id));
+  const arcs = [[260, 360], [0, 22], [58, 145], [220, 260]];
+  const span = arcs.reduce((sum, [a, b]) => sum + b - a, 0);
+  const colors = new Map();
+  rest.forEach((s, i) => {
+    let distance = (i + 0.5) * span / rest.length;
+    for (const [a, b] of arcs) {
+      if (distance < b - a) {
+        colors.set(s.id, `hsl(${(a + distance).toFixed(3)} 72% 76%)`);
+        break;
+      }
+      distance -= b - a;
+    }
+  });
+  for (const [id, n] of pinned) colors.set(id, comparisonColors[n] || '#EDEDED');
+  return colors;
+}
+
+/** One mapping for the 3D labels and canvas minimap, in the current candidate-list order. */
+export function mapSiteColors() {
+  const L = LLSN(), css = getComputedStyle(document.documentElement);
+  const pins = L.pins?.() || [];
+  const comparisonColors = Object.fromEntries(pins.map(p => [p.n, css.getPropertyValue(`--c${p.n}`).trim()]));
+  return candidateMapColors(L.sortedSites?.() || L.state?.sites || [], pins, comparisonColors);
+}
+
 /** Register module strings (English + Korean) in the shared i18n table without editing i18n.js. */
 export function addStrings(en, ko) {
   Object.assign(STR.en, en);

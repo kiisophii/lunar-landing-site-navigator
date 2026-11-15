@@ -1,3 +1,4 @@
+import { blockedStrip } from './visibility_graph.js';
 // relay_panel.js — differentiator A: relay tower for the focused site (team idea, BEACON-style tower).
 // Reads web/data/relay/<ID>.json (contract section 12) written by pipeline/run_relay.py from real LOLA DEMs.
 // Sites without a real DEM cache are listed in relay/index.json "pending_terrain" and are shown as such:
@@ -12,9 +13,9 @@ import { relayIndex, relayFor, segmentHours, longestNone } from './diff_data.js'
 addStrings({
   rlTitle: 'Relay tower — restore line of sight to Earth', rlAria: 'Relay tower analysis for the focused site',
   rlFor: 'Site', rlPeriod: 'Period', rlHeight: 'Tower height',
-  rlDirect: 'Direct to Earth', rlVia: 'Added via tower', rlTotal: 'Link with tower(s)', rlNone: 'No link',
-  rlLongestNone: 'Longest no-link stretch', rlOfPeriod: 'of the period',
-  rlStrip: 'Link timeline over the period', rlStripDirect: 'direct', rlStripVia: 'via tower', rlStripNone: 'no link',
+  rlDirect: 'Earth in view', rlVia: 'Added via tower', rlTotal: 'In view with tower(s)', rlNone: 'Out of view',
+  rlLongestNone: 'Longest out-of-view stretch', rlOfPeriod: 'of the period',
+  rlStrip: 'Visibility over the period', rlStripDirect: 'direct', rlStripVia: 'via tower', rlStripNone: 'out of view',
   rlBest: 'Tower site that adds the most hours', rlTowers: 'Tower network (greedy, up to 3 towers)',
   rlDist: 'distance from lander', rlBearing: 'bearing', rlGround: 'ground height', rlSlope: 'slope',
   rlTowerSun: 'tower-top sunlight', rlTowerEarth: 'tower sees Earth', rlGain: 'adds', rlParent: 'linked to',
@@ -34,9 +35,9 @@ addStrings({
 }, {
   rlTitle: '중계 타워 — 지구 가시선 되살리기', rlAria: '선택한 착륙지의 중계 타워 분석',
   rlFor: '착륙지', rlPeriod: '기간', rlHeight: '타워 높이',
-  rlDirect: '지구 직접 통신', rlVia: '타워로 추가', rlTotal: '타워 포함 통신', rlNone: '통신 불가',
-  rlLongestNone: '가장 긴 통신 불가 구간', rlOfPeriod: '(기간 대비)',
-  rlStrip: '기간 동안 통신 타임라인', rlStripDirect: '직접', rlStripVia: '타워 경유', rlStripNone: '불가',
+  rlDirect: '지구 직접 보임', rlVia: '타워로 추가', rlTotal: '타워 포함 가시', rlNone: '보이지 않음',
+  rlLongestNone: '가장 긴 비가시 구간', rlOfPeriod: '(기간 대비)',
+  rlStrip: '기간 동안 가시 여부', rlStripDirect: '직접', rlStripVia: '타워 경유', rlStripNone: '보이지 않음',
   rlBest: '가시 시간을 가장 늘리는 타워 위치', rlTowers: '타워 네트워크 (탐욕법, 최대 3기)',
   rlDist: '착륙선과의 거리', rlBearing: '방위', rlGround: '지면 고도', rlSlope: '경사',
   rlTowerSun: '타워 꼭대기 햇빛', rlTowerEarth: '타워에서 지구 보임', rlGain: '추가', rlParent: '연결 대상',
@@ -122,7 +123,8 @@ function markHeight() {
 async function load() {
   const site = getFocus();
   const my = ++seq;
-  const [idx, rel] = await Promise.all([relayIndex(), relayFor(site.id).catch(() => null)]);
+  const idx=await relayIndex();
+  const rel=idx.ids.includes(site.id)?await relayFor(site.id).catch(()=>null):null;
   if (my !== seq) return;
   curId = site.id; cur = { site, idx, rel };
   render();
@@ -163,6 +165,7 @@ function render() {
       <span><i class="sw" style="background:var(--relay)"></i>${t('rlStripVia')}</span>
       <span><i class="sw" style="background:var(--warn)"></i>${t('rlStripNone')}</span>
       <span class="num">${isoDay(w.i0)} → ${isoDay(w.i1)}</span></div>
+    ${blockedStrip(site,w)}<p class="hint geometry-explanation">${t('visRelay')}</p>
     ${always ? `<p class="note">${t('rlAlways')}</p>` : ''}
     <div class="rl-grid">
       <div><h3>${t('rlMap')}</h3><canvas class="rl-map" width="420" height="420" role="img" aria-label="${esc(t('rlMap'))}"></canvas>

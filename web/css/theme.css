@@ -28,8 +28,15 @@
   --font: "Inter", "Pretendard Variable", Pretendard, system-ui, -apple-system, "Segoe UI", "Noto Sans KR", sans-serif;
   --fs-body: 14px; --head-h: 48px;
   /* compared-site colours 01–10 (chips and left bars); none is the Sun yellow, Earth blue or relay green */
-  --c1: #B9A6FF; --c2: #FF9F6B; --c3: #D4E86B; --c4: #FF7EB6; --c5: #8FA8FF; --c6: #E8A6FF; --c7: #FFB98A; --c8: #A9E2C9; --c9: #F3A6B6; --c10: #A6C8FF;
+  --c1: #B9A6FF; --c2: #FF8F70; --c3: #C6E36B; --c4: #FF7EB6; --c5: #8FA8FF; --c6: #E8A6FF; --c7: #FFB98A; --c8: #A9E2C9; --c9: #F3A6B6; --c10: #A6C8FF;
 }
 
 /* below the first screen: the same achromatic dark as the top (no blue tint) */
 :root { --bg: #0A0A0B; --surface: #111113; --surface-2: #1B1B1D; --off: #3A3A3F; }
+/* logo (Chaei Oh's vector trace, web/assets/luna-sight-logo.svg): a 34 px slot like the copy (30 px at <= 1180 px);
+   the copy's 34 px image has margins around the letters, so the vector itself is drawn at the copy's letter width (~114 px) */
+.ls-logo-slot:not(:empty) { display: inline-flex; align-items: center; height: 34px; }
+.ls .ls-logo-slot img { display: block; height: 10px; width: auto; }
+.ls-logo-slot:not(:empty) ~ .ls-word { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+.ls-brand:has(.ls-logo-slot:not(:empty)) .ls-out { align-self: center; }
+@media (max-width: 1180px) { .ls-logo-slot:not(:empty) { height: 30px; } .ls .ls-logo-slot img { height: 8.8px; } }

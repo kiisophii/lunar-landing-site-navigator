@@ -28,7 +28,7 @@ addStrings({
   skipBelow: '비교로 건너뛰기', footSources: '출처',
   footNote: '모든 시각은 UTC. 3D의 태양·지구 원반은 보기 쉽게 크게 그렸고, 고도 축은 과장했습니다.',
   verdictNote: '다른 곳의 판정 배지는 공개한 예시 기준값만 씁니다(최장 그늘 72시간, 직접 교신 50 % / 90 %).',
-  tbAria: '지도 레이어와 카메라',
+  tbAria: '지도 보기와 시간',
   addT: '착륙지 추가', close: '닫기', tabCat: '카탈로그', tabCoord: '좌표',
   catSearch: '이름으로 찾기', catAll: '모든 종류', catN: '{n}곳',
   catNote: '값은 ① 미션 조건의 분석 기간 기준이며, 조건 밖은 흐리게 보입니다.',
@@ -234,6 +234,7 @@ window.addEventListener('llsn:time', () => {
 async function setLayer(k) {
   layerNoted = false; const ln = document.getElementById('ls-layernote'); if (ln && k === 'light') ln.hidden = true;
   tb.classList.toggle('time-off', k !== 'light' && k !== 'sun');   // open for Sunlight and Average sunlight (the copy); folds for the others
+  if (tb.classList.contains('time-off')) { const pb = document.getElementById('play'); if (pb?.getAttribute('aria-pressed') === 'true') pb.click(); }   // 18-4: folding the time part stops playback
   LL().globe?.setElevation?.(null);
   { const el = document.getElementById('elev-legend'); if (el) el.hidden = true; }
   { const h1 = document.getElementById('hud-1'); if (h1) h1.style.display = k === 'light' ? '' : 'none'; }   // one legend at a time: the LROC/Earth-set line belongs to the Sunlight view
@@ -244,13 +245,12 @@ async function setLayer(k) {
     g0.setElevation({ min: ELEV_MIN, max: ELEV_MAX, stops: ELEV_RAMP });
     const r = await elevRange();
     if (layer !== 'elev') return;
-    $('#map-legend').hidden = true;
+    // 18-3 (copy 20:27): the static layers share one legend box under the minimap, so elevation uses #map-legend too
     const km = x => `${x > 0 ? '+' : x < 0 ? '−' : ''}${Math.abs(x).toFixed(1)}`;
-    let el = document.getElementById('elev-legend');
-    if (!el) { el = document.createElement('div'); el.id = 'elev-legend'; el.className = 'elev-legend'; tb.appendChild(el); }
-    const note = fill(t('lgElevNote'), { x: 3, a: r ? km(r[0]) : '—', b: r ? km(r[1]) : '—' });
-    el.title = note; el.hidden = false;
-    el.innerHTML = `<b>${esc(t('lgElev'))}</b><span class="el-row"><span class="el-ends num"><span>≥ ${km(ELEV_MAX)} km</span><span>≤ ${km(ELEV_MIN)} km</span></span><i class="el-bar" style="background:linear-gradient(0deg, ${ELEV_RAMP.join(', ')})"></i></span><span class="sr">${esc(note)}</span>`;
+    const leg = $('#map-legend'); leg.hidden = false;
+    leg.innerHTML = `<div>${esc(t('lgElev'))}</div>
+      <div class="bar" style="background:linear-gradient(90deg, ${ELEV_RAMP.join(', ')})"></div><div class="ends"><span>≤ ${km(ELEV_MIN)} km</span><span>${km((ELEV_MIN + ELEV_MAX) / 2)}</span><span>≥ ${km(ELEV_MAX)} km</span></div>
+      <div class="muted" style="margin-top:3px">${esc(fill(t('lgElevNote'), { x: 3, a: r ? km(r[0]) : '—', b: r ? km(r[1]) : '—' }))}</div>`;
     return;
   }
   if (k === 'relief') {                                            // terrain shading only: neutral grey over the LOLA hillshade
@@ -465,7 +465,7 @@ fetch('version.json', { cache: 'no-cache' }).then(r => r.json()).then(j => { $('
   };
   new MutationObserver(arrows).observe(host, { childList: true, subtree: true }); arrows();
 })();
-addStrings({ colPrev: 'Previous columns', colNext: 'Next columns' }, { colPrev: '이전 열', colNext: '다음 열' });
+addStrings({ colPrev: 'Previous columns', colNext: 'Next columns' }, { colPrev: '이전 후보 열', colNext: '다음 후보 열' });
 
 // ------------------------------------------------------------ bottom toolbar time parts (the copy's bar): ticks, UTC chip, speed stepper
 (() => {
@@ -526,7 +526,16 @@ addStrings({ colPrev: 'Previous columns', colNext: 'Next columns' }, { colPrev: 
   };
   const sync = () => { const folded = box.classList.contains('folded'); sum.hidden = !folded; if (folded) fillS(); };
   new MutationObserver(sync).observe(box, { attributes: true, attributeFilter: ['class'] });
-  sum.addEventListener('click', e => { if (e.target.closest('.c1-add')) fb.click(); });
+  // "+ Condition": open the editor and move focus to its first field; when the editor folds again, focus returns here (a11y)
+  let fromAdd = false;
+  sum.addEventListener('click', e => {
+    if (!e.target.closest('.c1-add')) return;
+    fromAdd = true; fb.click();
+    requestAnimationFrame(() => box.querySelector('.ls-foldable')?.querySelector('input, select, button, [tabindex]:not([tabindex="-1"])')?.focus());
+  });
+  new MutationObserver(() => {
+    if (fromAdd && box.classList.contains('folded')) { fromAdd = false; requestAnimationFrame(() => sum.querySelector('.c1-add')?.focus()); }
+  }).observe(box, { attributes: true, attributeFilter: ['class'] });
   foldLabel(fb, !box.classList.contains('folded'));
   // first view: when sites are already in the comparison, start with the conditions folded (the copy)
   window.addEventListener('llsn:ready', () => setTimeout(() => {
@@ -600,4 +609,53 @@ document.getElementById('c1-sum')?.addEventListener('pointerdown', () => { const
   let saved = ''; try { saved = localStorage.getItem(KEY) || ''; } catch (e) { /* ignore */ }
   if (window.matchMedia('(min-width: 1100px)').matches) { if (saved.includes('l')) set('l', true); if (saved.includes('r')) set('r', true); }
   ['llsn:lang', 'llsn:pins', 'llsn:ready', 'llsn:sites', 'llsn:filter'].forEach(ev => window.addEventListener(ev, () => setTimeout(label, 60))); label();
+})();
+
+// ------------------------------------------------------------ 18-3: static-layer legend as one row (title, range, colour band, i).
+// The assumptions / grid text is not dropped: it moves into the tooltip of the i button (hover, keyboard focus or click).
+(() => { const leg = document.getElementById('map-legend'); if (!leg) return;
+  const wide = window.matchMedia('(min-width: 1100px)');
+  const compact = () => {
+    if (!wide.matches || leg.hidden || leg.querySelector('.lg-row')) return;
+    const first = leg.firstElementChild; if (!first) return;
+    const bar = leg.querySelector(':scope > .bar'), ends = [...leg.querySelectorAll(':scope > .ends span')].map(e => e.textContent.trim());
+    const title = ([...first.childNodes].filter(n => n.nodeType === 3).map(n => n.textContent).join(' ').trim()) || first.textContent.trim();
+    const extra = [...first.querySelectorAll('*')].map(e => e.textContent.trim()).filter(Boolean);
+    const notes = [...leg.querySelectorAll(':scope > .muted')].map(e => e.textContent.trim()).filter(Boolean);
+    const tip = [title, ...extra, ends.length ? ends.join(' · ') : '', ...notes].filter(Boolean);
+    // short range for the row ('−4.5 → +5.5 km'); the full end labels stay in the tooltip
+    const lo = (ends[0] || '').replace(/^[≤≥]\s*/, ''), hi = (ends[ends.length - 1] || '').replace(/^[≤≥]\s*/, '');
+    const unit = (hi.match(/\s*[a-zA-Z°]+$/) || [''])[0];
+    const range = ends.length ? `${unit && lo.endsWith(unit) ? lo.slice(0, -unit.length) : lo} → ${hi}` : '';
+    const ko = getLang() === 'ko';
+    const short = title.replace(/\s*\d{4}\s*[–-]\s*\d{4}$/, '');   // the row drops the trailing years; the tooltip keeps the full title
+    leg.innerHTML = `<div class="lg-row"><span class="lg-t" title="${esc(title)}">${esc(short)}</span>${range ? `<span class="lg-r num">${esc(range)}</span>` : ''}${bar ? `<i class="lg-bar" style="${esc(bar.getAttribute('style') || '')}"></i>` : ''}
+      <button type="button" class="lg-i" aria-expanded="false" aria-controls="lg-tip" aria-label="${ko ? '범례 설명' : 'About this legend'}"><svg viewBox="0 0 16 16" aria-hidden="true"><circle cx="8" cy="8" r="6.6" fill="none" stroke="currentColor" stroke-width="1.3"/><path d="M8 7.3v3.9" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/><circle cx="8" cy="4.9" r=".9" fill="currentColor"/></svg></button></div>
+      <div class="lg-tip" id="lg-tip" role="tooltip">${tip.map(x => `<p>${esc(x)}</p>`).join('')}</div>`;
+  };
+  new MutationObserver(compact).observe(leg, { childList: true, attributes: true, attributeFilter: ['hidden'] });
+  leg.addEventListener('click', e => { const b = e.target.closest('.lg-i'); if (!b) return; const on = !leg.classList.contains('tip-on'); leg.classList.toggle('tip-on', on); b.setAttribute('aria-expanded', String(on)); });
+  document.addEventListener('keydown', e => { if (e.key === 'Escape' && leg.classList.contains('tip-on')) { leg.classList.remove('tip-on'); leg.querySelector('.lg-i')?.setAttribute('aria-expanded', 'false'); } });
+  document.addEventListener('click', e => { if (!leg.contains(e.target) && leg.classList.contains('tip-on')) { leg.classList.remove('tip-on'); leg.querySelector('.lg-i')?.setAttribute('aria-expanded', 'false'); } });
+  compact();
+})();
+
+// ------------------------------------------------------------ keyboard tooltip for the tray and map info buttons (a11y)
+// Mouse users see the native title; keyboard focus now shows the same text in a visible tooltip, linked by aria-describedby.
+(() => {
+  const tipEl = document.createElement('div'); tipEl.id = 'kbd-tip'; tipEl.className = 'kbd-tip'; tipEl.setAttribute('role', 'tooltip'); tipEl.hidden = true;
+  document.body.appendChild(tipEl);
+  const SEL = '.tc-i, #hud-i';
+  document.addEventListener('focusin', e => {
+    const b = e.target.closest?.(SEL); if (!b) return;
+    const txt = b.getAttribute('title') || b.getAttribute('aria-label') || ''; if (!txt) return;
+    tipEl.textContent = txt; tipEl.hidden = false; b.setAttribute('aria-describedby', 'kbd-tip');
+    const r = b.getBoundingClientRect(), w = Math.min(280, innerWidth - 16);
+    tipEl.style.maxWidth = w + 'px';
+    const tw = tipEl.offsetWidth, th = tipEl.offsetHeight;
+    tipEl.style.left = Math.max(8, Math.min(innerWidth - tw - 8, r.left + r.width / 2 - tw / 2)) + 'px';
+    tipEl.style.top = (r.bottom + 6 + th > innerHeight ? r.top - th - 6 : r.bottom + 6) + 'px';
+  });
+  document.addEventListener('focusout', e => { if (e.target.closest?.(SEL)) tipEl.hidden = true; });
+  document.addEventListener('keydown', e => { if (e.key === 'Escape') tipEl.hidden = true; });
 })();

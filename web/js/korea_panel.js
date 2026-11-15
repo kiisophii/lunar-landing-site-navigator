@@ -1,3 +1,4 @@
+import { blockedStrip } from './visibility_graph.js';
 // korea_panel.js — differentiator B: Korea links (KASA is a NASA Space Apps 2026 partner).
 //   1. KDSA (Yeoju, 35 m) Moon visibility in KST for the analysis period, compared with the NASA DSN 70 m antennas.
 //   2. Direct link from the focused site: Earth visible from the site AND the Moon >= 10 deg above Yeoju (and NASA DSN 70 m).
@@ -12,12 +13,12 @@ import { stationHours, stationsMeta, kdsaWindows, siteStationLink, koreaInfo, ST
 addStrings({
   krTitle: 'Korea links — Yeoju antenna, ShadowCam', krAria: 'Korea links',
   krPeriod: 'Period',
-  krStTitle: 'Who on Earth can hear the Moon? (Moon ≥ 10° above the antenna)',
+  krStTitle: 'Where is the Moon in view? (Moon ≥ 10° above the antenna)',
   krStHint: 'Hours in the analysis period with the Moon center at least 10° above each antenna\'s horizon (no refraction, no local terrain). A lander signal still needs a direct or relayed line of sight to Earth.',
   krAnyDsn: 'Any NASA DSN 70 m', krKdsaOnly: 'Only Yeoju (no DSN 70 m)',
   krWin: 'Yeoju (KDSA) passes in Korean time (KST = UTC+9)', krFrom: 'from (KST)', krTo: 'to (KST)', krMaxEl: 'max. Moon elevation',
   krMore: 'more passes in this period', krNoWin: 'The Moon does not rise 10° above Yeoju in this period.',
-  krLnTitle: 'Can this site talk to Yeoju directly?',
+  krLnTitle: 'When are Earth and the stations in view?',
   krLnHint: 'Hours in the analysis period when the Earth center is above this site\'s real terrain horizon AND the Moon is at least 10° above the antenna (direct link only; no relay, no link budget).',
   krLnEarth: 'Site sees Earth', krLnKdsa: 'Site sees Earth + Yeoju sees the Moon', krLnDsn: 'Site sees Earth + any NASA DSN 70 m',
   krLnPending: 'Terrain pending — no real horizon for this site yet, so the direct link is not computed (no flat-horizon result is shown).',
@@ -30,12 +31,12 @@ addStrings({
 }, {
   krTitle: '한국 연결 — 여주 안테나, 섀도캠', krAria: '한국 연결',
   krPeriod: '기간',
-  krStTitle: '지구에서 누가 달을 들을 수 있나? (안테나 위로 달 고도 10° 이상)',
+  krStTitle: '어느 지상국에서 달이 보이나? (안테나 위로 달 고도 10° 이상)',
   krStHint: '분석 기간 중 달 중심이 각 안테나 지평선 위 10° 이상인 시간 (굴절 없음, 주변 지형 무시). 착륙선 신호는 여전히 지구까지 직접 또는 중계 가시선이 필요하다.',
   krAnyDsn: 'NASA DSN 70 m 중 하나라도', krKdsaOnly: '여주만 (DSN 70 m 없음)',
   krWin: '여주(KDSA) 달 가시 시간, 한국 시간 (KST = UTC+9)', krFrom: '시작 (KST)', krTo: '끝 (KST)', krMaxEl: '최대 달 고도',
   krMore: '개 더 있음 (이 기간)', krNoWin: '이 기간에는 여주에서 달이 10° 위로 뜨지 않는다.',
-  krLnTitle: '이 착륙지는 여주와 직접 통신할 수 있나?',
+  krLnTitle: '이 착륙지에서 지구와 지상국이 보이는 시간은?',
   krLnHint: '분석 기간 중 착륙지의 실제 지형 지평선 위로 지구 중심이 보이면서, 안테나에서 달이 10° 이상 떠 있는 시간 (직접 통신만, 중계·링크 버짓 없음).',
   krLnEarth: '착륙지에서 지구가 보임', krLnKdsa: '지구 보임 + 여주에서 달 보임', krLnDsn: '지구 보임 + NASA DSN 70 m 중 하나',
   krLnPending: '지형 대기 중 — 이 착륙지는 아직 실제 지평선이 없어서 직접 통신을 계산하지 않는다 (평평한 지평선 결과는 보여 주지 않음).',
@@ -124,6 +125,7 @@ async function render() {
   const lnBody = ln.pending ? `<p class="note">${t('krLnPending')}</p>`
     : `<div class="bars">${row(t('krLnEarth'), ln.earth)}${row(t('krLnKdsa'), ln.kdsa, 'kdsa')}${row(t('krLnDsn'), ln.dsn)}</div>`;
   sec.querySelector('.kr-ln').innerHTML = `<h3>${t('krLnTitle')} — ${esc(siteName(site))}</h3>${lnBody}<p class="hint">${t('krLnHint')}</p>`;
+  if(!ln.pending)sec.querySelector('.kr-ln').insertAdjacentHTML('beforeend', `${blockedStrip(site,w)}<p class="hint geometry-explanation">${t('visStation')}</p>`);
   // ---- 3. ShadowCam + CP-11
   const sc = info.shadowcam;
   const cp = (info.sites_of_korean_interest || [])[0];

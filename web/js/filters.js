@@ -21,12 +21,12 @@ addStrings({
   flAny: 'any', flDayUnit: 'd', flReset: 'Reset all', flDone: 'Done', flNone: 'No site matches. Loosen a condition.', flEdit: 'Type a value',
 }, {
   flTitle: '착륙지 거르기', flAria: '미션 조건: 후보 목록 거르기',
-  fcSun: '일조', fcEarth: '지구 가시', fcSlope: '경사', fcDark: '최장 어둠',
+  fcSun: '일조율', fcEarth: '지구 가시', fcSlope: '경사', fcDark: '최장 어둠',
   fiSun: '기간 중 태양 원반의 절반 이상이 지형 지평선 위에 있는 시간 비율. 최솟값.',
   fiEarth: '지구 중심이 지형 지평선 위에 있는 시간 비율 (기하학적 가시, 실제 교신 보장 아님). 최솟값.',
   fiSlope: '착륙 지점 경사, 최댓값. 남쪽 16곳은 5–20 m PGDA LOLA 지형의 착륙선 규모 경사, 나머지 17곳은 250 m 상자의 거친 경사(SLDEM2015)입니다. 사용자 지점은 경사 값이 없어 이 조건을 걸면 빠집니다. 8°·15°는 참고값이며 착륙 기준이 아닙니다.',
   fiDark: '기간 중 햇빛이 없는 가장 긴 연속 시간. 최댓값.',
-  flAny: '상관없음', flDayUnit: '일', flReset: '모두 초기화', flDone: '완료', flNone: '맞는 착륙지가 없습니다. 조건을 풀어 보세요.', flEdit: '값 직접 입력',
+  flAny: '제한 없음', flDayUnit: '일', flReset: '모두 초기화', flDone: '완료', flNone: '맞는 착륙지가 없습니다. 조건을 풀어 보세요.', flEdit: '값 직접 입력',
 });
 
 const IC = { sun: 'sun', earth: 'earth', slope: 'slope', dark: 'shadow' };   // icon names in js/icons.js

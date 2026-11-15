@@ -1451,6 +1451,18 @@ body.on-about .ls-export { display: none; }
   @media (max-width: 860px) { #view-about .abh-text h1 { font-size: 20px; } #view-about .abh-lead { display: none; } }
 }
 
+/* ---- About next/top arrow on phones (<= 600 px): smaller button in its own strip below the scrolling text,
+   so it never covers body copy mid-scroll. 40 px button, 16 px from the right/bottom edges; the text box
+   (#abScroll) stops 64 px above the screen bottom (16 edge + 40 button + 8 gap). Desktop/tablet unchanged. */
+@media screen and (max-width: 600px) {
+  #view-about .ab-next { right: 16px; bottom: 16px; width: 40px; height: 40px; }
+  #view-about .ab-next svg { width: 16px; height: 16px; }
+  #abScroll { margin-bottom: 64px; padding-bottom: 24px;
+    -webkit-mask-image: linear-gradient(180deg,transparent 0,rgba(0,0,0,.35) 28px,#000 96px,#000 calc(100% - 20px),rgba(0,0,0,.4));
+    mask-image: linear-gradient(180deg,transparent 0,rgba(0,0,0,.35) 28px,#000 96px,#000 calc(100% - 20px),rgba(0,0,0,.4)); }
+  #abScroll.at-top { -webkit-mask-image: linear-gradient(180deg,#000 calc(100% - 20px),rgba(0,0,0,.4)); mask-image: linear-gradient(180deg,#000 calc(100% - 20px),rgba(0,0,0,.4)); }
+}
+
 /* ---- four-item check against the copy (18:41): mean-error rows, typed value box */
 .val-pop .vp-cap { display: flex; align-items: baseline; justify-content: space-between; gap: 10px; margin: 0 0 4px; font-size: 11px; color: #6E6E74; }
 .val-pop .vp-cap b { font-size: 13px; font-weight: 600; color: #EDEDED; }
@@ -1532,6 +1544,31 @@ body.on-about .ls-export { display: none; }
 /* ---- headings and sections that take script focus: no ring after a mouse / touch move (Safari), ring stays for keyboard users */
 html:not([data-kbd]) .ls [tabindex="-1"]:focus, html:not([data-kbd]) .ls [tabindex="-1"]:focus-visible { outline: none; }
 
+/* v46 regressions: narrow tray layout and wide collapsed dock. */
+@media (min-width: 1100px) and (max-width: 1439px) {
+  html:lang(en) .ls #ls-tray .tray-main { overflow: visible; }
+  html:lang(en) .ls #ls-tray .tc-scroll { margin-right: -42px; padding-right: 3px; }
+  html:lang(en) .ls #ls-tray .tc-desc,
+  html:lang(en) .ls #ls-tray .tc-body { margin-right: 29px; }
+  html:lang(en) .ls #ls-tray .tc-h { width: auto; flex-wrap: nowrap; gap: 1px; }
+  html:lang(en) .ls #ls-tray .tc-h h4 { flex: none; }
+  html:lang(en) .ls #ls-tray .tc-i { width: 16px; padding: 0; flex: none; }
+  html:lang(en) .ls #ls-tray .tc-subs { flex: 0 1 auto; min-width: 0; flex-wrap: nowrap; margin-left: auto; gap: 2px; }
+  html:lang(en) .ls #ls-tray .tc-subs button { padding: 0; font-size: 14px; white-space: nowrap; }
+
+  #ls-tray .tc-rows.bars .tc-row { display: grid; grid-template-columns: 24px 22px minmax(0, 1fr) max-content; column-gap: 8px; }
+  #ls-tray .tc-rows.bars .tc-sw { grid-column: 1; grid-row: 1; }
+  #ls-tray .tc-rows.bars .tc-row > :nth-child(2) { grid-column: 2; grid-row: 1; }
+  #ls-tray .tc-rows.bars .tc-nm { grid-column: 3; grid-row: 1; min-width: 0; }
+  #ls-tray .tc-rows.bars .tc-val { grid-column: 4; grid-row: 1; margin-left: 0; white-space: nowrap; }
+  #ls-tray .tc-rows.bars .tc-bar { grid-column: 2 / -1; grid-row: 2; width: auto; max-width: none; margin-left: 0; }
+  #ls-tray .tc-rows.bars .tc-note { grid-column: 2 / -1; grid-row: 3; max-width: none; }
+}
+@media (min-width: 1600px) {
+  .ls-toolbar.time-off { width: max-content; }
+  .ls-toolbar.time-off .tb-timewrap { display: none; }
+}
+
 /* Bundle 10 follow-up: compact English tray headings below 1440; keep 14px labels. */
 @media (min-width: 1280px) and (max-width: 1439px) {
   html:lang(en) #ls-tray .tray-main { overflow: visible; }
@@ -1591,3 +1628,47 @@ html:not([data-kbd]) .ls [tabindex="-1"]:focus, html:not([data-kbd]) .ls [tabind
   .ls .ls-drawer { left: var(--mapL); right: auto; top: auto; bottom: var(--BOT); height: min(620px, calc(100% - var(--TOP) - var(--BOT))); }
   .ls .c1-sum { margin-top: 16px; }
 }
+
+/* Detailed visibility follow-up: geometry, never power or link performance. */
+.big-cmp .r-why .why-btn { background:rgba(255,255,255,.10); border:1px solid rgba(255,255,255,.28); font-weight:600; }
+.geometry-strip { display:block; width:100%; height:12px; margin-top:8px; }
+.geometry-legend { display:flex; align-items:center; flex-wrap:wrap; gap:6px; font-size:12px; color:var(--muted); margin:6px 0; }
+.geometry-legend i { display:inline-block; width:20px; height:8px; flex:none; }
+.sun-swatch { background:var(--sun); }
+.earth-swatch { background:repeating-linear-gradient(135deg,transparent 0 3px,var(--earth) 3px 5px); }
+.blocked-swatch { background:repeating-linear-gradient(135deg,transparent 0 3px,#999 3px 5px); }
+#ls-brief .sc-hidden-toggle { display:block; margin-top:10px; background:none; border:0; padding:4px 0; color:var(--muted); text-align:left; cursor:pointer; }
+#ls-brief .sc-unavailable { margin-top:8px; opacity:.55; }
+#ls-brief .sc-unavailable[hidden], #ls-brief .data-unavailable { display:none; }
+@media (max-width:600px) {
+  #ls-brief :is(.rl-period,.kr-period,.sa-period,.now-link) { white-space:normal; overflow-wrap:anywhere; max-width:100%; }
+  #ls-brief .panel-head { flex-wrap:wrap; }
+}
+/* v46 comparison table integration: retain map action and existing fixed graph scale. */
+#ls-compare .detail-table .detail-see { background:rgba(255,255,255,.10); border:1px solid rgba(255,255,255,.28); font-weight:600; }
+#ls-compare .detail-charts .cw { height:auto; }
+#ls-compare .detail-charts .cw svg.alt-geometry { height:202px; }
+
+/* ---- bundle 18 (copy 20:27, map and dock): zoom − / + at the dock's right end, one legend box for the static layers */
+.ls-toolbar .tb-zoom, .ls-toolbar .tb-zoom-sep { display: none; }
+@media (min-width: 1100px) {
+  .ls-toolbar .tb-zoom { display: flex; gap: 2px; flex: none; }
+  .ls-toolbar .tb-zoom-sep { display: block; }
+  .ls .ls-toolbar .tb-zoom button { width: 32px; height: 32px; padding: 0; border: 0; border-radius: 9px; background: none; color: #9C9CA1; display: grid; place-items: center; }
+  .ls .ls-toolbar .tb-zoom button:hover { color: #EDEDED; background: rgba(237, 237, 237, .06); }
+  .ls .map-legend { display: block; box-sizing: border-box; width: 252px; height: 32px; padding: 0 5px 0 8px; background: rgba(6, 8, 12, .72); border: 1px solid rgba(255, 255, 255, .12); border-radius: 6px; color: #9AA4B5; font: 12px var(--font); overflow: visible; }
+  .ls .map-legend[hidden] { display: none; }
+  .ls .map-legend .lg-row { display: flex; flex-wrap: nowrap; align-items: center; gap: 6px; height: 30px; margin: 0; }
+  .ls .map-legend .lg-t { flex: 0 1 auto; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .ls .map-legend .lg-r { flex: none; white-space: nowrap; font-size: 11px; }
+  .ls .map-legend .lg-bar { flex: 1 1 16px; min-width: 16px; height: 6px; border-radius: 3px; display: block; }
+  .ls .map-legend .lg-i { flex: none; margin-left: auto; width: 20px; height: 20px; padding: 0; border: 0; border-radius: 50%; background: none; color: #9AA4B5; display: grid; place-items: center; cursor: help; pointer-events: auto; }
+  .ls .map-legend .lg-i svg { width: 14px; height: 14px; display: block; }
+  .ls .map-legend .lg-i:hover, .ls .map-legend .lg-i:focus-visible { color: #EDEDED; }
+  .ls .map-legend .lg-tip { display: none; position: absolute; inset: auto; right: 0; left: auto; bottom: auto; top: calc(100% + 6px); transform: none; margin: 0; pointer-events: none; width: 252px; box-sizing: border-box; padding: 8px 10px; background: #16171A; border: 1px solid #2A2A2D; border-radius: 8px; color: #C9CBCE; font-size: 11.5px; line-height: 1.45; box-shadow: 0 8px 24px rgba(0, 0, 0, .45); z-index: 30; }
+  .ls .map-legend .lg-tip p { margin: 0 0 4px; } .ls .map-legend .lg-tip p:last-child { margin: 0; } .ls .map-legend .lg-tip p:first-child { color: #EDEDED; font-weight: 500; }
+  .ls .map-legend .lg-i:hover ~ .lg-tip, .ls .map-legend .lg-row:has(.lg-i:hover) + .lg-tip, .ls .map-legend .lg-row:has(.lg-i:focus-visible) + .lg-tip, .ls .map-legend.tip-on .lg-tip { display: block; }
+}
+@media (min-width: 1440px) { .ls .ls-toolbar .tb-time { width: clamp(60px, calc(var(--mapW) - 554px), 280px); min-width: 0; flex: 0 0 auto; } }   /* the time axis gives up the room of the two zoom buttons; the dock stays one row */
+/* Chaei review: minimap expand icon centred in its 30 px box (the 11 px side padding pushed the 14 px icon right) */
+.ls-minimap .mm-exp, .ls-minimap.open .mm-exp { padding: 0; }

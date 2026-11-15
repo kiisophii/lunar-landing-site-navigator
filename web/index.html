@@ -18,6 +18,7 @@
 <link rel="stylesheet" href="css/theme.css">
 <!-- icons.css: sizing for the icon set in js/icons.js (Chaei Oh) -->
 <link rel="stylesheet" href="css/icons.css">
+<link rel="stylesheet" href="css/a11y.css">
 </head>
 <body class="ls">
 <a class="ls-skip" href="#ls-compare" data-i18n="skipBelow">Skip to the comparison</a>
@@ -30,9 +31,9 @@
 <!-- H. header: wordmark (→ About), language -->
 <header class="ls-head">
   <a class="ls-brand" href="#about" data-i18n-aria="toAbout">
-    <!-- LOGO SLOT: hand-made logo only (no AI-generated images anywhere in the contest UI, team rule 11/14).
-         Until one exists the wordmark below is plain text (Pretendard web font). To swap: put the SVG in web/img/ and an <img> in this span; keep the text for screen readers. -->
-    <span class="ls-logo-slot" data-slot="logo" aria-hidden="true"></span>
+    <!-- LOGO (team decision 11/15): vector trace by team designer Oh Chaei of the team's brand logo; the brand image was made
+         with AI assistance (disclosed in About > Sources and in the SI disclosure). The text wordmark stays for screen readers. -->
+    <span class="ls-logo-slot" data-slot="logo"><img src="assets/luna-sight-logo.svg" alt="Luna Sight" width="1811" height="159"></span>
     <span class="ls-word" data-i18n="appName">Luna Sight</span>
     <span class="ls-sub" data-i18n="appSub">Lunar Landing Site Navigator</span>
     <svg class="ic ls-out" data-icon="arrow-up-right"></svg>
@@ -177,7 +178,6 @@
         <button type="button" data-sp="-1" data-i18n-aria="speedDown"><svg class="ic flip" data-icon="chevron-right"></svg></button><span class="num" id="speed-val">6 h/s</span><button type="button" data-sp="1" data-i18n-aria="speedUp"><svg class="ic" data-icon="chevron-right"></svg></button>
         <select id="speed" data-dd-skip hidden data-i18n-aria="speedAria"><option value="1">1 h/s</option><option value="6" selected>6 h/s</option><option value="24">24 h/s</option></select>
       </div>
-      <span class="tb-sep" aria-hidden="true"></span>
       <div class="tb-group" role="group">
         <button type="button" data-layer="sun" aria-pressed="false" data-tip="tbt_mean" data-i18n-aria="tb_mean"><svg class="ic" data-icon="sun-average" data-size="18"></svg></button>
         <button type="button" data-layer="earth" aria-pressed="false" data-tip="tbt_earthmap" data-i18n-aria="tb_earthmap"><svg class="ic" data-icon="earth-visibility" data-size="18"></svg></button>
@@ -189,6 +189,11 @@
         <button type="button" data-view="focus" data-tip="tb_focus" data-i18n-aria="tb_focus"><svg class="ic" data-icon="moon-focus" data-size="18"></svg></button>
         <button type="button" data-view="south" data-tip="tb_south" data-i18n-aria="tb_south"><svg class="ic" data-icon="target" data-size="18"></svg></button>
         <button type="button" data-tool="pick" aria-pressed="false" data-tip="tbt_pick" data-i18n-aria="tb_pick"><svg class="ic" data-icon="site-marker" data-size="18"></svg></button>
+      </div>
+      <span class="tb-sep tb-zoom-sep" aria-hidden="true"></span>
+      <div class="tb-group tb-zoom" role="group">
+        <button type="button" data-zoom="out" aria-label="Zoom out" title="Zoom out"><svg class="ic" viewBox="0 0 18 18" width="18" height="18" aria-hidden="true"><path d="M4 9h10" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></button>
+        <button type="button" data-zoom="in" aria-label="Zoom in" title="Zoom in"><svg class="ic" viewBox="0 0 18 18" width="18" height="18" aria-hidden="true"><path d="M4 9h10M9 4v10" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></button>
       </div>
       <span class="tb-tip" role="tooltip" hidden></span>
     </div>

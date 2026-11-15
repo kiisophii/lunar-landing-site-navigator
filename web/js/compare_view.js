@@ -1,3 +1,4 @@
+import { visibilityRows } from './visibility_graph.js';
 import './design_lower.js';
 // compare_view.js — comparison tray (spec §3.9) + "Compare pinned sites" section (§4): table with best-value marks,
 // lunar-day clock, Sun/Earth elevation, timeline. No limit on pinned sites (horizontal scroll, stable #numbers).
@@ -44,7 +45,7 @@ addStrings({
   noChange: '자료 안에서 변화 없음', why: '이 후보 따져 보기 ↓', whyOn: '아래에 표시 중', pending: '지형 계산 전', hoursN: '{h}시간',
   tabDial: '달의 하루 시계', tabAlt: '태양·지구 고도', changeH: '시간에 따른 변화',
   dialDesc: '한 바퀴 = 선택한 기간, 12시 = 기간 시작.',
-  lgSun: '햇빛', lgEarth: '지구 보임 (직접 교신 기하)', lgRelay: '중계탑 경유', lgCut: '탑이 있어도 끊김', lgNeedle: '선택 시각', lgKdsa: '여주에서 달 ≥ 10° 이고 착륙지에서 지구가 보임 — 기하만',
+  lgSun: '태양 보임 (진할수록 원반이 많이 보임)', lgEarth: '지구 보임 (직접 교신 기하)', lgRelay: '중계탑 경유', lgCut: '탑이 있어도 끊김', lgNeedle: '선택 시각 (끌어서 이동)', lgKdsa: '여주에서 달 ≥ 10° 이고 착륙지에서 지구가 보임 — 기하만',
   altDesc: '지형 선보다 위에 있어야 보입니다.', lgSunEl: '태양 고도', lgEarthEl: '지구 고도', lgHzSun: '지형 지평선 (태양 방향)', lgZero: '0° (평평한 지평선)', lgSunPart: '태양 일부만 보임', lgSunDial: '햇빛 (진할수록 원반이 많이 보임)', altAria: '기간 동안의 태양·지구 고도와 지형 지평선',
   tlH: '타임라인', tlDesc: '누르거나 끌어서 선택 시각을 옮깁니다.',
   sNextSet: '다음 일몰까지', sNextRise: '다음 일출까지', sNextESet: '다음 지구몰까지', sNextERise: '다음 지구돋이까지', sDark: '최장 연속 그늘',
@@ -207,14 +208,14 @@ async function dialSVG(s, size) {
     const col = e ? earthC : c === 2 ? relayC : (codes ? cutC : off), wdt = e || c === 2 ? size * 0.07 : size * 0.025;
     parts.push(`<path d="${arc(cx, cy, R2, a0, a1)}" stroke="${col}" stroke-width="${wdt}" fill="none"/>`);
   }
-  const ticks = [7, 14, 21].filter(d => d * 24 < n).map(d => { const a = (d * 24 / n) * 2 * Math.PI; return `<line x1="${cx + (R1 + size * .05) * Math.sin(a)}" y1="${cy - (R1 + size * .05) * Math.cos(a)}" x2="${cx + (R1 + size * .085) * Math.sin(a)}" y2="${cy - (R1 + size * .085) * Math.cos(a)}" stroke="${css('--muted')}" stroke-width="1.5"/><text x="${cx + (R1 + size * .06) * Math.sin(a) * 0.86}" y="${cy - (R1 + size * .06) * Math.cos(a) * 0.86 + 3}" font-size="${size * .045}" fill="${css('--muted')}" text-anchor="middle" font-family="Oxanium, monospace">+${d}d</text>`; }).join('');
+  const ticks = [7, 14, 21].filter(d => d * 24 < n).map(d => { const a = (d * 24 / n) * 2 * Math.PI; return `<line x1="${cx + (R1 + size * .05) * Math.sin(a)}" y1="${cy - (R1 + size * .05) * Math.cos(a)}" x2="${cx + (R1 + size * .085) * Math.sin(a)}" y2="${cy - (R1 + size * .085) * Math.cos(a)}" stroke="${css('--muted')}" stroke-width="1.5"/><text x="${cx + (R1 + size * .06) * Math.sin(a) * 0.86}" y="${cy - (R1 + size * .06) * Math.cos(a) * 0.86 + 3}" font-size="${size * .045}" fill="${css('--muted')}" text-anchor="middle" style="font-family:var(--font-num)">+${d}d</text>`; }).join('');
   const m = w.metrics.get(s.id);
   return `<svg class="dial" viewBox="0 0 ${size} ${size}" role="img" aria-label="${esc(nameOf(s))}: ${esc(t('lgSun'))} ${Math.round(m.sun_frac * 100)}%, ${esc(t('lgEarth'))} ${Math.round(m.earth_frac * 100)}%">
     <line x1="${cx}" y1="${cy - R1 - size * .05}" x2="${cx}" y2="${cy - R1 + size * .05}" stroke="${css('--text')}" stroke-width="1"/>
     ${parts.join('')}${ticks}
     <g class="dial-needle" data-n="${n}" data-i0="${w.i0}"><line x1="${cx}" y1="${cy}" x2="${cx}" y2="${cy - R1 - size * .02}" stroke="${css('--text')}" stroke-width="2"/><circle cx="${cx}" cy="${cy}" r="3" fill="${css('--text')}"/></g>
-    <text x="${cx}" y="${cy - 2}" text-anchor="middle" font-size="${size * .08}" fill="${sunC}" font-family="Oxanium, monospace">☼ ${Math.round(m.sun_frac * 100)}%</text>
-    <text x="${cx}" y="${cy + size * .09}" text-anchor="middle" font-size="${size * .08}" fill="${earthC}" font-family="Oxanium, monospace">◍ ${Math.round(m.earth_frac * 100)}%</text></svg>`;
+    <text x="${cx}" y="${cy - 2}" text-anchor="middle" font-size="${size * .08}" fill="${sunC}" style="font-family:var(--font-num)">☼ ${Math.round(m.sun_frac * 100)}%</text>
+    <text x="${cx}" y="${cy + size * .09}" text-anchor="middle" font-size="${size * .08}" fill="${earthC}" style="font-family:var(--font-num)">◍ ${Math.round(m.earth_frac * 100)}%</text></svg>`;
 }
 function placeDialNeedles(root) {
   const now = LLSN().now();
@@ -236,18 +237,18 @@ function altSVG(s, W, H, bounds = null) {
     lo = Math.min(lo, su.el, ea.el); hi = Math.max(hi, su.el, ea.el, hz ?? 0);
   }
   lo = bounds ? bounds[0] : Math.floor(lo - 1); hi = bounds ? bounds[1] : Math.ceil(hi + 1);
-  const X = k => 28 + (k / (n - 1)) * (W - 34), Y = v => 6 + (1 - (v - lo) / (hi - lo)) * (H - 20);
+  const X = k => 28 + ((k+.5) / n) * (W - 34), Y = v => 6 + (1 - (v - lo) / (hi - lo)) * (H - 20);
   const line = (arr, col, wd, dash = '') => `<polyline points="${arr.map(([k, v]) => `${X(k).toFixed(1)},${Y(v).toFixed(1)}`).join(' ')}" fill="none" stroke="${col}" stroke-width="${wd}" ${dash}/>`;
   return `<svg viewBox="0 0 ${W} ${H}" role="img" aria-label="${esc(nameOf(s))}: ${esc(t('altAria'))}">
     <line x1="28" x2="${W - 6}" y1="${Y(0)}" y2="${Y(0)}" stroke="${css('--muted')}" stroke-dasharray="3 3" stroke-width="1"/>
-    <text x="2" y="${Y(hi) + 8}" font-size="9" fill="${css('--muted')}" font-family="Oxanium,monospace">${hi}°</text><text x="2" y="${Y(lo)}" font-size="9" fill="${css('--muted')}" font-family="Oxanium,monospace">${lo}°</text><text x="2" y="${Y(0) + 3}" font-size="9" fill="${css('--muted')}" font-family="Oxanium,monospace">0°</text>
+    <text x="2" y="${Y(hi) + 8}" font-size="9" fill="${css('--muted')}" style="font-family:var(--font-num)">${hi}°</text><text x="2" y="${Y(lo)}" font-size="9" fill="${css('--muted')}" style="font-family:var(--font-num)">${lo}°</text><text x="2" y="${Y(0) + 3}" font-size="9" fill="${css('--muted')}" style="font-family:var(--font-num)">0°</text>
     ${pts.hz.length ? line(pts.hz, css('--muted'), 1) : ''}${line(pts.earth, css('--earth'), 1.6)}${line(pts.sun, css('--sun'), 1.6)}
     <line class="alt-needle" data-n="${n}" data-i0="${w.i0}" data-x0="28" data-w="${W - 34}" x1="0" x2="0" y1="4" y2="${H - 12}" stroke="${css('--text')}" stroke-width="1.5"/></svg>`;
 }
 function placeAltNeedles(root) {
   const now = LLSN().now();
   root.querySelectorAll('.alt-needle').forEach(l => {
-    const x = Number(l.dataset.x0) + ((now - Number(l.dataset.i0)) / (Number(l.dataset.n) - 1)) * Number(l.dataset.w);
+    const x = Number(l.dataset.x0) + ((now - Number(l.dataset.i0)+.5) / Number(l.dataset.n)) * Number(l.dataset.w);
     l.setAttribute('x1', x); l.setAttribute('x2', x);
   });
   root.querySelectorAll('.alt-now').forEach(p => {
@@ -376,7 +377,18 @@ const detailHelp = {
     '15 m 중계탑 가정 전후 지구 가시성입니다. 기하학적 결과이며 무선 성능은 아닙니다.',
     '착륙지에서 지구가 보이고 여주에서 달 고도가 10° 이상인 시간을 일로 표시합니다.'],
 };
-const detailIcons = ['☼', '⊕', '☍', '☾', '∠', '↟', '◉'];
+// 14 px line icons for the row labels (sun, globe, Sun+Earth link, dark, slope, tower, Korean flag for Yeoju) — no glyph characters
+const ICO = d => `<svg viewBox="0 0 16 16" width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${d}</svg>`;
+const detailIcons = [
+  ICO('<circle cx="8" cy="8" r="2.6"/><path d="M8 1.5v1.6M8 12.9v1.6M1.5 8h1.6M12.9 8h1.6M3.4 3.4l1.1 1.1M11.5 11.5l1.1 1.1M3.4 12.6l1.1-1.1M11.5 4.5l1.1-1.1"/>'),
+  ICO('<circle cx="8" cy="8" r="6"/><path d="M2 8h12M8 2c1.8 1.7 2.6 3.7 2.6 6S9.8 12.3 8 14M8 2C6.2 3.7 5.4 5.7 5.4 8s.8 4.3 2.6 6"/>'),
+  ICO('<circle cx="4.5" cy="11.5" r="2.2"/><circle cx="11.5" cy="4.5" r="2.2"/><path d="M6.1 9.9l3.8-3.8"/>'),
+  ICO('<path d="M12.5 10.2A5.5 5.5 0 0 1 5.8 3.5a5.5 5.5 0 1 0 6.7 6.7z"/><path d="M11 2.2v2M10 3.2h2M13.6 5.6v1.4M12.9 6.3h1.4"/>'),
+  ICO('<path d="M2 13.5h12L2 6z"/><path d="M5.6 13.5a3.6 3.6 0 0 0-1-2.5"/>'),
+  ICO('<path d="M8 6.5V14.5M5.5 14.5h5M6 14.5L8 6.5l2 8"/><path d="M5.2 3.8a4 4 0 0 1 5.6 0M3.6 2.2a6.2 6.2 0 0 1 8.8 0"/><circle cx="8" cy="6" r=".6" fill="currentColor"/>'),
+  // Korean flag for the Yeoju row (the copy uses a flag here); drawn from the flag's published geometry
+  '<svg class="flag" viewBox="0 0 36 24" width="14" height="14" aria-hidden="true"><rect width="36" height="24" rx="2" fill="#fff"/><g transform="translate(18.0 12.0) rotate(33.69)"><path d="M-6.0 0A6.0 6.0 0 0 1 6.0 0A3.0 3.0 0 0 1 0 0A3.0 3.0 0 0 0 -6.0 0Z" fill="#CD2E3A"/><path d="M-6.0 0A6.0 6.0 0 0 0 6.0 0A3.0 3.0 0 0 1 0 0A3.0 3.0 0 0 0 -6.0 0Z" fill="#0047A0"/></g><g fill="#000"><g transform="translate(18.0 12.0) rotate(-56.31) translate(0 -10.85)"><rect x="-3.00" y="-1.85" width="6.00" height="0.90"/><rect x="-3.00" y="-0.45" width="6.00" height="0.90"/><rect x="-3.00" y="0.95" width="6.00" height="0.90"/></g><g transform="translate(18.0 12.0) rotate(123.69) translate(0 -10.85)"><rect x="-3.00" y="-1.85" width="2.50" height="0.90"/><rect x="0.50" y="-1.85" width="2.50" height="0.90"/><rect x="-3.00" y="-0.45" width="2.50" height="0.90"/><rect x="0.50" y="-0.45" width="2.50" height="0.90"/><rect x="-3.00" y="0.95" width="2.50" height="0.90"/><rect x="0.50" y="0.95" width="2.50" height="0.90"/></g><g transform="translate(18.0 12.0) rotate(56.31) translate(0 -10.85)"><rect x="-3.00" y="-1.85" width="2.50" height="0.90"/><rect x="0.50" y="-1.85" width="2.50" height="0.90"/><rect x="-3.00" y="-0.45" width="6.00" height="0.90"/><rect x="-3.00" y="0.95" width="2.50" height="0.90"/><rect x="0.50" y="0.95" width="2.50" height="0.90"/></g><g transform="translate(18.0 12.0) rotate(-123.69) translate(0 -10.85)"><rect x="-3.00" y="-1.85" width="6.00" height="0.90"/><rect x="-3.00" y="-0.45" width="2.50" height="0.90"/><rect x="0.50" y="-0.45" width="2.50" height="0.90"/><rect x="-3.00" y="0.95" width="6.00" height="0.90"/></g></g></svg>'];
+const INFO_IC = '<svg viewBox="0 0 16 16" width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.2" aria-hidden="true"><path d="M8 2.2L13.8 8 8 13.8 2.2 8z"/></svg>';
 const detailDay = hours => `<span class="val num">${(hours / 24).toFixed(1)}<small>${getLang() === 'ko' ? '일' : 'd'}</small></span>`;
 function detailCell(row, site, w) {
   const original = cell(row, site, w, asyncVals);
@@ -405,7 +417,7 @@ function detailCell(row, site, w) {
 function detailAltSVG(s, W, H, bounds) {
   const w = LLSN().window, n = w.i1 - w.i0 + 1, step = Math.max(1, Math.ceil(n / 480));
   const [lo, hi] = bounds, L = 30, R = 4, T = 8, B = 22;
-  const X = k => L + (k / (n - 1)) * (W - L - R), Y = v => T + (1 - (v - lo) / (hi - lo)) * (H - T - B);
+  const X = k => L + ((k+.5) / n) * (W - L - R), Y = v => T + (1 - (v - lo) / (hi - lo)) * (H - T - B);
   const pts = { sun: [], earth: [], hz: [] };
   for (let k = 0; k < n; k += step) {
     const i = w.i0 + k, su = core.sunAzEl(s, i), ea = core.earthAzEl(s, i);
@@ -420,23 +432,24 @@ function detailAltSVG(s, W, H, bounds) {
     grid += `${v === 0 ? '' : `<line x1="${L}" x2="${W - R}" y1="${Y(v).toFixed(1)}" y2="${Y(v).toFixed(1)}" stroke="rgba(237,237,237,.05)" stroke-width="1"/>`}<text x="0" y="${(Y(v) + 3).toFixed(1)}" font-size="9.5" fill="#6E6E74" style="font-family:${esc(font)}">${v}°</text>`;
   }
   const d0 = core.hourToDate(w.i0).toISOString().slice(5, 10), d1 = core.hourToDate(w.i1).toISOString().slice(5, 10);
-  return `<svg viewBox="0 0 ${W} ${H}" width="100%" height="${H}" role="img" aria-label="${esc(nameOf(s))}: ${esc(t('altAria'))}">${grid}
+  const bits=hourBits(s,w.i0,w.i1), strips=bits?visibilityRows(bits,[{key:'sun',on:b=>!!(b&1)},{key:'earth',on:b=>!!(b&2)}],{x:L,y:H+2,width:W-L-R}):'';
+  return `<svg class="alt-geometry" viewBox="0 0 ${W} ${H+34}" width="100%" height="${H+34}" role="img" aria-label="${esc(nameOf(s))}: ${esc(t('altAria'))}">${grid}
     <line x1="${L}" x2="${W - R}" y1="${Y(0)}" y2="${Y(0)}" stroke="#6E6E74" stroke-dasharray="3 3" stroke-width="0.75"/>
     ${pts.hz.length ? line(pts.hz, '#8D96A4', 0.75) : ''}${line(pts.earth, css('--earth'), 1.8)}${line(pts.sun, css('--sun'), 1.8)}
     <text x="${L}" y="${H - 6}" font-size="9.5" fill="#6E6E74" style="font-family:${esc(font)}">${d0}</text><text x="${W - R}" y="${H - 6}" text-anchor="end" font-size="9.5" fill="#6E6E74" style="font-family:${esc(font)}">${d1}</text>
-    <line class="alt-needle" data-n="${n}" data-i0="${w.i0}" data-x0="${L}" data-w="${W - L - R}" x1="0" x2="0" y1="${T - 4}" y2="${H - B + 2}" stroke="${css('--text')}" stroke-width="1.5"/></svg>`;
+    ${strips}<line class="alt-needle" data-n="${n}" data-i0="${w.i0}" data-x0="${L}" data-w="${W - L - R}" x1="0" x2="0" y1="${T - 4}" y2="${H+26}" stroke="${css('--text')}" stroke-width="2.5" vector-effect="non-scaling-stroke"/></svg><div class="geometry-legend"><i class="sun-swatch"></i>${esc(t('visSun'))}<i class="earth-swatch"></i>${esc(t('visEarth'))}</div>`;
 }
 function placeReadouts(root) {
   const now = LLSN().now?.(); if (now == null) return;
   const ko = getLang() === 'ko';
   root.querySelectorAll('.rd-now').forEach(p => {
     const s = byId(p.dataset.id); if (!s) return;
-    p.innerHTML = `<span class="k-sun">${ko ? '태양' : 'Sun'} ${core.sunAzEl(s, now).el.toFixed(1)}°</span><span class="k-earth">${ko ? '지구' : 'Earth'} ${core.earthAzEl(s, now).el.toFixed(1)}°</span>`;
+    p.innerHTML = `<span class="k-sun">${iconSvg('sun', { size: 12, cls: 'ic rd-ic' })}${ko ? '태양' : 'Sun'} ${core.sunAzEl(s, now).el.toFixed(1)}°</span><span class="k-earth">${iconSvg('earth', { size: 12, cls: 'ic rd-ic' })}${ko ? '지구' : 'Earth'} ${core.earthAzEl(s, now).el.toFixed(1)}°</span>`;
   });
 }
 const altLegend = ko => `<ul class="detail-lg">${[
-  ['<span class="sw ln" style="background:var(--sun)"></span>', ko ? '태양 고도' : 'Sun elevation'],
-  ['<span class="sw ln" style="background:var(--earth)"></span>', ko ? '지구 고도' : 'Earth elevation'],
+  ['<span class="sw ln" style="background:var(--sun)"></span>' + iconSvg('sun', { size: 14, cls: 'ic lg-ic k-sun' }), ko ? '태양 고도' : 'Sun elevation'],
+  ['<span class="sw ln" style="background:var(--earth)"></span>' + iconSvg('earth', { size: 14, cls: 'ic lg-ic k-earth' }), ko ? '지구 고도' : 'Earth elevation'],
   ['<span class="sw ln thin" style="background:#8D96A4"></span>', ko ? '지형 지평선 (태양 방향)' : 'Terrain horizon (Sun direction)'],
   ['<span class="sw dash"></span>', ko ? '0° 기준선' : '0° level'],
   ['<span class="sw vl"></span>', ko ? '선택 시각' : 'Selected time']].map(([sw, l]) => `<li>${sw}${esc(l)}</li>`).join('')}</ul>`;
@@ -466,12 +479,12 @@ async function renderBig() {
   const root = sec(); if (!root || !LLSN().window) return;
   const my = ++bigSeq, allSites = shown(), w = LLSN().window;
   // phones: a 96 px label column and two candidates side by side (#120); wider screens: 248 px + 300 px columns
-  const capacity = innerWidth <= 760 ? Math.max(1, Math.min(2, Math.floor((root.clientWidth - 96) / 120))) : Math.max(1, Math.floor((root.clientWidth - 248) / 300));
+  const capacity = innerWidth <= 760 ? Math.max(1, Math.min(2, Math.floor((root.clientWidth - 96) / 120))) : Math.max(1, Math.floor((root.clientWidth - 248) / 150));   // desktop: as many 150-300 px columns as fit (copy 6-3)
   firstColumn = Math.min(firstColumn, Math.max(0, allSites.length - capacity));
   const sites = allSites.slice(firstColumn, firstColumn + capacity);
   const ko = getLang() === 'ko', labels = detailLabels[ko ? 'ko' : 'en'];
   loadAsync(allSites, () => { if (my === bigSeq) renderBig(); });
-  const terrainJobs = allSites.filter(s => !terrainValues.has(s.id)).map(async site => {
+  const terrainJobs = allSites.filter(s => !s.user && !terrainValues.has(s.id)).map(async site => {
     terrainValues.set(site.id, null);
     try {
       const response = await fetch(`${core.state.base}terrain/${encodeURIComponent(site.id)}.json`);
@@ -481,7 +494,7 @@ async function renderBig() {
   if (terrainJobs.length) Promise.all(terrainJobs).then(() => renderBig());
   const bounds = chartBounds(allSites);
   const head = sites.map((site, index) => `<th scope="col" class="${site.id === LLSN().focus ? 'focus-col' : ''}">
-    <div class="col-h"><button class="detail-name" data-focus="${esc(site.id)}"><span class="pin-no">#${firstColumn + index + 1}</span><span class="nm">${esc(nameOf(site))}</span></button>
+    <div class="col-h"><button class="detail-name" data-focus="${esc(site.id)}" title="${esc(nameOf(site))}"><span class="pin-no">#${firstColumn + index + 1}</span><span class="nm" title="${esc(nameOf(site))}">${esc(nameOf(site))}</span></button>
     <button class="unpin" data-id="${esc(site.id)}" aria-label="${esc(t('unpin'))} ${esc(nameOf(site))}">×</button></div><span class="detail-group">${esc(t('g_' + site.group))}</span></th>`).join('');
   const rows = BIG_ROWS.map((row, index) => {
     const cells = sites.map(site => detailCell(row, site, w));
@@ -489,7 +502,7 @@ async function renderBig() {
     const direction = row === 'slope' || row === 'dark' ? -1 : 1;
     const best = allValues.length > 1 && row !== 'relay' ? (direction > 0 ? Math.max(...allValues) : Math.min(...allValues)) : null;
     const unique = best !== null && allValues.filter(v => v === best).length === 1;
-    return `<tr class="r-${row}"><th scope="row" class="lbl"><span class="detail-icon" aria-hidden="true">${detailIcons[index]}</span>${labels[index]}<button class="detail-info" aria-label="${esc(labels[index])}" title="${esc(detailHelp[ko ? 'ko' : 'en'][index])}">◇</button></th>
+    return `<tr class="r-${row}"><th scope="row" class="lbl"><span class="detail-icon" aria-hidden="true">${detailIcons[index]}</span>${labels[index]}<button class="detail-info" aria-label="${esc(labels[index])}" title="${esc(detailHelp[ko ? 'ko' : 'en'][index])}">${INFO_IC}</button></th>
     ${cells.map((c, i) => `<td class="${sites[i].id === LLSN().focus ? 'focused ' : ''}${unique && c.v === best ? 'best' : ''}">${c.html}</td>`).join('')}</tr>`;
   }).join('');
   const actions = sites.map(site => `<td class="${site.id === LLSN().focus ? 'focused' : ''}"><button class="detail-map" data-map="${esc(site.id)}">${ko ? '지도에서 보기' : 'Show on map'}<span aria-hidden="true">◫</span></button><button class="detail-see" data-why="${esc(site.id)}">${ko ? '자세히 보기' : 'See details'}<span aria-hidden="true">↓</span></button></td>`).join('');
@@ -521,7 +534,7 @@ async function renderBig() {
     box.addEventListener('pointermove', event => {
       const svgBox = box.querySelector('svg') || box, rect = svgBox.getBoundingClientRect(), vbW = svgBox.viewBox?.baseVal?.width || 264;
       const fraction = Math.max(0, Math.min(1, ((event.clientX - rect.left) / rect.width * vbW - 30) / (vbW - 34)));
-      const i = w.i0 + fraction * (w.i1 - w.i0), site = byId(box.dataset.chartSite);
+      const i = w.i0 + Math.max(0,Math.min(w.i1-w.i0,fraction*(w.i1-w.i0+1)-.5)), site = byId(box.dataset.chartSite);
       const tip = root.querySelector('.detail-tooltip');
       tip.classList.remove('tl-tip');
       tip.textContent = `${nameOf(site)} · ${core.hourToDate(i).toISOString().slice(0,16).replace('T',' ')} UTC · ${t('lgSunEl')} ${core.sunAzEl(site,i).el.toFixed(1)}° · ${t('lgEarthEl')} ${core.earthAzEl(site,i).el.toFixed(1)}°`;
