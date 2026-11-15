@@ -1120,6 +1120,16 @@ body.on-about { overflow-x: clip; }
 @media (min-width: 861px) { .ls-about .ab-hero { height: max(260px, calc((100vh - var(--head-h)) * .34)); } .abh-text { max-width: 470px; } .ls-about .abh-text h1 { font-size: clamp(22px, 2.3vw, 34px); } }
 @media (max-width: 860px) { .ls-about .ab-hero { height: 260px; } .abh-cap { right: 8px; bottom: 4px; font-size: 9.5px; } .abh-text { top: 46%; } .abh-btns .ls-btn { height: 30px; font-size: 12.5px; } }
 @media (max-width: 860px) { .abh-cap { top: 8px; bottom: auto; right: 8px; } }
+/* About hero sits right under the 64 px desktop header (theme.css resets --head-h to 48 on :root, which hid the top
+   16 px of the band and the Moon's halo behind the header); scoped to About so the first screen is untouched */
+@media (min-width: 1100px) { .ls-about { --head-h: 64px; } }
+/* frame spec (채이사본_동기화_로켓모션.md) R-1: on desktop the band is 30 % of the screen below the header (249 px at
+   1440 x 900, 219 at 1280 x 800); it only grows when the team's hero text needs more room. R-9: no caption on the band. */
+@media (min-width: 861px) {
+  .ls-about .ab-hero { display: flex; align-items: center; height: auto; min-height: max(200px, calc((100vh - var(--head-h)) * .3)); }
+  .ls-about .ab-hero > .abh-text { position: relative; left: auto; top: auto; transform: none; margin: 4px 0 4px 4vw; }
+}
+.ls-about .abh-cap { display: none; }
 
 /* ================================================================ sync 13:03 bundle 4: interaction states */
 /* (1) folded toolbar: the speed control folds with the time block; (2) unfold at once (fold keeps 120 ms) */
