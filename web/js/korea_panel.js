@@ -13,7 +13,7 @@ import { stationHours, stationsMeta, kdsaWindows, siteStationLink, koreaInfo, ST
 addStrings({
   krTitle: 'Korea links — Yeoju antenna, ShadowCam', krAria: 'Korea links',
   krPeriod: 'Period',
-  krStTitle: 'Where is the Moon in view? (Moon ≥ 10° above the antenna)',
+  krStTitle: 'Total time with Moon ≥ 10° above each antenna',
   krStHint: 'Hours in the analysis period with the Moon center at least 10° above each antenna\'s horizon (no refraction, no local terrain). A lander signal still needs a direct or relayed line of sight to Earth.',
   krAnyDsn: 'Any NASA DSN 70 m', krKdsaOnly: 'Only Yeoju (no DSN 70 m)',
   krWin: 'Yeoju (KDSA) passes in Korean time (KST = UTC+9)', krFrom: 'from (KST)', krTo: 'to (KST)', krMaxEl: 'max. Moon elevation',
@@ -26,12 +26,12 @@ addStrings({
   krScNote: 'Links and label metadata only — no ShadowCam images are copied or shown here. Credit: NASA/KARI/ASU.',
   krScCentre: 'center', krScDates: 'acquired', krScPix: 'pixel', krScLabel: 'PDS label', krScData: 'data (COG)', krScReadme: 'readme',
   krPendingQ: 'Open questions to the organisers',
-  krSrc: 'Station coordinates: DSN 810-005 module 301 (NASA/JPL); KDSA from the publicly released NASA/JPL NAIF SPICE file kdsa01.tf (cited; no separate permission requested). Moon positions: NAIF DE440s via Skyfield.',
+  krSrc: 'Station coordinates: DSN 810-005 module 301 (NASA/JPL); KDSA from public NASA/JPL NAIF SPICE antenna coordinates. Moon positions: NAIF DE440s via Skyfield.',
   krCP11: 'Korean payload on the Moon',
 }, {
   krTitle: '한국 연결 — 여주 안테나, 섀도캠', krAria: '한국 연결',
   krPeriod: '기간',
-  krStTitle: '어느 지상국에서 달이 보이나? (안테나 위로 달 고도 10° 이상)',
+  krStTitle: '지상국별 달 가시 시간 합계 (안테나 위 달 고도 ≥ 10°)',
   krStHint: '분석 기간 중 달 중심이 각 안테나 지평선 위 10° 이상인 시간 (굴절 없음, 주변 지형 무시). 착륙선 신호는 여전히 지구까지 직접 또는 중계 가시선이 필요하다.',
   krAnyDsn: 'NASA DSN 70 m 중 하나라도', krKdsaOnly: '여주만 (DSN 70 m 없음)',
   krWin: '여주(KDSA) 달 가시 시간, 한국 시간 (KST = UTC+9)', krFrom: '시작 (KST)', krTo: '끝 (KST)', krMaxEl: '최대 달 고도',
@@ -44,7 +44,7 @@ addStrings({
   krScNote: '링크와 라벨 정보만 — 섀도캠 이미지는 복사하거나 보여 주지 않는다. 출처: NASA/KARI/ASU.',
   krScCentre: '중심', krScDates: '촬영', krScPix: '픽셀', krScLabel: 'PDS 라벨', krScData: '데이터 (COG)', krScReadme: 'readme',
   krPendingQ: '운영진에게 보낸 질문',
-  krSrc: '지상국 좌표: DSN 810-005 모듈 301 (NASA/JPL), KDSA는 NASA/JPL NAIF가 공개 배포한 SPICE 파일 kdsa01.tf (출처 표기, 별도 허가는 요청하지 않음). 달 위치: NAIF DE440s, Skyfield.',
+  krSrc: '지상국 좌표: DSN 810-005 모듈 301 (NASA/JPL), KDSA는 NASA/JPL NAIF 공개 SPICE 안테나 좌표. 달 위치: NAIF DE440s, Skyfield.',
   krCP11: '달에 가는 한국 장비',
 });
 
@@ -142,7 +142,7 @@ async function render() {
     <p class="hint">${esc(sc.citation)}</p>
     ${cp ? `<h3>${t('krCP11')}</h3><p>${esc(lang === 'ko' && cp.korea_link_ko ? cp.korea_link_ko : cp.korea_link)}
       <a href="${esc(cp.source_url)}" target="_blank" rel="noopener">NTRS 20230000531</a></p>` : ''}
-    ${(info.pending_questions || []).length ? `<h3>${t('krPendingQ')}</h3><ul>${info.pending_questions.map(q => `<li>${esc(q)}</li>`).join('')}</ul>` : ''}`;
+`;
 }
 
 whenReady(() => {

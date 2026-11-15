@@ -21,7 +21,7 @@ addStrings({
   lmPair: 'Biggest jump between neighbours ({s} apart): {a} → {b} ({m}).',
   lmScaleNote: 'Percent scales are fixed at 0–100 % for every site, so maps can be compared.',
   lmClick: 'Click a square (or arrows + Enter) to send that location to "Your own landing point".',
-  lmNote: 'Sampled points, not area averages · observer 2 m · Earth center above the horizon · geometry only (no power or radio model).', lmRes: 'Grid: {n} × {n} nodes, {s} apart, ±{r} km · data: web/data/{d}/', lmRes250: '250 m grid', lmRes1k: '1 km grid', lmResFall: '250 m file unavailable — 1 km grid shown',
+  lmNote: 'Sampled points, not area averages · observer 2 m · Earth center above the horizon · geometry only (no power or radio model).', lmRes: 'Grid: {n} × {n} nodes, {s} apart, ±{r} km', lmRes250: '250 m grid', lmRes1k: '1 km grid', lmResFall: '250 m file unavailable — 1 km grid shown',
   lmLoading: 'Loading local map…', lmFail: 'Local map could not be loaded.',
   lmNoGrid: 'No local map for the focused site (your own point) — showing {s}. Local maps exist for all catalogue sites.',
 }, {
@@ -33,7 +33,7 @@ addStrings({
   lmPair: '이웃한 두 칸({s})의 가장 큰 차이: {a} → {b} ({m}).',
   lmScaleNote: '비율 색 범위는 모든 착륙지에서 0–100 %로 같아서 지도끼리 비교할 수 있다.',
   lmClick: '칸을 누르면(또는 화살표 + Enter) 그 위치가 "내 착륙 지점"에 들어간다.',
-  lmNote: '면적 평균이 아니라 표본 지점 · 관측자 2 m · 지구 중심이 지평선 위 · 기하만 (전력·전파 모델 없음).', lmRes: '격자: {n} × {n} 지점, {s} 간격, ±{r} km · 자료: web/data/{d}/', lmRes250: '250 m 격자', lmRes1k: '1 km 격자', lmResFall: '250 m 파일을 못 불러와 1 km 격자로 표시',
+  lmNote: '면적 평균이 아니라 표본 지점 · 관측자 2 m · 지구 중심이 지평선 위 · 기하만 (전력·전파 모델 없음).', lmRes: '격자: {n} × {n} 지점, {s} 간격, ±{r} km', lmRes250: '250 m 격자', lmRes1k: '1 km 격자', lmResFall: '250 m 파일을 못 불러와 1 km 격자로 표시',
   lmLoading: '국지 지도 불러오는 중…', lmFail: '국지 지도를 불러오지 못했다.',
   lmNoGrid: '선택한 곳(직접 넣은 지점)에는 국지 지도가 없어서 {s}을(를) 보여 준다. 국지 지도는 목록의 모든 착륙지에 있다.',
 });

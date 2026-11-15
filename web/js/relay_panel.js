@@ -25,7 +25,7 @@ addStrings({
   rlAlways: 'This site already sees Earth all the time in the 5-year data window — no tower needed.',
   rlMap: 'Where a tower would help (search area)', rlMapLegend: '', rlLgGain: 'link gain with one tower at that spot (stronger = more)', rlLgNo: 'no line of sight or too steep', rlLgLander: 'lander', rlLgTower: 'towers',
   rlByN: 'Whole 2026–2030 window: link % with 0 / 1 / 2 / 3 towers',
-  rlBudget: 'Link budget tower → Earth (ESTIMATE)', rlBudgetNote: 'Rough estimate with our own assumptions (not a specification): ',
+  rlBudget: 'Link budget tower → Earth (ESTIMATE)', rlBudgetNote: 'Rough estimate using assumed equipment parameters, not a specification.',
   rlStation: 'station', rlBand: 'band', rlRange: 'range', rlCn0: 'C/N₀', rlRate: 'power-limited rate (ignores bandwidth)',
   rlPending: 'Terrain pending — the relay tower is computed only from real LOLA terrain. This site has no DEM cache yet, so nothing is shown (never a flat-horizon result).',
   rlNotYet: 'Relay results not computed yet for this site.',
@@ -47,7 +47,7 @@ addStrings({
   rlAlways: '이 착륙지는 5년 데이터 내내 지구가 보인다 — 타워가 필요 없다.',
   rlMap: '타워가 도움이 되는 곳 (탐색 범위)', rlMapLegend: '', rlLgGain: '그 자리에 탑 1기를 세울 때 늘어나는 교신 (진할수록 많음)', rlLgNo: '가시선 없음 또는 너무 가파름', rlLgLander: '착륙선', rlLgTower: '탑',
   rlByN: '2026–2030 전체: 타워 0 / 1 / 2 / 3기일 때 통신 %',
-  rlBudget: '타워 → 지구 링크 버짓 (추정치)', rlBudgetNote: '우리 가정으로 낸 대략적 추정치 (규격 아님): ',
+  rlBudget: '타워 → 지구 링크 버짓 (추정치)', rlBudgetNote: '장비 매개변수를 가정한 대략적 추정치이며 실제 규격이 아닙니다.',
   rlStation: '지상국', rlBand: '대역', rlRange: '거리', rlCn0: 'C/N₀', rlRate: '전력 기준 전송률 (대역폭 무시)',
   rlPending: '지형 대기 중 — 중계 타워는 실제 LOLA 지형으로만 계산한다. 이 착륙지는 아직 DEM이 없어서 아무것도 보여 주지 않는다 (평평한 지평선 결과는 절대 쓰지 않음).',
   rlNotYet: '이 착륙지는 아직 중계 결과가 계산되지 않았다.',
@@ -76,7 +76,6 @@ function build() {
       <span class="rl-site muted"></span>
     </div>
     <div class="rl-body"></div>
-    <p class="hint" data-i18n="rlAssume"></p>
     <p class="hint" data-i18n="rlSrc"></p>`;
   const st = document.createElement('style');
   st.dataset.owner = 'relay_panel.js';
@@ -205,13 +204,37 @@ function towerHTML(net, best, rel) {
 
 function budgetHTML(rel) {
   const lb = rel.link_budget; if (!lb || !lb.results) return '';
-  const rows = lb.results.filter(r => r.range === 'mean').map(r => `<tr><td>${esc(r.station)}</td><td>${esc(r.band)}</td>
+  const rows = lb.results.filter(r => r.range === 'mean').map(r => `<tr><td>${esc(r.station.replace('_', ' '))}</td><td>${esc(r.band)}</td>
     <td>${lb.range_km?.mean ? Math.round(lb.range_km.mean).toLocaleString() + ' km' : '—'}</td>
     <td>${r.cn0_dbhz?.toFixed(1)} dB-Hz</td><td>${fmtRate(r.max_rate_bps)}</td><td class="muted">${esc(r.band_support || '')}</td></tr>`).join('');
-  const as = lb.assumptions ? Object.entries(lb.assumptions).map(([k, v]) => `${k} = ${typeof v === 'object' ? JSON.stringify(v) : v}`).join('; ') : '';
+  const as = budgetAssumptions(lb.assumptions);
   return `<h3>${t('rlBudget')}<span class="est">ESTIMATE</span></h3>
     <div class="scroll"><table><thead><tr><th>${t('rlStation')}</th><th>${t('rlBand')}</th><th>${t('rlRange')}</th><th>${t('rlCn0')}</th><th>${t('rlRate')}</th><th></th></tr></thead><tbody>${rows}</tbody></table></div>
-    <p class="hint">${t('rlBudgetNote')}${esc(as)}</p>`;
+    <p class="hint">${t('rlBudgetNote')}</p>${as}`;
+}
+
+/** Human-readable technical assumptions; results above remain expanded and unchanged. */
+function budgetAssumptions(a) {
+  if (!a) return '';
+  const ko = document.documentElement.lang === 'ko';
+  const label = (en, kr) => ko ? kr : en;
+  const row = (name, value, unit = '') => value == null ? '' : `<dt>${esc(name)}</dt><dd>${esc(value)}${unit ? ` ${unit}` : ''}</dd>`;
+  const bands = values => Object.entries(values || {}).map(([band, value]) => `${band}: ${value}`).join(' · ');
+  const stationRows = Object.entries(a.stations || {}).map(([id, st]) => `<h4>${esc(id.replace('_', ' '))}</h4><dl>
+    ${row(label('Dish diameter', '안테나 지름'), st.dish_m, 'm')}
+    ${row(label('Efficiency', '효율'), st.efficiency)}
+    ${row(label('System noise temperature', '시스템 잡음 온도'), bands(st.tsys_k), 'K')}
+    ${row(label('Band support (assumed / unverified)', '대역 지원 (가정 / 미검증)'), bands(st.bands_supported))}</dl>`).join('');
+  return `<details class="rl-budget-method"><summary>${t('mv')}</summary>
+    <p class="hint">${label('All equipment parameters are assumptions, not BEACON, DSN or KDSA specifications. Range uses the largest and mean Moon–Earth distance over the ephemeris window.', '모든 장비 매개변수는 가정이며 BEACON·DSN·KDSA의 규격이 아닙니다. 거리는 천체력 기간의 달–지구 최대 거리와 평균 거리를 사용합니다.')}</p><dl>
+    ${row(label('Transmit power', '송신 전력'), a.tx_power_w, 'W')}
+    ${row(label('Transmit dish diameter', '송신 안테나 지름'), a.tx_dish_m, 'm')}
+    ${row(label('Transmit efficiency', '송신 효율'), a.tx_efficiency)}
+    ${row(label('Pointing loss', '지향 손실'), a.pointing_loss_db, 'dB')}
+    ${row(label('Polarisation and other losses', '편파·기타 손실'), a.polarisation_misc_loss_db, 'dB')}
+    ${row(label('Earth atmosphere loss', '지구 대기 손실'), bands(a.earth_atmos_loss_db), 'dB')}
+    ${row(label('Required Eb/N₀', '필요 Eb/N₀'), a.required_ebn0_db, 'dB')}
+    ${row(label('Margin', '여유'), a.margin_db, 'dB')}</dl>${stationRows}</details>`;
 }
 
 function fmtRate(bps) {

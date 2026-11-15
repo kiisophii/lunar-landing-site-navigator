@@ -10,7 +10,7 @@ import { addStrings, whenReady, mountSection, translate, siteName, getFocus, set
 addStrings({
   hzTitle: 'Horizon panorama', hzAria: 'Horizon panorama of the focused site',
   hzSite: 'Site', hzScale: 'Vertical scale',
-  hzHint: 'Pick a site above or click a card / table row to change it.', hzLgMask: 'terrain horizon mask (LOLA)', hzLgSun: 'Sun, hourly', hzLgEarth: 'Earth, hourly', hzLgHidden: 'hidden behind the terrain',
+  hzHint: 'Angles in degrees. Azimuth runs clockwise from north (0°), through east (90°). Elevation is above the local horizontal. Pick a site above or click a card / table row to change it.', hzLgMask: 'terrain horizon mask (LOLA)', hzLgSun: 'Sun, hourly', hzLgEarth: 'Earth, hourly', hzLgHidden: 'hidden behind the terrain',
   hzFlat: 'TERRAIN PENDING — no LOLA horizon has been computed for this site yet. Sun and Earth positions are shown, but no visibility is judged (the 0° line is only a reference).',
   hzSun: 'Sun', hzEarth: 'Earth', hzMask: 'terrain mask', hzEl: 'el',
   hzVisible: 'Visible', hzPartial: 'Partly visible', hzBlocked: 'Blocked by terrain', hzBelow: 'Below horizon',
@@ -20,7 +20,7 @@ addStrings({
 }, {
   hzTitle: '지평선 파노라마', hzAria: '선택한 착륙지의 지평선 파노라마',
   hzSite: '착륙지', hzScale: '세로 배율',
-  hzHint: '위에서 착륙지를 고르거나 카드·표의 줄을 누르면 바뀐다.', hzLgMask: '지형 지평선 마스크 (LOLA)', hzLgSun: '태양, 1시간마다', hzLgEarth: '지구, 1시간마다', hzLgHidden: '지형에 가려짐',
+  hzHint: '각도 단위는 °입니다. 방위는 북쪽 0°에서 동쪽 90° 방향으로 시계 방향, 고도는 지역 수평면 기준입니다. 위에서 착륙지를 고르거나 카드·표의 줄을 누르면 바뀝니다.', hzLgMask: '지형 지평선 마스크 (LOLA)', hzLgSun: '태양, 1시간마다', hzLgEarth: '지구, 1시간마다', hzLgHidden: '지형에 가려짐',
   hzFlat: '지형 계산 중 — 이 착륙지의 LOLA 지평선이 아직 없다. 태양·지구 위치는 보여 주지만 보이는지는 판정하지 않는다 (0° 선은 참고용).',
   hzSun: '해', hzEarth: '지구', hzMask: '지형 마스크', hzEl: '고도',
   hzVisible: '보임', hzPartial: '일부 보임', hzBlocked: '지형에 가려짐', hzBelow: '지평선 아래',
@@ -45,11 +45,11 @@ function build() {
       <span class="hz-tracknote hint" style="margin:0"></span>
     </div>
     <p class="hz-flat hint" data-i18n="hzFlat" hidden style="color:var(--warn);font-weight:700"></p>
+    <div class="hz-read" aria-live="polite" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:.5em var(--gap)"></div>
     <div class="hz-wrap" style="position:relative;margin-top:calc(var(--gap)*.5)">
       <canvas class="hz-canvas" role="img" style="display:block;width:100%;border-radius:8px;background:var(--bg)"></canvas>
     </div>
     <p class="hz-hover hint" aria-hidden="true">&nbsp;</p>
-    <div class="hz-read" aria-live="polite" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:.5em var(--gap)"></div>
     <div class="hz-lg"></div><p class="hint" data-i18n="hzHint"></p>`;
   canvas = sec.querySelector('canvas'); ctx = canvas.getContext('2d');
   readout = sec.querySelector('.hz-read'); hoverLine = sec.querySelector('.hz-hover');

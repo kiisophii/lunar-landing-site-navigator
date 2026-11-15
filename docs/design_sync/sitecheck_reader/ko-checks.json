@@ -1,0 +1,16 @@
+{
+  "checks": {
+    "method_open": true,
+    "method_closed": true,
+    "raw_open": true,
+    "tower_height": true,
+    "horizon_scale": true,
+    "date_changed": true,
+    "stay_changed": true,
+    "map_metric": true,
+    "no_empty_slot": true,
+    "no_developer_text": true
+  },
+  "bad_text": [],
+  "errors": []
+}

@@ -1,0 +1,1177 @@
+{
+  "window": {
+    "i0": 7632,
+    "i1": 8339,
+    "metrics": [
+      [
+        "APOLLO11",
+        {
+          "sun_frac": 0.5,
+          "earth_frac": 1,
+          "both_frac": 0.5,
+          "longest_dark_h": 352
+        }
+      ],
+      [
+        "APOLLO12",
+        {
+          "sun_frac": 0.5028248587570622,
+          "earth_frac": 1,
+          "both_frac": 0.5028248587570622,
+          "longest_dark_h": 257
+        }
+      ],
+      [
+        "APOLLO14",
+        {
+          "sun_frac": 0.4929378531073446,
+          "earth_frac": 1,
+          "both_frac": 0.4929378531073446,
+          "longest_dark_h": 270
+        }
+      ],
+      [
+        "APOLLO15",
+        {
+          "sun_frac": 0.4703389830508475,
+          "earth_frac": 1,
+          "both_frac": 0.4703389830508475,
+          "longest_dark_h": 315
+        }
+      ],
+      [
+        "APOLLO16",
+        {
+          "sun_frac": 0.5,
+          "earth_frac": 1,
+          "both_frac": 0.5,
+          "longest_dark_h": 334
+        }
+      ],
+      [
+        "APOLLO17",
+        {
+          "sun_frac": 0.4774011299435028,
+          "earth_frac": 1,
+          "both_frac": 0.4774011299435028,
+          "longest_dark_h": 370
+        }
+      ],
+      [
+        "LUNA16",
+        {
+          "sun_frac": 0.4929378531073446,
+          "earth_frac": 1,
+          "both_frac": 0.4929378531073446,
+          "longest_dark_h": 359
+        }
+      ],
+      [
+        "LUNA20",
+        {
+          "sun_frac": 0.4774011299435028,
+          "earth_frac": 1,
+          "both_frac": 0.4774011299435028,
+          "longest_dark_h": 370
+        }
+      ],
+      [
+        "LUNA24",
+        {
+          "sun_frac": 0.4929378531073446,
+          "earth_frac": 1,
+          "both_frac": 0.4929378531073446,
+          "longest_dark_h": 359
+        }
+      ],
+      [
+        "CHANGE3",
+        {
+          "sun_frac": 0.4943502824858757,
+          "earth_frac": 1,
+          "both_frac": 0.4943502824858757,
+          "longest_dark_h": 269
+        }
+      ],
+      [
+        "CHANGE4",
+        {
+          "sun_frac": 0.4985875706214689,
+          "earth_frac": 0,
+          "both_frac": 0,
+          "longest_dark_h": 355
+        }
+      ],
+      [
+        "CHANGE5",
+        {
+          "sun_frac": 0.4943502824858757,
+          "earth_frac": 1,
+          "both_frac": 0.4943502824858757,
+          "longest_dark_h": 205
+        }
+      ],
+      [
+        "CHANGE6",
+        {
+          "sun_frac": 0.501412429378531,
+          "earth_frac": 0,
+          "both_frac": 0,
+          "longest_dark_h": 353
+        }
+      ],
+      [
+        "CHANDRAYAAN3",
+        {
+          "sun_frac": 0.4985875706214689,
+          "earth_frac": 1,
+          "both_frac": 0.4985875706214689,
+          "longest_dark_h": 355
+        }
+      ],
+      [
+        "SLIM",
+        {
+          "sun_frac": 0.480225988700565,
+          "earth_frac": 1,
+          "both_frac": 0.480225988700565,
+          "longest_dark_h": 358
+        }
+      ],
+      [
+        "IM1",
+        {
+          "sun_frac": 0.4279661016949153,
+          "earth_frac": 1,
+          "both_frac": 0.4279661016949153,
+          "longest_dark_h": 307
+        }
+      ],
+      [
+        "IM2",
+        {
+          "sun_frac": 0.5282485875706214,
+          "earth_frac": 0.8234463276836158,
+          "both_frac": 0.5282485875706214,
+          "longest_dark_h": 327
+        }
+      ],
+      [
+        "BLUE_GHOST1",
+        {
+          "sun_frac": 0.4929378531073446,
+          "earth_frac": 1,
+          "both_frac": 0.4929378531073446,
+          "longest_dark_h": 359
+        }
+      ],
+      [
+        "ARTEMIS_CABEUS_B",
+        {
+          "sun_frac": 0.4731638418079096,
+          "earth_frac": 0.23163841807909605,
+          "both_frac": 0.00423728813559322,
+          "longest_dark_h": 169
+        }
+      ],
+      [
+        "ARTEMIS_HAWORTH",
+        {
+          "sun_frac": 0.8220338983050848,
+          "earth_frac": 0.5451977401129944,
+          "both_frac": 0.4858757062146893,
+          "longest_dark_h": 53
+        }
+      ],
+      [
+        "ARTEMIS_MALAPERT",
+        {
+          "sun_frac": 0.480225988700565,
+          "earth_frac": 1,
+          "both_frac": 0.480225988700565,
+          "longest_dark_h": 309
+        }
+      ],
+      [
+        "ARTEMIS_MOUTON_PLATEAU",
+        {
+          "sun_frac": 0.4703389830508475,
+          "earth_frac": 0.538135593220339,
+          "both_frac": 0.4632768361581921,
+          "longest_dark_h": 345
+        }
+      ],
+      [
+        "ARTEMIS_MOUTON",
+        {
+          "sun_frac": 1,
+          "earth_frac": 0.556497175141243,
+          "both_frac": 0.556497175141243,
+          "longest_dark_h": 0
+        }
+      ],
+      [
+        "ARTEMIS_NOBILE_RIM1",
+        {
+          "sun_frac": 1,
+          "earth_frac": 0.6793785310734464,
+          "both_frac": 0.6793785310734464,
+          "longest_dark_h": 0
+        }
+      ],
+      [
+        "ARTEMIS_NOBILE_RIM2",
+        {
+          "sun_frac": 0.4943502824858757,
+          "earth_frac": 0.7951977401129944,
+          "both_frac": 0.4943502824858757,
+          "longest_dark_h": 358
+        }
+      ],
+      [
+        "ARTEMIS_DE_GERLACHE_RIM2",
+        {
+          "sun_frac": 0.882768361581921,
+          "earth_frac": 0.501412429378531,
+          "both_frac": 0.4392655367231638,
+          "longest_dark_h": 81
+        }
+      ],
+      [
+        "ARTEMIS_SLATER_PLAIN",
+        {
+          "sun_frac": 0.6242937853107344,
+          "earth_frac": 0.3220338983050847,
+          "both_frac": 0.15254237288135594,
+          "longest_dark_h": 266
+        }
+      ],
+      [
+        "SHACKLETON_RIM",
+        {
+          "sun_frac": 1,
+          "earth_frac": 0.442090395480226,
+          "both_frac": 0.442090395480226,
+          "longest_dark_h": 0
+        }
+      ],
+      [
+        "CONNECTING_RIDGE",
+        {
+          "sun_frac": 0.7824858757062146,
+          "earth_frac": 0.365819209039548,
+          "both_frac": 0.2344632768361582,
+          "longest_dark_h": 154
+        }
+      ],
+      [
+        "PEAK_NEAR_SHACKLETON",
+        {
+          "sun_frac": 1,
+          "earth_frac": 0.4971751412429379,
+          "both_frac": 0.4971751412429379,
+          "longest_dark_h": 0
+        }
+      ],
+      [
+        "DE_GERLACHE_RIM1",
+        {
+          "sun_frac": 0.8149717514124294,
+          "earth_frac": 0.5112994350282486,
+          "both_frac": 0.5056497175141242,
+          "longest_dark_h": 131
+        }
+      ],
+      [
+        "SHOEMAKER_RIM_A",
+        {
+          "sun_frac": 0.4731638418079096,
+          "earth_frac": 0.3714689265536723,
+          "both_frac": 0.2966101694915254,
+          "longest_dark_h": 244
+        }
+      ],
+      [
+        "IM3_REINER_GAMMA",
+        {
+          "sun_frac": 0.4943502824858757,
+          "earth_frac": 1,
+          "both_frac": 0.4943502824858757,
+          "longest_dark_h": 189
+        }
+      ]
+    ]
+  },
+  "now": 7645,
+  "focus": "SHACKLETON_RIM",
+  "results": [
+    {
+      "id": "blk-time",
+      "values": [
+        "100%",
+        "29d 12h",
+        "44%",
+        "13d 1h",
+        "14d 1h",
+        "8d 6h",
+        "2",
+        "0h",
+        "0",
+        "29d 12h",
+        "44%",
+        "Sunlight",
+        "708 h",
+        "0",
+        "0.0 h",
+        "—",
+        "Direct-to-Earth",
+        "313 h",
+        "2",
+        "14 d 1 h",
+        "8 d 6 h",
+        "Sun + Earth together",
+        "313 h",
+        "2",
+        "14 d 1 h",
+        "8 d 6 h",
+        "2026-11-15 00:00 UTC",
+        "2026-12-14 12:00 UTC",
+        "29 d 12 h",
+        "2028-04-17 16:00",
+        "2028-04-20 19:00",
+        "3 d 3 h",
+        "2027-04-29 07:00",
+        "2027-05-02 09:00",
+        "3 d 2 h",
+        "2029-04-07 02:00",
+        "2029-04-10 03:00",
+        "3 d 1 h",
+        "2030-02-25 21:00",
+        "2030-02-28 22:00",
+        "3 d 1 h",
+        "2026-05-09 23:00",
+        "2026-05-12 23:00",
+        "3 d 0 h",
+        "2029-03-08 13:00",
+        "2029-03-11 13:00",
+        "3 d 0 h",
+        "2026-06-08 10:00",
+        "2026-06-11 09:00",
+        "2 d 23 h",
+        "2030-03-27 11:00",
+        "2030-03-30 10:00",
+        "2 d 23 h",
+        "2027-05-28 20:00",
+        "2027-05-31 17:00",
+        "2 d 21 h",
+        "2028-03-19 05:00",
+        "2028-03-22 02:00",
+        "2 d 21 h",
+        "2027-01-23 10:00",
+        "2027-02-07 03:00",
+        "14 d 17 h",
+        "2026-09-09 11:00",
+        "2026-09-24 03:00",
+        "14 d 16 h",
+        "2027-06-08 11:00",
+        "2027-06-23 02:00",
+        "14 d 15 h",
+        "2030-12-08 15:00",
+        "2030-12-23 06:00",
+        "14 d 15 h",
+        "2027-02-19 20:00",
+        "2027-03-06 10:00",
+        "14 d 14 h",
+        "2027-05-12 08:00",
+        "2027-05-26 22:00",
+        "14 d 14 h",
+        "2027-07-05 19:00",
+        "2027-07-20 09:00",
+        "14 d 14 h",
+        "2026-08-13 08:00",
+        "2026-08-27 21:00",
+        "14 d 13 h",
+        "2026-10-06 19:00",
+        "2026-10-21 07:00",
+        "14 d 12 h",
+        "2027-04-15 07:00",
+        "2027-04-29 19:00",
+        "14 d 12 h",
+        "Shadow (no sunlight)",
+        "6,650 h (277.1 d)",
+        "225",
+        "29.6 h",
+        "75 h (3.1 d)",
+        "—",
+        "Continuous sunlight",
+        "37,174 h (1548.9 d)",
+        "226",
+        "164.5 h (6.9 d)",
+        "2,817 h (117.4 d)",
+        "≥ 981 h (40.9 d) (start)≥ 28 h (end)",
+        "No direct-to-Earth",
+        "21,937 h (914.0 d)",
+        "67",
+        "327.4 h (13.6 d)",
+        "353 h (14.7 d)",
+        "—"
+      ],
+      "features": {
+        "tables": 5,
+        "canvases": 0,
+        "details": 3
+      },
+      "controls": []
+    },
+    {
+      "id": "blk-near",
+      "values": [
+        "Connecting Ridge (DEM region centre, R01)",
+        "8.7 km",
+        "78%",
+        "37%",
+        "6.4 d",
+        "-22 pp",
+        "-8 pp",
+        "100 m (n=5)",
+        "Sunlight",
+        "45.0%",
+        "47.3%",
+        "51.5%",
+        "74.0%",
+        "84.8%",
+        "",
+        "Earth view",
+        "38.5%",
+        "42.7%",
+        "49.1%",
+        "49.7%",
+        "49.9%",
+        "",
+        "Sun + Earth",
+        "22.5%",
+        "23.3%",
+        "24.6%",
+        "37.9%",
+        "44.4%",
+        "",
+        "Longest dark",
+        "3.1 d",
+        "6.9 d",
+        "14.0 d",
+        "15.1 d",
+        "15.7 d",
+        "",
+        "300 m (n=29)",
+        "Sunlight",
+        "29.9%",
+        "34.4%",
+        "47.9%",
+        "56.6%",
+        "84.8%",
+        "",
+        "Earth view",
+        "0.0%",
+        "0.0%",
+        "47.1%",
+        "49.1%",
+        "49.9%",
+        "",
+        "Sun + Earth",
+        "0.0%",
+        "0.0%",
+        "22.2%",
+        "28.8%",
+        "44.4%",
+        "",
+        "Longest dark",
+        "3.1 d",
+        "13.2 d",
+        "15.8 d",
+        "18.9 d",
+        "25.9 d",
+        "",
+        "500 m (n=81)",
+        "Sunlight",
+        "0.0%",
+        "26.5%",
+        "41.1%",
+        "54.3%",
+        "84.8%",
+        "",
+        "Earth view",
+        "0.0%",
+        "0.0%",
+        "44.0%",
+        "49.0%",
+        "49.9%",
+        "",
+        "Sun + Earth",
+        "0.0%",
+        "0.0%",
+        "17.1%",
+        "25.4%",
+        "44.4%",
+        "",
+        "Longest dark",
+        "3.1 d",
+        "13.5 d",
+        "17.0 d",
+        "25.9 d",
+        "1826.0 d",
+        "",
+        "1 km (n=49)",
+        "Sunlight",
+        "0.0%",
+        "31.7%",
+        "37.0%",
+        "41.7%",
+        "84.8%",
+        "Earth view",
+        "0.0%",
+        "19.8%",
+        "40.8%",
+        "46.5%",
+        "50.0%",
+        "Sun + Earth",
+        "0.0%",
+        "2.5%",
+        "15.0%",
+        "18.4%",
+        "44.4%",
+        "Longest dark",
+        "3.1 d",
+        "16.6 d",
+        "17.8 d",
+        "21.8 d",
+        "1826.0 d",
+        "3 km (n=441)",
+        "Sunlight",
+        "0.0%",
+        "12.0%",
+        "20.9%",
+        "31.1%",
+        "84.8%",
+        "Earth view",
+        "0.0%",
+        "1.1%",
+        "25.5%",
+        "42.0%",
+        "52.3%",
+        "Sun + Earth",
+        "0.0%",
+        "0.0%",
+        "6.1%",
+        "12.3%",
+        "44.4%",
+        "Longest dark",
+        "3.1 d",
+        "22.1 d",
+        "26.8 d",
+        "169.6 d",
+        "1826.0 d",
+        "5 km (n=1257)",
+        "Sunlight",
+        "0.0%",
+        "4.5%",
+        "19.0%",
+        "29.8%",
+        "84.8%",
+        "Earth view",
+        "0.0%",
+        "0.0%",
+        "26.2%",
+        "46.4%",
+        "53.0%",
+        "Sun + Earth",
+        "0.0%",
+        "0.0%",
+        "4.4%",
+        "12.6%",
+        "44.4%",
+        "Longest dark",
+        "3.1 d",
+        "23.0 d",
+        "28.2 d",
+        "234.3 d",
+        "1826.0 d"
+      ],
+      "features": {
+        "tables": 3,
+        "canvases": 0,
+        "details": 0
+      },
+      "controls": [
+        {
+          "tag": "SELECT",
+          "cls": "lm-site dd-native",
+          "value": "SHACKLETON_RIM",
+          "pressed": null
+        }
+      ]
+    },
+    {
+      "id": "blk-date",
+      "values": [
+        "100.0% 336 h",
+        "82.7% 278 h",
+        "82.7% 278 h",
+        "0 h",
+        "−7 d",
+        "2026-11-08",
+        "100.0% (±0.0 pp)",
+        "32.7% (−50.0 pp)",
+        "32.7% (−50.0 pp)",
+        "0 h (±0 h)",
+        "−3 d",
+        "2026-11-12",
+        "100.0% (±0.0 pp)",
+        "61.3% (−21.4 pp)",
+        "61.3% (−21.4 pp)",
+        "0 h (±0 h)",
+        "−1 d",
+        "2026-11-14",
+        "100.0% (±0.0 pp)",
+        "75.6% (−7.1 pp)",
+        "75.6% (−7.1 pp)",
+        "0 h (±0 h)",
+        "+1 d",
+        "2026-11-16",
+        "100.0% (±0.0 pp)",
+        "89.9% (+7.1 pp)",
+        "89.9% (+7.1 pp)",
+        "0 h (±0 h)",
+        "+3 d",
+        "2026-11-18",
+        "100.0% (±0.0 pp)",
+        "89.0% (+6.3 pp)",
+        "89.0% (+6.3 pp)",
+        "0 h (±0 h)",
+        "+7 d",
+        "2026-11-22",
+        "100.0% (±0.0 pp)",
+        "60.4% (−22.3 pp)",
+        "60.4% (−22.3 pp)",
+        "0 h (±0 h)",
+        "Sunlight",
+        "5.1 pp",
+        "-41.4 pp2027-04-03 → 2027-04-10",
+        "6.8 pp",
+        "-67.3 pp2027-04-03 → 2027-04-17",
+        "39%",
+        "Direct-to-Earth",
+        "46.1 pp",
+        "-50.0 pp2026-01-22 → 2026-01-29",
+        "49.1 pp",
+        "-93.8 pp2027-09-12 → 2027-09-26",
+        "50%",
+        "Sun + Earth together",
+        "37.5 pp",
+        "-50.0 pp2026-01-22 → 2026-01-29",
+        "44.2 pp",
+        "-93.8 pp2027-09-12 → 2027-09-26",
+        "50%",
+        "Longest shadow",
+        "3 h",
+        "+34 h2026-03-15 → 2026-03-22",
+        "14 h",
+        "+59 h2026-03-16 → 2026-03-30",
+        "40%"
+      ],
+      "features": {
+        "tables": 2,
+        "canvases": 0,
+        "details": 0
+      },
+      "controls": [
+        {
+          "tag": "INPUT",
+          "cls": "z3-day",
+          "value": "2026-11-15",
+          "pressed": null
+        },
+        {
+          "tag": "BUTTON",
+          "cls": "pill",
+          "value": "",
+          "pressed": "false"
+        },
+        {
+          "tag": "BUTTON",
+          "cls": "pill",
+          "value": "",
+          "pressed": "true"
+        },
+        {
+          "tag": "BUTTON",
+          "cls": "pill",
+          "value": "",
+          "pressed": "false"
+        },
+        {
+          "tag": "INPUT",
+          "cls": "ls-from",
+          "value": "2026-11-15",
+          "pressed": null
+        },
+        {
+          "tag": "SELECT",
+          "cls": "ls-range dd-native",
+          "value": "12",
+          "pressed": null
+        },
+        {
+          "tag": "INPUT",
+          "cls": "ls-n",
+          "value": "14",
+          "pressed": null
+        }
+      ]
+    },
+    {
+      "id": "blk-relay",
+      "values": [
+        "44%",
+        "13 d 1 h",
+        "+6%",
+        "43.0 h",
+        "50%",
+        "14 d 20 h",
+        "50%",
+        "Longest out-of-view stretch: 13 d 3 h",
+        "1",
+        "9.25 km",
+        "52°",
+        "0.9°",
+        "+4.5 pp",
+        "lander",
+        "93%",
+        "2",
+        "9.75 km",
+        "181°",
+        "9.3°",
+        "+0.1 pp",
+        "lander",
+        "45%",
+        "3",
+        "9.80 km",
+        "52°",
+        "5.4°",
+        "+0.1 pp",
+        "tower 1",
+        "77%",
+        "DSN 34m",
+        "S",
+        "384,931 km",
+        "84.3 dB-Hz",
+        "75.5 Mbps",
+        "assumed",
+        "DSN 34m",
+        "Ka",
+        "384,931 km",
+        "103.1 dB-Hz",
+        "5.7 Gbps",
+        "assumed",
+        "KDSA 35m",
+        "S",
+        "384,931 km",
+        "82.8 dB-Hz",
+        "53.3 Mbps",
+        "assumed",
+        "KDSA 35m",
+        "Ka",
+        "384,931 km",
+        "102.1 dB-Hz",
+        "4.5 Gbps",
+        "unverified (KDSA Ka-band receive not confirmed)"
+      ],
+      "features": {
+        "tables": 2,
+        "canvases": 2,
+        "details": 1
+      },
+      "controls": [
+        {
+          "tag": "BUTTON",
+          "cls": "",
+          "value": "",
+          "pressed": "false"
+        },
+        {
+          "tag": "BUTTON",
+          "cls": "",
+          "value": "",
+          "pressed": "true"
+        },
+        {
+          "tag": "BUTTON",
+          "cls": "",
+          "value": "",
+          "pressed": "false"
+        },
+        {
+          "tag": "BUTTON",
+          "cls": "",
+          "value": "",
+          "pressed": "false"
+        }
+      ]
+    },
+    {
+      "id": "blk-gs",
+      "values": [
+        "12 d 0 h · 41%",
+        "12 d 1 h · 41%",
+        "11 d 13 h · 39%",
+        "12 d 20 h · 44%",
+        "28 d 23 h · 98%",
+        "0.0 h · 0%",
+        "2026-11-15 13:14",
+        "2026-11-15 20:50",
+        "29.6°",
+        "2026-11-16 13:41",
+        "2026-11-16 21:54",
+        "33.6°",
+        "2026-11-17 14:06",
+        "2026-11-17 22:58",
+        "38.5°",
+        "2026-11-18 14:28",
+        "2026-11-19 00:02",
+        "44.0°",
+        "2026-11-19 14:51",
+        "2026-11-20 01:05",
+        "50.0°",
+        "2026-11-20 15:15",
+        "2026-11-21 02:10",
+        "56.4°",
+        "2026-11-21 15:41",
+        "2026-11-22 03:17",
+        "62.8°",
+        "2026-11-22 16:12",
+        "2026-11-23 04:27",
+        "68.9°",
+        "13 d 1 h · 44%",
+        "6 d 8 h · 21%",
+        "13 d 0 h · 44%"
+      ],
+      "features": {
+        "tables": 1,
+        "canvases": 0,
+        "details": 0
+      },
+      "controls": []
+    },
+    {
+      "id": "blk-hz",
+      "values": [
+        "Sun\n    +1.6°\n    az 270.6° · terrain mask −0.7°\n    Visible\n    Earth\n    −3.2°\n    az 159.4° · terrain mask −0.3°\n    ✕ Below horizon"
+      ],
+      "features": {
+        "tables": 0,
+        "canvases": 1,
+        "details": 0
+      },
+      "controls": [
+        {
+          "tag": "SELECT",
+          "cls": "hz-site dd-native",
+          "value": "SHACKLETON_RIM",
+          "pressed": null
+        },
+        {
+          "tag": "BUTTON",
+          "cls": "",
+          "value": "",
+          "pressed": "true"
+        },
+        {
+          "tag": "BUTTON",
+          "cls": "",
+          "value": "",
+          "pressed": "false"
+        }
+      ]
+    },
+    {
+      "id": "blk-terrain",
+      "values": [
+        "2.1°",
+        "median 0.48 m · 95th % 0.87 m",
+        "1.0°",
+        "100 m",
+        "1,258",
+        "6.8°",
+        "15.2°",
+        "22.2°",
+        "63.4%",
+        "94.1%",
+        "500 m",
+        "31,418",
+        "14.4°",
+        "23.3°",
+        "36.3°",
+        "15.6%",
+        "54.0%",
+        "1000 m",
+        "125,663",
+        "15.6°",
+        "27.3°",
+        "38.8°",
+        "9.8%",
+        "46.7%",
+        "Outside PSR",
+        "151 m",
+        "221° SW"
+      ],
+      "features": {
+        "tables": 1,
+        "canvases": 0,
+        "details": 0
+      },
+      "controls": []
+    },
+    {
+      "id": "blk-access",
+      "values": [
+        "151 m",
+        "no",
+        "221° SW",
+        "89.690°S 163.418°W"
+      ],
+      "features": {
+        "tables": 0,
+        "canvases": 0,
+        "details": 0
+      },
+      "controls": []
+    },
+    {
+      "id": "blk-history",
+      "values": [
+        "1. IM-2 Athena",
+        "167.3 km",
+        "191° SSW",
+        "ntrs.nasa.gov",
+        "2. IM-1 Odysseus",
+        "308.4 km",
+        "165° SSE",
+        "www.nasa.gov",
+        "3. Chandrayaan-3",
+        "634.6 km",
+        "195° SSW",
+        "www.isro.gov.in"
+      ],
+      "features": {
+        "tables": 1,
+        "canvases": 0,
+        "details": 0
+      },
+      "controls": []
+    },
+    {
+      "id": "blk-routes",
+      "values": [
+        "100 m",
+        "5.9%",
+        "15.2°",
+        "22.2°",
+        "500 m",
+        "46.0%",
+        "23.3°",
+        "36.3°",
+        "1000 m",
+        "53.3%",
+        "27.3°",
+        "38.8°",
+        "0.87 m"
+      ],
+      "features": {
+        "tables": 1,
+        "canvases": 0,
+        "details": 0
+      },
+      "controls": []
+    },
+    {
+      "id": "blk-seasons",
+      "values": [],
+      "features": {
+        "tables": 0,
+        "canvases": 0,
+        "details": 1
+      },
+      "controls": [
+        {
+          "tag": "SELECT",
+          "cls": "sn-mode dd-native",
+          "value": "lun",
+          "pressed": null
+        }
+      ]
+    },
+    {
+      "id": "blk-trust",
+      "values": [
+        "Apollo 11",
+        "1969-07-20 20:17",
+        "10.65°",
+        "10.70°",
+        "0.05°",
+        "Apollo 12",
+        "1969-11-19 06:54",
+        "5.19°",
+        "5.15°",
+        "-0.04°",
+        "Apollo 14",
+        "1971-02-05 09:18",
+        "10.36°",
+        "10.35°",
+        "-0.01°",
+        "Apollo 15",
+        "1971-07-30 22:16",
+        "12.05°",
+        "12.02°",
+        "-0.03°",
+        "Apollo 16",
+        "1972-04-21 02:23",
+        "14.76°",
+        "14.76°",
+        "0.00°",
+        "Apollo 17",
+        "1972-12-11 19:54",
+        "13.33°",
+        "13.35°",
+        "0.02°",
+        "Chandrayaan-3 (Vikram)",
+        "2023-08-23 12:32",
+        "our sunset minus reported event: +3.8 h · source",
+        "SLIM (JAXA)",
+        "2024-01-19 15:20",
+        "our sunset 2024-01-31 04:05 UTC vs reported date 2024-02-01: -1 day(s) · source",
+        "IM-1 Odysseus (Intuitive Machines / NASA CLPS)",
+        "2024-02-22 23:23",
+        "our sunset 2024-03-02 13:55 UTC vs reported date 2024-02-29: +2 day(s) · source",
+        "Chang'e 3 (lander + Yutu)",
+        "2013-12-14 13:11",
+        "our sunset minus reported event: +18.6 h · source",
+        "Chang'e 4 (lander + Yutu-2)",
+        "2019-01-03 02:26",
+        "not compared (no public source)"
+      ],
+      "features": {
+        "tables": 2,
+        "canvases": 0,
+        "details": 1
+      },
+      "controls": []
+    },
+    {
+      "id": "blk-more",
+      "values": [],
+      "features": {
+        "tables": 0,
+        "canvases": 0,
+        "details": 0
+      },
+      "controls": []
+    }
+  ],
+  "links": [
+    "https://pgda.gsfc.nasa.gov/products/90",
+    "https://naif.jpl.nasa.gov/pub/naif/generic_kernels/",
+    "https://ntrs.nasa.gov/api/citations/20170007365/downloads/20170007365.pdf",
+    "https://pgda.gsfc.nasa.gov/products/90",
+    "https://pgda.gsfc.nasa.gov/products/69",
+    "https://ntrs.nasa.gov/api/citations/20170007365/downloads/20170007365.pdf",
+    "https://pgda.gsfc.nasa.gov/products/90",
+    "https://naif.jpl.nasa.gov/pub/naif/generic_kernels/",
+    "https://ntrs.nasa.gov/api/citations/20170007365/downloads/20170007365.pdf",
+    "https://pgda.gsfc.nasa.gov/products/90",
+    "https://ntrs.nasa.gov/citations/20240014584",
+    "https://ntrs.nasa.gov/api/citations/20170007365/downloads/20170007365.pdf",
+    "https://pds.shadowcam.asu.edu/derived/cmosaic/shackleton01/shadowcam_cmosaic_shackleton01_p896s1350_summer_11am_20m.xml",
+    "https://pds.shadowcam.asu.edu/derived/cmosaic/shackleton01/shadowcam_cmosaic_shackleton01_p896s1350_summer_11am_20m_cog.tif",
+    "https://pds.shadowcam.asu.edu/derived/cmosaic/shackleton01/shadowcam_cmosaic_shackleton01_p896s1350_summer_11am_readme.txt",
+    "https://pds.shadowcam.asu.edu/derived/umosaic/spudis01/shadowcam_umosaic_spudis01_p889s3107_summer_02pm_20m.xml",
+    "https://pds.shadowcam.asu.edu/derived/umosaic/spudis01/shadowcam_umosaic_spudis01_p889s3107_summer_02pm_20m_cog.tif",
+    "https://pds.shadowcam.asu.edu/derived/umosaic/spudis01/shadowcam_umosaic_spudis01_p889s3107_summer_02pm_readme.txt",
+    "https://pds.shadowcam.asu.edu/derived/umosaic/shackletondegerlacheridge01/shadowcam_umosaic_shackletondegerlacheridge01_p884s0447_summer_09am_20m.xml",
+    "https://pds.shadowcam.asu.edu/derived/umosaic/shackletondegerlacheridge01/shadowcam_umosaic_shackletondegerlacheridge01_p884s0447_summer_09am_20m_cog.tif",
+    "https://pds.shadowcam.asu.edu/derived/umosaic/shackletondegerlacheridge01/shadowcam_umosaic_shackletondegerlacheridge01_p884s0447_summer_09am_readme.txt",
+    "https://ntrs.nasa.gov/api/citations/20230000531/downloads/Blewett_LVx-CP11_landingsite_LPSC2023_abstr1780.pdf",
+    "https://deepspace.jpl.nasa.gov/dsndocs/810-005/",
+    "https://naif.jpl.nasa.gov/pub/naif/generic_kernels/",
+    "https://ntrs.nasa.gov/api/citations/20170007365/downloads/20170007365.pdf",
+    "https://pgda.gsfc.nasa.gov/products/90",
+    "https://ntrs.nasa.gov/api/citations/20170007365/downloads/20170007365.pdf",
+    "https://pgda.gsfc.nasa.gov/data/LOLA_5mpp/87S/ldem_87s_5mpp.tif",
+    "https://pgda.gsfc.nasa.gov/products/90",
+    "https://pgda.gsfc.nasa.gov/products/90",
+    "https://ntrs.nasa.gov/api/citations/20170007365/downloads/20170007365.pdf",
+    "https://pgda.gsfc.nasa.gov/products/90",
+    "https://pgda.gsfc.nasa.gov/products/90",
+    "https://ntrs.nasa.gov/api/citations/20170007365/downloads/20170007365.pdf",
+    "https://ntrs.nasa.gov/api/citations/20260003150/downloads/MSolo%20PRIME-1%20overview%20and%20results%20-%20LSSW.pdf",
+    "https://www.nasa.gov/missions/lro/nasas-lro-images-intuitive-machines-odysseus-lander/",
+    "https://www.isro.gov.in/Chandrayaan3.html",
+    "https://ntrs.nasa.gov/api/citations/20170007365/downloads/20170007365.pdf",
+    "https://pgda.gsfc.nasa.gov/products/90",
+    "https://ntrs.nasa.gov/api/citations/20170007365/downloads/20170007365.pdf",
+    "https://naif.jpl.nasa.gov/pub/naif/generic_kernels/",
+    "https://ntrs.nasa.gov/api/citations/20170007365/downloads/20170007365.pdf",
+    "https://pgda.gsfc.nasa.gov/products/69",
+    "https://apollojournals.org/alsj/alsj-EarthSun_AltAz.html",
+    "https://www.businesstoday.in/latest/trends/story/chandrayaan-3-update-vikram-lander-set-into-sleep-mode-at-8-am-payloads-are-now-switched-off-says-isro-396766-2023-09-04",
+    "https://cosmiclog.com/2024/02/01/japans-moon-lander-sleeps-again-after-sending-science/",
+    "https://www.nasa.gov/centers-and-facilities/marshall/nasa-lights-beacon-on-moon-with-autonomous-navigation-system-test/",
+    "https://spaceflightnow.com/china/change3/131227hibernation",
+    "https://pgda.gsfc.nasa.gov/products/69"
+  ],
+  "text": "Site checks · South-polar peaks & rims\n\nShackleton Rim (S)\n\nLatitude/Longitude 89.69°S 162.81°W\nAnalysis period 2026.11.15 – 2026.12.14 (29d 12h)\n\nChange site\n#1 Shackleton Rim (S)\n#2 Haworth (region)\n#3 Apollo 17\nCompare with other sites\nCopy link\nSunlight\n100%\nEarth view\n44%\nSun + Earth\n44%\nLongest dark\n0h\n\nChoose analyses\nPick as many as you like · 9/11\n\nSunlight & Earth-view time\nNearby-location sensitivity\nLanding date & delays\nRelay tower benefit\nGround stations in view\nHorizon & blocking\nSlope, roughness & flat areas\nAccess to science targets\nPast missions nearby\nRoutes & obstacles\nSeasons 2026–2030\n01\nSunlight & Earth-view time\nSunlight\n100%\nTotal sunlight\n29d 12h\nEarth view\n44%\nTotal Earth view\n13d 1h\nLongest Earth gap\n14d 1h\nAverage Earth gap\n8d 6h\nEarth gaps\n2\nLongest dark\n0h\nDark spells\n0\nLongest sunlit run\n29d 12h\nSun + Earth\n44%\nSun up\nEarth in view\nSun + Earth\nNot visible\nSun\nEarth\nBoth\nNov 15\nNov 22\nNov 29\nDec 7\nDec 14\n\nAnalysis period 2026-11-15 00:00 UTC – 2026-12-14 11:00 UTC (708 h). Longest Earth gap: 11-30 11:00 UTC – 12-14 11:00 UTC; longest dark: –.\n\nRaw table\n2026–2030 visibility — click a year position to move the analysis period there long-term 2026–2030\n☼\n◍\n2027\n2028\n2029\n2030\nLongest 10 gaps in 2026–2030 (Sunlight · Direct-to-Earth)\nLong-term statistics\n2026-01-01 → 2031-01-01\nlong-term 2026–2030\n\tTotal\tRuns\tMean\tLongest\tCut at data edge\nShadow (no sunlight)\t6,650 h (277.1 d)\t225\t29.6 h\t75 h (3.1 d)\t—\nContinuous sunlight\t37,174 h (1548.9 d)\t226\t164.5 h (6.9 d)\t2,817 h (117.4 d)\t≥ 981 h (40.9 d) (start)\n≥ 28 h (end)\nNo direct-to-Earth\t21,937 h (914.0 d)\t67\t327.4 h (13.6 d)\t353 h (14.7 d)\t—\n\nCounts, means and longest include runs cut by 2026-01-01 / 2031-01-01; a cut run’s length is only a lower bound. Without cut runs: Continuous sunlight: Mean 161.5 h (6.7 d), Longest 2,817 h (117.4 d).\n\nSunlit 37,174 h · Earth visible 21,887 h · Sun + Earth 19,441 h (of 43,824 h)\n\nEarth visible AND Moon ≥ 10° at: KDSA 9,986 h · at least 1 of 4 stations 21,807 h · at least 2 stations 13,940 h\n\nAssumptions & limits Gaps are counted inside the analysis period; gaps cut by the start or end count with their clipped length.\n\nSources: NASA LOLA terrain horizons · NAIF DE440s / DE421 ephemeris · NASA PGDA / LOLA · NASA NAIF\nMethod & validation\n02\nNearby-location sensitivity\nRegistered sites within 20 km: 1\nNearest: Connecting Ridge (DEM region centre, R01) · 8.7 km\nRegistered sites within 20 km computed · this period\n\tDistance\t\t\tLongest dark\t vs this site\t vs this site\nConnecting Ridge (DEM region centre, R01)\t8.7 km\t78%\t37%\t6.4 d\t-22 pp\t-8 pp\nSite and surrounding terrain\nlong-term 2026–2030\nmostly shadow (< 5 % sunlight)\n2 km\nN ↑\nSunlight (%)\n250 m grid\n0\n100\n\nThis grid: 0.0% – 84.8% (same 0–100 % scale for every site)\n\nLOLA-based ±5 km grid · 250 m spacing (250 m grid) · 2026–2030 · color = Sunlight\n\nCoordinate uncertainty (100 m grid) long-term 2026–2030\nRadius\t\tmin\tp10\tmedian\tp90\tmax\t\n100 m (n=5)\tSunlight\t45.0%\t47.3%\t51.5%\t74.0%\t84.8%\t\n\nEarth view\t38.5%\t42.7%\t49.1%\t49.7%\t49.9%\t\n\nSun + Earth\t22.5%\t23.3%\t24.6%\t37.9%\t44.4%\t\n\nLongest dark\t3.1 d\t6.9 d\t14.0 d\t15.1 d\t15.7 d\t\n\n300 m (n=29)\tSunlight\t29.9%\t34.4%\t47.9%\t56.6%\t84.8%\t\n\nEarth view\t0.0%\t0.0%\t47.1%\t49.1%\t49.9%\t\n\nSun + Earth\t0.0%\t0.0%\t22.2%\t28.8%\t44.4%\t\n\nLongest dark\t3.1 d\t13.2 d\t15.8 d\t18.9 d\t25.9 d\t\n\n500 m (n=81)\tSunlight\t0.0%\t26.5%\t41.1%\t54.3%\t84.8%\t\n\nEarth view\t0.0%\t0.0%\t44.0%\t49.0%\t49.9%\t\n\nSun + Earth\t0.0%\t0.0%\t17.1%\t25.4%\t44.4%\t\n\nLongest dark\t3.1 d\t13.5 d\t17.0 d\t25.9 d\t1826.0 d\t\n\nCircular neighbourhood in the local east/north grid; long-term samples, not area averages. · South-polar samples (latitude ≤ −75°)\n\n±5 km grid summary (250 m spacing) long-term 2026–2030\nWithin\t\tmin\tp25\tmedian\tp75\tmax\n1 km (n=49)\tSunlight\t0.0%\t31.7%\t37.0%\t41.7%\t84.8%\nEarth view\t0.0%\t19.8%\t40.8%\t46.5%\t50.0%\nSun + Earth\t0.0%\t2.5%\t15.0%\t18.4%\t44.4%\nLongest dark\t3.1 d\t16.6 d\t17.8 d\t21.8 d\t1826.0 d\n3 km (n=441)\tSunlight\t0.0%\t12.0%\t20.9%\t31.1%\t84.8%\nEarth view\t0.0%\t1.1%\t25.5%\t42.0%\t52.3%\nSun + Earth\t0.0%\t0.0%\t6.1%\t12.3%\t44.4%\nLongest dark\t3.1 d\t22.1 d\t26.8 d\t169.6 d\t1826.0 d\n5 km (n=1257)\tSunlight\t0.0%\t4.5%\t19.0%\t29.8%\t84.8%\nEarth view\t0.0%\t0.0%\t26.2%\t46.4%\t53.0%\nSun + Earth\t0.0%\t0.0%\t4.4%\t12.6%\t44.4%\nLongest dark\t3.1 d\t23.0 d\t28.2 d\t234.3 d\t1826.0 d\nPGDA ±300 m range (18.6 years)\n\nours 84.5% · PGDA 87.1% (±300 m 0.0%–87.1%)\n\nHow much does the exact spot matter?\n\nMoving a few hundred meters on a polar ridge can change everything. Each square is a real location 250 m from its neighbours, with its own LOLA terrain horizon (2026–2030, hourly).\n\nArea \nApollo 11\nApollo 12\nApollo 14\nApollo 15\nApollo 16\nApollo 17\nLuna 16\nLuna 20\nLuna 24\nChang'e 3\nChang'e 4\nChang'e 5\nChang'e 6\nChandrayaan-3\nSLIM\nIM-1 Odysseus\nIM-2 Athena\nBlue Ghost Mission 1\nPeak near Cabeus B (region)\nHaworth (region)\nMalapert Massif (region)\nMons Mouton Plateau (region)\nMons Mouton (region)\nNobile Rim 1 (region)\nNobile Rim 2 (region)\nde Gerlache Rim 2 (region)\nSlater Plain (region)\nShackleton Rim (S)\nConnecting Ridge (DEM region centre, R01)\nPeak Near Shackleton (DEM region centre, R07)\nde Gerlache Rim 1 (DEM region centre, R11)\nShoemaker Rim A (DEM region centre, LM2)\nIM-3 / Lunar Vertex target\nShackleton Rim (S)\nSun + Earth together\nSunlight\nDirect-to-Earth\nLongest shadow\nN ↑ · 250 m · 250 m grid\n\nPoint: catalogue point · 89.6866°S 162.8100°W · height 1730 m\nSunlight 84.8% · Direct-to-Earth 49.9% · Sun + Earth together 44.4% · Longest shadow 3 d 3 h\n\nWithin 1 km of the catalogue point: 0.0% – 44.4%\n\nWithin 3 km of the catalogue point: 0.0% – 44.4%\n\nWithin 5 km of the catalogue point: 0.0% – 44.4%\n\nBiggest jump between neighbours (250 m apart): (0, 0.25) km 0.0% → (0, 0) km 44.4% (Sun + Earth together).\n\nSun + Earth together (%)\n0.0%\n100.0%\n\nGrid: 41 × 41 nodes, 250 m apart, ±5 km\n\nClick a square (or arrows + Enter) to send that location to \"Your own landing point\". Percent scales are fixed at 0–100 % for every site, so maps can be compared. Sampled points, not area averages · observer 2 m · Earth center above the horizon · geometry only (no power or radio model).\n\nAssumptions & limits Values around the site. Uncertainty, grid and PGDA results are long-term averages (2026–2030 / 18.6 years): do not compare them directly with this period’s values.\n\nSources: NASA LOLA terrain · NASA PGDA ±300 m range · NASA PGDA / LOLA · NASA PGDA visibility maps\nMethod & validation\n03\nLanding date & delays\nLanding date and stay (2026–2030)\nLanding date (00:00 UTC) \nStay 7 d 14 d 29.5 d\n\nLanding 2026-11-15 00:00 UTC, 14 d on the surface\n\nSunlight\n100.0% 336 h\nDirect-to-Earth\n82.7% 278 h\nSun + Earth together\n82.7% 278 h\nLongest shadow\n0 h\nSlip\tNew landing\t Sunlight\t Direct-to-Earth\tSun + Earth together\tLongest shadow\n−7 d\t2026-11-08\t100.0% (±0.0 pp)\t32.7% (−50.0 pp)\t32.7% (−50.0 pp)\t0 h (±0 h)\n−3 d\t2026-11-12\t100.0% (±0.0 pp)\t61.3% (−21.4 pp)\t61.3% (−21.4 pp)\t0 h (±0 h)\n−1 d\t2026-11-14\t100.0% (±0.0 pp)\t75.6% (−7.1 pp)\t75.6% (−7.1 pp)\t0 h (±0 h)\n+1 d\t2026-11-16\t100.0% (±0.0 pp)\t89.9% (+7.1 pp)\t89.9% (+7.1 pp)\t0 h (±0 h)\n+3 d\t2026-11-18\t100.0% (±0.0 pp)\t89.0% (+6.3 pp)\t89.0% (+6.3 pp)\t0 h (±0 h)\n+7 d\t2026-11-22\t100.0% (±0.0 pp)\t60.4% (−22.3 pp)\t60.4% (−22.3 pp)\t0 h (±0 h)\nLanding-date scan · Shackleton Rim (S)\n\nThe launch slipped — how do conditions change? Each point is one landing date; values cover the first N days on the surface.\n\nFirst landing date (UTC) \nScan \n3 months\n6 months\n12 months\n24 months\n12 months\nDays after landing (N) \nSunlight\nDirect-to-Earth\nSun + Earth together\nLongest shadow\n0%\n50%\n100%\nLongest shadow\n3.1 d\n12\n2027-01\n02\n03\n04\n05\n06\n07\n08\n09\n10\n11\n▲ Highest 09-12\n▼ Lowest 04-18\nCurrent period\n\nLanding 2026-11-15 · 14 days: Sunlight 100% · Direct-to-Earth 83% · Sun + Earth together 83% · Longest shadow 0.0 h\n\nBest / worst = highest / lowest \"Both\" % (ties: shorter longest dark). Click (or ←/→ then Enter) to start the analysis period on that date.\n\nWhat if the landing slips 1 or 2 weeks? · Shackleton Rim (S)\n\nEvery landing day in 2026–2027 is compared with the same site landed 7 or 14 days later. Values cover the first 14 days on the surface (hourly, real terrain horizon).\n\nMetric\t+7 d · typical change\t+7 d · worst change\t+14 d · typical change\t+14 d · worst change\t+14 d · days that get worse\nSunlight\t5.1 pp\t-41.4 pp\n2027-04-03 → 2027-04-10\n\t6.8 pp\t-67.3 pp\n2027-04-03 → 2027-04-17\n\t39%\nDirect-to-Earth\t46.1 pp\t-50.0 pp\n2026-01-22 → 2026-01-29\n\t49.1 pp\t-93.8 pp\n2027-09-12 → 2027-09-26\n\t50%\nSun + Earth together\t37.5 pp\t-50.0 pp\n2026-01-22 → 2026-01-29\n\t44.2 pp\t-93.8 pp\n2027-09-12 → 2027-09-26\n\t50%\nLongest shadow\t3 h\t+34 h\n2026-03-15 → 2026-03-22\n\t14 h\t+59 h\n2026-03-16 → 2026-03-30\n\t40%\n\n▲ Highest Sun + Earth day: 2027-09-12 (both 94%, longest dark 0.0 h)\n\n▼ Lowest Sun + Earth day: 2027-04-18 (both 0%, longest dark 2 d 17 h)\n\nAll sites: worst extra darkness after a 14-day slip\n\nShorter bar = more slip-tolerant. Click a bar to compare that site.\n\npp = percentage points. Typical = median of |change| over all landing days; worst = most unfavourable change, with its dates. Landing at 00:00 UTC; geometry only.\n\nAssumptions & limits Landing-date table: 2026–2030. Date scan uses the terrain horizon and ephemeris; delay comparisons cover 2026–2027. These have separate analysis periods.\n\nSources: NAIF ephemeris + terrain horizons · NASA PGDA / LOLA · NASA NAIF\nMethod & validation\n04\nRelay tower benefit\nRelay tower — restore line of sight to Earth\nPeriod 2026-11-15 → 2026-12-14 (29.5 days)\nTower height \n5 m\n15 m\n30 m\n50 m\nSite: Shackleton Rim (S)\nEarth in view\n44%\n13 d 1 h\nAdded via tower (3 towers, 15 m)\n+6%\n43.0 h\nIn view with tower(s)\n50%\n14 d 20 h\nOut of view\n50%\nLongest out-of-view stretch: 13 d 3 h\nVisibility over the period\ndirect\nvia tower\nout of view\n2026-11-15 → 2026-12-14\nEarth hidden by terrain\n\nBlue marks Earth directly in view; green marks added visibility through the modeled tower. Gray hatching below marks Earth hidden by terrain at the site, even when a tower provides another line of sight.\n\nWhere a tower would help (search area)\nlink gain with one tower at that spot (stronger = more)\nno line of sight or too steep\nlander\ntowers\nTower site that adds the most hours (15 m)\ndistance from lander\n9.25 km · bearing 52°\nlat / lon\n-89.4430°, -137.3877°\nground height\n1956 m (slope 0.9°)\ntower sees Earth\n54.2% (2026–2030)\ntower-top sunlight\n93.1% · Longest shadow 4 d 4 h\nline of sight to lander\nyes · min. clearance 2.0 m\nfirst-Fresnel clearance (≥ 0.6 = clear)\nS 1.55 · Ka 5.33\nTower network (greedy, up to 3 towers)\n#\tdistance from lander\tbearing\tslope\tadds\tlinked to\ttower-top sunlight\n1\t9.25 km\t52°\t0.9°\t+4.5 pp\tlander\t93%\n2\t9.75 km\t181°\t9.3°\t+0.1 pp\tlander\t45%\n3\t9.80 km\t52°\t5.4°\t+0.1 pp\ttower 1\t77%\nWhole 2026–2030 window: link % with 0 / 1 / 2 / 3 towers\n\n0: 49.9% · 1: 54.4% · 2: 54.5% · 3: 54.6%\n\nLink budget tower → Earth (ESTIMATE)ESTIMATE\nstation\tband\trange\tC/N₀\tpower-limited rate (ignores bandwidth)\t\nDSN 34m\tS\t384,931 km\t84.3 dB-Hz\t75.5 Mbps\tassumed\nDSN 34m\tKa\t384,931 km\t103.1 dB-Hz\t5.7 Gbps\tassumed\nKDSA 35m\tS\t384,931 km\t82.8 dB-Hz\t53.3 Mbps\tassumed\nKDSA 35m\tKa\t384,931 km\t102.1 dB-Hz\t4.5 Gbps\tunverified (KDSA Ka-band receive not confirmed)\n\nRough estimate using assumed equipment parameters, not a specification.\n\nMethod & validation\n\nTerrain: PGDA LOLA 20 m / 60 m / 80 m (near) + LOLA LDEM_16 (far, to 300 km). Ephemeris: NAIF DE440s + DE421 Moon orientation.\n\nAssumptions & limits Geometric visibility only (lander ↔ tower line of sight, tower sees the Earth). Radio strength and equipment are estimates. Concept: NASA Glenn BEACON (NTRS 20240014584).\n\nSources: NASA LOLA terrain · BEACON concept, NASA Glenn (NTRS 20240014584) · NASA PGDA / LOLA · NASA Glenn BEACON\nMethod & validation\n05\nGround stations in view\nKorea links — Yeoju antenna, ShadowCam\nPeriod 2026-11-15 → 2026-12-14 (29.5 days)\nTotal time with Moon ≥ 10° above each antenna\nKorea Deep Space Antenna (Yeoju), 35 m\n12 d 0 h · 41%\nNASA DSN Goldstone (DSS-14, 70 m)\n12 d 1 h · 41%\nNASA DSN Madrid (DSS-63, 70 m)\n11 d 13 h · 39%\nNASA DSN Canberra (DSS-43, 70 m)\n12 d 20 h · 44%\nAny NASA DSN 70 m\n28 d 23 h · 98%\nOnly Yeoju (no DSN 70 m)\n0.0 h · 0%\n\nHours in the analysis period with the Moon center at least 10° above each antenna's horizon (no refraction, no local terrain). A lander signal still needs a direct or relayed line of sight to Earth.\n\nYeoju (KDSA) passes in Korean time (KST = UTC+9)\nfrom (KST)\tto (KST)\tmax. Moon elevation\n2026-11-15 13:14\t2026-11-15 20:50\t29.6°\n2026-11-16 13:41\t2026-11-16 21:54\t33.6°\n2026-11-17 14:06\t2026-11-17 22:58\t38.5°\n2026-11-18 14:28\t2026-11-19 00:02\t44.0°\n2026-11-19 14:51\t2026-11-20 01:05\t50.0°\n2026-11-20 15:15\t2026-11-21 02:10\t56.4°\n2026-11-21 15:41\t2026-11-22 03:17\t62.8°\n2026-11-22 16:12\t2026-11-23 04:27\t68.9°\n\n+21 more passes in this period\n\nWhen are Earth and the stations in view? — Shackleton Rim (S)\nSite sees Earth\n13 d 1 h · 44%\nSite sees Earth + Yeoju sees the Moon\n6 d 8 h · 21%\nSite sees Earth + any NASA DSN 70 m\n13 d 0 h · 44%\n\nHours in the analysis period when the Earth center is above this site's real terrain horizon AND the Moon is at least 10° above the antenna (direct link only; no relay, no link budget).\n\nEarth hidden by terrain\n\nThe bars above show total hours: the first is Earth in view from the site; station bars also require the Moon ≥ 10° above that station’s horizon. The separate strip below reads left to right through the selected period; gray hatching marks Earth hidden by terrain.\n\nShadowCam context (NASA instrument aboard Korea's Danuri / KPLO)\n\nLinks and label metadata only — no ShadowCam images are copied or shown here. Credit: NASA/KARI/ASU.\n\nShackleton crater (PSR interior)\nShackleton Crater controlled mosaic - 20 m\ncenter -89.59°, 135.00° · pixel 20 m\nacquired 2023-02-22\nPDS label · data (COG) · readme\n© NASA/KARI/ASU\nSpudis crater\nSpudis uncontrolled mosaic - 20m\ncenter -88.89°, -49.33° · pixel 20 m\nacquired 2023-01-12\nPDS label · data (COG) · readme\n© NASA/KARI/ASU\nShackleton-de Gerlache ridge (ShadowCam name, not IAU)\nShackleton de Gerlache Ridge uncontrolled mosaic - 20m\ncenter -88.44°, 44.66° · pixel 20 m\nacquired 2023-02-27\nPDS label · data (COG) · readme\n© NASA/KARI/ASU\n\nShadowCam SOC, KPLO ShadowCam Data Archive, NASA PDS, doi:10.17189/y89z-kt98; mosaics: Grieser et al. 2025, LPSC 56 #2523 (https://www.hou.usra.edu/meetings/lpsc2025/pdf/2523.pdf)\n\nKorean payload on the Moon\n\nIntuitive Machines IM-3 (CLPS CP-11) carries KASI's Lunar Space Environment Monitor (LUSEM) to Reiner Gamma (NASA CP-11 page: https://science.nasa.gov/lunar-science/clps-deliveries/cp-11/). Launch date differs between sources (2026 H2 vs early 2027): unverified. NTRS 20230000531\n\nStation coordinates: DSN 810-005 module 301 (NASA/JPL); KDSA from public NASA/JPL NAIF SPICE antenna coordinates. Moon positions: NAIF DE440s via Skyfield.\n\nThe communication story for this site — Shackleton Rim (S)\nPeriod 2026-11-15 → 2026-12-14 · change in Analysis window ↓\n1 · Direct link to Earth\n\n44%\n\nEarth is hidden by terrain or libration for 56% of the period.\n\n2 · A relay tower\n\n50%\n\nWith 3 tower(s) of 15 m: link 44% → 50% of the period.\n\n3 · Yeoju sees the Moon too\n\n21%\n\nYeoju (KDSA, 35 m) in view for 21% of the period (6 d 8 h) — geometry only: the site sees Earth and the Moon is ≥ 10° above Yeoju. With the 3 NASA DSN 70 m sites: 44%.\n\nAssumptions & limits Site sees the Earth AND the Moon is ≥ 10° above the station. Geometry only — reception was not modelled. Totals are unions. Coordinates: KDSA = KARI antenna coordinates (NAIF), DSN = NASA 810-005.\n\nSources: KDSA: KARI antenna coordinates (NASA NAIF) · DSN: NASA 810-005 · NASA/JPL DSN 810-005 · NASA NAIF\nMethod & validation\n06\nHorizon & blocking\nHorizon panorama\nSite \nApollo 11\nApollo 12\nApollo 14\nApollo 15\nApollo 16\nApollo 17\nLuna 16\nLuna 20\nLuna 24\nChang'e 3\nChang'e 4\nChang'e 5\nChang'e 6\nChandrayaan-3\nSLIM\nIM-1 Odysseus\nIM-2 Athena\nBlue Ghost Mission 1\nPeak near Cabeus B (region)\nHaworth (region)\nMalapert Massif (region)\nMons Mouton Plateau (region)\nMons Mouton (region)\nNobile Rim 1 (region)\nNobile Rim 2 (region)\nde Gerlache Rim 2 (region)\nSlater Plain (region)\nShackleton Rim (S)\nConnecting Ridge (DEM region centre, R01)\nPeak Near Shackleton (DEM region centre, R07)\nde Gerlache Rim 1 (DEM region centre, R11)\nShoemaker Rim A (DEM region centre, LM2)\nIM-3 / Lunar Vertex target\nShackleton Rim (S)\nVertical scale \n×1\n×3\nTracks: 29.5 days · centered on S\nSun\n+1.6°\naz 270.6° · terrain mask −0.7°\nVisible\nEarth\n−3.2°\naz 159.4° · terrain mask −0.3°\n✕ Below horizon\n\n \n\nterrain horizon mask (LOLA)\nSun, hourly\nEarth, hourly\nhidden behind the terrain\n\nAngles in degrees. Azimuth runs clockwise from north (0°), through east (90°). Elevation is above the local horizontal. Pick a site above or click a card / table row to change it.\n\nAssumptions & limits Margin = body elevation − terrain height in that direction; positive = visible (Sun: disc center).\n\nSources: NASA LOLA / PGDA / SLDEM2015 terrain · NASA PGDA / LOLA\nMethod & validation\n07\nSlope, roughness & flat areas\nTerrain at the landing point\nLander-scale slope\n2.1°\nRoughness (500 m)\nmedian 0.48 m · 95th % 0.87 m\n250 m box slope\n1.0°\nWithin\tsamples\tmedian\t95th %\tmax\tarea ≤ 8° (reference)\tarea ≤ 15° (reference)\n100 m\t1,258\t6.8°\t15.2°\t22.2°\t63.4%\t94.1%\n500 m\t31,418\t14.4°\t23.3°\t36.3°\t15.6%\t54.0%\n1000 m\t125,663\t15.6°\t27.3°\t38.8°\t9.8%\t46.7%\n\n8° and 15° are reference values for comparison only — not landing-safety criteria. Area-weighted share of terrain samples at or below the value.\n\nSource: PGDA LOLA 5 m (PGDA_LOLA_5M)\n\nNearest permanently shadowed region (PSR)\nPSR\nOutside PSR\nDistance to PSR edge\n151 m\nBearing\n221° SW\n\nPSR ≠ confirmed ice. NASA PGDA · LPSR_80S_20MPP_ADJ (20 m)\n\nAssumptions & limits Slope and roughness from LOLA terrain and the nearest permanently shadowed region. Reference values only — not a landing-safety assessment.\n\nSources: NASA PGDA LOLA DEMs · PGDA 20 m PSR map · NASA PGDA / LOLA\nMethod & validation\n08\nPast missions nearby\nNearest past landings\nMission\tDistance\tBearing\tOfficial page\n1. IM-2 Athena\t167.3 km\t191° SSW\tntrs.nasa.gov\n2. IM-1 Odysseus\t308.4 km\t165° SSE\twww.nasa.gov\n3. Chandrayaan-3\t634.6 km\t195° SSW\twww.isro.gov.in\n\nAssumptions & limits Three nearest of the 18 actual landers up to 2026-11-15. Great-circle distance on the reference sphere; not route length, access or infrastructure.\n\nSources: NASA NSSDCA / LROC and official mission pages\nMethod & validation\n09\nSeasons 2026–2030\nSeasons 2026–2030 · Shackleton Rim (S)\n\nHow the same site changes over the year. One bar per month; at the poles the season matters more than the landing day.\n\n Why does the Moon have seasons?\nValues \nPer lunar day\nPer calendar month\nPer lunar day\nSunlight\nEarth visible\nLongest shadow in the month\n\nPer lunar day = 709 h (29.5 days) centered on each month: removes the wobble from months being 28–31 days long. Per calendar month = exactly that month (UTC).\n\n0%\n50%\n100%\n744 h\n0\n+1.5°\n−1.5°\n2026\n2027\n2028\n2029\n2030\nLongest shadow in the month\nSun’s latitude on the Moon · ■ Sun south (southern summer)\n\nSunlight 50.3%–100.0% (best 2026-01, worst 2028-04). Months with the Sun south vs north: +41.1 pp.\n\nLongest shadow per month: 0 h–75 h.\n\nClick a month (or ←/→ then Enter) to start the analysis period there.\n\nHourly samples, real LOLA horizon, geometry only (no atmosphere). Sunlit = ≥ 50 % of the solar disc above the horizon; Earth = Earth center above it.\n\nAssumptions & limits Monthly values for 60 months. Click a month to start the analysis period there.\n\nSources: NAIF ephemeris + terrain horizons · NASA NAIF\nMethod & validation",
+  "controls": [
+    [
+      "time",
+      "true"
+    ],
+    [
+      "near",
+      "true"
+    ],
+    [
+      "date",
+      "true"
+    ],
+    [
+      "relay",
+      "true"
+    ],
+    [
+      "gs",
+      "true"
+    ],
+    [
+      "hz",
+      "true"
+    ],
+    [
+      "terrain",
+      "true"
+    ],
+    [
+      "access",
+      "false"
+    ],
+    [
+      "history",
+      "true"
+    ],
+    [
+      "routes",
+      "false"
+    ],
+    [
+      "seasons",
+      "true"
+    ]
+  ]
+}

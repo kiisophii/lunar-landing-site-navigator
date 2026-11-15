@@ -23,7 +23,7 @@ addStrings({
   snClick: 'Click a month (or ←/→ then Enter) to start the analysis period there.',
   snCustom: 'Seasons are available for catalogue sites only (precomputed from the site’s terrain horizon).',
   snNone: 'No seasonal data for this site (no real terrain horizon yet).', snLoading: 'Loading…',
-  snNote: 'Hourly samples, real LOLA horizon, geometry only (no atmosphere). Sunlit = ≥ 50 % of the solar disc above the horizon; Earth = Earth center above it. Data: web/data/monthly/, check: docs/seasons.md.',
+  snNote: 'Hourly samples, real LOLA horizon, geometry only (no atmosphere). Sunlit = ≥ 50 % of the solar disc above the horizon; Earth = Earth center above it.',
   snReadout: '{m}: Sunlight {s} · Earth {e} · longest darkness {d} · Sun latitude {l}',
 }, {
   snTitle: '계절 2026–2030', snAria: '선택한 착륙지의 월별 햇빛, 지구 보임, 어둠 (2026–2030)',
@@ -40,7 +40,7 @@ addStrings({
   snClick: '달을 누르면(또는 ←/→ 후 Enter) 분석 기간이 그 달부터 시작한다.',
   snCustom: '계절 그래프는 목록 착륙지에만 있다 (착륙지 지형 지평선으로 미리 계산함).',
   snNone: '이 착륙지는 계절 자료가 없다 (실제 지형 지평선이 아직 없음).', snLoading: '불러오는 중…',
-  snNote: '1시간 간격, 실제 LOLA 지평선, 기하만 계산 (대기 없음). 햇빛 = 태양 원반의 50 % 이상이 지평선 위, 지구 = 지구 중심이 지평선 위. 자료: web/data/monthly/, 검증: docs/seasons.md.',
+  snNote: '1시간 간격, 실제 LOLA 지평선, 기하만 계산 (대기 없음). 햇빛 = 태양 원반의 50 % 이상이 지평선 위, 지구 = 지구 중심이 지평선 위.',
   snReadout: '{m}: 햇빛 {s} · 지구 {e} · 최장 그늘 {d} · 태양 위도 {l}',
 });
 

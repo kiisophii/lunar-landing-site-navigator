@@ -15,7 +15,7 @@ addStrings({
   dsFull: '{n} sites where a 14-day slip can turn the whole first two weeks into night (+{h} h or more):',
   dsCustom: 'The date-slip table is available for catalogue sites; for your own points use the landing-date scan above.',
   dsNone: 'No slip table for this site (no real terrain horizon yet).', dsLoading: 'Loading slip tables…',
-  dsNote: 'pp = percentage points. Typical = median of |change| over all landing days; worst = most unfavourable change, with its dates. Landing at 00:00 UTC; geometry only. Data: card 19, web/data/date_slip/.',
+  dsNote: 'pp = percentage points. Typical = median of |change| over all landing days; worst = most unfavourable change, with its dates. Landing at 00:00 UTC; geometry only.',
 }, {
   dsTitle: '착륙이 1~2주 밀리면?', dsAria: '착륙일 지연 요약',
   dsWhy: '2026–2027년의 모든 착륙일을 7일 또는 14일 늦게 착륙한 경우와 비교한다. 값은 착륙 후 첫 14일 동안이다 (1시간 간격, 실제 지형 지평선).',
@@ -26,7 +26,7 @@ addStrings({
   dsFull: '14일 밀리면 첫 2주 전체가 밤이 될 수 있는 착륙지 {n}곳 (+{h} h 이상):',
   dsCustom: '지연 표는 목록 착륙지에만 있다. 내 착륙 지점은 위의 착륙 날짜 훑어보기를 쓰면 된다.',
   dsNone: '이 착륙지는 지연 표가 없다 (실제 지형 지평선이 아직 없음).', dsLoading: '지연 표 불러오는 중…',
-  dsNote: 'pp = 퍼센트포인트. 보통 변화 = 모든 착륙일의 |변화| 중앙값, 최악 변화 = 가장 불리한 변화와 그 날짜. 00:00 UTC 착륙, 기하만. 자료: 카드 19, web/data/date_slip/.',
+  dsNote: 'pp = 퍼센트포인트. 보통 변화 = 모든 착륙일의 |변화| 중앙값, 최악 변화 = 가장 불리한 변화와 그 날짜. 00:00 UTC 착륙, 기하만.',
 });
 
 const ROWS = [['sun_frac', 'dsSun', 'sun'], ['earth_frac', 'dsEarth', 'earth'], ['both_frac', 'dsBoth', 'both'], ['longest_dark_h', 'dsDark', 'dark']];

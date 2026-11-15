@@ -1,0 +1,101 @@
+{
+  "reference": "c42c515",
+  "reports": [
+    {
+      "site": "SHACKLETON_RIM",
+      "lang": "en",
+      "checks": {
+        "initial_sources_preserved": true,
+        "initial_equal": true,
+        "expanded_sources_preserved": true,
+        "expanded_equal": true,
+        "changed_sources_preserved": true,
+        "changed_equal": true,
+        "errors_zero": true
+      },
+      "cells": 528,
+      "errors_before": [],
+      "errors_after": []
+    },
+    {
+      "site": "SHACKLETON_RIM",
+      "lang": "ko",
+      "checks": {
+        "initial_sources_preserved": true,
+        "initial_equal": true,
+        "expanded_sources_preserved": true,
+        "expanded_equal": true,
+        "changed_sources_preserved": true,
+        "changed_equal": true,
+        "errors_zero": true
+      },
+      "cells": 528,
+      "errors_before": [],
+      "errors_after": []
+    },
+    {
+      "site": "ARTEMIS_HAWORTH",
+      "lang": "en",
+      "checks": {
+        "initial_sources_preserved": true,
+        "initial_equal": true,
+        "expanded_sources_preserved": true,
+        "expanded_equal": true,
+        "changed_sources_preserved": true,
+        "changed_equal": true,
+        "errors_zero": true
+      },
+      "cells": 530,
+      "errors_before": [],
+      "errors_after": []
+    },
+    {
+      "site": "ARTEMIS_HAWORTH",
+      "lang": "ko",
+      "checks": {
+        "initial_sources_preserved": true,
+        "initial_equal": true,
+        "expanded_sources_preserved": true,
+        "expanded_equal": true,
+        "changed_sources_preserved": true,
+        "changed_equal": true,
+        "errors_zero": true
+      },
+      "cells": 530,
+      "errors_before": [],
+      "errors_after": []
+    },
+    {
+      "site": "APOLLO17",
+      "lang": "en",
+      "checks": {
+        "initial_sources_preserved": true,
+        "initial_equal": true,
+        "expanded_sources_preserved": true,
+        "expanded_equal": true,
+        "changed_sources_preserved": true,
+        "changed_equal": true,
+        "errors_zero": true
+      },
+      "cells": 450,
+      "errors_before": [],
+      "errors_after": []
+    },
+    {
+      "site": "APOLLO17",
+      "lang": "ko",
+      "checks": {
+        "initial_sources_preserved": true,
+        "initial_equal": true,
+        "expanded_sources_preserved": true,
+        "expanded_equal": true,
+        "changed_sources_preserved": true,
+        "changed_equal": true,
+        "errors_zero": true
+      },
+      "cells": 450,
+      "errors_before": [],
+      "errors_after": []
+    }
+  ]
+}

@@ -185,3 +185,85 @@ html:not([lang="ko"]) body > .sc-pop, html:not([lang="ko"]) body > .sc-tip { --f
   #ls-brief #blk-time .sc-axis span:nth-child(2),
   #ls-brief #blk-time .sc-axis span:nth-child(4) { display: none; }
 }
+
+/* Reader layout: presentation only; hidden cards stay mounted for existing modules. */
+body.ls .ls-below > #ls-brief {
+  width: min(1392px, calc(100% - 48px)); max-width: none; margin-left: auto; margin-right: auto; padding-right: 0;
+  font-size: 14px; line-height: 1.5;
+}
+#ls-brief .sc-box .sc-cards { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; align-items: start; padding: 16px; }
+#ls-brief .sc-cards > .ls-detail { min-width: 0; padding: 20px 20px 0; container-type: inline-size; }
+#ls-brief .sc-cards > :is(#blk-time, #blk-terrain, #blk-access, #blk-history, #blk-routes, #blk-seasons, #blk-trust, #blk-more) { grid-column: 1 / -1; }
+#ls-brief .sc-cards > .is-closed { grid-column: auto; }
+#ls-brief .sc-box .ls-detail > header h3 { font-size: 16px; line-height: 24px; font-weight: 700; }
+#ls-brief :is(.blk-body, .panel) { font-family: var(--font); font-size: 14px; line-height: 1.5; }
+#ls-brief :is(.lsn-note, .hint, .sc-lim, .sc-src) { font-family: var(--font); font-size: 12px; line-height: 18px; overflow-wrap: anywhere; }
+#ls-brief .sc-src { flex-wrap: wrap; align-items: start; }
+#ls-brief .sc-src > span { flex: 1 1 200px; }
+#ls-brief .sc-src a { color: inherit; text-underline-offset: 3px; }
+#ls-brief .sc-kpis { grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 16px; }
+#ls-brief .sc-kv { padding-right: 0; }
+#ls-brief .sc-kv > span { font: 400 13px/20px var(--font); white-space: normal; overflow: visible; text-overflow: clip; }
+#ls-brief .sc-kv b, #ls-brief .det-kv b, #ls-brief #llsn-relay .kpi .value { font-size: 24px; line-height: 30px; }
+#ls-brief .sc-kv b { white-space: normal; overflow-wrap: anywhere; }
+#ls-brief .sc-kv b small { font-size: 12px; }
+#ls-brief .sc-near-summary { display: grid; gap: 8px; margin-bottom: 16px; }
+#ls-brief .sc-near-summary b { font-size: 24px; line-height: 30px; font-family: var(--font-num); }
+#ls-brief .sc-map { margin-top: 20px; max-width: 460px; }
+#ls-brief .sc-pgda-range { position: relative; height: 14px; margin: 10px 0; background: var(--sc-off); border-radius: 3px; }
+#ls-brief .sc-pgda-range i { position: absolute; height: 100%; background: var(--sun); opacity: .65; }
+#ls-brief .sc-pgda-range b { position: absolute; top: -2px; width: 2px; height: 18px; background: var(--text); }
+#ls-brief .sc-gap-tables { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 320px), 1fr)); gap: 12px; margin-top: 6px; }
+#ls-brief .mini-tbl { max-width: 100%; }
+#ls-brief .tbl-x { min-width: 0; }
+#ls-brief .tbl-x .mini-tbl { width: 100%; }
+#ls-brief .mini-tbl :is(td:first-child, th) { font-family: var(--font); }
+#ls-brief .sc-raw > summary { max-width: 100%; width: fit-content; }
+#ls-brief .panel-head { flex-wrap: wrap; }
+#ls-brief :is(.rl-period, .kr-period, .sa-period, .now-link) { white-space: normal; overflow-wrap: anywhere; }
+#ls-brief #llsn-horizon .hz-read { grid-template-columns: repeat(auto-fit, minmax(min(100%, 260px), 1fr)) !important; margin: 12px 0; }
+#ls-brief #llsn-horizon select { max-width: 100%; }
+#ls-brief .ctl > :is(label, span) { min-width: 0; max-width: 100%; }
+#ls-brief :is(input, select) { max-width: 100%; }
+#ls-brief :is(.sc-info, .info) { min-width: 24px; min-height: 24px; }
+#ls-brief :is(.sc-mv, summary) { min-height: 24px; }
+#ls-brief #llsn-relay .rl-budget-method { margin-top: 12px; }
+#ls-brief #llsn-relay .rl-budget-method dl { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); font-size: 12px; line-height: 18px; }
+#ls-brief #llsn-relay .rl-budget-method dd { overflow-wrap: anywhere; }
+@container (max-width: 700px) {
+  #ls-brief #llsn-local .lm-wrap, #ls-brief #llsn-relay .rl-grid { grid-template-columns: minmax(0, 1fr); }
+  #ls-brief #llsn-local .lm-map { max-width: 420px; }
+  #ls-brief #llsn-local .lm-scale { flex-wrap: wrap; }
+  #ls-brief #llsn-relay .rl-kpis { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
+  #ls-brief #llsn-korea .brow { grid-template-columns: minmax(0, 1fr) auto; grid-template-areas: 'l v' 'b b'; }
+  #ls-brief .mini-tbl { display: block; overflow-x: auto; }
+}
+@media (max-width: 1099px) {
+  #ls-brief .sc-box .sc-cards { grid-template-columns: minmax(0, 1fr); }
+}
+@media (max-width: 760px) {
+  #ls-brief .sc-box .sc-cards { padding: 16px 0 0; }
+  #ls-brief .sc-cards > .ls-detail { padding: 20px 16px 0; }
+  #ls-brief .sc-kpis, #ls-brief .sc-kpis.ac { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  #ls-brief .sc-act { gap: 8px; }
+  #ls-brief .sc-btn { height: auto; min-height: 34px; white-space: normal; }
+  #ls-brief .sc-chip { height: auto; min-height: 40px; white-space: normal; text-align: left; }
+  #ls-brief .sc-row { grid-template-columns: 52px minmax(0, 1fr); }
+  #ls-brief #llsn-relay dl { grid-template-columns: minmax(0, 1fr); gap: 2px; }
+  #ls-brief #llsn-relay dd { margin-bottom: 8px; }
+  #ls-brief #llsn-korea .sc { grid-template-columns: minmax(0, 1fr); }
+  #ls-brief .kv { grid-template-columns: minmax(0, 1fr) !important; }
+  #ls-brief .kv dd { margin: 0 0 8px; }
+}
+/* Specificity above the dynamically mounted detail modules, without changing their data. */
+body.ls #ls-brief .det-kv b { font-size: 24px; line-height: 30px; }
+body.ls #ls-brief .det-kv b small { font-size: 12px; line-height: 18px; }
+
+/* The shared lower-page wrapper reserves 60px right / 16px left for its rail.
+   Cancel that asymmetry for this section only, keeping other pages unchanged. */
+@media (min-width: 761px) and (max-width: 1499px) {
+  body.ls .ls-below > #ls-brief { width: min(1392px, calc(100% + 28px)); margin-left: calc((100% - min(1392px, calc(100% + 28px))) / 2 + 22px); margin-right: 0; }
+}
+@media (max-width: 760px) {
+  body.ls .ls-below > #ls-brief { width: min(1392px, calc(100% - 24px)); }
+}
