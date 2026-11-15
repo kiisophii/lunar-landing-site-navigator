@@ -2,7 +2,7 @@
 // Message in:  {id, lat, lon, base}        (base = URL of the data folder, e.g. 'https://…/data/')
 // Messages out: {id, type:'progress', text} … then {id, type:'done', mask:[720], h0_m, dem_sources, tiles, ms, polar}
 //               or {id, type:'error', message}
-// South of hterrain/polar_s/index.json lat_edge_deg the PGDA polar levels are used first (see hterrain.js).
+// Optional polar_s / polar_n indices select PGDA levels within each hemisphere's latitude edge.
 import { computeHorizon, decodeTile, decodePolarTile, tilesFor, needCount } from './hterrain.js';
 
 let index = null, indexBase = null;
@@ -24,7 +24,7 @@ async function fetchTiles(base, want) {
     const url = base + 'hterrain/' + index.url.replace('{grid}', g).replace('{ty}_{tx}', key);
     jobs.push(get(url).then(raw => cache[g].set(key, decodeTile(raw, index.grids[g].n))));
   }
-  for (const lv of (index.polar ? index.polar.levels : [])) {
+  for (const lv of [...(index.polar?.levels || []), ...(index.polarNorth?.levels || [])]) {
     const m = cache.polar[lv.name] || (cache.polar[lv.name] = new Map());
     for (const key of (want.polar && want.polar[lv.name]) || []) {
       if (m.has(key)) continue;
@@ -32,11 +32,14 @@ async function fetchTiles(base, want) {
       jobs.push(get(url).then(raw => m.set(key, decodePolarTile(raw, lv.n, lv.q_m))));
     }
   }
-  await Promise.all(jobs);
+  // A failed tile must not release the job queue while siblings can still write into the shared cache.
+  const settled = await Promise.allSettled(jobs);
+  const failed = settled.find(result => result.status === 'rejected');
+  if (failed) throw failed.reason;
   return jobs.length;
 }
 
-self.onmessage = async ev => {
+async function runJob(ev) {
   const { id, lat, lon, base } = ev.data;
   try {
     const t0 = performance.now();
@@ -44,8 +47,11 @@ self.onmessage = async ev => {
       const r = await fetch(base + 'hterrain/index.json');
       if (!r.ok) throw new Error('hterrain/index.json: HTTP ' + r.status);
       index = await r.json(); indexBase = base;
-      const p = await fetch(base + 'hterrain/polar_s/index.json').catch(() => null);   // optional polar levels
-      if (p && p.ok) index.polar = await p.json();
+      cache.near.clear(); cache.far.clear(); cache.polar = {};
+      // A missing optional index falls back to global terrain; a missing advertised tile remains an error.
+      const optionalIndex = path => fetch(base + 'hterrain/' + path + '/index.json')
+        .then(p => p.ok ? p.json() : null).catch(() => null);
+      [index.polar, index.polarNorth] = await Promise.all([optionalIndex('polar_s'), optionalIndex('polar_n')]);
     }
     let fetched = await fetchTiles(base, tilesFor(index, lat, lon));
     self.postMessage({ id, type: 'progress', text: 'march' });
@@ -58,8 +64,12 @@ self.onmessage = async ev => {
     if (needCount(res.need) || !res.mask) throw new Error('terrain tiles missing');
     self.postMessage({ id, type: 'done', mask: Array.from(res.mask, v => Math.round(v * 1e4) / 1e4), h0_m: res.h0_m,
       dem_sources: res.dem_sources, grids: { near: index.grids.near.res_m, far: index.grids.far.res_m },
-      polar: res.polar, params: res.params, tiles: fetched, ms: Math.round(performance.now() - t0) });
+      polar: res.polar, pole: res.pole, params: res.params, tiles: fetched, ms: Math.round(performance.now() - t0) });
   } catch (e) {
     self.postMessage({ id, type: 'error', message: String(e && e.message || e) });
   }
-};
+}
+
+// Fetch yields to other messages; serialize jobs so a base/hemisphere switch cannot replace an in-flight cache.
+let queue = Promise.resolve();
+self.onmessage = ev => (queue = queue.then(() => runJob(ev)));

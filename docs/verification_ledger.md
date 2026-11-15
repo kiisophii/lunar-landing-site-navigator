@@ -225,3 +225,9 @@ Input main `274e676`; implementation/evidence commit **dc53eca**. AI-assisted in
 | V / PGDA Earth definition | All 240 random masks independently reconstructed; own 81,444-epoch loop and direct original PGDA pixels. Centre MAE 3.874106927 pp → upper-limb approximation 1.239463679 pp (68.006% reduction); stored any-part max difference 0.000496292 pp. Direct PGDA max below 0.00001 pp. | Reproduction PASS; residual >0.1 pp at112/240, maximum25.083492952 pp, alllisted. 148 improve/31 worsen/61 unchanged. Sixteen named metrics separately reproduced (max0.000462453 pp), using checker-authored existing masks: not independent verification of those masks. Whole-disk geometry equivalence, exact PGDA dates and observer height unresolved. [Report](task_v_earth_definition.md), [all256rows](task_v_earth_definition_rows.csv). |
 
 Task K is an administrative audit, not an additional verified scientific product: [35 unique Jiyong SI entries across pinned main/current/pending branches including local storage migration, 17 rows with pending human cells](task_k_si_audit.md). Prior log entries and human cells are preserved. This table excludes the unmerged C/D/X/P/Q PR evidence from its status counts; each PR documents its own scope.
+
+## Northern terrain improvement — Jiyong, 2026-11-15
+
+| Product | Author checks | Status |
+|---|---|---|
+| `hterrain/polar_n/` | 30 same Task-U coordinates: median RMS 0.559386786 → 0.045787575 deg; hourly maximum Sun 5.378331508 → 0.561336254 pp, Earth 13.291803578 → 0.709656809 pp. All 3 bands pass targets. Three same-tile full CPU controls match 2,160 rounded bins, fractions 0 pp; 8 edge tests and 3 southern regressions pass; 3,146 shared tile borders exact. [Report](north_terrain.md), [full evidence](north_terrain_check.json). | Author-verified only; separate AI implementation/review is not another team member. Team verification pending. |

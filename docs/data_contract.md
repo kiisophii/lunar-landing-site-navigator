@@ -274,6 +274,14 @@ Sampling chain for a polar point (same rule as `horizon.sample_chain`): for a sa
 
 Task F proposal (2026-11-15, Jiyong): optional sparse `p5` and `p10` levels precede the existing levels, with the same encoding and 0.25 m height steps, used only to 3 km. They contain full-valid native-source tiles intersecting 4 km projected discs around the 16 catalogue sites; absent keys still fall through. `patch_radius_m`, `coverage_note` and top-level `sparse_near_field` document this limited coverage. No full-polar 5/10 m coverage or catalogue-equivalence promise. See [measured accuracy, regressions and cost](task_f_custom_polar.md).
 
+### 14c. Proposed — north-polar custom-point terrain (Jiyong, 2026-11-15)
+
+Optional `web/data/hterrain/polar_n/index.json` uses the section 14b predictor codec and fields, with `pole: "north"`, positive `lat_edge_deg`, and spherical stereographic `lat_0=90, lat_ts=90, lon_0=0, R=1737400`. Coordinates are `x=rho*sin(lon), y=-rho*cos(lon)`. Every level explicitly carries `pole: "north"`; names start with `n`, separate from southern `p` levels. URLs start `polar_n/<name>/`. `coverage_radius_m` records the projected cap enclosing the observer latitude band plus that level's entire geodesic sampling range. Native source pixels and shared tile borders are retained; height quantization is given by `q_m`.
+
+The optional north index is attached as `index.polarNorth` in memory; legacy `index.polar` remains southern. Missing optional indices use the global chain. Advertised missing tile files are errors. Levels apply by observer latitude and distance; the remaining global chain extends to 300 km. The Worker adds `pole: "north" | "south" | null`, while retaining `polar: boolean`. The existing 2 m observer, curvature, 720 azimuths and polar march parameters do not change.
+
+`hterrain/validation.json.north` contains `lat_edge_deg`, descriptive `levels`, `target` (`rms_deg_median`, `abs_sun_pp_per_point`), and `bands` keyed `75-80N`, `80-85N`, `85-90N`, each with `n`, `rms_deg_median`, `rms_deg_max`, `abs_sun_pp_median`, `abs_sun_pp_max`, `meets_target`. The UI applies measured northern accuracy only when the Worker actually reports `pole: "north"`; missing/failed validation retains an approximation warning. Measured errors are comparison results at sampled points, not guaranteed bounds at arbitrary coordinates.
+
 ## 15. Proposed — `web/data/local/<ID>.json` (Card 18, Jiyong, 2026-11-14)
 
 New optional data only; existing sections unchanged. Written by `pipeline/local_maps.py`.
