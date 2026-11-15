@@ -1,0 +1,92 @@
+[
+  {
+    "width": 1920,
+    "height": 1080,
+    "geometry": {
+      "title": 97,
+      "tableWidth": 1148,
+      "pageOverflow": false,
+      "background": "rgb(2, 3, 6)"
+    },
+    "shared_axes": [
+      "70\u00b0",
+      "-73\u00b0",
+      "0\u00b0"
+    ],
+    "page_errors": [],
+    "checks": "table, missing slope, no relay winner, shared scale, chart focus, KDSA lane hover, popover Escape, map/details actions, unpin numbering, Korean, overflow, hidden legacy all-sites table"
+  },
+  {
+    "width": 1440,
+    "height": 900,
+    "geometry": {
+      "title": 97,
+      "tableWidth": 1148,
+      "pageOverflow": false,
+      "background": "rgb(2, 3, 6)"
+    },
+    "shared_axes": [
+      "70\u00b0",
+      "-73\u00b0",
+      "0\u00b0"
+    ],
+    "page_errors": [],
+    "checks": "table, missing slope, no relay winner, shared scale, chart focus, KDSA lane hover, popover Escape, map/details actions, unpin numbering, Korean, overflow, hidden legacy all-sites table"
+  },
+  {
+    "width": 1280,
+    "height": 800,
+    "geometry": {
+      "title": 97,
+      "tableWidth": 1148,
+      "pageOverflow": false,
+      "background": "rgb(2, 3, 6)"
+    },
+    "shared_axes": [
+      "70\u00b0",
+      "-73\u00b0",
+      "0\u00b0"
+    ],
+    "page_errors": [],
+    "checks": "table, missing slope, no relay winner, shared scale, chart focus, KDSA lane hover, popover Escape, map/details actions, unpin numbering, Korean, overflow, hidden legacy all-sites table"
+  },
+  {
+    "width": 1100,
+    "height": 800,
+    "geometry": {
+      "title": 97,
+      "tableWidth": 1024,
+      "pageOverflow": false,
+      "background": "rgb(2, 3, 6)"
+    },
+    "shared_axes": [
+      "70\u00b0",
+      "-73\u00b0",
+      "0\u00b0"
+    ],
+    "page_errors": [],
+    "checks": "table, missing slope, no relay winner, shared scale, chart focus, KDSA lane hover, popover Escape, map/details actions, unpin numbering, Korean, overflow, hidden legacy all-sites table"
+  },
+  {
+    "width": 390,
+    "height": 844,
+    "geometry": {
+      "title": 94.078125,
+      "tableWidth": 690,
+      "pageOverflow": false,
+      "background": "rgb(2, 3, 6)"
+    },
+    "shared_axes": [
+      "70\u00b0",
+      "-73\u00b0",
+      "0\u00b0"
+    ],
+    "page_errors": [],
+    "checks": "table, missing slope, no relay winner, shared scale, chart focus, KDSA lane hover, popover Escape, map/details actions, unpin numbering, Korean, overflow, hidden legacy all-sites table"
+  },
+  {
+    "ties": "pass",
+    "rail_auto_hide": "pass",
+    "rail_keyboard_reveal": "pass"
+  }
+]

@@ -405,12 +405,15 @@ fetch('version.json', { cache: 'no-cache' }).then(r => r.json()).then(j => { $('
 // ------------------------------------------------------------ three screens (Chaei #26): page indicator on the right edge
 (() => {
   const nav = document.getElementById('ls-pages'); if (!nav) return;
+  let railTimer;
+  const reveal = () => { nav.classList.add('revealed'); clearTimeout(railTimer); railTimer = setTimeout(() => nav.classList.remove('revealed'), 1800); };
+  window.addEventListener('scroll', reveal, { passive: true });
   const targets = { map: () => document.querySelector('.ls-screen'), cmp: () => document.getElementById('ls-compare'), brief: () => document.getElementById('ls-brief') };
   nav.addEventListener('click', e => {
     const a = e.target.closest('a[data-page]'); if (!a) return;
     e.preventDefault();
     const el = targets[a.dataset.page]();
-    if (a.dataset.page === 'map') window.scrollTo({ top: 0, behavior: 'smooth' }); else el?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    if (a.dataset.page === 'map') window.scrollTo({ top: 0, behavior: reduced() ? 'auto' : 'smooth' }); else el?.scrollIntoView({ behavior: reduced() ? 'auto' : 'smooth', block: 'start' });
   });
   const mark = () => {
     const y = window.scrollY + window.innerHeight * 0.4;
@@ -425,7 +428,7 @@ fetch('version.json', { cache: 'no-cache' }).then(r => r.json()).then(j => { $('
 (() => {
   const host = document.querySelector('#ls-compare .cmp-dyn'); if (!host) return;
   const arrows = () => {
-    const wrap = host.querySelector('.big-cmp'); if (!wrap || wrap.querySelector('.cmp-arrows')) return;
+    const wrap = host.querySelector('.big-cmp'); if (!wrap || wrap.classList.contains('synced-comparison') || wrap.querySelector('.cmp-arrows')) return;
     const sc = wrap.querySelector('.cmp-scroll'); if (!sc) return;
     wrap.insertAdjacentHTML('afterbegin', `<div class="cmp-arrows"><button type="button" class="ls-btn" data-dir="-1" aria-label="${t('colPrev')}">‹</button><button type="button" class="ls-btn" data-dir="1" aria-label="${t('colNext')}">›</button></div>`);
     const upd = () => {
@@ -447,7 +450,7 @@ fetch('version.json', { cache: 'no-cache' }).then(r => r.json()).then(j => { $('
   };
   new MutationObserver(arrows).observe(host, { childList: true, subtree: true }); arrows();
 })();
-addStrings({ colPrev: 'Previous columns', colNext: 'Next columns' }, { colPrev: '이전 열', colNext: '다음 열' });
+addStrings({ colPrev: 'Previous columns', colNext: 'Next columns', pgCmp: 'Compare' }, { colPrev: '이전 열', colNext: '다음 열', pgCmp: '비교' });
 
 // ------------------------------------------------------------ bottom toolbar time parts (the copy's bar): ticks, UTC chip, speed stepper
 (() => {

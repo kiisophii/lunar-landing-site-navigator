@@ -1244,3 +1244,79 @@ body.on-about { overflow-x: clip; }
   .ls-detail.is-closed { display: none; }
   .ls-foot { border-top: 1px solid #2A2A2D; padding: 8px 0 0; }
 }
+/* Design sync bundles 6/9: lower-page comparison, isolated from the compact tray. */
+@media screen {
+  .ls-below, .ls-below .ls-section { background: #020306; }
+  .ls-below { padding-left: 16px; padding-right: 60px; }
+  #ls-compare, #ls-brief { padding-top: 30px; scroll-margin-top: 64px; }
+  .ls-head.scrolled { border-bottom-color: rgb(21,22,25); }
+  #ls-compare .sec-head { align-items: center; justify-content: space-between; margin-bottom: 14px; }
+  #ls-compare .sec-head h2 { font: 700 22px var(--font); }
+  .cmp-controls { display: flex; align-items: center; gap: 12px; }
+  .cmp-range { font: 500 13px var(--font-num); color: #ededed; }
+  .cmp-controls .cmp-arrows { margin: 0; gap: 10px; }
+  .cmp-controls .cmp-arrows .ls-btn { width: 32px; height: 32px; border: 1px solid #2a2a2c; border-radius: 8px; }
+  .synced-comparison .cmp-scroll { cursor: auto; }
+  .synced-comparison .cmp-detail-table { table-layout: fixed; min-width: 0; width: min(100%, calc(248px + var(--candidate-count) * 300px)); }
+  .synced-comparison .cmp-tbl th.lbl { width: 248px; min-width: 248px; background: #020306; color: #a3a3a8; }
+  .synced-comparison .cmp-tbl td, .synced-comparison .cmp-tbl thead th:not(.lbl) { width: 300px; min-width: 150px; max-width: 300px; padding: 0 18px; }
+  .synced-comparison .cmp-tbl thead th { position: relative; height: 85px; padding: 14px 18px; background: #020306; vertical-align: bottom; border-top: 1px solid #2a2a2c; }
+  .synced-comparison .cmp-tbl thead th.lbl { font: 500 12px var(--font-num); color: #6e6e74; padding-left: 4px; }
+  .synced-comparison .pin-no { display: block; padding: 0; margin: 0 0 5px; background: none; font: 500 12px var(--font-num); color: #6e6e74; }
+  .synced-comparison .cmp-name { display: block; text-align: left; border: 0; padding: 0; background: none; color: #ededed; font: 600 17px var(--font-num); }
+  .cmp-group { display: block; font: 400 12.5px var(--font); color: #a3a3a8; margin-top: 4px; }
+  .synced-comparison .unpin { position: absolute; top: 10px; right: 10px; width: 26px; height: 26px; border: 0; border-radius: 6px; background: none; color: #6e6e74; }
+  .synced-comparison .cmp-tbl tbody td { background: #151516; text-align: right; vertical-align: middle; }
+  .synced-comparison .cmp-tbl tbody th.lbl { padding: 0 4px; vertical-align: middle; font: 400 14.5px var(--font); }
+  .synced-comparison .cmp-tbl tr:not(.r-actions):not(.r-plots):not(.r-change-title) td { height: 58px; }
+  .synced-comparison .cmp-tbl .focus-col { background: #1b1b1c; box-shadow: none; }
+  .synced-comparison .cmp-tbl .best { background: #050505; box-shadow: inset 0 0 0 1px #777; }
+  .synced-comparison .cmp-tbl .val { font: 500 15px var(--font-num); }
+  .synced-comparison .cmp-tbl .val::after { content: none; }
+  .synced-comparison .cmp-tbl .val small { font: 400 12px var(--font-num); color: #6e6e74; margin-left: 2px; }
+  .synced-comparison .cmp-tbl .sub { display: none; }
+  .synced-comparison .r-relay .sub { display: block; font: 400 12px var(--font-num); color: #6e6e74; }
+  .synced-comparison .measure-icon { display: inline-block; width: 16px; margin-right: 8px; color: #6e6e74; }
+  .measure-help { display: inline-block; position: relative; margin-left: 5px; font-size: 12px; }
+  .measure-help summary { cursor: pointer; list-style: none; width: 22px; height: 22px; display: inline-grid; place-items: center; color: #6e6e74; }
+  .measure-help summary::-webkit-details-marker { display: none; }
+  .measure-help p { position: absolute; left: 0; bottom: 24px; width: 230px; z-index: 12; padding: 10px; margin: 0; border: 1px solid #444; border-radius: 6px; background: #0c0c0d; color: #ededed; font: 400 12px/1.5 var(--font); }
+  .synced-comparison .r-actions td { padding: 12px 18px; }
+  .synced-comparison .r-actions .ls-btn { display: flex; justify-content: space-between; align-items: center; width: 100%; height: 34px; border: 1px solid #2a2a2c; border-radius: 8px; font-size: 13px; }
+  .synced-comparison .r-actions .cmp-detail { margin-top: 6px; border-color: #ededed; font-weight: 600; }
+  .synced-comparison .r-change-title th { padding: 4px 18px; font: 700 14px var(--font); }
+  .synced-comparison .r-change-title small { font: 400 12px var(--font); color: #a3a3a8; }
+  .synced-comparison .r-plots td { background: #020306; padding: 0 10px; }
+  .synced-comparison .r-plots .lbl { vertical-align: middle; }
+  .synced-comparison .r-plots .lg { flex-direction: column; align-items: flex-start; }
+  .synced-comparison .r-plots svg { display: block; width: 100%; }
+  .cmp-tooltip { position: fixed; z-index: 80; max-width: min(440px, calc(100vw - 16px)); padding: 6px 9px; border: 1px solid rgba(237,237,237,.18); border-radius: 6px; background: rgba(12,12,13,.96); color: #ededed; font: 500 12px/1.5 var(--font-num); pointer-events: none; }
+  .ls-pages { gap: 60px; padding: 0; }
+  .ls-pages::before { top: 14px; bottom: 14px; }
+  .ls-pages a::after { width: 8px; height: 1px; border: 0; border-radius: 0; background: #6e6e74; }
+  .ls-pages a[aria-current="true"]::after { width: 4px; height: 4px; border-radius: 50%; background: #ededed; box-shadow: 0 0 0 3px #020306, 0 0 0 4px #6e6e74; }
+  .ls-pages a[aria-current="true"]::before { content: ''; position: absolute; width: 18px; height: 2px; background: #ededed; top: 25px; }
+  .ls-pages.revealed a > span, .ls-pages:hover a > span, .ls-pages:focus-within a > span { opacity: 1; }
+  @media (max-width: 700px) {
+    .ls-below { padding-left: 12px; padding-right: 12px; }
+    .cmp-controls { flex-wrap: wrap; gap: 6px; }
+    .synced-comparison .cmp-detail-table { width: calc(150px + var(--candidate-count) * 180px); }
+    .synced-comparison .cmp-tbl th.lbl { width: 150px; min-width: 150px; }
+    .synced-comparison .cmp-tbl td, .synced-comparison .cmp-tbl thead th:not(.lbl) { width: 180px; min-width: 180px; }
+    .synced-comparison .cmp-tbl tbody th.lbl { font-size: 12px; }
+    .synced-comparison .measure-icon { display: none; }
+    .measure-help p { left: -70px; width: 180px; }
+  }
+}
+@media screen {
+  .synced-comparison .pin-no { border: 0; border-radius: 0; line-height: 1.2; }
+  .synced-comparison .cmp-name { max-width: 100%; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .synced-comparison .cmp-tbl tbody tr.r-plots td { background: #020306; }
+  .synced-comparison .r-plots .lg-row { display: flex; flex-direction: column; align-items: flex-start; gap: 8px; padding: 12px 4px; }
+  .synced-comparison .r-plots .lg-row > span { display: flex; align-items: center; white-space: normal; font-size: 12px; }
+  .synced-comparison .r-plots .lg-sw { width: 24px; height: 12px; flex: 0 0 24px; }
+}
+@media screen {
+  .synced-comparison .cmp-tbl td, .synced-comparison .cmp-tbl thead th:not(.lbl) { width: var(--candidate-width, 300px); min-width: 150px; }
+}
+@media screen { #ls-compare > details { display: none; } }
