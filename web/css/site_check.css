@@ -185,3 +185,57 @@ html:not([lang="ko"]) body > .sc-pop, html:not([lang="ko"]) body > .sc-tip { --f
   #ls-brief #blk-time .sc-axis span:nth-child(2),
   #ls-brief #blk-time .sc-axis span:nth-child(4) { display: none; }
 }
+
+/* Chaei 23:00 request: Site check only; presentation, no content/data changes. */
+html body.ls #ls-brief {
+  width:100%; max-width:1392px; margin-left:auto; margin-right:auto;
+  padding-left:0; padding-right:0; box-sizing:border-box; text-align:left;
+  font-family:var(--font); font-size:13px; line-height:20px;
+}
+html body.ls #ls-brief .sc-box .sc-cards {
+  display:grid; grid-template-columns:repeat(2,minmax(0,1fr));
+  align-items:start; gap:16px; padding:20px;
+}
+html body.ls #ls-brief .sc-cards > .ls-detail {
+  grid-column:auto; min-width:0; max-width:100%; padding:20px;
+  box-sizing:border-box; overflow-wrap:anywhere;
+}
+/* Broad timelines, terrain/science tables and route maps need both columns. */
+html body.ls #ls-brief .sc-cards > :is(#blk-time,#blk-terrain,#blk-access,#blk-routes,#blk-seasons,#blk-trust) { grid-column:1 / -1; }
+html body.ls #ls-brief .sc-cards > .is-closed { grid-column:auto; }
+html body.ls #ls-brief .brief-head h2.sc-name { font:600 24px/32px var(--font); letter-spacing:-.3px; }
+html body.ls #ls-brief .sc-cell .v { font-size:24px; line-height:30px; }
+html body.ls #ls-brief .sc-box .ls-detail > header { padding-bottom:10px; margin-bottom:12px; }
+html body.ls #ls-brief .sc-box .ls-detail > header h3 { font-size:16px; line-height:24px; }
+html body.ls #ls-brief :is(p,.desc,.sc-lim,.sc-src,.lsn-note,.det-kv .k,.kpi .sub) { font-family:var(--font); line-height:20px; }
+html body.ls #ls-brief p.num { font-family:var(--font); }
+html body.ls #ls-brief :is(.sc-foot,.sc-src,.sc-lim) { overflow-wrap:anywhere; }
+html body.ls #ls-brief .sc-src { flex-wrap:wrap; padding-bottom:0; }
+html body.ls #ls-brief .sc-box .ls-detail .blk-body { min-width:0; max-width:100%; }
+html body.ls #ls-brief :is(.tbl-x,.table-wrap) { min-width:0; max-width:100%; overflow-x:auto; }
+html body.ls #ls-brief .mini-tbl { display:block; width:100%; max-width:100%; overflow-x:auto; }
+html body.ls #ls-brief .mini-tbl :is(th,td) { padding:6px 8px; font-size:12px; line-height:18px; }
+html body.ls #ls-brief :is(.rl-period,.kr-period,.sa-period,.now-link) { white-space:normal; overflow-wrap:anywhere; }
+html body.ls #ls-brief :is(svg,canvas,img) { max-width:100%; }
+html body.ls #ls-brief .sc-chip { min-height:32px; height:auto; padding-top:6px; padding-bottom:6px; }
+@media(max-width:760px) {
+ html body.ls #ls-brief .sc-box .sc-cards { grid-template-columns:minmax(0,1fr); padding:14px; }
+ html body.ls #ls-brief .sc-cards > .ls-detail { padding:16px; }
+ html body.ls #ls-brief .brief-head h2.sc-name { font-size:22px; line-height:30px; }
+}
+
+/* Compensate only this section for the shared lower shell's 16px/60px inset. */
+@media(min-width:701px) and (max-width:1499px) {
+ html body.ls #ls-brief { position:relative; left:22px; }
+}
+/* A half-width relay card must not squeeze its own map and detail table into halves again. */
+html body.ls #ls-brief #llsn-relay .rl-grid { grid-template-columns:minmax(0,1fr); }
+html body.ls #ls-brief #llsn-relay dl { grid-template-columns:minmax(0,1fr) minmax(0,1fr); }
+html body.ls #ls-brief .mini-tbl :is(th,td) { overflow-wrap:normal; word-break:normal; }
+html body.ls #ls-brief #llsn-relay .mini-tbl :is(th,td) { white-space:nowrap; }
+
+html body.ls #ls-brief #llsn-local .lm-wrap { grid-template-columns:minmax(0,1fr); }
+html body.ls #ls-brief #llsn-local .lm-map { max-width:420px; }
+html body.ls #ls-brief #llsn-local .lm-scale { flex-wrap:wrap; }
+html body.ls #ls-brief .kpi .value { font-size:26px; line-height:32px; }
+html body.ls #ls-brief .kpi .sub { font-family:var(--font); }

@@ -1,0 +1,24 @@
+[
+  {
+    "width": 1440,
+    "lang": "en",
+    "odd_half_width": true,
+    "reflow": true,
+    "errors": [],
+    "fonts": {
+      "geist": true,
+      "body": "Geist, Pretendard, system-ui, sans-serif"
+    }
+  },
+  {
+    "width": 390,
+    "lang": "ko",
+    "odd_half_width": false,
+    "reflow": true,
+    "errors": [],
+    "fonts": {
+      "geist": true,
+      "body": "Inter, \"Pretendard Variable\", Pretendard, system-ui, -apple-system, \"Segoe UI\", \"Noto Sans KR\", sans-serif"
+    }
+  }
+]
