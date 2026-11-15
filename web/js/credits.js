@@ -35,6 +35,7 @@ export const CREDITS = [
   ["Software and fonts", [
     ["C17", "Pretendard — Copyright (c) 2021 Kil Hyung-jin, SIL Open Font License 1.1."],
     ["C18", "Oxanium — Copyright 2019 The Oxanium Project Authors, SIL Open Font License 1.1."],
+    ["C22", "JetBrains Mono — Copyright 2020 The JetBrains Mono Project Authors, SIL Open Font License 1.1."],
     ["C19", "three.js r170 — Copyright © 2010–2024 three.js authors, MIT License."],
     ["C20", "Luna Sight source code: Apache License 2.0, github.com/kiisophii/lunar-landing-site-navigator."],
   ]],

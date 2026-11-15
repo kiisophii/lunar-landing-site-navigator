@@ -1,6 +1,6 @@
 // shell.js — page chrome for the 3-column layout (design spec v65 §3.1–3.3, 3.7, 3.10, 6): header, intro, panel folding,
 // sort help, layer/camera toolbar, mean-map layers (948 m whole-Moon grid), click-to-place points, add-site drawer,
-// scroll hint, About routing. Loaded BEFORE app.js (so the intro can count real data requests). No numbers computed here.
+// scroll hint, About routing. Loaded BEFORE app.js (so the intro hears the first load events). No numbers computed here.
 import { t, getLang } from './i18n.js';
 import { addStrings } from './ui_shared.js';
 
@@ -34,52 +34,25 @@ const esc = x => String(x).replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;',
 const fill = (s, o) => s.replace(/\{(\w+)\}/g, (_, k) => o[k] ?? '');
 const reduced = () => window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-// ------------------------------------------------------------ I. intro (first visit, ≤ 3 s, real progress)
+// ------------------------------------------------------------ I. intro (first visit; js/luna-intro.js, Chaei Oh)
+// The bar follows real loading: window load + the Moon colour map (llsn:globe) + the site data (llsn:ready).
+// A failed load counts as done, and each wait is capped, so the intro can never block the app.
 (function intro() {
   const el = $('#ls-intro');
   const q = new URLSearchParams(location.search);
   let seen = false; try { seen = localStorage.getItem('ls.introSeen') === '1'; } catch (e) { /* storage blocked */ }
-  if (seen || reduced() || q.has('sites') || q.has('nointro') || location.hash) return;
+  if (!el || !window.LunaIntro || seen || q.has('sites') || q.has('nointro') || location.hash) return;
   try { localStorage.setItem('ls.introSeen', '1'); } catch (e) { /* ignore */ }
-  // real progress: completed data/ requests of the first load (sites, ephemeris, horizon index, 33 horizons)
-  let done = 0, expect = 37, ready = false;
-  const orig = window.fetch.bind(window);
-  window.fetch = (...a) => {
-    const p = orig(...a);
-    const u = String(a[0]?.url || a[0]);
-    if (/data\/(sites|ephem|horizon)/.test(u)) p.then(r => { done++; if (/sites\.json/.test(u)) r.clone().json().then(j => { expect = 4 + j.length; }).catch(() => {}); }).catch(() => { done++; });
-    return p;
-  };
-  el.hidden = false;
-  el.innerHTML = `<div class="stars"></div><button type="button" class="skip">${t('introSkip')} ⏩</button>
-    <div class="moon"><svg class="lander" viewBox="0 0 34 30" aria-hidden="true"><path d="M10 4h14l3 10H7z M7 14h20v4H7z M9 18l-5 10M25 18l5 10M3 28h4M27 28h4M17 18v4" fill="none" stroke="currentColor" stroke-width="1.5"/></svg></div>
-    <div class="bar"><i></i></div>
-    <div class="word"><b>LUNA SIGHT</b><span>Lunar Landing Site Navigator</span></div>
-    <div class="pct num">${t('introLoading')} 000%</div><div class="clock num">T+ 00:00.00</div>`;
-  const t0 = performance.now();
-  let raf = 0, finished = false;
-  const finish = () => {
-    if (finished) return; finished = true;
-    cancelAnimationFrame(raf); window.fetch = orig;
-    el.classList.add('done'); setTimeout(() => { el.hidden = true; el.innerHTML = ''; }, 400);
-    window.removeEventListener('keydown', onKey);
-  };
-  const onKey = e => { if (e.key === 'Escape') finish(); };
-  el.addEventListener('click', finish);
-  window.addEventListener('keydown', onKey);
-  window.addEventListener('llsn:ready', () => { ready = true; });
-  window.addEventListener('llsn:loadfail', finish);
-  const tick = () => {
-    const ms = performance.now() - t0;
-    const pct = ready ? 100 : Math.min(99, Math.round((done / expect) * 100));
-    el.querySelector('.bar i').style.width = pct + '%';
-    el.querySelector('.clock').textContent = `T+ ${String(Math.floor(ms / 60000)).padStart(2, '0')}:${(ms / 1000 % 60).toFixed(2).padStart(5, '0')}`;
-    if (ready || ms > 2100) { el.classList.add('touch'); el.querySelector('.pct').textContent = ready ? t('introTouch') : `${t('introLoading')} ${String(pct).padStart(3, '0')}%`; }
-    else el.querySelector('.pct').textContent = `${t('introLoading')} ${String(pct).padStart(3, '0')}%`;
-    if (ms > 3000 || (ready && ms > 1600)) { finish(); return; }          // never longer than 3 s
-    raf = requestAnimationFrame(tick);
-  };
-  raf = requestAnimationFrame(tick);
+  const when = (events, capMs, failed) => new Promise(res => {
+    events.forEach(ev => window.addEventListener(ev, res, { once: true }));
+    setTimeout(res, capMs);
+    if (failed) { const iv = setInterval(() => { if (failed()) { clearInterval(iv); res(); } }, 250); setTimeout(() => clearInterval(iv), capMs); }
+  });
+  const globeFailed = () => document.getElementById('globe-stage')?.classList.contains('failed');   // no WebGL: no texture event
+  window.LunaIntro.mount({
+    el, label: getLang() === 'ko' ? 'Luna Sight 불러오는 중' : 'Loading Luna Sight',
+    waitFor: [when(['llsn:globe', 'llsn:loadfail'], 12000, globeFailed), when(['llsn:ready', 'llsn:loadfail'], 12000)],
+  });
 })();
 
 // ------------------------------------------------------------ header background on scroll, scroll hint
@@ -315,6 +288,7 @@ async function route() {
     if (target) { target.closest('details')?.setAttribute('open', ''); target.scrollIntoView(); } else window.scrollTo(0, 0);
     $('#view-about h1')?.focus({ preventScroll: true });
   } else if (wasOn) {
+    const foot = $('.ls-foot'); if (foot && foot.parentNode !== document.body) $('#view-about').after(foot);   // about.js docks it in #abScroll
     window.scrollTo(0, 0);
     window.dispatchEvent(new Event('resize'));          // the globe canvas was hidden: let it re-measure
   }

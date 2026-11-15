@@ -49,6 +49,7 @@
 
 - C17. Pretendard — Copyright (c) 2021 Kil Hyung-jin, SIL Open Font License 1.1.
 - C18. Oxanium — Copyright 2019 The Oxanium Project Authors, SIL Open Font License 1.1.
+- C22. JetBrains Mono — Copyright 2020 The JetBrains Mono Project Authors, SIL Open Font License 1.1.
 - C19. three.js r170 — Copyright © 2010–2024 three.js authors, MIT License.
 - C20. Luna Sight source code: Apache License 2.0, github.com/kiisophii/lunar-landing-site-navigator.
 
@@ -82,6 +83,7 @@ Opened on 14 November 2026 (KST) unless the source column says "resources_en.md"
 | C18 | **Confirmed.** OFL.txt first line "Copyright 2019 The Oxanium Project Authors (https://github.com/sevmeyer/oxanium)"; loaded from Google Fonts. **Only if the design branch is merged** | https://github.com/google/fonts/blob/main/ofl/oxanium/OFL.txt |
 | C19 | **Confirmed.** r170 LICENSE "Copyright © 2010-2024 three.js authors", MIT. MIT asks that the notice stay with copies of the software; we load it from cdnjs, so the line plus a link to the LICENSE is enough for the About page | https://github.com/mrdoob/three.js/blob/r170/LICENSE |
 | C20 | **Confirmed.** Repository LICENSE = Apache License 2.0 | ../LICENSE |
+| C22 | **Confirmed 2026-11-15.** OFL.txt first line "Copyright 2020 The JetBrains Mono Project Authors (https://github.com/JetBrains/JetBrainsMono)"; SIL OFL 1.1. Loaded from Google Fonts by the intro (js/luna-intro.js, HUD text). Numbered C22 so C19–C21 keep their numbers | https://github.com/JetBrains/JetBrainsMono/blob/master/OFL.txt |
 | C21 | **Basis confirmed: NASA Images and Media Usage Guidelines.** NASA content "used in a factual manner that does not imply endorsement may be used"; "NASA should be acknowledged as the source"; the Insignia and Logotype "are not in the public domain"; for SI uses, "do not imply any review or permission was granted by NASA". The Space Apps brand guidelines and 2026 participant terms pages were also opened: neither shows a required disclaimer text, so C21 is our own wording based on the NASA page | https://www.nasa.gov/nasa-brand-center/images-and-media/ ; https://www.spaceappschallenge.org/brand/ ; https://www.spaceappschallenge.org/legal/ |
 
 ## Differences from the current About source table (`s5-design-impl-sua`, `web/js/about.js`)

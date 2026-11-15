@@ -20,8 +20,10 @@
 <body class="ls">
 <a class="ls-skip" href="#ls-compare" data-i18n="skipBelow">Skip to the comparison</a>
 
-<!-- I. intro (intro.js): first visit only, ≤ 3 s, real loading progress, skip; none with reduced motion -->
+<!-- I. intro (js/luna-intro.js, Chaei Oh; mounted by shell.js): first visit only, follows real loading
+     (page + Moon colour map + site data), skip once loaded; reduced motion lands in place -->
 <div id="ls-intro" class="ls-intro" hidden></div>
+<script src="js/luna-intro.js"></script>
 
 <!-- H. header: wordmark (→ About), language -->
 <header class="ls-head">
