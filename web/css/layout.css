@@ -1451,6 +1451,18 @@ body.on-about .ls-export { display: none; }
   @media (max-width: 860px) { #view-about .abh-text h1 { font-size: 20px; } #view-about .abh-lead { display: none; } }
 }
 
+/* ---- About next/top arrow on phones (<= 600 px): smaller button in its own strip below the scrolling text,
+   so it never covers body copy mid-scroll. 40 px button, 16 px from the right/bottom edges; the text box
+   (#abScroll) stops 64 px above the screen bottom (16 edge + 40 button + 8 gap). Desktop/tablet unchanged. */
+@media screen and (max-width: 600px) {
+  #view-about .ab-next { right: 16px; bottom: 16px; width: 40px; height: 40px; }
+  #view-about .ab-next svg { width: 16px; height: 16px; }
+  #abScroll { margin-bottom: 64px; padding-bottom: 24px;
+    -webkit-mask-image: linear-gradient(180deg,transparent 0,rgba(0,0,0,.35) 28px,#000 96px,#000 calc(100% - 20px),rgba(0,0,0,.4));
+    mask-image: linear-gradient(180deg,transparent 0,rgba(0,0,0,.35) 28px,#000 96px,#000 calc(100% - 20px),rgba(0,0,0,.4)); }
+  #abScroll.at-top { -webkit-mask-image: linear-gradient(180deg,#000 calc(100% - 20px),rgba(0,0,0,.4)); mask-image: linear-gradient(180deg,#000 calc(100% - 20px),rgba(0,0,0,.4)); }
+}
+
 /* ---- four-item check against the copy (18:41): mean-error rows, typed value box */
 .val-pop .vp-cap { display: flex; align-items: baseline; justify-content: space-between; gap: 10px; margin: 0 0 4px; font-size: 11px; color: #6E6E74; }
 .val-pop .vp-cap b { font-size: 13px; font-weight: 600; color: #EDEDED; }
