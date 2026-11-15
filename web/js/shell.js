@@ -4,6 +4,7 @@
 import { t, getLang } from './i18n.js';
 import { addStrings } from './ui_shared.js';
 import { enhanceSelect, autoEnhance } from './ui_select.js';
+import { runIntro } from './intro.js';
 // ?gv= (shared camera) is read here, before app.js rewrites the address bar, so the late-loading globe still gets it
 window.__llsnGV = new URLSearchParams(location.search).get('gv');
 
@@ -41,53 +42,8 @@ const esc = x => String(x).replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;',
 const fill = (s, o) => s.replace(/\{(\w+)\}/g, (_, k) => o[k] ?? '');
 const reduced = () => window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-// ------------------------------------------------------------ I. intro (first visit, ≤ 3 s, real progress)
-(function intro() {
-  const el = $('#ls-intro');
-  const q = new URLSearchParams(location.search);
-  let seen = false; try { seen = localStorage.getItem('ls.introSeen') === '1'; } catch (e) { /* storage blocked */ }
-  if (seen || reduced() || q.has('sites') || q.has('nointro') || location.hash) return;
-  try { localStorage.setItem('ls.introSeen', '1'); } catch (e) { /* ignore */ }
-  // real progress: completed data/ requests of the first load (sites, ephemeris, horizon index, 33 horizons)
-  let done = 0, expect = 37, ready = false;
-  const orig = window.fetch.bind(window);
-  window.fetch = (...a) => {
-    const p = orig(...a);
-    const u = String(a[0]?.url || a[0]);
-    if (/data\/(sites|ephem|horizon)/.test(u)) p.then(r => { done++; if (/sites\.json/.test(u)) r.clone().json().then(j => { expect = 4 + j.length; }).catch(() => {}); }).catch(() => { done++; });
-    return p;
-  };
-  el.hidden = false;
-  el.innerHTML = `<div class="stars"></div><button type="button" class="skip">${t('introSkip')} ⏩</button>
-    <div class="moon"><svg class="lander" viewBox="0 0 34 30" aria-hidden="true"><path d="M10 4h14l3 10H7z M7 14h20v4H7z M9 18l-5 10M25 18l5 10M3 28h4M27 28h4M17 18v4" fill="none" stroke="currentColor" stroke-width="1.5"/></svg></div>
-    <div class="bar"><i></i></div>
-    <div class="word"><b>LUNA SIGHT</b><span>Lunar Landing Site Navigator</span></div>
-    <div class="pct num">${t('introLoading')} 000%</div><div class="clock num">T+ 00:00.00</div>`;
-  const t0 = performance.now();
-  let raf = 0, finished = false;
-  const finish = () => {
-    if (finished) return; finished = true;
-    cancelAnimationFrame(raf); window.fetch = orig;
-    el.classList.add('done'); setTimeout(() => { el.hidden = true; el.innerHTML = ''; }, 400);
-    window.removeEventListener('keydown', onKey);
-  };
-  const onKey = e => { if (e.key === 'Escape') finish(); };
-  el.addEventListener('click', finish);
-  window.addEventListener('keydown', onKey);
-  window.addEventListener('llsn:ready', () => { ready = true; });
-  window.addEventListener('llsn:loadfail', finish);
-  const tick = () => {
-    const ms = performance.now() - t0;
-    const pct = ready ? 100 : Math.min(99, Math.round((done / expect) * 100));
-    el.querySelector('.bar i').style.width = pct + '%';
-    el.querySelector('.clock').textContent = `T+ ${String(Math.floor(ms / 60000)).padStart(2, '0')}:${(ms / 1000 % 60).toFixed(2).padStart(5, '0')}`;
-    if (ready || ms > 2100) { el.classList.add('touch'); el.querySelector('.pct').textContent = ready ? t('introTouch') : `${t('introLoading')} ${String(pct).padStart(3, '0')}%`; }
-    else el.querySelector('.pct').textContent = `${t('introLoading')} ${String(pct).padStart(3, '0')}%`;
-    if (ms > 3000 || (ready && ms > 1600)) { finish(); return; }          // never longer than 3 s
-    raf = requestAnimationFrame(tick);
-  };
-  raf = requestAnimationFrame(tick);
-})();
+// ------------------------------------------------------------ I. intro (first visit; Chaei's copy, ~14 s, skippable) — intro.js
+runIntro();
 
 // ------------------------------------------------------------ header background on scroll, scroll hint
 const head = $('.ls-head'), hint = $('.ls-scrollhint');   // the pill was removed (5-1); hint may be null
