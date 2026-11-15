@@ -1,7 +1,10 @@
 // about.js — About view (#about, design spec v65 §6): how to use, definitions, validation, Korea links,
 // sources (required by the rules), assumptions, team and SI (AI) use disclosure. Loaded on first visit to #about.
 // Numbers: validation.json, hindcast.json (no other numbers on this page).
-import { t, getLang } from './i18n.js';
+// Top band (Chaei Oh's About band spec): a fixed 40 % band with the Earth-to-Moon picture (about-journey.js, Chaei Oh),
+// the sections scroll inside #abScroll only, and the craft follows that scroll. Decorative picture: no data, not to scale.
+import './about-journey.js';                       // classic script: defines window.LunaJourney
+import { t } from './i18n.js';
 import { addStrings, LLSN } from './ui_shared.js';
 import { headline, PGDA_URL, PAPER_URL } from './trust.js';
 import { hindcast, validation } from './values.js';
@@ -10,6 +13,8 @@ import { CREDITS } from './credits.js';
 
 addStrings({
   abExplore: 'Explore the Moon', abKicker: 'Lunar Landing Site Navigator',
+  abBand1: 'See lunar landing', abBand2: 'conditions clearly.', abLede: 'Sunlight, Earth contact and terrain at a glance.', abCta: 'Explore the Moon',
+  abArt: 'Illustration of the journey from the Earth to a landing on the Moon. Not to scale.', abNext: 'Next section', abTop: 'Back to top',
   abH1: 'Where can a lander see the Sun and the Earth?', abLead: 'Luna Sight compares lunar landing sites and dates side by side: sunlight for power, a direct line to Earth for the radio link, and how long the dark lasts — from NASA terrain and ephemeris data, hour by hour. A comparison tool, not a “best site” picker.',
   abArtCap: 'The Moon is drawn by this tool’s 3D view (NASA SVS CGI Moon Kit colour, LOLA terrain). Not to scale.',
   abWhy: 'Why the lunar south pole?', abW1: 'There is ice', abW1t: 'Crater floors that never see the Sun can keep water ice — a resource for future crews.',
@@ -43,6 +48,8 @@ addStrings({
   abCTA: 'Find your own landing site', abCTAb: 'Find my landing site →',
 }, {
   abExplore: '달 살펴보기', abKicker: 'Lunar Landing Site Navigator',
+  abBand1: '달 착륙 조건을', abBand2: '더 또렷하게.', abLede: '햇빛과 지구 교신, 착륙지의 조건을 한눈에.', abCta: '달 살펴보기',
+  abArt: '지구에서 달까지 착륙 과정을 표현한 그림. 실제 비율이 아닙니다.', abNext: '다음 내용으로', abTop: '맨 위로',
   abH1: '착륙선이 해와 지구를 볼 수 있는 곳은?', abLead: 'Luna Sight는 달 착륙지와 날짜를 나란히 비교합니다: 전력을 위한 햇빛, 지구와 직접 교신할 수 있는 시간, 어둠이 얼마나 오래 가는지 — NASA 지형·천체력 자료로 1시간 간격으로 계산합니다. "최고의 착륙지"를 고르는 도구가 아니라 비교 도구입니다.',
   abArtCap: '달은 이 도구의 3D 보기(NASA SVS CGI Moon Kit 색, LOLA 지형)로 그린 것. 실제 비율 아님.',
   abWhy: '왜 달 남극인가', abW1: '얼음이 있다', abW1t: '해가 들지 않는 분화구 바닥에 물 얼음이 남아 있을 수 있습니다 — 미래 탐사의 자원.',
@@ -90,14 +97,18 @@ async function render() {
   const H = await headline(), v = await validation(), h = await hindcast();
   const inRange = v?.named ? v.named.filter(n => n.ours_sun >= n.pgda_sun_min300 && n.ours_sun <= n.pgda_sun_max300).length : null;
   const ap = h?.apollo_sun_elevation || [], rb = h?.robotic_sunset || [];
+  const foot = document.querySelector('.ls-foot'); if (foot && root.contains(foot)) root.after(foot);   // keep the page footer
+  stopJourney();
   root.innerHTML = `
-  <div class="ab-hero">
-    <div><div class="ab-kicker">${E('abKicker')}</div><h1 tabindex="-1">${E('abH1')}</h1><p>${E('abLead')}</p>
-      <p style="margin-top:20px"><a class="ls-btn primary" href="#" data-explore style="height:40px;border-radius:999px;padding:0 1.4em">${E('abExplore')} →</a></p></div>
-    <figure style="margin:0"><div class="ab-art"><canvas class="ab-moon" width="360" height="360" style="width:62%;aspect-ratio:1"></canvas>
-      <svg viewBox="0 0 100 100" style="position:absolute;inset:0;width:100%;height:100%" aria-hidden="true"><path d="M70 6 C64 20 60 30 56 38" stroke="#fff" stroke-dasharray="2 2" fill="none" stroke-width=".5"/><g transform="translate(51 36) scale(.25)" fill="none" stroke="#fff" stroke-width="2"><path d="M10 4h14l3 10H7z M7 14h20v4H7z M9 18l-5 10M25 18l5 10M17 18v4"/></g></svg></div>
-      <figcaption class="ls-caption"><span class="chip-st">${getLang() === 'ko' ? '그림' : 'Picture'}</span> ${E('abArtCap')}</figcaption></figure>
-  </div>
+  <section class="ab-band" aria-labelledby="abH">
+    <div class="ab-stage" role="img" aria-label="${E('abArt')}"><div id="heroJourney" role="presentation" aria-hidden="true"></div></div>
+    <div class="ab-copy">
+      <h1 id="abH" tabindex="-1"><span>${E('abBand1')}</span><br><span>${E('abBand2')}</span></h1>
+      <p class="ab-lede">${E('abLede')}</p>
+      <a class="ls-btn primary ab-cta" href="#" data-explore><span>${E('abCta')}</span> <span aria-hidden="true">→</span></a>
+    </div>
+  </section>
+  <div class="ab-scroll at-top" id="abScroll">
   <section class="ab-sec" id="about-why"><h2>${E('abWhy')}</h2><div class="ab-cards">${[1, 2, 3].map(k => `<div class="ls-panel"><h3>${E('abW' + k)}</h3><p>${E('abW' + k + 't')}</p></div>`).join('')}</div></section>
   <section class="ab-sec" id="about-how"><h2>${E('abHow')}</h2><div><div class="ab-cards">${[1, 2, 3].map(k => `<div class="ls-panel"><h3><span class="circ">${k}</span> ${E('abH' + k + 's')}</h3><p>${E('abH' + k + 't')}</p></div>`).join('')}</div>
     <details><summary>${E('abKeys')}</summary><p class="muted">${E('abKeysT')}</p></details></div></section>
@@ -122,31 +133,75 @@ async function render() {
     <details id="about-team"><summary>${E('abTeam')}</summary><p>${E('abTeamLead')}</p><ul>${TEAM.map(([n, r]) => `<li><b>${esc(n)}</b> — <span class="muted">${esc(r)}</span></li>`).join('')}</ul>
       <p>${E('abSI')}</p><p><a href="https://github.com/kiisophii/lunar-landing-site-navigator/blob/main/docs/SI_USAGE.md" target="_blank" rel="noopener">docs/SI_USAGE.md</a> · <a href="https://github.com/kiisophii/lunar-landing-site-navigator" target="_blank" rel="noopener">source (Apache-2.0)</a></p></details>
   </div></section>
-  <section class="ab-sec"><h2>${E('abCTA')}</h2><div><a class="ls-btn primary" href="#" data-mine style="height:40px;border-radius:999px;padding:0 1.4em">${E('abCTAb')}</a></div></section>`;
-  drawMoon(root.querySelector('.ab-moon'));
+  <section class="ab-sec"><h2>${E('abCTA')}</h2><div><a class="ls-btn primary" href="#" data-mine style="height:40px;border-radius:999px;padding:0 1.4em">${E('abCTAb')}</a></div></section>
+  </div>
+  <button type="button" class="ab-next" aria-label="${E('abNext')}"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="square" stroke-linejoin="miter" aria-hidden="true"><path d="M12 4V18M6.5 12.5L12 18L17.5 12.5"/></svg></button>`;
+  wireScroll(root);
+  if (document.body.classList.contains('on-about')) enter();
   root.querySelector('[data-explore]').addEventListener('click', e => { e.preventDefault(); leave(); });
   root.querySelector('[data-mine]').addEventListener('click', e => { e.preventDefault(); leave(); setTimeout(() => LLSN().openAdd?.('coord'), 100); });
   root.querySelector('[data-gs]').addEventListener('click', e => { e.preventDefault(); leave(); setTimeout(() => { document.querySelector('#ls-brief [data-open="gs"]')?.click(); }, 200); });
 }
 function leave() { history.pushState(null, '', location.pathname + location.search); window.dispatchEvent(new HashChangeEvent('hashchange')); }
-/** The hero picture: the same colour map as the 3D view, orthographic, lit from the side. */
-function drawMoon(cv) {
-  const im = new Image();
-  im.onload = () => {
-    const IW = 512, IH = 256, c = document.createElement('canvas'); c.width = IW; c.height = IH;
-    const g0 = c.getContext('2d'); g0.drawImage(im, 0, 0, IW, IH); const px = g0.getImageData(0, 0, IW, IH).data;
-    const W = cv.width, R = W / 2, g = cv.getContext('2d'), out = g.createImageData(W, W), la = -0.5;
-    for (let j = 0; j < W; j++) for (let i = 0; i < W; i++) {
-      const x = (i + .5) / R - 1, y = 1 - (j + .5) / R, rr = x * x + y * y; if (rr > 1) continue;
-      const z = Math.sqrt(1 - rr), lat = Math.asin(z * Math.sin(la) + y * Math.cos(la)), lon = Math.atan2(x, z * Math.cos(la) - y * Math.sin(la));
-      const u = ((lon / (2 * Math.PI) + .5) % 1 + 1) % 1, v = .5 - lat / Math.PI, si = (Math.floor(v * IH) * IW + Math.floor(u * IW)) * 4, di = (j * W + i) * 4;
-      const sh = Math.max(0.06, 0.15 + 0.85 * (0.75 * x + 0.35 * y + 0.55 * z));
-      out.data[di] = px[si] * sh; out.data[di + 1] = px[si + 1] * sh; out.data[di + 2] = px[si + 2] * sh; out.data[di + 3] = 255;
-    }
-    g.putImageData(out, 0, 0);
-  };
-  im.src = 'data/globe/moon_color_2k.jpg';
+// ------------------------------------------------------------ scroll area, page footer, arrow, band picture
+const reduced = () => window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+/** The page footer lives at the end of #abScroll while About is shown (shell.js puts it back on leaving). */
+function dockFoot() {
+  const foot = document.querySelector('.ls-foot'), sc = document.getElementById('abScroll');
+  if (foot && sc && foot.parentNode !== sc) sc.appendChild(foot);
 }
+function wireScroll(root) {
+  const sc = root.querySelector('#abScroll'), btn = root.querySelector('.ab-next');
+  const atEnd = () => sc.scrollTop >= sc.scrollHeight - sc.clientHeight - 4;
+  const sync = () => {
+    sc.classList.toggle('at-top', sc.scrollTop < 4);              // top fade only once the content has moved
+    const end = atEnd();
+    btn.classList.toggle('up', end);
+    btn.setAttribute('aria-label', t(end ? 'abTop' : 'abNext'));
+  };
+  sc.addEventListener('scroll', sync, { passive: true });
+  new ResizeObserver(sync).observe(sc);
+  btn.addEventListener('click', () => {
+    const behavior = reduced() ? 'auto' : 'smooth';
+    if (atEnd()) { sc.scrollTo({ top: 0, behavior }); return; }
+    const top = sc.getBoundingClientRect().top;
+    const next = [...sc.querySelectorAll(':scope > section')].find(s => s.getBoundingClientRect().top - top > 40);
+    sc.scrollTo({ top: next ? sc.scrollTop + next.getBoundingClientRect().top - top - 32 : sc.scrollHeight, behavior });
+  });
+  sync();
+}
+// The band picture runs only while About is shown: mounted on entering, destroyed on leaving or re-rendering.
+let journey = null, jRaf = 0;
+function stopJourney() { cancelAnimationFrame(jRaf); jRaf = 0; journey?.destroy(); journey = null; }
+function startJourney() {
+  stopJourney();
+  const el = document.getElementById('heroJourney'), sc = document.getElementById('abScroll');
+  if (!el || !sc || !window.LunaJourney) return;
+  const j = window.LunaJourney.mount(el, { mode: 'manual', fit: 'band', showLabels: false, bandPadTop: 26, bandPadBot: 52, focusAt: innerWidth > 860 ? 0.62 : 0.7 });
+  const T = j.timeline, stops = [T.fadeIn[1], T.coast[0], T.flip[0], T.touch, T.touch + 1400], endPad = 0.15;
+  const timeAt = p => { const q = Math.max(0, Math.min(1, p / (1 - endPad))) * (stops.length - 1), i = Math.min(stops.length - 2, Math.floor(q)); return stops[i] + (stops[i + 1] - stops[i]) * (q - i); };
+  let cur = stops[0];
+  const tick = () => {
+    jRaf = requestAnimationFrame(tick);
+    if (document.getElementById('view-about').hidden) return;
+    const run = sc.scrollHeight - sc.clientHeight, p = run > 0 ? sc.scrollTop / run : 1, tt = reduced() ? stops[4] : timeAt(p);
+    cur += (tt - cur) * (reduced() ? 1 : 0.12); if (Math.abs(tt - cur) < 1) cur = tt;
+    j.seekTime(cur);
+  };
+  journey = j; tick();
+}
+/** Entering About (first render or #about again): footer in, scroll from the top (unless a section was asked for), picture on. */
+function enter() {
+  dockFoot();
+  const sc = document.getElementById('abScroll'); if (!sc) return;
+  const target = location.hash.length > 6 ? document.getElementById(location.hash.slice(1)) : null;
+  if (target && sc.contains(target)) { target.closest('details')?.setAttribute('open', ''); target.scrollIntoView(); } else sc.scrollTop = 0;
+  startJourney();
+  window.dispatchEvent(new Event('resize'));                      // the band was display:none until now
+  if (document.activeElement === document.body) document.getElementById('abH')?.focus({ preventScroll: true });   // first load: h1 came late
+}
+window.addEventListener('llsn:about', enter);
+window.addEventListener('hashchange', () => { if (!/^#about/.test(location.hash)) stopJourney(); });
 
 window.addEventListener('llsn:lang', () => { if (document.body.classList.contains('on-about')) render(); });
 render();
