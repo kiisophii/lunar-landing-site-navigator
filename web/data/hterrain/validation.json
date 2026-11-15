@@ -108,5 +108,44 @@
    }
   },
   "impl_rms_deg_max": 1.41e-11
+ },
+ "north": {
+  "lat_edge_deg": 75,
+  "levels": [
+   "20 m to 3 km at 85\u201390\u00b0N",
+   "60 m to 3 km at 75\u201385\u00b0N",
+   "240 m to 200 km"
+  ],
+  "target": {
+   "rms_deg_median": 0.2,
+   "abs_sun_pp_per_point": 2
+  },
+  "bands": {
+   "75-80N": {
+    "n": 10,
+    "rms_deg_median": 0.04036685597476304,
+    "rms_deg_max": 0.05860670082935538,
+    "abs_sun_pp_median": 0.034227820372398354,
+    "abs_sun_pp_max": 0.18939393939393923,
+    "meets_target": true
+   },
+   "80-85N": {
+    "n": 10,
+    "rms_deg_median": 0.04765228489995384,
+    "rms_deg_max": 0.33281614631679346,
+    "abs_sun_pp_median": 0.07530120481927527,
+    "abs_sun_pp_max": 0.33771449434100154,
+    "meets_target": true
+   },
+   "85-90N": {
+    "n": 10,
+    "rms_deg_median": 0.046845624647249756,
+    "rms_deg_max": 0.3064334318754795,
+    "abs_sun_pp_median": 0.07872398685651663,
+    "abs_sun_pp_max": 0.5613362541073391,
+    "meets_target": true
+   }
+  },
+  "reference": "docs/north_terrain_check.json; 30 stratified points, original PGDA 10/20/30 m near field; sampled comparison, not a universal accuracy bound"
  }
 }

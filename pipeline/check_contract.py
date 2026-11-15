@@ -432,35 +432,44 @@ def check_hterrain(data):
     check_mock_flag(idx, "hterrain/index.json")
     print(f"hterrain: near {idx['grids']['near'].get('res_m')} m, far {idx['grids']['far'].get('res_m')} m")
     check_hterrain_polar(d)
+    check_hterrain_polar(d, 'north')
 
 
-def check_hterrain_polar(d):
-    """Section 14b (proposed): south-polar PGDA levels for custom points (web/data/hterrain/polar_s/)."""
-    f = d / "polar_s" / "index.json"
+def check_hterrain_polar(d, pole='south'):
+    """Sections 14b/c: optional hemisphere-specific PGDA levels."""
+    folder = 'polar_n' if pole == 'north' else 'polar_s'
+    where = f'hterrain/{folder}'
+    f = d / folder / "index.json"
     if not f.exists():
-        warn("hterrain.polar_s", "index.json missing - polar custom points use the 948 m grid")
+        warn(where, "index.json missing - polar custom points use the 948 m grid")
         return
     idx = load_json(f)
-    if idx is None or not need(idx, ["pole", "lat_edge_deg", "levels", "projection", "mock"], "hterrain/polar_s/index.json"):
+    if idx is None or not need(idx, ["pole", "lat_edge_deg", "levels", "projection", "mock"], where+'/index.json'):
         return
-    if "R=1737400" not in idx["projection"].replace(".0", "") or "lat_0=-90" not in idx["projection"]:
-        err("hterrain/polar_s", f"unexpected projection {idx['projection']}")
+    origin = 'lat_0=90' if pole == 'north' else 'lat_0=-90'
+    if "R=1737400" not in idx["projection"].replace(".0", "") or origin not in idx["projection"]:
+        err(where, f"unexpected projection {idx['projection']}")
+    if idx['pole'] != pole or not is_num(idx['lat_edge_deg']) or not (0 < (1 if pole=='north' else -1)*idx['lat_edge_deg'] <= 90):
+        err(where, 'pole/latitude edge mismatch')
     total = 0
     for lv in idx["levels"]:
-        w = f"hterrain.polar_s.{lv.get('name')}"
+        w = f"hterrain.{folder}.{lv.get('name')}"
         if not need(lv, ["name", "res_m", "q_m", "to_km", "x0_m", "y0_m", "tile_px", "n", "nt", "tiles", "url"], w):
             continue
         if lv["n"] != lv["tile_px"] + 1:
             err(w, "n must be tile_px + 1")
-        if not (0 < lv["to_km"] <= 150):
-            err(w, f"to_km {lv['to_km']} outside (0, 150]")
+        limit = 300 if pole == 'north' else 150
+        if not (0 < lv["to_km"] <= limit):
+            err(w, f"to_km {lv['to_km']} outside (0, {limit}]")
+        if pole == 'north' and (lv.get('pole') != 'north' or not (0 < lv.get('lat_edge_deg',0) <= 90)):
+            err(w, 'north level requires pole=north and positive latitude edge')
         paths = [d / lv["url"].replace("{ty}_{tx}", k) for k in lv["tiles"]]
         absent = [p.name for p in paths if not p.exists()]
         if absent:
             err(w, f"{len(absent)} listed tiles missing, e.g. {absent[:3]}")
         total += sum(p.stat().st_size for p in paths if p.exists())
-    check_mock_flag(idx, "hterrain/polar_s/index.json")
-    print(f"hterrain.polar_s: {[(lv['name'], lv['res_m'], lv['to_km']) for lv in idx['levels']]}, {total / 1e6:.1f} MB")
+    check_mock_flag(idx, where+'/index.json')
+    print(f"hterrain.{folder}: {[(lv['name'], lv['res_m'], lv['to_km']) for lv in idx['levels']]}, {total / 1e6:.1f} MB")
 
 
 def check_local(data, sites):

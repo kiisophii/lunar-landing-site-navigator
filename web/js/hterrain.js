@@ -1,5 +1,5 @@
 // hterrain.js — horizon mask for a user-defined point, computed from the browser height tiles in web/data/hterrain/
-// (written by pipeline/build_custom_terrain.py and, near the south pole, pipeline/build_polar_terrain.py).
+// (written by pipeline/build_custom_terrain.py and the south/north polar terrain builders).
 // Pure maths, no DOM: used by custom_horizon_worker.js and by the Node check pipeline/check_custom_horizon.mjs.
 //
 // Same definitions as pipeline/horizon.py (contract section 3 / 9):
@@ -9,7 +9,7 @@
 //   distance s the first source whose "to_km" ≥ s and that has data wins (NaN falls through), as horizon.sample_chain.
 // Global path: "near" grid (LDEM_64 → 32 px/deg, ~948 m) to 150 km, "far" grid (LDEM_16, ~1895 m) to 300 km,
 //   distances 0.2 → 300 km in 4000 steps.
-// South-polar path (point latitude ≤ polar.lat_edge_deg): PGDA polar-stereographic levels (e.g. 60 m, 240 m) first,
+// Polar path (inside the hemisphere's lat_edge_deg): PGDA polar-stereographic levels (e.g. 60 m, 240 m) first,
 //   then the global grids; distances 0.005 → 300 km in 8000 steps (the card-8 settings).
 
 export const R_M = 1737400;
@@ -69,15 +69,16 @@ export function sampleGrid(grid, tiles, lat, lon, need) {
   return (1 - p.fr) * ((1 - p.fc) * t[k] + p.fc * t[k + 1]) + p.fr * ((1 - p.fc) * t[k + n] + p.fc * t[k + n + 1]);
 }
 
-/** South polar stereographic (k0 = 1 at the pole, R = 1737.4 km), as horizon.polar_stereo_xy(south=True). */
-export function polarXY(lat, lon) {
-  const rho = 2 * R_M * Math.tan(Math.PI / 4 + lat * D2R / 2);
-  return [rho * Math.sin(lon * D2R), rho * Math.cos(lon * D2R)];
+/** Polar stereographic (k0 = 1, R = 1737.4 km). Omitted pole preserves the legacy southern projection. */
+export function polarXY(lat, lon, pole = 'south') {
+  const sign = pole === 'north' ? -1 : 1;
+  const rho = 2 * R_M * Math.tan(Math.PI / 4 + sign * lat * D2R / 2);
+  return [rho * Math.sin(lon * D2R), sign * rho * Math.cos(lon * D2R)];
 }
 
 /** Locate (lat, lon) on a polar level; null when outside the level's tiles (= no data there, falls through). */
 export function locatePolar(level, lat, lon) {
-  const [x, y] = polarXY(lat, lon), d = level.res_m, T = level.tile_px, N = level.nt * T;
+  const [x, y] = polarXY(lat, lon, level.pole), d = level.res_m, T = level.tile_px, N = level.nt * T;
   const c = (x - level.x0_m) / d, r = (level.y0_m - y) / d;
   if (!(r >= 0 && c >= 0 && r <= N && c <= N)) return null;
   const r0 = Math.min(Math.floor(r), N - 1), c0 = Math.min(Math.floor(c), N - 1);
@@ -106,9 +107,10 @@ export function distancesKm(minKm = 0.2, maxKm = 300, nSteps = 4000) {
 
 /** Polar levels that apply to a point (finest first), or [] for the global path. */
 export function polarLevels(index, lat) {
-  const P = index.polar;
-  if (!P || P.pole !== 'south' || !(lat <= P.lat_edge_deg)) return [];
-  return P.levels.filter(lv => lat <= (lv.lat_edge_deg ?? P.lat_edge_deg));
+  const pole = lat >= 0 ? 'north' : 'south', P = pole === 'north' ? index.polarNorth : index.polar;
+  const covers = edge => pole === 'north' ? lat >= edge : lat <= edge;
+  if (!P || P.pole !== pole || !covers(P.lat_edge_deg)) return [];
+  return P.levels.filter(lv => (lv.pole ?? 'south') === pole && covers(lv.lat_edge_deg ?? P.lat_edge_deg));
 }
 
 /** March settings for a point: card-8 settings on the polar path, the phase-2 defaults elsewhere. */
@@ -118,7 +120,7 @@ export function marchParams(index, lat) {
 
 function emptyNeed(index) {
   const need = { near: new Set(), far: new Set(), polar: {} };
-  for (const lv of (index.polar ? index.polar.levels : [])) need.polar[lv.name] = new Set();
+  for (const lv of [...(index.polar?.levels || []), ...(index.polarNorth?.levels || [])]) need.polar[lv.name] = new Set();
   return need;
 }
 export const needCount = need => need.near.size + need.far.size + Object.values(need.polar || {}).reduce((s, v) => s + v.size, 0);
@@ -185,8 +187,8 @@ export function computeHorizon(index, tiles, lat, lon, opts = {}) {
     if (s <= nearTo) return [sampleGrid(near, tiles.near, la, lo, need.near), levels.length];
     return [sampleGrid(far, tiles.far, la, lo, need.far), levels.length + 1];
   };
-  const [h0] = sample(lat, lon, 0);
-  if (!isFinite(h0)) return { mask: null, h0_m: NaN, need, polar: levels.length > 0 };
+  const [h0, h0src] = sample(lat, lon, 0);
+  if (!isFinite(h0)) return { mask: null, h0_m: NaN, need, polar: false, pole: null };
   const ro = R_M + h0 + OBS_HEIGHT_M, rTop = R_M + HMAX_M;
   const s = distancesKm(minKm, maxKm, nSteps), ns = s.length, Rk = R_M / 1000;
   const th = new Float64Array(ns), ct = new Float64Array(ns), st = new Float64Array(ns);
@@ -219,5 +221,7 @@ export function computeHorizon(index, tiles, lat, lon, opts = {}) {
   levels.forEach((lv, i) => { if (used[i]) dem_sources.push({ name: `PGDA ${lv.res_m} m (browser, ${lv.q_m} m steps)`, res_m: lv.res_m, to_km: r2(used[i]) }); });
   if (used[levels.length]) dem_sources.push({ name: 'LDEM_64 (32 px/deg, browser)', res_m: near.res_m, to_km: r2(used[levels.length]) });
   if (used[levels.length + 1]) dem_sources.push({ name: 'LDEM_16 (browser)', res_m: far.res_m, to_km: r2(used[levels.length + 1]) });
-  return { mask, h0_m: h0, need, dem_sources, params: { minKm, maxKm, nSteps }, polar: levels.length > 0 };
+  const polar = h0src < levels.length || used.slice(0, levels.length).some(v => v > 0);
+  return { mask, h0_m: h0, need, dem_sources, params: { minKm, maxKm, nSteps }, polar,
+    pole: polar ? (lat >= 0 ? 'north' : 'south') : null };
 }

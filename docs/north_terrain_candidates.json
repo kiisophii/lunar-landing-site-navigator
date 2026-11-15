@@ -1,0 +1,1239 @@
+{
+ "note": "Diagnostic native-window runs, 2-hour ephemeris. Final shipped tiles validated separately by actual browser in north_terrain_check.json.",
+ "candidates": {
+  "candidate60": {
+   "input_result_sha256": "b9a4073bfcb5b458caceb66ef4121f99af591c58e2a1dc0b3aa6541980e0e142",
+   "elapsed_s": 37.17011059995275,
+   "rows": [
+    {
+     "id": "NORTH_75_01",
+     "lat": 75.370492,
+     "lon": -38.040535,
+     "band": "75-80N",
+     "difference": {
+      "rms_deg": 0.026370104090967836,
+      "max_abs_deg": 0.1457446878447719,
+      "sun_diff_pp": -0.009127418765969564,
+      "earth_diff_pp": -0.041073384446876915,
+      "both_diff_pp": -0.027382256297919794
+     }
+    },
+    {
+     "id": "NORTH_75_02",
+     "lat": 78.857179,
+     "lon": -150.544101,
+     "band": "75-80N",
+     "difference": {
+      "rms_deg": 0.019788364669192336,
+      "max_abs_deg": 0.12327059065688317,
+      "sun_diff_pp": -0.01825483753195023,
+      "earth_diff_pp": 0.0,
+      "both_diff_pp": 0.0
+     }
+    },
+    {
+     "id": "NORTH_75_03",
+     "lat": 76.30161,
+     "lon": 34.140722,
+     "band": "75-80N",
+     "difference": {
+      "rms_deg": 0.007415766501085275,
+      "max_abs_deg": 0.07096778893282618,
+      "sun_diff_pp": -0.009127418765969564,
+      "earth_diff_pp": 0.0,
+      "both_diff_pp": -0.009127418765969564
+     }
+    },
+    {
+     "id": "NORTH_75_04",
+     "lat": 79.091262,
+     "lon": -156.64427,
+     "band": "75-80N",
+     "difference": {
+      "rms_deg": 0.004468128076989832,
+      "max_abs_deg": 0.022551655582130792,
+      "sun_diff_pp": 0.0,
+      "earth_diff_pp": 0.0,
+      "both_diff_pp": 0.0
+     }
+    },
+    {
+     "id": "NORTH_75_05",
+     "lat": 79.670804,
+     "lon": -46.276705,
+     "band": "75-80N",
+     "difference": {
+      "rms_deg": 0.05276792421053192,
+      "max_abs_deg": 0.24164520241413867,
+      "sun_diff_pp": 0.23274917853230992,
+      "earth_diff_pp": -0.013691128148962672,
+      "both_diff_pp": 0.10040160642569851
+     }
+    },
+    {
+     "id": "NORTH_75_06",
+     "lat": 76.15138,
+     "lon": -4.842523,
+     "band": "75-80N",
+     "difference": {
+      "rms_deg": 0.01996303339795425,
+      "max_abs_deg": 0.10383295665806735,
+      "sun_diff_pp": 0.009127418765969564,
+      "earth_diff_pp": 0.0,
+      "both_diff_pp": 0.009127418765969564
+     }
+    },
+    {
+     "id": "NORTH_75_07",
+     "lat": 75.318501,
+     "lon": 13.028697,
+     "band": "75-80N",
+     "difference": {
+      "rms_deg": 0.004485016273546235,
+      "max_abs_deg": 0.03138253123913337,
+      "sun_diff_pp": 0.0,
+      "earth_diff_pp": 0.0,
+      "both_diff_pp": 0.0
+     }
+    },
+    {
+     "id": "NORTH_75_08",
+     "lat": 78.517517,
+     "lon": 109.541482,
+     "band": "75-80N",
+     "difference": {
+      "rms_deg": 0.021465794519606552,
+      "max_abs_deg": 0.10965326297837841,
+      "sun_diff_pp": 0.02281854691493293,
+      "earth_diff_pp": 0.0,
+      "both_diff_pp": 0.0
+     }
+    },
+    {
+     "id": "NORTH_75_09",
+     "lat": 79.641143,
+     "lon": -119.82793,
+     "band": "75-80N",
+     "difference": {
+      "rms_deg": 0.033965656632129346,
+      "max_abs_deg": 0.12042488445981425,
+      "sun_diff_pp": 0.0,
+      "earth_diff_pp": 0.0,
+      "both_diff_pp": 0.0
+     }
+    },
+    {
+     "id": "NORTH_75_10",
+     "lat": 77.894143,
+     "lon": -158.081219,
+     "band": "75-80N",
+     "difference": {
+      "rms_deg": 0.043168423430650076,
+      "max_abs_deg": 0.18625601296450123,
+      "sun_diff_pp": 0.0638919313618147,
+      "earth_diff_pp": 0.0,
+      "both_diff_pp": 0.0
+     }
+    },
+    {
+     "id": "NORTH_80_01",
+     "lat": 81.868285,
+     "lon": -128.234048,
+     "band": "80-85N",
+     "difference": {
+      "rms_deg": 0.036610561086799664,
+      "max_abs_deg": 0.16241658993409658,
+      "sun_diff_pp": -0.0958378970427165,
+      "earth_diff_pp": 0.0,
+      "both_diff_pp": 0.0
+     }
+    },
+    {
+     "id": "NORTH_80_02",
+     "lat": 80.80341,
+     "lon": 49.640731,
+     "band": "80-85N",
+     "difference": {
+      "rms_deg": 0.053322982905915986,
+      "max_abs_deg": 0.19368266533035916,
+      "sun_diff_pp": 0.17798466593647033,
+      "earth_diff_pp": 0.5111354508944843,
+      "both_diff_pp": 0.3194596568090541
+     }
+    },
+    {
+     "id": "NORTH_80_03",
+     "lat": 84.290985,
+     "lon": -79.863231,
+     "band": "80-85N",
+     "difference": {
+      "rms_deg": 0.012257305572612417,
+      "max_abs_deg": 0.058648363232623346,
+      "sun_diff_pp": -0.01825483753194468,
+      "earth_diff_pp": 0.013691128148957121,
+      "both_diff_pp": 0.00912741876597234
+     }
+    },
+    {
+     "id": "NORTH_80_04",
+     "lat": 80.407259,
+     "lon": 56.203982,
+     "band": "80-85N",
+     "difference": {
+      "rms_deg": 0.19545192304743852,
+      "max_abs_deg": 0.7016020040892652,
+      "sun_diff_pp": 0.05476451259583959,
+      "earth_diff_pp": 0.0,
+      "both_diff_pp": 0.0
+     }
+    },
+    {
+     "id": "NORTH_80_05",
+     "lat": 82.046717,
+     "lon": 116.525827,
+     "band": "80-85N",
+     "difference": {
+      "rms_deg": 0.023850390078270542,
+      "max_abs_deg": 0.1523528374056209,
+      "sun_diff_pp": -0.018254837531947454,
+      "earth_diff_pp": 0.0,
+      "both_diff_pp": 0.0
+     }
+    },
+    {
+     "id": "NORTH_80_06",
+     "lat": 81.886242,
+     "lon": 170.252609,
+     "band": "80-85N",
+     "difference": {
+      "rms_deg": 0.0919044152439931,
+      "max_abs_deg": 0.5244191016603259,
+      "sun_diff_pp": 0.2738225629791924,
+      "earth_diff_pp": 0.0,
+      "both_diff_pp": 0.0
+     }
+    },
+    {
+     "id": "NORTH_80_07",
+     "lat": 82.383779,
+     "lon": 81.255466,
+     "band": "80-85N",
+     "difference": {
+      "rms_deg": 0.05335863737580061,
+      "max_abs_deg": 0.23485493679511826,
+      "sun_diff_pp": -0.25100401606426015,
+      "earth_diff_pp": 0.666301569916028,
+      "both_diff_pp": 0.1369112814895948
+     }
+    },
+    {
+     "id": "NORTH_80_08",
+     "lat": 81.943234,
+     "lon": 113.731219,
+     "band": "80-85N",
+     "difference": {
+      "rms_deg": 0.08038685566989942,
+      "max_abs_deg": 0.48934574492748906,
+      "sun_diff_pp": 0.045637093829870023,
+      "earth_diff_pp": 0.04563709382986447,
+      "both_diff_pp": 0.022818546914932236
+     }
+    },
+    {
+     "id": "NORTH_80_09",
+     "lat": 84.010682,
+     "lon": 121.100832,
+     "band": "80-85N",
+     "difference": {
+      "rms_deg": 0.3140403245737665,
+      "max_abs_deg": 1.080567624777375,
+      "sun_diff_pp": 0.337714494340996,
+      "earth_diff_pp": 0.0,
+      "both_diff_pp": 0.0
+     }
+    },
+    {
+     "id": "NORTH_80_10",
+     "lat": 83.770055,
+     "lon": 66.501129,
+     "band": "80-85N",
+     "difference": {
+      "rms_deg": 0.010799318152823187,
+      "max_abs_deg": 0.09934250342388351,
+      "sun_diff_pp": 0.0,
+      "earth_diff_pp": 0.0,
+      "both_diff_pp": 0.0
+     }
+    },
+    {
+     "id": "NORTH_85_01",
+     "lat": 88.623982,
+     "lon": -111.115875,
+     "band": "85-90N",
+     "difference": {
+      "rms_deg": 0.1329149083714274,
+      "max_abs_deg": 0.5705996861769655,
+      "sun_diff_pp": 0.6161007667031759,
+      "earth_diff_pp": 0.03194596568090735,
+      "both_diff_pp": 0.5522088353413654
+     }
+    },
+    {
+     "id": "NORTH_85_02",
+     "lat": 86.099697,
+     "lon": 73.585781,
+     "band": "85-90N",
+     "difference": {
+      "rms_deg": 0.34425652057595646,
+      "max_abs_deg": 0.7031245502346879,
+      "sun_diff_pp": 2.437020810514787,
+      "earth_diff_pp": 0.01825483753195023,
+      "both_diff_pp": 0.8534136546184734
+     }
+    },
+    {
+     "id": "NORTH_85_03",
+     "lat": 86.254578,
+     "lon": -133.412235,
+     "band": "85-90N",
+     "difference": {
+      "rms_deg": 0.0011635226325935539,
+      "max_abs_deg": 0.0034016614770475684,
+      "sun_diff_pp": 0.0,
+      "earth_diff_pp": 0.0,
+      "both_diff_pp": 0.0
+     }
+    },
+    {
+     "id": "NORTH_85_04",
+     "lat": 86.725365,
+     "lon": -109.392562,
+     "band": "85-90N",
+     "difference": {
+      "rms_deg": 0.0016865746375649437,
+      "max_abs_deg": 0.021214400830175784,
+      "sun_diff_pp": 0.0,
+      "earth_diff_pp": 0.0,
+      "both_diff_pp": 0.0
+     }
+    },
+    {
+     "id": "NORTH_85_05",
+     "lat": 85.489546,
+     "lon": 29.099046,
+     "band": "85-90N",
+     "difference": {
+      "rms_deg": 0.02809859869119068,
+      "max_abs_deg": 0.1404849540658657,
+      "sun_diff_pp": 0.03650967506389213,
+      "earth_diff_pp": 0.0,
+      "both_diff_pp": 0.013691128148959897
+     }
+    },
+    {
+     "id": "NORTH_85_06",
+     "lat": 86.442001,
+     "lon": -47.928059,
+     "band": "85-90N",
+     "difference": {
+      "rms_deg": 0.07363621118082107,
+      "max_abs_deg": 0.2501791921434382,
+      "sun_diff_pp": 0.022818546914932236,
+      "earth_diff_pp": 0.013691128148962672,
+      "both_diff_pp": 0.022818546914932236
+     }
+    },
+    {
+     "id": "NORTH_85_07",
+     "lat": 86.10642,
+     "lon": 31.496533,
+     "band": "85-90N",
+     "difference": {
+      "rms_deg": 0.28028410027972894,
+      "max_abs_deg": 0.9488927015181599,
+      "sun_diff_pp": 0.28294998174516195,
+      "earth_diff_pp": 0.8899233296823739,
+      "both_diff_pp": 0.4107338444687858
+     }
+    },
+    {
+     "id": "NORTH_85_08",
+     "lat": 86.738958,
+     "lon": 6.836987,
+     "band": "85-90N",
+     "difference": {
+      "rms_deg": 0.4816239291146228,
+      "max_abs_deg": 1.4967993015904373,
+      "sun_diff_pp": 0.2875136911281495,
+      "earth_diff_pp": 1.5653523183643658,
+      "both_diff_pp": 0.5020080321285134
+     }
+    },
+    {
+     "id": "NORTH_85_09",
+     "lat": 88.679849,
+     "lon": -110.499132,
+     "band": "85-90N",
+     "difference": {
+      "rms_deg": 0.022080827997688277,
+      "max_abs_deg": 0.14915890129615805,
+      "sun_diff_pp": -0.00456370938298617,
+      "earth_diff_pp": -0.0045637093829875575,
+      "both_diff_pp": 0.0
+     }
+    },
+    {
+     "id": "NORTH_85_10",
+     "lat": 89.241603,
+     "lon": -40.124428,
+     "band": "85-90N",
+     "difference": {
+      "rms_deg": 0.6190536905793451,
+      "max_abs_deg": 1.597249462028672,
+      "sun_diff_pp": 0.12778386272362108,
+      "earth_diff_pp": 0.0,
+      "both_diff_pp": 0.0
+     }
+    }
+   ]
+  },
+  "candidate_fine": {
+   "input_result_sha256": "0da9eae8cba648346479d4dc795cfd00cbe71f4ebda7adae3d98160f6efd7c6f",
+   "elapsed_s": 24.249553799978457,
+   "rows": [
+    {
+     "id": "NORTH_85_01",
+     "res": 40,
+     "difference": {
+      "rms_deg": 0.09347862839784979,
+      "max_abs_deg": 0.4498803934889739,
+      "sun_diff_pp": 0.3148959474260679,
+      "earth_diff_pp": 0.01825483753194468,
+      "both_diff_pp": 0.2783862723621758
+     }
+    },
+    {
+     "id": "NORTH_85_02",
+     "res": 40,
+     "difference": {
+      "rms_deg": 0.28594806091200503,
+      "max_abs_deg": 0.5927670944265184,
+      "sun_diff_pp": 2.1449434100036497,
+      "earth_diff_pp": 0.01825483753195023,
+      "both_diff_pp": 0.7621394669587445
+     }
+    },
+    {
+     "id": "NORTH_85_03",
+     "res": 40,
+     "difference": {
+      "rms_deg": 0.0005089667309945115,
+      "max_abs_deg": 0.0018819027737340122,
+      "sun_diff_pp": 0.0,
+      "earth_diff_pp": 0.0,
+      "both_diff_pp": 0.0
+     }
+    },
+    {
+     "id": "NORTH_85_04",
+     "res": 40,
+     "difference": {
+      "rms_deg": 0.0016299821991770122,
+      "max_abs_deg": 0.0152640775692785,
+      "sun_diff_pp": 0.0,
+      "earth_diff_pp": 0.0,
+      "both_diff_pp": 0.0
+     }
+    },
+    {
+     "id": "NORTH_85_05",
+     "res": 40,
+     "difference": {
+      "rms_deg": 0.012348953007979476,
+      "max_abs_deg": 0.07096750569680932,
+      "sun_diff_pp": 0.013691128148959897,
+      "earth_diff_pp": -0.0045637093829875575,
+      "both_diff_pp": 0.00456370938298617
+     }
+    },
+    {
+     "id": "NORTH_85_06",
+     "res": 40,
+     "difference": {
+      "rms_deg": 0.05612956691757312,
+      "max_abs_deg": 0.260584692274918,
+      "sun_diff_pp": 0.013691128148959897,
+      "earth_diff_pp": 0.013691128148962672,
+      "both_diff_pp": 0.013691128148959897
+     }
+    },
+    {
+     "id": "NORTH_85_07",
+     "res": 40,
+     "difference": {
+      "rms_deg": 0.2395562606832955,
+      "max_abs_deg": 0.8601224584250078,
+      "sun_diff_pp": 0.19623950346842056,
+      "earth_diff_pp": 0.7986491420226449,
+      "both_diff_pp": 0.333150784958014
+     }
+    },
+    {
+     "id": "NORTH_85_08",
+     "res": 40,
+     "difference": {
+      "rms_deg": 0.21640342750360694,
+      "max_abs_deg": 0.7601757322783342,
+      "sun_diff_pp": 0.1506024096385561,
+      "earth_diff_pp": 0.8899233296823628,
+      "both_diff_pp": 0.2510040160642574
+     }
+    },
+    {
+     "id": "NORTH_85_09",
+     "res": 40,
+     "difference": {
+      "rms_deg": 0.031367987470642046,
+      "max_abs_deg": 0.23751215232114342,
+      "sun_diff_pp": 0.009127418765973033,
+      "earth_diff_pp": 0.0,
+      "both_diff_pp": 0.009127418765973033
+     }
+    },
+    {
+     "id": "NORTH_85_10",
+     "res": 40,
+     "difference": {
+      "rms_deg": 0.3327156742118284,
+      "max_abs_deg": 1.1586538498910572,
+      "sun_diff_pp": 0.06845564074479671,
+      "earth_diff_pp": 0.0,
+      "both_diff_pp": 0.0
+     }
+    },
+    {
+     "id": "NORTH_85_01",
+     "res": 20,
+     "difference": {
+      "rms_deg": 0.02819047485154899,
+      "max_abs_deg": 0.15974606114221723,
+      "sun_diff_pp": 0.05476451259583681,
+      "earth_diff_pp": 0.009127418765975115,
+      "both_diff_pp": 0.04563709382986447
+     }
+    },
+    {
+     "id": "NORTH_85_02",
+     "res": 20,
+     "difference": {
+      "rms_deg": 0.05337725221364196,
+      "max_abs_deg": 0.2186955153617518,
+      "sun_diff_pp": 0.4016064257028107,
+      "earth_diff_pp": -0.009127418765969564,
+      "both_diff_pp": 0.15516611902154087
+     }
+    },
+    {
+     "id": "NORTH_85_03",
+     "res": 20,
+     "difference": {
+      "rms_deg": 0.0007126971409858586,
+      "max_abs_deg": 0.0028534915150544293,
+      "sun_diff_pp": 0.0045637093829875575,
+      "earth_diff_pp": 0.0,
+      "both_diff_pp": 0.0
+     }
+    },
+    {
+     "id": "NORTH_85_04",
+     "res": 20,
+     "difference": {
+      "rms_deg": 0.0008143519861820344,
+      "max_abs_deg": 0.007798393432888462,
+      "sun_diff_pp": 0.0,
+      "earth_diff_pp": 0.0,
+      "both_diff_pp": 0.0
+     }
+    },
+    {
+     "id": "NORTH_85_05",
+     "res": 20,
+     "difference": {
+      "rms_deg": 0.019736924992744754,
+      "max_abs_deg": 0.1584639602639495,
+      "sun_diff_pp": -0.018254837531947454,
+      "earth_diff_pp": 0.0,
+      "both_diff_pp": -0.009127418765973727
+     }
+    },
+    {
+     "id": "NORTH_85_06",
+     "res": 20,
+     "difference": {
+      "rms_deg": 0.0548958818078904,
+      "max_abs_deg": 0.2638102681856118,
+      "sun_diff_pp": -0.004563709382984782,
+      "earth_diff_pp": -0.013691128148962672,
+      "both_diff_pp": -0.004563709382984782
+     }
+    },
+    {
+     "id": "NORTH_85_07",
+     "res": 20,
+     "difference": {
+      "rms_deg": 0.22235965774710645,
+      "max_abs_deg": 0.8199248176702296,
+      "sun_diff_pp": -0.027382256297919794,
+      "earth_diff_pp": -0.0638919313618036,
+      "both_diff_pp": -0.05476451259583681
+     }
+    },
+    {
+     "id": "NORTH_85_08",
+     "res": 20,
+     "difference": {
+      "rms_deg": 0.08168583007649109,
+      "max_abs_deg": 0.29203374501924806,
+      "sun_diff_pp": 0.03650967506389213,
+      "earth_diff_pp": 0.2966411098941135,
+      "both_diff_pp": 0.05932822197882437
+     }
+    },
+    {
+     "id": "NORTH_85_09",
+     "res": 20,
+     "difference": {
+      "rms_deg": 0.017677881259254985,
+      "max_abs_deg": 0.18020597549701023,
+      "sun_diff_pp": 0.004563709382986864,
+      "earth_diff_pp": 0.0,
+      "both_diff_pp": 0.00456370938298617
+     }
+    },
+    {
+     "id": "NORTH_85_10",
+     "res": 20,
+     "difference": {
+      "rms_deg": 0.30592264475290637,
+      "max_abs_deg": 0.9320777143957368,
+      "sun_diff_pp": 0.06845564074479671,
+      "earth_diff_pp": 0.0,
+      "both_diff_pp": 0.0
+     }
+    }
+   ]
+  },
+  "candidate_mid3": {
+   "input_result_sha256": "6a6dc5c3076eb50ffc17b7e3b16ec9de78be261756ef0067eadcf337e5edd4fd",
+   "elapsed_s": 36.41467319999356,
+   "rows": [
+    {
+     "id": "NORTH_75_01",
+     "difference": {
+      "rms_deg": 0.054632458605943124,
+      "max_abs_deg": 0.30383958140379974,
+      "sun_diff_pp": 0.01825483753194468,
+      "earth_diff_pp": -0.041073384446876915,
+      "both_diff_pp": -0.009127418765975115
+     }
+    },
+    {
+     "id": "NORTH_75_02",
+     "difference": {
+      "rms_deg": 0.021459969576440478,
+      "max_abs_deg": 0.12327059065688317,
+      "sun_diff_pp": -0.01825483753195023,
+      "earth_diff_pp": 0.0,
+      "both_diff_pp": 0.0
+     }
+    },
+    {
+     "id": "NORTH_75_03",
+     "difference": {
+      "rms_deg": 0.020030311690854983,
+      "max_abs_deg": 0.07694015822914047,
+      "sun_diff_pp": 0.027382256297919794,
+      "earth_diff_pp": 0.0,
+      "both_diff_pp": 0.027382256297919794
+     }
+    },
+    {
+     "id": "NORTH_75_04",
+     "difference": {
+      "rms_deg": 0.029034943948040712,
+      "max_abs_deg": 0.10662551591840952,
+      "sun_diff_pp": 0.05020080321285203,
+      "earth_diff_pp": 0.0,
+      "both_diff_pp": 0.0
+     }
+    },
+    {
+     "id": "NORTH_75_05",
+     "difference": {
+      "rms_deg": 0.05500324930818692,
+      "max_abs_deg": 0.24164520241413867,
+      "sun_diff_pp": 0.2464403066812726,
+      "earth_diff_pp": 0.08671047827674139,
+      "both_diff_pp": 0.17798466593647033
+     }
+    },
+    {
+     "id": "NORTH_75_06",
+     "difference": {
+      "rms_deg": 0.055357753054728204,
+      "max_abs_deg": 0.24947171091475084,
+      "sun_diff_pp": 0.059328221978821594,
+      "earth_diff_pp": 0.0,
+      "both_diff_pp": 0.059328221978821594
+     }
+    },
+    {
+     "id": "NORTH_75_07",
+     "difference": {
+      "rms_deg": 0.025066159404965822,
+      "max_abs_deg": 0.11822282550133145,
+      "sun_diff_pp": 0.0045637093829875575,
+      "earth_diff_pp": 0.0,
+      "both_diff_pp": 0.0045637093829875575
+     }
+    },
+    {
+     "id": "NORTH_75_08",
+     "difference": {
+      "rms_deg": 0.030949298699197356,
+      "max_abs_deg": 0.10965326297837841,
+      "sun_diff_pp": 0.08671047827674347,
+      "earth_diff_pp": 0.0,
+      "both_diff_pp": 0.0
+     }
+    },
+    {
+     "id": "NORTH_75_09",
+     "difference": {
+      "rms_deg": 0.036978676153816045,
+      "max_abs_deg": 0.12042488445981425,
+      "sun_diff_pp": 0.01825483753195023,
+      "earth_diff_pp": 0.0,
+      "both_diff_pp": 0.0
+     }
+    },
+    {
+     "id": "NORTH_75_10",
+     "difference": {
+      "rms_deg": 0.0474961727705717,
+      "max_abs_deg": 0.18625601296450123,
+      "sun_diff_pp": 0.07758305951077182,
+      "earth_diff_pp": 0.0,
+      "both_diff_pp": 0.0
+     }
+    },
+    {
+     "id": "NORTH_80_01",
+     "difference": {
+      "rms_deg": 0.036989761764687386,
+      "max_abs_deg": 0.16241658993409658,
+      "sun_diff_pp": -0.07301935012778427,
+      "earth_diff_pp": 0.0,
+      "both_diff_pp": 0.0
+     }
+    },
+    {
+     "id": "NORTH_80_02",
+     "difference": {
+      "rms_deg": 0.056774939170586465,
+      "max_abs_deg": 0.195153219925148,
+      "sun_diff_pp": 0.21449434100036524,
+      "earth_diff_pp": 0.5111354508944843,
+      "both_diff_pp": 0.3468419131069739
+     }
+    },
+    {
+     "id": "NORTH_80_03",
+     "difference": {
+      "rms_deg": 0.02147833698135379,
+      "max_abs_deg": 0.0958283025385187,
+      "sun_diff_pp": 0.0045637093829875575,
+      "earth_diff_pp": 0.013691128148957121,
+      "both_diff_pp": 0.00912741876597234
+     }
+    },
+    {
+     "id": "NORTH_80_04",
+     "difference": {
+      "rms_deg": 0.195727105503502,
+      "max_abs_deg": 0.7016020040892652,
+      "sun_diff_pp": 0.06845564074479671,
+      "earth_diff_pp": 0.0,
+      "both_diff_pp": 0.0
+     }
+    },
+    {
+     "id": "NORTH_80_05",
+     "difference": {
+      "rms_deg": 0.025248494876122424,
+      "max_abs_deg": 0.1523528374056209,
+      "sun_diff_pp": -0.0045637093829875575,
+      "earth_diff_pp": 0.0,
+      "both_diff_pp": 0.0
+     }
+    },
+    {
+     "id": "NORTH_80_06",
+     "difference": {
+      "rms_deg": 0.09358520493436068,
+      "max_abs_deg": 0.5244191016603259,
+      "sun_diff_pp": 0.33771449434100154,
+      "earth_diff_pp": 0.0,
+      "both_diff_pp": 0.0
+     }
+    },
+    {
+     "id": "NORTH_80_07",
+     "difference": {
+      "rms_deg": 0.055266634156555056,
+      "max_abs_deg": 0.23485493679511826,
+      "sun_diff_pp": -0.25100401606426015,
+      "earth_diff_pp": 0.666301569916028,
+      "both_diff_pp": 0.1369112814895948
+     }
+    },
+    {
+     "id": "NORTH_80_08",
+     "difference": {
+      "rms_deg": 0.08161770355220234,
+      "max_abs_deg": 0.48934574492748906,
+      "sun_diff_pp": 0.0638919313618147,
+      "earth_diff_pp": 0.1277838627236183,
+      "both_diff_pp": 0.07301935012778149
+     }
+    },
+    {
+     "id": "NORTH_80_09",
+     "difference": {
+      "rms_deg": 0.31405933283645837,
+      "max_abs_deg": 1.080567624777375,
+      "sun_diff_pp": 0.337714494340996,
+      "earth_diff_pp": 0.0,
+      "both_diff_pp": 0.0
+     }
+    },
+    {
+     "id": "NORTH_80_10",
+     "difference": {
+      "rms_deg": 0.027463731158339895,
+      "max_abs_deg": 0.12440905221602705,
+      "sun_diff_pp": 0.013691128148959463,
+      "earth_diff_pp": 0.07758305951077182,
+      "both_diff_pp": 0.013691128148959463
+     }
+    },
+    {
+     "id": "NORTH_85_01",
+     "difference": {
+      "rms_deg": 0.038923311805249876,
+      "max_abs_deg": 0.15974606114221723,
+      "sun_diff_pp": 0.0821467688937566,
+      "earth_diff_pp": 0.013691128148957121,
+      "both_diff_pp": 0.05476451259583681
+     }
+    },
+    {
+     "id": "NORTH_85_02",
+     "difference": {
+      "rms_deg": 0.054770143958394545,
+      "max_abs_deg": 0.2186955153617518,
+      "sun_diff_pp": 0.6069733479372036,
+      "earth_diff_pp": 0.07301935012778427,
+      "both_diff_pp": 0.25556772544724354
+     }
+    },
+    {
+     "id": "NORTH_85_03",
+     "difference": {
+      "rms_deg": 0.025182312850457782,
+      "max_abs_deg": 0.11033885363657525,
+      "sun_diff_pp": 0.05476451259583959,
+      "earth_diff_pp": 0.0,
+      "both_diff_pp": 0.0
+     }
+    },
+    {
+     "id": "NORTH_85_04",
+     "difference": {
+      "rms_deg": 0.014859363698309355,
+      "max_abs_deg": 0.10206741915037565,
+      "sun_diff_pp": 0.013691128148957121,
+      "earth_diff_pp": 0.0,
+      "both_diff_pp": 0.0045637093829875575
+     }
+    },
+    {
+     "id": "NORTH_85_05",
+     "difference": {
+      "rms_deg": 0.023664610857296223,
+      "max_abs_deg": 0.1584639602639495,
+      "sun_diff_pp": 0.027382256297919794,
+      "earth_diff_pp": 0.059328221978827145,
+      "both_diff_pp": 0.03650967506389213
+     }
+    },
+    {
+     "id": "NORTH_85_06",
+     "difference": {
+      "rms_deg": 0.05949446510951209,
+      "max_abs_deg": 0.2638102681856118,
+      "sun_diff_pp": 0.1095290251916764,
+      "earth_diff_pp": 0.14147499087258097,
+      "both_diff_pp": 0.09127418765972894
+     }
+    },
+    {
+     "id": "NORTH_85_07",
+     "difference": {
+      "rms_deg": 0.22238271401627563,
+      "max_abs_deg": 0.8199248176702296,
+      "sun_diff_pp": -0.01825483753194468,
+      "earth_diff_pp": -0.0638919313618036,
+      "both_diff_pp": -0.05476451259583681
+     }
+    },
+    {
+     "id": "NORTH_85_08",
+     "difference": {
+      "rms_deg": 0.08491962226660585,
+      "max_abs_deg": 0.29203374501924806,
+      "sun_diff_pp": 0.06389193136181193,
+      "earth_diff_pp": 0.2966411098941135,
+      "both_diff_pp": 0.0821467688937566
+     }
+    },
+    {
+     "id": "NORTH_85_09",
+     "difference": {
+      "rms_deg": 0.03271777753629929,
+      "max_abs_deg": 0.18020597549701023,
+      "sun_diff_pp": 0.12322015334063491,
+      "earth_diff_pp": 0.009127418765975115,
+      "both_diff_pp": 0.1095290251916757
+     }
+    },
+    {
+     "id": "NORTH_85_10",
+     "difference": {
+      "rms_deg": 0.3064336691144211,
+      "max_abs_deg": 0.9320777143957368,
+      "sun_diff_pp": 0.13234757210660586,
+      "earth_diff_pp": 0.0,
+      "both_diff_pp": 0.0
+     }
+    }
+   ]
+  },
+  "candidate_mid3_qhalf": {
+   "input_result_sha256": "fa251d16beefcf6c7b504375ee2d9a457280721f5ce07057e0747565fd027146",
+   "elapsed_s": 34.981643499981146,
+   "rows": [
+    {
+     "id": "NORTH_75_01",
+     "difference": {
+      "rms_deg": 0.05860598348467532,
+      "max_abs_deg": 0.3044080159947198,
+      "sun_diff_pp": 0.0,
+      "earth_diff_pp": 0.041073384446876915,
+      "both_diff_pp": 0.0045637093829875575
+     }
+    },
+    {
+     "id": "NORTH_75_02",
+     "difference": {
+      "rms_deg": 0.01996398959474819,
+      "max_abs_deg": 0.11171782397139296,
+      "sun_diff_pp": -0.0045637093829875575,
+      "earth_diff_pp": 0.0,
+      "both_diff_pp": 0.0
+     }
+    },
+    {
+     "id": "NORTH_75_03",
+     "difference": {
+      "rms_deg": 0.019457763662541858,
+      "max_abs_deg": 0.0749455541644295,
+      "sun_diff_pp": 0.027382256297919794,
+      "earth_diff_pp": 0.0,
+      "both_diff_pp": 0.027382256297919794
+     }
+    },
+    {
+     "id": "NORTH_75_04",
+     "difference": {
+      "rms_deg": 0.029701866965097582,
+      "max_abs_deg": 0.10753975828245288,
+      "sun_diff_pp": 0.05020080321285203,
+      "earth_diff_pp": 0.0,
+      "both_diff_pp": 0.0
+     }
+    },
+    {
+     "id": "NORTH_75_05",
+     "difference": {
+      "rms_deg": 0.046465786358407625,
+      "max_abs_deg": 0.2175069673248231,
+      "sun_diff_pp": 0.191675794085433,
+      "earth_diff_pp": 0.08671047827674139,
+      "both_diff_pp": 0.14603870025556298
+     }
+    },
+    {
+     "id": "NORTH_75_06",
+     "difference": {
+      "rms_deg": 0.05366829526064815,
+      "max_abs_deg": 0.24804882127304317,
+      "sun_diff_pp": 0.054764512595834036,
+      "earth_diff_pp": 0.0,
+      "both_diff_pp": 0.054764512595834036
+     }
+    },
+    {
+     "id": "NORTH_75_07",
+     "difference": {
+      "rms_deg": 0.025217014042814498,
+      "max_abs_deg": 0.11842916346869414,
+      "sun_diff_pp": 0.0045637093829875575,
+      "earth_diff_pp": 0.0,
+      "both_diff_pp": 0.0045637093829875575
+     }
+    },
+    {
+     "id": "NORTH_75_08",
+     "difference": {
+      "rms_deg": 0.03426594120912132,
+      "max_abs_deg": 0.11920357842971896,
+      "sun_diff_pp": 0.0958378970427165,
+      "earth_diff_pp": 0.0,
+      "both_diff_pp": 0.0
+     }
+    },
+    {
+     "id": "NORTH_75_09",
+     "difference": {
+      "rms_deg": 0.052156569418821165,
+      "max_abs_deg": 0.18097036336971217,
+      "sun_diff_pp": 0.013691128148962672,
+      "earth_diff_pp": 0.0,
+      "both_diff_pp": 0.0
+     }
+    },
+    {
+     "id": "NORTH_75_10",
+     "difference": {
+      "rms_deg": 0.049021098004998674,
+      "max_abs_deg": 0.16039914956902646,
+      "sun_diff_pp": 0.07301935012778427,
+      "earth_diff_pp": 0.0,
+      "both_diff_pp": 0.0
+     }
+    },
+    {
+     "id": "NORTH_80_01",
+     "difference": {
+      "rms_deg": 0.03853743431013654,
+      "max_abs_deg": 0.15929939046515162,
+      "sun_diff_pp": -0.07758305951077182,
+      "earth_diff_pp": 0.0,
+      "both_diff_pp": 0.0
+     }
+    },
+    {
+     "id": "NORTH_80_02",
+     "difference": {
+      "rms_deg": 0.04511035091048332,
+      "max_abs_deg": 0.15941608386356698,
+      "sun_diff_pp": 0.12322015334063074,
+      "earth_diff_pp": 0.38791529755385357,
+      "both_diff_pp": 0.2190580503833528
+     }
+    },
+    {
+     "id": "NORTH_80_03",
+     "difference": {
+      "rms_deg": 0.022295544033228747,
+      "max_abs_deg": 0.09288226127299559,
+      "sun_diff_pp": -0.009127418765975115,
+      "earth_diff_pp": -0.013691128148957121,
+      "both_diff_pp": -0.00912741876597234
+     }
+    },
+    {
+     "id": "NORTH_80_04",
+     "difference": {
+      "rms_deg": 0.16875650320916538,
+      "max_abs_deg": 0.6219586588199562,
+      "sun_diff_pp": 0.059328221978827145,
+      "earth_diff_pp": 0.0,
+      "both_diff_pp": 0.0
+     }
+    },
+    {
+     "id": "NORTH_80_05",
+     "difference": {
+      "rms_deg": 0.022905402603023994,
+      "max_abs_deg": 0.12126068298021231,
+      "sun_diff_pp": -0.0045637093829875575,
+      "earth_diff_pp": 0.0,
+      "both_diff_pp": 0.0
+     }
+    },
+    {
+     "id": "NORTH_80_06",
+     "difference": {
+      "rms_deg": 0.11092048261869265,
+      "max_abs_deg": 0.4322577024923846,
+      "sun_diff_pp": 0.3012048192771122,
+      "earth_diff_pp": 0.0,
+      "both_diff_pp": 0.0
+     }
+    },
+    {
+     "id": "NORTH_80_07",
+     "difference": {
+      "rms_deg": 0.05019488821505594,
+      "max_abs_deg": 0.24270506746281395,
+      "sun_diff_pp": 0.09127418765972894,
+      "earth_diff_pp": 0.7256297918948551,
+      "both_diff_pp": 0.20080321285140534
+     }
+    },
+    {
+     "id": "NORTH_80_08",
+     "difference": {
+      "rms_deg": 0.07763385746257717,
+      "max_abs_deg": 0.4843860211990668,
+      "sun_diff_pp": 0.07758305951077182,
+      "earth_diff_pp": 0.1277838627236183,
+      "both_diff_pp": 0.07301935012778149
+     }
+    },
+    {
+     "id": "NORTH_80_09",
+     "difference": {
+      "rms_deg": 0.3328165682424955,
+      "max_abs_deg": 1.1333884091225315,
+      "sun_diff_pp": 0.36966046002190334,
+      "earth_diff_pp": 0.0,
+      "both_diff_pp": 0.0
+     }
+    },
+    {
+     "id": "NORTH_80_10",
+     "difference": {
+      "rms_deg": 0.030623445138514463,
+      "max_abs_deg": 0.12329249844316337,
+      "sun_diff_pp": 0.00912741876597299,
+      "earth_diff_pp": 0.07758305951077182,
+      "both_diff_pp": 0.00912741876597299
+     }
+    },
+    {
+     "id": "NORTH_85_01",
+     "difference": {
+      "rms_deg": 0.038923311805249876,
+      "max_abs_deg": 0.15974606114221723,
+      "sun_diff_pp": 0.0821467688937566,
+      "earth_diff_pp": 0.013691128148957121,
+      "both_diff_pp": 0.05476451259583681
+     }
+    },
+    {
+     "id": "NORTH_85_02",
+     "difference": {
+      "rms_deg": 0.054770143958394545,
+      "max_abs_deg": 0.2186955153617518,
+      "sun_diff_pp": 0.6069733479372036,
+      "earth_diff_pp": 0.07301935012778427,
+      "both_diff_pp": 0.25556772544724354
+     }
+    },
+    {
+     "id": "NORTH_85_03",
+     "difference": {
+      "rms_deg": 0.025182312850457782,
+      "max_abs_deg": 0.11033885363657525,
+      "sun_diff_pp": 0.05476451259583959,
+      "earth_diff_pp": 0.0,
+      "both_diff_pp": 0.0
+     }
+    },
+    {
+     "id": "NORTH_85_04",
+     "difference": {
+      "rms_deg": 0.014859363698309355,
+      "max_abs_deg": 0.10206741915037565,
+      "sun_diff_pp": 0.013691128148957121,
+      "earth_diff_pp": 0.0,
+      "both_diff_pp": 0.0045637093829875575
+     }
+    },
+    {
+     "id": "NORTH_85_05",
+     "difference": {
+      "rms_deg": 0.023664610857296223,
+      "max_abs_deg": 0.1584639602639495,
+      "sun_diff_pp": 0.027382256297919794,
+      "earth_diff_pp": 0.059328221978827145,
+      "both_diff_pp": 0.03650967506389213
+     }
+    },
+    {
+     "id": "NORTH_85_06",
+     "difference": {
+      "rms_deg": 0.05949446510951209,
+      "max_abs_deg": 0.2638102681856118,
+      "sun_diff_pp": 0.1095290251916764,
+      "earth_diff_pp": 0.14147499087258097,
+      "both_diff_pp": 0.09127418765972894
+     }
+    },
+    {
+     "id": "NORTH_85_07",
+     "difference": {
+      "rms_deg": 0.22238271401627563,
+      "max_abs_deg": 0.8199248176702296,
+      "sun_diff_pp": -0.01825483753194468,
+      "earth_diff_pp": -0.0638919313618036,
+      "both_diff_pp": -0.05476451259583681
+     }
+    },
+    {
+     "id": "NORTH_85_08",
+     "difference": {
+      "rms_deg": 0.08491962226660585,
+      "max_abs_deg": 0.29203374501924806,
+      "sun_diff_pp": 0.06389193136181193,
+      "earth_diff_pp": 0.2966411098941135,
+      "both_diff_pp": 0.0821467688937566
+     }
+    },
+    {
+     "id": "NORTH_85_09",
+     "difference": {
+      "rms_deg": 0.03271777753629929,
+      "max_abs_deg": 0.18020597549701023,
+      "sun_diff_pp": 0.12322015334063491,
+      "earth_diff_pp": 0.009127418765975115,
+      "both_diff_pp": 0.1095290251916757
+     }
+    },
+    {
+     "id": "NORTH_85_10",
+     "difference": {
+      "rms_deg": 0.3064336691144211,
+      "max_abs_deg": 0.9320777143957368,
+      "sun_diff_pp": 0.13234757210660586,
+      "earth_diff_pp": 0.0,
+      "both_diff_pp": 0.0
+     }
+    }
+   ]
+  }
+ }
+}
