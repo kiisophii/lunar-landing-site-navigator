@@ -161,12 +161,152 @@ function tableHTML(sites, rows, big, async) {
   return `<div class="cmp-scroll"><table class="cmp-tbl"><thead><tr><th scope="col" class="lbl">${esc(t('r_item'))}</th>${head}</tr></thead><tbody>${body}${why}</tbody></table></div>`;
 }
 
+const terrainVals = new Map();
 const asyncVals = { relay: new Map(), gs: new Map(), key: '' };
+addStrings({
+  measure: 'Measure', showMap: 'Show on map', seeDetails: 'See details', slopeLabel: 'Slope',
+  missingMeasure: 'Data needed', noTowerSite: 'No tower site', compareRange: '{n} pinned · showing {a}–{b}',
+  sameScale: 'Sun and Earth elevation · same period and scale for every candidate',
+  help_sun: 'Share of hourly samples with at least half the solar disc above terrain.',
+  help_earth: 'Earth centre above terrain. Geometric visibility, not guaranteed radio service.',
+  help_both: 'Hours meeting both sunlight and Earth visibility conditions.',
+  help_dark: 'Longest consecutive dark run within the selected period; shown in days.',
+  help_slope: 'Catalogue landing slope from data/terrain. Footprints and DEM resolution vary; not a safety assessment.',
+  help_relay: 'Direct Earth visibility → visibility including the 15 m relay network. Geometry only.',
+  help_kdsa: 'Site sees Earth and Yeoju sees the Moon above 10°. Shown in days; geometry only.',
+  label_sun: 'Sunlit time', label_earth: 'Earth visibility', label_both: 'Sun and Earth together', label_dark: 'Longest dark period', label_slope: 'Slope', label_relay: 'Relay tower', label_kdsa: 'Yeoju ground station',
+}, {
+  measure: '측정 항목', showMap: '지도에서 보기', seeDetails: '자세히 보기', slopeLabel: '경사',
+  missingMeasure: '데이터 필요', noTowerSite: '중계탑 위치 없음', compareRange: '{n}개 고정 · {a}–{b} 표시',
+  sameScale: '태양·지구 고도 · 모든 후보에 같은 기간과 눈금 적용',
+  help_sun: '시간별 표본 중 태양 원반의 절반 이상이 지형 위로 보이는 비율입니다.',
+  help_earth: '지구 중심이 지형 위로 보이는 비율입니다. 실제 통신 성능을 뜻하지 않습니다.',
+  help_both: '일조와 지구 가시 조건을 동시에 만족하는 시간의 비율입니다.',
+  help_dark: '선택한 기간에서 가장 길게 이어지는 암흑 구간을 일 단위로 표시합니다.',
+  help_slope: 'data/terrain의 착륙 지점 경사입니다. 분석 범위와 DEM 해상도가 다르며 안전 판정이 아닙니다.',
+  help_relay: '지구 직접 가시율 → 15m 중계탑 네트워크 포함 가시율. 기하학적 계산입니다.',
+  help_kdsa: '착륙지에서 지구가 보이고 여주에서 달 고도가 10° 이상인 시간을 일 단위로 표시합니다.',
+  label_sun: '일조 시간', label_earth: '지구 가시성', label_both: '태양·지구 동시 가시', label_dark: '최장 암흑 기간', label_slope: '경사', label_relay: '중계탑', label_kdsa: '여주 지상국',
+});
+
+function sharedScale(sites) {
+  const w = LLSN().window, step = Math.max(1, Math.ceil((w.i1 - w.i0 + 1) / 480));
+  let lo = 0, hi = 0;
+  for (const s of sites) for (let i = w.i0; i <= w.i1; i += step) {
+    const sun = core.sunAzEl(s, i), earth = core.earthAzEl(s, i);
+    const hz = core.terrainPending(s) ? 0 : core.horizonAt(s, sun.az);
+    lo = Math.min(lo, sun.el, earth.el, hz); hi = Math.max(hi, sun.el, earth.el, hz);
+  }
+  return [Math.floor(lo - 1), Math.ceil(hi + 1)];
+}
+
+function detailTableHTML(sites, scale) {
+  const w = LLSN().window, focus = LLSN().focus;
+  const rows = ['sun', 'earth', 'both', 'dark', 'slope', 'relay', 'kdsa'];
+  const symbols = ['☼', '⊕', '◉', '☾', '∠', '⚑', '⊙'];
+  const header = sites.map((s, k) => `<th scope="col" data-id="${s.id}" class="${s.id === focus ? 'focus-col' : ''}"><span class="pin-no">#${k + 1}</span><button class="cmp-name" title="${esc(nameOf(s))}" data-focus="${s.id}">${esc(getLang() === 'ko' ? nameOf(s) : (s.short || s.name))}</button><span class="cmp-group">${esc(t('g_' + s.group))}</span>${LLSN().pinNo?.(s.id) ? `<button class="unpin" data-id="${s.id}" aria-label="${esc(t('unpin'))}: ${esc(nameOf(s))}">×</button>` : ''}</th>`).join('');
+  const body = rows.map((row, ri) => {
+    const cells = sites.map(s => {
+      const m = w.metrics.get(s.id), base = cell(row, s, w, asyncVals);
+      if (row === 'slope') {
+        const v = terrainVals.get(s.id)?.landing_slope_deg;
+        return { v: Number.isFinite(v) ? v : null, html: Number.isFinite(v) ? `<span class="val num">${v.toFixed(1)}<small>°</small></span>` : `<span class="na">${t('missingMeasure')}</span>` };
+      }
+      if (!m || m.pending) return base;
+      if (row === 'dark') return { v: m.longest_dark_h, html: `<span class="val num">${(m.longest_dark_h / 24).toFixed(1)}<small>${getLang() === 'ko' ? '일' : 'd'}</small></span>` };
+      if (row === 'kdsa') {
+        const g = asyncVals.gs.get(s.id);
+        if (g && !g.pending && !g.error) return { v: g.kdsa, html: `<span class="val num">${(g.kdsa / 24).toFixed(1)}<small>${getLang() === 'ko' ? '일' : 'd'}</small></span>` };
+      }
+      if (row === 'relay') {
+        const r = asyncVals.relay.get(s.id);
+        if (r?.state === 'ok') return { html: r.towers ? `<span class="val num">${pctH(m.earth_frac)} <span class="muted">›</span> ${pctH(r.pct)}</span><span class="sub">${r.distKm.toFixed(1)} km</span>` : `<span class="na">${esc(t('noTowerSite'))}</span>` };
+      }
+      return base;
+    });
+    const vals = cells.map(c => c.v).filter(Number.isFinite), direction = row === 'slope' || row === 'dark' ? -1 : 1;
+    const candidate = direction > 0 ? Math.max(...vals) : Math.min(...vals);
+    const best = row !== 'relay' && vals.length > 1 && vals.filter(v => v === candidate).length === 1 ? candidate : null;
+    return `<tr class="r-${row}"><th scope="row" class="lbl"><span class="measure-icon" aria-hidden="true">${symbols[ri]}</span>${esc(t('label_' + row))}<details class="measure-help"><summary aria-label="${esc(t('label_' + row))}: ${esc(t('info') || 'Info')}">◇</summary><p>${esc(t('help_' + row))}</p></details></th>${cells.map((c, i) => `<td data-id="${sites[i].id}" class="${sites[i].id === focus ? 'focus-col ' : ''}${best !== null && c.v === best ? 'best' : ''}">${c.html}</td>`).join('')}</tr>`;
+  }).join('');
+  const actions = `<tr class="r-actions"><th class="lbl"></th>${sites.map(s => `<td class="${s.id === focus ? 'focus-col' : ''}"><button class="ls-btn cmp-map" data-map="${s.id}">${esc(t('showMap'))}<span aria-hidden="true">◫</span></button><button class="ls-btn cmp-detail" data-why="${s.id}">${esc(t('seeDetails'))}<span aria-hidden="true">↓</span></button></td>`).join('')}</tr>`;
+  const plots = `<tr class="r-change-title"><th colspan="${sites.length + 1}">${esc(t('changeH'))} <small>${esc(t('sameScale'))}</small></th></tr><tr class="r-plots"><th class="lbl">${LG.alt()}</th>${sites.map(s => `<td class="alt-card" data-id="${s.id}" tabindex="0" aria-label="${esc(nameOf(s))}: ${esc(t('altAria'))}">${altSVG(s, 300, 180, scale)}</td>`).join('')}</tr>`;
+  return `<div class="cmp-scroll"><table class="cmp-tbl cmp-detail-table" style="--candidate-count:${sites.length}"><thead><tr><th scope="col" class="lbl">${esc(t('measure'))}</th>${header}</tr></thead><tbody>${body}${actions}${plots}</tbody></table></div>`;
+}
+
+let columnsObserver;
+function wireColumns(root, count, pinned) {
+  columnsObserver?.disconnect();
+  const sc = root.querySelector('.cmp-scroll'), columns = [...sc.querySelectorAll('thead th[data-id]')];
+  const update = () => {
+    const label = innerWidth <= 700 ? 150 : 248;
+    const width = innerWidth <= 700 ? 180 : Math.max(150, Math.min(300, (sc.clientWidth - label) / Math.max(1, count)));
+    const table = sc.querySelector('table');
+    table.style.setProperty('--candidate-width', `${width}px`);
+    table.style.width = `${label + width * count}px`;
+    const bounds = sc.getBoundingClientRect(), labelWidth = sc.querySelector('th.lbl').getBoundingClientRect().width;
+    const visible = columns.map((c, k) => ({ k, r: c.getBoundingClientRect() })).filter(x => x.r.right > bounds.left + labelWidth + 1 && x.r.left < bounds.right - 1);
+    root.querySelector('.cmp-range').textContent = fill(t('compareRange'), { n: pinned, a: visible.length ? visible[0].k + 1 : 0, b: visible.length ? visible.at(-1).k + 1 : 0 });
+    root.querySelector('[data-col="-1"]').disabled = sc.scrollLeft <= 1;
+    root.querySelector('[data-col="1"]').disabled = sc.scrollLeft + sc.clientWidth >= sc.scrollWidth - 1;
+  };
+  root.querySelectorAll('[data-col]').forEach(b => b.addEventListener('click', () => sc.scrollBy({ left: Number(b.dataset.col) * (columns[0]?.offsetWidth || 300), behavior: matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth' })));
+  sc.addEventListener('scroll', update, { passive: true });
+  columnsObserver = new ResizeObserver(update); columnsObserver.observe(sc); update();
+}
+
+function showReading(root, anchor, i, site) {
+  const tip = root.querySelector('.cmp-tooltip');
+  if (!site || core.terrainPending(site)) return;
+  const su = core.sunAzEl(site, i), ea = core.earthAzEl(site, i), hz = core.horizonAt(site, su.az);
+  tip.textContent = `${nameOf(site)} · ${core.hourToDate(i).toISOString().slice(0,16).replace('T',' ')} UTC · ${t('lgSunEl')} ${su.el.toFixed(2)}° · ${t('lgEarthEl')} ${ea.el.toFixed(2)}° · ${t('lgHzSun')} ${hz.toFixed(2)}° · ${t('label_sun')} ${core.sunlit(site,i) ? '1' : '0'} · ${t('label_earth')} ${core.earthVisible(site,i) ? '1' : '0'}`;
+  tip.hidden = false;
+  tip.style.left = Math.max(8, Math.min(anchor.x + 12, innerWidth - tip.offsetWidth - 8)) + 'px';
+  tip.style.top = Math.max(8, Math.min(anchor.y + 14, innerHeight - tip.offsetHeight - 8)) + 'px';
+}
+function wirePlotTips(root) {
+  for (const td of root.querySelectorAll('.r-plots td')) {
+    const svg = td.querySelector('svg');
+    td.addEventListener('pointermove', e => {
+      const r = svg.getBoundingClientRect(), w = LLSN().window;
+      const fraction = Math.max(0, Math.min(1, ((e.clientX-r.left)/r.width*300-28)/266));
+      showReading(root, {x:e.clientX,y:e.clientY}, w.i0 + fraction*(w.i1-w.i0), byId(td.dataset.id));
+    });
+    td.addEventListener('focus', () => { const r=td.getBoundingClientRect();showReading(root,{x:r.left,y:r.top},LLSN().now(),byId(td.dataset.id)); });
+    for (const event of ['pointerleave','blur']) td.addEventListener(event,()=>{root.querySelector('.cmp-tooltip').hidden=true;});
+  }
+}
+async function wireTimelineTips(root, sites) {
+  const svg=root.querySelector('.tl-svg'); if(!svg)return;
+  const w=LLSN().window;
+  const codes=await Promise.all(sites.map(s=>relayCodes(s.id,w.i0,w.i1).catch(()=>null)));
+  const kd=await stationBits().catch(()=>null);
+  if(!svg.isConnected)return;
+  svg.addEventListener('pointermove',e=>{
+    const r=svg.getBoundingClientRect(),box=svg.viewBox.baseVal,nd=svg.querySelector('.tl-needle'),lw=Number(nd.dataset.lw);
+    const x=(e.clientX-r.left)/r.width*box.width,y=(e.clientY-r.top)/r.height*box.height;
+    const k=Math.floor((y-22)/46); if(k<0||k>=sites.length||x<lw){root.querySelector('.cmp-tooltip').hidden=true;return;}
+    const i=Math.min(w.i1,w.i0+Math.floor((x-lw)/(box.width-lw-10)*(w.i1-w.i0+1)));
+    const lane=(y-22)%46,site=sites[k],tip=root.querySelector('.cmp-tooltip');
+    if(core.terrainPending(site)){tip.hidden=true;return;}
+    if(lane>35){tip.hidden=true;return;}
+    const yes=getLang()==='ko'?'가능':'Yes',no=getLang()==='ko'?'불가':'No';
+    const sun=core.sunlit(site,i),earth=core.earthVisible(site,i),code=codes[k]?.[i-w.i0];
+    let label,value;
+    if(lane<16){label=t('label_sun');value=`${sun?yes:no} · ${getLang()==='ko'?'태양 원반':'Solar disc'} ${(core.sunVisibleFraction(site,i)*100).toFixed(1)}%`;}
+    else if(lane<32){label=t('label_earth');value=`${earth?yes:no} · ${t('lgRelay')}: ${code==null||code<0?t('missingMeasure'):code===2?yes:no}`;}
+    else {label=t('label_kdsa');value=kd?.KDSA?((earth&&kd.KDSA[i])?yes:no):t('missingMeasure');}
+    tip.textContent=`${nameOf(site)} · ${core.hourToDate(i).toISOString().slice(0,16).replace('T',' ')} UTC · ${label}: ${value}`;
+    tip.hidden=false;tip.style.left=Math.max(8,Math.min(e.clientX+12,innerWidth-tip.offsetWidth-8))+'px';tip.style.top=Math.max(8,Math.min(e.clientY+14,innerHeight-tip.offsetHeight-8))+'px';
+  });
+  svg.addEventListener('pointerleave',()=>{root.querySelector('.cmp-tooltip').hidden=true;});
+}
 function loadAsync(sites, after) {
   const w = LLSN().window, key = `${w.i0}|${w.i1}`;
   if (asyncVals.key !== key) { asyncVals.relay.clear(); asyncVals.gs.clear(); asyncVals.key = key; }
   const jobs = [];
   for (const s of sites) {
+    if (!terrainVals.has(s.id)) jobs.push((s.user ? Promise.resolve(null) : fetch(`data/terrain/${s.id}.json`).then(r => r.ok ? r.json() : null).catch(() => null)).then(v => terrainVals.set(s.id, v)));
     if (!asyncVals.relay.has(s.id)) jobs.push(relayPeriod(s.id, w.i0, w.i1).then(v => { if (asyncVals.key === key) asyncVals.relay.set(s.id, v); }));
     if (!asyncVals.gs.has(s.id)) jobs.push(stationPeriod(s, w.i0, w.i1).then(v => { if (asyncVals.key === key) asyncVals.gs.set(s.id, v); }));
   }
@@ -222,7 +362,7 @@ function placeDialNeedles(root) {
 }
 
 // ------------------------------------------------------------ Sun/Earth elevation (SVG)
-function altSVG(s, W, H) {
+function altSVG(s, W, H, scale = null) {
   const w = LLSN().window, n = w.i1 - w.i0 + 1, step = Math.max(1, Math.ceil(n / 480));
   const pts = { sun: [], earth: [], hz: [] };
   let lo = 0, hi = 0;
@@ -232,7 +372,7 @@ function altSVG(s, W, H) {
     pts.sun.push([k, su.el]); pts.earth.push([k, ea.el]); if (hz != null) pts.hz.push([k, hz]);
     lo = Math.min(lo, su.el, ea.el); hi = Math.max(hi, su.el, ea.el, hz ?? 0);
   }
-  lo = Math.floor(lo - 1); hi = Math.ceil(hi + 1);
+  lo = scale ? scale[0] : Math.floor(lo - 1); hi = scale ? scale[1] : Math.ceil(hi + 1);
   const X = k => 28 + (k / (n - 1)) * (W - 34), Y = v => 6 + (1 - (v - lo) / (hi - lo)) * (H - 20);
   const line = (arr, col, wd, dash = '') => `<polyline points="${arr.map(([k, v]) => `${X(k).toFixed(1)},${Y(v).toFixed(1)}`).join(' ')}" fill="none" stroke="${col}" stroke-width="${wd}" ${dash}/>`;
   return `<svg viewBox="0 0 ${W} ${H}" role="img" aria-label="${esc(nameOf(s))}: ${esc(t('altAria'))}">
@@ -289,33 +429,8 @@ function placeTlNeedle(root) {
   g.setAttribute('transform', `translate(${x.toFixed(1)},0)`);
 }
 
-// ------------------------------------------------------------ summary card under each clock
-async function summaryHTML(s, ids) {
-  const w = LLSN().window, m = w.metrics.get(s.id), now = LLSN().now();
-  if (!m || m.pending) return `<p class="na">${t('pending')}</p>`;
-  const x = instant(s, now), bits = hourBits(s, w.i0, w.i1), eg = gapStats(bits, 2);
-  const r = await relayPeriod(s.id, w.i0, w.i1), g = await stationPeriod(s, w.i0, w.i1);
-  const v = verdict(s.id, ids);
-  const hz = LLSN().state.horizons.get(s.id);
-  return `<h4><span>${LLSN().pinNo?.(s.id) ? `<span class="pin-no">#${LLSN().pinNo(s.id)}</span>` : ''}${esc(nameOf(s))}</span>
-      <span class="verdict${v.good ? '' : ' cond'}" title="${esc(t('vRuleTip'))}">${esc(t(v.good ? 'vGood' : 'vCond'))}</span></h4>
-    <p class="meta">${esc(fill(t('coordsH'), { c: coordText(s), h: hz ? Math.round(hz.h0_m) : '—' }))}</p>
-    <dl class="kv">
-      <dt>${esc(t(x.lit ? 'sNextSet' : 'sNextRise'))}</dt><dd>${esc(until(x.sunNext))}</dd>
-      <dt>${esc(t(x.up ? 'sNextESet' : 'sNextERise'))}</dt><dd>${esc(until(x.earthNext))}</dd>
-      <dt>${esc(t('sDark'))}</dt><dd>${esc(darkH(m.longest_dark_h))}</dd>
-      <dt>${esc(t('sRelayNeed'))}</dt><dd>${esc(darkH(eg.longest))}</dd>
-      <dt style="color:var(--relay)">${esc(fill(t('sTower'), { h: TOWER_H }))}</dt><dd style="color:var(--relay)">${r.state === 'ok' ? `${Math.round(r.pct * 100)}%${r.towers ? ` · ${r.distKm.toFixed(1)} km` : ` · ${esc(t('noTower'))}`}` : esc(t('noTowerCalc'))}</dd>
-      <dt style="color:var(--cut)">${esc(t('sCut'))}</dt><dd style="color:var(--cut)">${r.state === 'ok' ? `${r.none} h` : '—'}</dd>
-      <dt style="color:var(--kdsa)">${esc(t('sKdsa'))}</dt><dd style="color:var(--kdsa)">${g && !g.pending && !g.error ? `${g.kdsa} h` : '—'}</dd>
-    </dl>
-    <p class="lsn-note">${esc(fill(t('sumLine'), { n: nameOf(s), s: v.plus.length, c: v.bang.length }))}</p>
-    <button type="button" class="ls-btn why-btn" data-why="${s.id}" style="margin-top:8px;width:100%" aria-pressed="${s.id === LLSN().focus}">${esc(t(s.id === LLSN().focus ? 'whyOn' : 'why'))}</button>`;
-}
-
 // ------------------------------------------------------------ render
-let trayView = 'table', bigTab = 'dial', seq = 0;
-try { bigTab = localStorage.getItem('ls.cmpTab') || 'dial'; } catch (e) { /* ignore */ }
+let trayView = 'table', seq = 0;
 const tray = () => $('#tray-body'), sec = () => $('#ls-compare .cmp-dyn');
 
 async function renderTray() {
@@ -354,29 +469,22 @@ async function renderBig() {
   const pinned = (LLSN().compare?.() || []).length, sites = shown(), ids = sites.map(s => s.id);
   loadAsync(sites, () => { if (my === bigSeq) renderBig(); });
   const sm = document.querySelector('#ls-compare > details > summary'); if (sm) sm.textContent = t('allSites');
-  root.innerHTML = `<div class="sec-head"><h2 id="cmp-h">${esc(t('cmpH'))}</h2></div>
-    <p class="ls-caption">${esc(t('cmpCaption'))}</p>${legendHTML([{ kind: 'line', c: 'var(--earth)', w: 2, label: t('cmpEdge') }], 'lg-cap')}
-    ${pinned ? '' : `<p class="lsn-note" style="margin-bottom:10px">${esc(t('cmpNoPins'))}</p>`}
-    <div class="big-cmp" id="cards">${tableHTML(sites, BIG_ROWS, true, asyncVals)}</div>
-    <div class="sub-h"><h3>${esc(t('changeH'))}</h3><div class="ls-seg" role="tablist">
-      <button type="button" role="tab" data-tab="dial" aria-selected="${bigTab === 'dial'}">${esc(t('tabDial'))}</button><button type="button" role="tab" data-tab="alt" aria-selected="${bigTab === 'alt'}">${esc(t('tabAlt'))}</button></div></div>
-    ${bigTab === 'dial' ? LG.dial() : LG.alt()}<p class="lsn-note">${esc(t(bigTab === 'dial' ? 'dialDesc' : 'altDesc'))}</p>
-    <div class="cards3 big-tab" role="tabpanel" style="margin-top:10px"></div>
+  const scale = sharedScale(sites);
+  root.innerHTML = `<div class="sec-head"><h2 id="cmp-h">${esc(t('cmpH'))}</h2><div class="cmp-controls"><span class="cmp-range"></span><div class="cmp-arrows"><button type="button" class="ls-btn" data-col="-1" aria-label="${esc(t('colPrev'))}">‹</button><button type="button" class="ls-btn" data-col="1" aria-label="${esc(t('colNext'))}">›</button></div></div></div>
+    ${pinned ? '' : `<p class="lsn-note">${esc(t('cmpNoPins'))}</p>`}
+    <div class="big-cmp synced-comparison" id="cards">${detailTableHTML(sites, scale)}</div>
     <div class="sub-h"><h3>${esc(t('tlH'))}</h3></div>${LG.tl()}<p class="lsn-note">${esc(t('tlDesc'))}</p>
-    <div class="tl ls-panel"><div class="tl-wrap"></div></div>`;
-  updateNow(root);
-  const tab = root.querySelector('.big-tab');
-  for (const s of sites) {
-    if (my !== bigSeq) return;
-    if (bigTab === 'dial') tab.insertAdjacentHTML('beforeend', `<div class="ls-panel dial-card">${await dialSVG(s, 240)}<div class="dial-sum">${await summaryHTML(s, ids)}</div></div>`);
-    else tab.insertAdjacentHTML('beforeend', `<div class="ls-panel alt-card"><div style="font-weight:600">${LLSN().pinNo?.(s.id) ? `<span class="pin-no">#${LLSN().pinNo(s.id)}</span>` : ''}${esc(nameOf(s))}</div>${altSVG(s, 420, 160)}<p class="alt-now num" data-id="${s.id}" style="margin:4px 0 0"></p></div>`);
-  }
-  if (my !== bigSeq) return;
-  placeDialNeedles(root); placeAltNeedles(root);
+    <div class="tl ls-panel"><div class="tl-wrap"></div></div><div class="cmp-tooltip" role="tooltip" hidden></div>`;
+  placeAltNeedles(root);
+  wireColumns(root, sites.length, pinned);
+  wirePlotTips(root);
   const tl = root.querySelector('.tl-wrap');
-  tl.innerHTML = await timelineSVG(sites);
+  const timeline = await timelineSVG(sites);
+  if (my !== bigSeq) return;
+  tl.innerHTML = timeline;
   placeTlNeedle(root);
   wireTimeline(tl);
+  wireTimelineTips(root, sites);
 }
 
 function wireTimeline(box) {
@@ -404,17 +512,6 @@ function onTime() {
   if (t0) { updateNow(t0); placeDialNeedles(t0); placeAltNeedles(t0); }
   if (b) { updateNow(b); placeDialNeedles(b); placeAltNeedles(b); placeTlNeedle(b); }
 }
-let sumTimer = 0;
-function onTimeSlow() {          // summary cards contain "until sunset" — refresh them less often
-  clearTimeout(sumTimer);
-  sumTimer = setTimeout(async () => {
-    const b = sec(); if (!b || bigTab !== 'dial') return;
-    const ids = shown().map(s => s.id);
-    for (const box of b.querySelectorAll('.dial-sum')) {
-      const id = box.querySelector('[data-why]')?.dataset.why, s = byId(id); if (s) box.innerHTML = await summaryHTML(s, ids);
-    }
-  }, 250);
-}
 
 function wire() {
   $('#tray-view').addEventListener('click', e => {
@@ -424,15 +521,25 @@ function wire() {
     renderTray();
   });
   const click = e => {
+    const map = e.target.closest('[data-map]');
+    if (map) { setFocus(map.dataset.map); LLSN().goTo?.('.ls-screen'); return; }
     const why = e.target.closest('[data-why]');
     if (why) { setFocus(why.dataset.why); LLSN().goTo?.('#ls-brief'); return; }
     const un = e.target.closest('.unpin'); if (un) { LLSN().unpin?.(un.dataset.id); return; }
     const f = e.target.closest('[data-focus]'); if (f) setFocus(f.dataset.focus);
-    const tb = e.target.closest('[data-tab]');
-    if (tb && sec().contains(tb)) { bigTab = tb.dataset.tab; try { localStorage.setItem('ls.cmpTab', bigTab); } catch (er) { /* ignore */ } renderBig(); }
+
   };
   tray().addEventListener('click', click);
   $('#ls-compare').addEventListener('click', click);
+  document.addEventListener('click', e => {
+    for (const pop of document.querySelectorAll('.measure-help[open]')) if (!pop.contains(e.target)) pop.open = false;
+  });
+  $('#ls-compare').addEventListener('keydown', e => {
+    if (e.key !== 'Escape') return;
+    const pop = e.target.closest('.measure-help[open]');
+    if (pop) { pop.open = false; pop.querySelector('summary').focus(); }
+    const tip = sec()?.querySelector('.cmp-tooltip'); if (tip) tip.hidden = true;
+  });
   for (const root of [tray(), $('#ls-compare')]) root.addEventListener('keydown', e => { const f = e.target.closest('[data-focus]'); if (f && (e.key === 'Enter' || e.key === ' ')) { e.preventDefault(); setFocus(f.dataset.focus); } });
   const all = () => { renderTray(); renderBig(); };
   window.addEventListener('llsn:pins', all);
@@ -440,7 +547,7 @@ function wire() {
   window.addEventListener('llsn:sites', all);
   window.addEventListener('llsn:lang', all);
   window.addEventListener('llsn:focus', () => { renderTray(); renderBig(); });
-  window.addEventListener('llsn:time', () => { onTime(); onTimeSlow(); });
+  window.addEventListener('llsn:time', onTime);
   all();
 }
 
