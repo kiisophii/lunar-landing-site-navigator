@@ -5,6 +5,10 @@ import { t, getLang } from './i18n.js';
 import { addStrings } from './ui_shared.js';
 import { enhanceSelect, autoEnhance } from './ui_select.js';
 import { iconSvg, hydrateIcons } from './icons.js';
+// Isolate final presentation overrides from the comparison work in progress.
+const finalUI = document.createElement('link');
+finalUI.rel = 'stylesheet'; finalUI.href = 'css/final_ui.css';
+document.head.appendChild(finalUI);
 hydrateIcons();
 // ?gv= (shared camera) is read here, before app.js rewrites the address bar, so the late-loading globe still gets it
 window.__llsnGV = new URLSearchParams(location.search).get('gv');

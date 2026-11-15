@@ -1,0 +1,109 @@
+{
+  "base": "1675728",
+  "cases": [
+    {
+      "width": 1100,
+      "lang": "en",
+      "errors": [],
+      "fatal": null,
+      "overflow_px": 0,
+      "clipped": 0,
+      "outside": 0,
+      "small_controls": null
+    },
+    {
+      "width": 1100,
+      "lang": "ko",
+      "errors": [],
+      "fatal": null,
+      "overflow_px": 0,
+      "clipped": 0,
+      "outside": 0,
+      "small_controls": null
+    },
+    {
+      "width": 390,
+      "lang": "en",
+      "errors": [],
+      "fatal": null,
+      "overflow_px": 0,
+      "clipped": 0,
+      "outside": 0,
+      "small_controls": 0
+    },
+    {
+      "width": 390,
+      "lang": "ko",
+      "errors": [],
+      "fatal": null,
+      "overflow_px": 0,
+      "clipped": 0,
+      "outside": 0,
+      "small_controls": 0
+    }
+  ],
+  "about_disclosures": [
+    {
+      "lang": "en",
+      "summaries": [
+        {
+          "text": "How to read the numbers",
+          "display": "list-item",
+          "height": 24
+        },
+        {
+          "text": "Can I trust these numbers?",
+          "display": "list-item",
+          "height": 24
+        },
+        {
+          "text": "Data & credits",
+          "display": "list-item",
+          "height": 24
+        },
+        {
+          "text": "Assumptions and limits",
+          "display": "list-item",
+          "height": 24
+        },
+        {
+          "text": "Team and SI (AI) use",
+          "display": "list-item",
+          "height": 24
+        }
+      ],
+      "errors": []
+    },
+    {
+      "lang": "ko",
+      "summaries": [
+        {
+          "text": "결과를 읽는 법",
+          "display": "list-item",
+          "height": 24
+        },
+        {
+          "text": "방법과 검증",
+          "display": "list-item",
+          "height": 24
+        },
+        {
+          "text": "데이터 출처",
+          "display": "list-item",
+          "height": 24
+        },
+        {
+          "text": "가정과 한계",
+          "display": "list-item",
+          "height": 24
+        },
+        {
+          "text": "팀과 AI 사용",
+          "display": "list-item",
+          "height": 24
+        }
+      ],
+      "errors": []
+    }
+  ]
+}
