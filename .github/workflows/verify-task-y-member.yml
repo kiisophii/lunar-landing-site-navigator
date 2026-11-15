@@ -1,0 +1,90 @@
+name: Independent member verification of task Y
+on:
+  push:
+    branches: [s7-y-verification-minchul]
+    paths:
+      - 'verification/task_y/**'
+      - '.github/workflows/verify-task-y-member.yml'
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    env:
+      PYTHONUNBUFFERED: '1'
+      OPENBLAS_NUM_THREADS: '1'
+      OMP_NUM_THREADS: '1'
+      Y_TARGET_ROOT: target
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          sparse-checkout-cone-mode: false
+          sparse-checkout: |
+            /verification/task_y/
+            /docs/verification_ledger.md
+            /docs/SI_USAGE.md
+            /docs/task_y_independent/
+      - uses: actions/checkout@v4
+        with:
+          ref: 9758ecdb156eae902881634090f53e4d2ea7d8e0
+          path: target
+          sparse-checkout-cone-mode: false
+          sparse-checkout: |
+            /pipeline/
+            /web/data/terrain/
+            /web/data/relay/
+            /web/data/sites.json
+            /docs/data_contract.md
+            /AGENTS.md
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - run: pip install numpy scipy pyproj tifffile imagecodecs requests pytest
+      - name: Resume completed numerical checkpoints from first run
+        uses: actions/download-artifact@v4
+        with:
+          name: independent-task-y-evidence
+          run-id: 43672717581
+          github-token: ${{ github.token }}
+          path: docs/task_y_independent/
+      - name: Record original computation provenance
+        run: |
+          cp docs/task_y_independent/summary.json docs/task_y_independent/original_computation_summary.json
+          echo '{"run_id":43672717581,"artifact_id":14144388417,"artifact_zip_sha256":"01030c945563da559810b12bc64df7190454af7621a25cceddf22ce4cb222d33","scope":"Original NASA-byte recomputation completed; later run resumes unchanged per-site signatures"}' > docs/task_y_independent/computation_run.json
+      - name: Independent original DEM recomputation
+        run: python verification/task_y/verify.py
+      - name: Focused regression tests on pinned PR
+        run: |
+          set -o pipefail
+          cd target
+          python -X utf8 -m pytest pipeline/tests/test_terrain_y.py pipeline/tests/test_terrain_y_contract.py pipeline/test_verify_terrain_y.py -q | tee ../docs/task_y_independent/focused_tests.txt
+      - name: Terrain contract on all 33 products
+        run: |
+          python - <<'PY'
+          import json,sys
+          from pathlib import Path
+          sys.path.insert(0,'target/pipeline')
+          from check_terrain_y import check_terrain_y
+          sites=json.loads(Path('target/web/data/sites.json').read_text())
+          errors=[]
+          check_terrain_y(Path('target/web/data'),{s['id']:s for s in sites},lambda w,m:errors.append({'where':w,'message':m}))
+          Path('docs/task_y_independent/terrain_contract.json').write_text(json.dumps({'errors':errors,'checked_sites':33,'scope':'terrain only'},indent=2))
+          assert not errors,errors
+          PY
+      - name: Append independent ledger and SI evidence
+        run: python verification/task_y/publish.py
+      - name: Commit review evidence on verification branch only
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add --sparse docs/task_y_independent docs/verification_ledger.md docs/SI_USAGE.md
+          git commit -m "Record independent task Y three-site DEM verification and source evidence"
+          git push origin HEAD:s7-y-verification-minchul
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: independent-task-y-evidence
+          retention-days: 30
+          path: docs/task_y_independent/

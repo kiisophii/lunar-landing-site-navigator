@@ -1,0 +1,231 @@
+{
+  "pr": 75,
+  "reviewed_sha": "9758ecdb156eae902881634090f53e4d2ea7d8e0",
+  "main_at_start": "300b8499e3ea4cadf1e9f2c36a267ba91e935aee",
+  "checker": "Minchul Kim",
+  "producer": "Jiyong Sung",
+  "controls": {
+    "analytic_plane": true,
+    "plane_roughness": true,
+    "projection_orientation": true
+  },
+  "inventory": {
+    "content_hashes_and_relay_centres": 33,
+    "polar_resolution_counts": {
+      "20": 1,
+      "10": 7,
+      "5": 8
+    }
+  },
+  "criteria": {
+    "slope_deg": 0.5,
+    "flat_pp": 1
+  },
+  "sites": [
+    {
+      "id": "ARTEMIS_HAWORTH",
+      "resolution_m": 5,
+      "source": {
+        "url": "https://pgda.gsfc.nasa.gov/data/LOLA_5mpp/87S/ldem_87s_5mpp.tif",
+        "resolution_m": 5,
+        "source_bytes": 3465285714,
+        "etag": "W/\"ce8c1052-17c7ede95a8\"",
+        "bounds": [
+          1394,
+          1880,
+          12886,
+          13372
+        ],
+        "registration": "pixel-area, half-cell centre",
+        "raster_sha256": "0584bb543b1acfa0f2326e7115aa20551d019fa7eec561e7ca21147f044a5a72",
+        "projection_geokeys": "{'KeyDirectoryVersion': 1, 'KeyRevision': 1, 'KeyRevisionMinor': 0, 'GTModelTypeGeoKey': <ModelType.Projected: 1>, 'GTRasterTypeGeoKey': <RasterPixel.IsArea: 1>, 'GTCitationGeoKey': 'Moon2000_spole', 'GeographicTypeGeoKey': <GCS.User_Defined: 32767>, 'GeogCitationGeoKey': 'GCS Name = GCS_Moon|Datum = D_Moon_2000|Ellipsoid = Moon_2000_IAU_IAG|Primem = Reference_Meridian|', 'GeogGeodeticDatumGeoKey': 32767, 'GeogAngularUnitsGeoKey': <Angular.Degree: 9102>, 'GeogEllipsoidGeoKey': <Ellipse.User_Defined: 32767>, 'GeogSemiMajorAxisGeoKey': 1737400.0, 'GeogSemiMinorAxisGeoKey': 1737400.0, 'GeogPrimeMeridianLongGeoKey': 0.0, 'ProjectedCSTypeGeoKey': <PCS.User_Defined: 32767>, 'ProjectionGeoKey': <Proj.User_Defined: 32767>, 'ProjCoordTransGeoKey': <CT.PolarStereographic: 15>, 'ProjLinearUnitsGeoKey': <Linear.Meter: 9001>, 'ProjNatOriginLatGeoKey': -90.0, 'ProjFalseEastingGeoKey': 0.0, 'ProjFalseNorthingGeoKey': 0.0, 'ProjScaleAtNatOriginGeoKey': 1.0, 'ProjStraightVertPoleLongGeoKey': 0.0, 'ModelPixelScale': [5.0, 5.0, 0.0], 'ModelTiepoint': [0.0, 0.0, 0.0, -100000.0, 100000.0, 0.0]}",
+        "blocks": [
+          {
+            "block": "0.bin",
+            "sha256": "5858b96a35123dc5c544e85a090f59e7e47a10a728af9ea6b54d73c80c96efd0"
+          },
+          {
+            "block": "48.bin",
+            "sha256": "4932d06f2560f1e06d427da810258df6dfa96522ed7e73e9aebed3d6f7fcb9d3"
+          },
+          {
+            "block": "49.bin",
+            "sha256": "5696eec2cd77044df26f8699d6e15a1c3c72b343f9ae276ec89626d7957660f1"
+          },
+          {
+            "block": "57.bin",
+            "sha256": "8f31b1d169493075ce68cc4e71601fb957126fa4d8978865aff0753d619fffbe"
+          },
+          {
+            "block": "66.bin",
+            "sha256": "01f83e0b97fdf2e3a1ee1f663ae65c481c9d2018ff1ce51ff4b2eae68805d50b"
+          },
+          {
+            "block": "67.bin",
+            "sha256": "b4f377cea675c44a6a7b122ceff87427ba39f15856992981b3d3782b2f0f6cd8"
+          }
+        ]
+      },
+      "finer_unavailable": []
+    },
+    {
+      "id": "ARTEMIS_NOBILE_RIM2",
+      "resolution_m": 10,
+      "source": {
+        "url": "https://pgda.gsfc.nasa.gov/data/LOLA_20mpp/LDEM_83S_10MPP_ADJ.TIF",
+        "resolution_m": 10,
+        "source_bytes": 5116709568,
+        "etag": "W/\"130facac0-189325a1dd0\"",
+        "bounds": [
+          11546,
+          11802,
+          36557,
+          36813
+        ],
+        "registration": "pixel-area, half-cell centre",
+        "raster_sha256": "82308ffc7bed3fa54b3587aee6c1d5b1686748c305202bdf6d0073f8e87d2bb1",
+        "projection_geokeys": "{'KeyDirectoryVersion': 1, 'KeyRevision': 1, 'KeyRevisionMinor': 0, 'GTModelTypeGeoKey': <ModelType.Projected: 1>, 'GTRasterTypeGeoKey': <RasterPixel.IsArea: 1>, 'GTCitationGeoKey': 'Moon (2015) - Sphere / Ocentric / South Polar', 'GeographicTypeGeoKey': <GCS.User_Defined: 32767>, 'GeogCitationGeoKey': 'GCS Name = Moon (2015) - Sphere / Ocentric|Datum = Moon (2015) - Sphere|Ellipsoid = Moon (2015) - Sphere|Primem = Reference Meridian|', 'GeogGeodeticDatumGeoKey': 32767, 'GeogAngularUnitsGeoKey': <Angular.Degree: 9102>, 'GeogEllipsoidGeoKey': <Ellipse.User_Defined: 32767>, 'GeogSemiMajorAxisGeoKey': 1737400.0, 'GeogSemiMinorAxisGeoKey': 1737400.0, 'GeogPrimeMeridianLongGeoKey': 0.0, 'ProjectedCSTypeGeoKey': <PCS.User_Defined: 32767>, 'ProjectionGeoKey': <Proj.User_Defined: 32767>, 'ProjCoordTransGeoKey': <CT.PolarStereographic: 15>, 'ProjLinearUnitsGeoKey': <Linear.Meter: 9001>, 'ProjNatOriginLatGeoKey': -90.0, 'ProjFalseEastingGeoKey': 0.0, 'ProjFalseNorthingGeoKey': 0.0, 'ProjScaleAtNatOriginGeoKey': 1.0, 'ProjStraightVertPoleLongGeoKey': 0.0, 'ModelPixelScale': [10.0, 10.0, 0.0], 'ModelTiepoint': [0.0, 0.0, 0.0, -216400.0, 216400.0, 0.0]}",
+        "blocks": [
+          {
+            "block": "0.bin",
+            "sha256": "e46d896ad136e24ab2804ecfad52bca365bf5f2fa1c57d672cc91b4bf01f848b"
+          },
+          {
+            "block": "2300.bin",
+            "sha256": "c3eb56b317e93feb581cbf0b8593d62895157d8a27e607a46ba8001fc28bb5ca"
+          },
+          {
+            "block": "2345.bin",
+            "sha256": "c8cb5683bf8f7ccc79e862953719f60d2f3b38c678399b514188aa0dd715db7b"
+          }
+        ]
+      },
+      "finer_unavailable": [
+        {
+          "url": "https://pgda.gsfc.nasa.gov/data/LOLA_5mpp/87S/ldem_87s_5mpp.tif",
+          "resolution_m": 5,
+          "reason": "required envelope outside original raster",
+          "requested": [
+            -174,
+            312,
+            49848,
+            50334
+          ],
+          "shape": [
+            40000,
+            40000
+          ]
+        }
+      ]
+    },
+    {
+      "id": "IM1",
+      "resolution_m": 20,
+      "source": {
+        "url": "https://pgda.gsfc.nasa.gov/data/LOLA_20mpp/LDEM_80S_20MPP_ADJ.TIF",
+        "resolution_m": 20,
+        "source_bytes": 2696082051,
+        "etag": "W/\"a0b2f283-189327867b8\"",
+        "bounds": [
+          133,
+          274,
+          15506,
+          15647
+        ],
+        "registration": "pixel-area, half-cell centre",
+        "raster_sha256": "181042e786beff8c0ca437117a3fbc46059f39900147a92125092b63c012e4d6",
+        "projection_geokeys": "{'KeyDirectoryVersion': 1, 'KeyRevision': 1, 'KeyRevisionMinor': 0, 'GTModelTypeGeoKey': <ModelType.Projected: 1>, 'GTRasterTypeGeoKey': <RasterPixel.IsArea: 1>, 'GTCitationGeoKey': 'Moon (2015) - Sphere / Ocentric / South Polar', 'GeographicTypeGeoKey': <GCS.User_Defined: 32767>, 'GeogCitationGeoKey': 'GCS Name = Moon (2015) - Sphere / Ocentric|Datum = Moon (2015) - Sphere|Ellipsoid = Moon (2015) - Sphere|Primem = Reference Meridian|', 'GeogGeodeticDatumGeoKey': 32767, 'GeogAngularUnitsGeoKey': <Angular.Degree: 9102>, 'GeogEllipsoidGeoKey': <Ellipse.User_Defined: 32767>, 'GeogSemiMajorAxisGeoKey': 1737400.0, 'GeogSemiMinorAxisGeoKey': 1737400.0, 'GeogPrimeMeridianLongGeoKey': 0.0, 'ProjectedCSTypeGeoKey': <PCS.User_Defined: 32767>, 'ProjectionGeoKey': <Proj.User_Defined: 32767>, 'ProjCoordTransGeoKey': <CT.PolarStereographic: 15>, 'ProjLinearUnitsGeoKey': <Linear.Meter: 9001>, 'ProjNatOriginLatGeoKey': -90.0, 'ProjFalseEastingGeoKey': 0.0, 'ProjFalseNorthingGeoKey': 0.0, 'ProjScaleAtNatOriginGeoKey': 1.0, 'ProjStraightVertPoleLongGeoKey': 0.0, 'ModelPixelScale': [20.0, 20.0, 0.0], 'ModelTiepoint': [0.0, 0.0, 0.0, -304000.0, 304000.0, 0.0]}",
+        "blocks": [
+          {
+            "block": "0.bin",
+            "sha256": "b7a04a0fcde8473d335fc4689f3b5d52bc3512694360077d631c4dec8fd5675c"
+          },
+          {
+            "block": "699.bin",
+            "sha256": "1c217c4d9f6a968ce7e7d4e23a8c5616f969a44885d47b247304dc47aadb0f25"
+          },
+          {
+            "block": "700.bin",
+            "sha256": "1545926ccfc7fe89120fe0173f4dcebcb555e5b5d8e2263639f9c42773580eba"
+          }
+        ]
+      },
+      "finer_unavailable": [
+        {
+          "url": "https://pgda.gsfc.nasa.gov/data/LOLA_5mpp/87S/ldem_87s_5mpp.tif",
+          "resolution_m": 5,
+          "reason": "required envelope outside original raster",
+          "requested": [
+            -40231,
+            -39745,
+            21265,
+            21751
+          ],
+          "shape": [
+            40000,
+            40000
+          ]
+        },
+        {
+          "url": "https://pgda.gsfc.nasa.gov/data/LOLA_20mpp/LDEM_83S_10MPP_ADJ.TIF",
+          "resolution_m": 10,
+          "reason": "required envelope outside original raster",
+          "requested": [
+            -8482,
+            -8226,
+            22266,
+            22522
+          ],
+          "shape": [
+            43280,
+            43280
+          ]
+        }
+      ]
+    }
+  ],
+  "failures": [],
+  "max_abs_slope_deg": 5.657696533489798e-13,
+  "max_abs_flat_pp": 1.1652900866465643e-12,
+  "max_abs_roughness_m": 1.1102230246251565e-16,
+  "complete": true,
+  "elapsed_s": 12.437739372253418,
+  "checker_sha256": "30d733a77666a74c9d394714e1e1f6ccef5b71a997c6167a5a634e02248e5480",
+  "rows": 66,
+  "passed": true,
+  "target_product_sha256": {
+    "APOLLO11": "c9e67d2b1c5949e25a2ff67da4ed2480a72d2b0b7a196536bb4ab9b153d301f6",
+    "APOLLO12": "ccdf65678242d5d8ffaf7bf95e5f59855c1778fe5c2838a212b8c3722d17bd73",
+    "APOLLO14": "1b63097904ff1ade53a2b75aba17af4dae0e74b5f79aa51d67277332e37880c0",
+    "APOLLO15": "531af70c2411b28e9ee93ad8c09f2bf857ea92d5e21c5ad8bf90e8a902faf74c",
+    "APOLLO16": "c2bf136006bde6bef095abdf744788b76109cca6f86823cb95f3f416244cfd5e",
+    "APOLLO17": "047cb393c533a1088164f1bad6b214d01835e024e3ddab4e4e06a9cfb4ff83f2",
+    "LUNA16": "43b9e45ebe54efb0743a7795e18828e35c37d2719eeabd1a62b3eacb65437523",
+    "LUNA20": "006e9d00c6b18ee8d7d8d490082ba01f102a48dd9970885c0f6519200057ab5a",
+    "LUNA24": "38e2855b5529b5d03c92f59d2550fc96d8f9583e1bee4239891accf47c0716a1",
+    "CHANGE3": "071be7427ff393a563099245765a969bcbd7a598e5f567c513bbf5b87c118a20",
+    "CHANGE4": "6ce55ea6f0e2e784e9e59b69bbefd41663a00d7dbab19f7d08fb6d768d7531f0",
+    "CHANGE5": "0db2bd718534ef90ab931bba59b11fdbe0c311e0026b0bc6441d5dddf229c482",
+    "CHANGE6": "1ac68aba41cada84bdc1850eebeacf1692cffbb8c6d7aadb9486cb37d7952fc9",
+    "CHANDRAYAAN3": "b333e4c409d6aed479c0f22faabc11bf1572acd6097a9ceb2170d8626e0bffee",
+    "SLIM": "979e70dd3c4d6d6e43bb798d0226bd9ea59c570cbb5e23c5334cd0f84ae74465",
+    "IM1": "840fa39e3d7adb86f983be159bd4b399230c5e2f219aaa806cd278c2ef8cdbed",
+    "IM2": "334a25105a02b64f8a7fdbcd162a0b63faec237af2e07821c2cdb32d8a172791",
+    "BLUE_GHOST1": "4a3eaa867a38968029ec78cab229fb52097eef8aeac0f3c6c00c58a68538a417",
+    "ARTEMIS_CABEUS_B": "a2b0413210824af5c96c4032b34292e35c251db22cfe2d4be86357ebe4856920",
+    "ARTEMIS_HAWORTH": "8855763075cb7521691a65f8bc667c7006ff3c4a889639165797855de7afd883",
+    "ARTEMIS_MALAPERT": "2fee0f5bc233b80e889deed25cf5312469eca693cc2d440d9027b3900d4898aa",
+    "ARTEMIS_MOUTON_PLATEAU": "46d318cdc16b8cb436dd84d6d9dc964a80781620738df620499baa534ff26fbb",
+    "ARTEMIS_MOUTON": "c48d03b2ddac8127a16aa256ba2c83149cdb4ea94135b1ef971506ebd22670ee",
+    "ARTEMIS_NOBILE_RIM1": "2fb35f2cb60511f888951712e3e3586789fba7a64cc47d4dd6ca48b57d91111b",
+    "ARTEMIS_NOBILE_RIM2": "6b18997aebdb090e8102e8c06585e7d765c64e6dbe14dc8fb9c0f9d1fe8bdcdf",
+    "ARTEMIS_DE_GERLACHE_RIM2": "bc34fb3ee709600adf1bd48dc36c2ad524386384f2bf4ffccc5015fae6f2353a",
+    "ARTEMIS_SLATER_PLAIN": "dff52203a90c6de9c1c4b7c44837410e4a49dbcabd478d42b5ff3a7403903bf7",
+    "SHACKLETON_RIM": "7dadc8e4e0e5254b5816d7934f69bfcf04b079adc0d9e9742f24d40c18e185f0",
+    "CONNECTING_RIDGE": "3243b213bab215df5739c4edcd9b6bb2885ef214dc4a8863b4a8cf9ff3bd7564",
+    "PEAK_NEAR_SHACKLETON": "53778a3dfb53622e113d1195faa1dd7e29f91f93616d5776160d74b71a1d291c",
+    "DE_GERLACHE_RIM1": "74b5388184f808861af3fb238b9a73c1e93932ebdec3d39261ccda724149eb42",
+    "SHOEMAKER_RIM_A": "ccc5b9d94c1a45bbc51494722295c591df2b9ea463edac03dec7be1324a1766b",
+    "IM3_REINER_GAMMA": "74319c7b2b8f5ce1c64cc160fbe37b6136bc0235150aae768dafc8353fa4989f"
+  }
+}

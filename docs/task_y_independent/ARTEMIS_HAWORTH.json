@@ -1,0 +1,90 @@
+{
+  "id": "ARTEMIS_HAWORTH",
+  "signature": "77110fa690841e5b719964890bef23f1c58dad144520fc90184bac0be4e74590",
+  "resolution_m": 5,
+  "source": {
+    "url": "https://pgda.gsfc.nasa.gov/data/LOLA_5mpp/87S/ldem_87s_5mpp.tif",
+    "resolution_m": 5,
+    "source_bytes": 3465285714,
+    "etag": "W/\"ce8c1052-17c7ede95a8\"",
+    "bounds": [
+      1394,
+      1880,
+      12886,
+      13372
+    ],
+    "registration": "pixel-area, half-cell centre",
+    "raster_sha256": "0584bb543b1acfa0f2326e7115aa20551d019fa7eec561e7ca21147f044a5a72",
+    "projection_geokeys": "{'KeyDirectoryVersion': 1, 'KeyRevision': 1, 'KeyRevisionMinor': 0, 'GTModelTypeGeoKey': <ModelType.Projected: 1>, 'GTRasterTypeGeoKey': <RasterPixel.IsArea: 1>, 'GTCitationGeoKey': 'Moon2000_spole', 'GeographicTypeGeoKey': <GCS.User_Defined: 32767>, 'GeogCitationGeoKey': 'GCS Name = GCS_Moon|Datum = D_Moon_2000|Ellipsoid = Moon_2000_IAU_IAG|Primem = Reference_Meridian|', 'GeogGeodeticDatumGeoKey': 32767, 'GeogAngularUnitsGeoKey': <Angular.Degree: 9102>, 'GeogEllipsoidGeoKey': <Ellipse.User_Defined: 32767>, 'GeogSemiMajorAxisGeoKey': 1737400.0, 'GeogSemiMinorAxisGeoKey': 1737400.0, 'GeogPrimeMeridianLongGeoKey': 0.0, 'ProjectedCSTypeGeoKey': <PCS.User_Defined: 32767>, 'ProjectionGeoKey': <Proj.User_Defined: 32767>, 'ProjCoordTransGeoKey': <CT.PolarStereographic: 15>, 'ProjLinearUnitsGeoKey': <Linear.Meter: 9001>, 'ProjNatOriginLatGeoKey': -90.0, 'ProjFalseEastingGeoKey': 0.0, 'ProjFalseNorthingGeoKey': 0.0, 'ProjScaleAtNatOriginGeoKey': 1.0, 'ProjStraightVertPoleLongGeoKey': 0.0, 'ModelPixelScale': [5.0, 5.0, 0.0], 'ModelTiepoint': [0.0, 0.0, 0.0, -100000.0, 100000.0, 0.0]}",
+    "blocks": [
+      {
+        "block": "0.bin",
+        "sha256": "5858b96a35123dc5c544e85a090f59e7e47a10a728af9ea6b54d73c80c96efd0"
+      },
+      {
+        "block": "48.bin",
+        "sha256": "4932d06f2560f1e06d427da810258df6dfa96522ed7e73e9aebed3d6f7fcb9d3"
+      },
+      {
+        "block": "49.bin",
+        "sha256": "5696eec2cd77044df26f8699d6e15a1c3c72b343f9ae276ec89626d7957660f1"
+      },
+      {
+        "block": "57.bin",
+        "sha256": "8f31b1d169493075ce68cc4e71601fb957126fa4d8978865aff0753d619fffbe"
+      },
+      {
+        "block": "66.bin",
+        "sha256": "01f83e0b97fdf2e3a1ee1f663ae65c481c9d2018ff1ce51ff4b2eae68805d50b"
+      },
+      {
+        "block": "67.bin",
+        "sha256": "b4f377cea675c44a6a7b122ceff87427ba39f15856992981b3d3782b2f0f6cd8"
+      }
+    ]
+  },
+  "finer_unavailable": [],
+  "own": {
+    "landing_slope_deg": 4.178640473441961,
+    "slope_by_radius_m": {
+      "100": {
+        "n": 1258,
+        "median_deg": 3.2347589515829007,
+        "p95_deg": 7.856417539625637,
+        "max_deg": 16.273552620750852,
+        "sampled_area_m2": 31399.99653142572,
+        "flat_fraction": {
+          "8": 0.958664571672204,
+          "15": 0.9992050850409477
+        }
+      },
+      "500": {
+        "n": 31462,
+        "median_deg": 5.0801501386848535,
+        "p95_deg": 11.393158747529268,
+        "max_deg": 19.239590468976317,
+        "sampled_area_m2": 785299.4179343366,
+        "flat_fraction": {
+          "8": 0.7854243831747425,
+          "15": 0.9941517146420675
+        }
+      },
+      "1000": {
+        "n": 125856,
+        "median_deg": 7.22351488611589,
+        "p95_deg": 16.434815380630255,
+        "max_deg": 30.712344567169957,
+        "sampled_area_m2": 3141397.157411218,
+        "flat_fraction": {
+          "8": 0.5586888190799799,
+          "15": 0.9113515093147259
+        }
+      }
+    },
+    "roughness_within_500m": {
+      "n": 31462,
+      "median_m": 0.3152414783672889,
+      "p95_m": 0.6772095460582933
+    }
+  }
+}

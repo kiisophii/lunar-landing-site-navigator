@@ -1,0 +1,94 @@
+{
+  "id": "ARTEMIS_NOBILE_RIM2",
+  "signature": "27858eb7e013854eed5e4518a747ee732b0d846ee000c3a20fa557effd99527e",
+  "resolution_m": 10,
+  "source": {
+    "url": "https://pgda.gsfc.nasa.gov/data/LOLA_20mpp/LDEM_83S_10MPP_ADJ.TIF",
+    "resolution_m": 10,
+    "source_bytes": 5116709568,
+    "etag": "W/\"130facac0-189325a1dd0\"",
+    "bounds": [
+      11546,
+      11802,
+      36557,
+      36813
+    ],
+    "registration": "pixel-area, half-cell centre",
+    "raster_sha256": "82308ffc7bed3fa54b3587aee6c1d5b1686748c305202bdf6d0073f8e87d2bb1",
+    "projection_geokeys": "{'KeyDirectoryVersion': 1, 'KeyRevision': 1, 'KeyRevisionMinor': 0, 'GTModelTypeGeoKey': <ModelType.Projected: 1>, 'GTRasterTypeGeoKey': <RasterPixel.IsArea: 1>, 'GTCitationGeoKey': 'Moon (2015) - Sphere / Ocentric / South Polar', 'GeographicTypeGeoKey': <GCS.User_Defined: 32767>, 'GeogCitationGeoKey': 'GCS Name = Moon (2015) - Sphere / Ocentric|Datum = Moon (2015) - Sphere|Ellipsoid = Moon (2015) - Sphere|Primem = Reference Meridian|', 'GeogGeodeticDatumGeoKey': 32767, 'GeogAngularUnitsGeoKey': <Angular.Degree: 9102>, 'GeogEllipsoidGeoKey': <Ellipse.User_Defined: 32767>, 'GeogSemiMajorAxisGeoKey': 1737400.0, 'GeogSemiMinorAxisGeoKey': 1737400.0, 'GeogPrimeMeridianLongGeoKey': 0.0, 'ProjectedCSTypeGeoKey': <PCS.User_Defined: 32767>, 'ProjectionGeoKey': <Proj.User_Defined: 32767>, 'ProjCoordTransGeoKey': <CT.PolarStereographic: 15>, 'ProjLinearUnitsGeoKey': <Linear.Meter: 9001>, 'ProjNatOriginLatGeoKey': -90.0, 'ProjFalseEastingGeoKey': 0.0, 'ProjFalseNorthingGeoKey': 0.0, 'ProjScaleAtNatOriginGeoKey': 1.0, 'ProjStraightVertPoleLongGeoKey': 0.0, 'ModelPixelScale': [10.0, 10.0, 0.0], 'ModelTiepoint': [0.0, 0.0, 0.0, -216400.0, 216400.0, 0.0]}",
+    "blocks": [
+      {
+        "block": "0.bin",
+        "sha256": "e46d896ad136e24ab2804ecfad52bca365bf5f2fa1c57d672cc91b4bf01f848b"
+      },
+      {
+        "block": "2300.bin",
+        "sha256": "c3eb56b317e93feb581cbf0b8593d62895157d8a27e607a46ba8001fc28bb5ca"
+      },
+      {
+        "block": "2345.bin",
+        "sha256": "c8cb5683bf8f7ccc79e862953719f60d2f3b38c678399b514188aa0dd715db7b"
+      }
+    ]
+  },
+  "finer_unavailable": [
+    {
+      "url": "https://pgda.gsfc.nasa.gov/data/LOLA_5mpp/87S/ldem_87s_5mpp.tif",
+      "resolution_m": 5,
+      "reason": "required envelope outside original raster",
+      "requested": [
+        -174,
+        312,
+        49848,
+        50334
+      ],
+      "shape": [
+        40000,
+        40000
+      ]
+    }
+  ],
+  "own": {
+    "landing_slope_deg": 1.3700296906007783,
+    "slope_by_radius_m": {
+      "100": {
+        "n": 314,
+        "median_deg": 2.3477799850621337,
+        "p95_deg": 6.44560464789784,
+        "max_deg": 8.57241882844837,
+        "sampled_area_m2": 31231.29533270433,
+        "flat_fraction": {
+          "8": 0.9936305754989255,
+          "15": 1.0
+        }
+      },
+      "500": {
+        "n": 7895,
+        "median_deg": 5.489375163988956,
+        "p95_deg": 17.804974804175153,
+        "max_deg": 25.62364111069169,
+        "sampled_area_m2": 785258.168898897,
+        "flat_fraction": {
+          "8": 0.6806795943505682,
+          "15": 0.8814412329943823
+        }
+      },
+      "1000": {
+        "n": 31587,
+        "median_deg": 10.39868851102933,
+        "p95_deg": 22.077272499642078,
+        "max_deg": 31.455809385972476,
+        "sampled_area_m2": 3141728.7057318715,
+        "flat_fraction": {
+          "8": 0.3710989716776854,
+          "15": 0.7126896723724041
+        }
+      }
+    },
+    "roughness_within_500m": {
+      "n": 7895,
+      "median_m": 0.17553000158104023,
+      "p95_m": 0.42643427049206595
+    }
+  }
+}
